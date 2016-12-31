@@ -23,7 +23,6 @@ namespace ProjectAltisLauncher
         }
         #region Global Variables
         private string currentDir = Directory.GetCurrentDirectory() + "\\";
-        private const string baseURL = "https://raw.githubusercontent.com/POROperations/releases/master/";
         #endregion
         #region Borderless Form Code
         Point mouseDownPoint = Point.Empty;
@@ -52,9 +51,9 @@ namespace ProjectAltisLauncher
         }
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            string finalURL = "https://projectaltis.com/api/?u=" + txtUser.Text + "&p=" + txtPass.Text;
+            string finalURL = "https://www.projectaltis.com/api/?u=" + txtUser.Text + "&p=" + txtPass.Text;
             string APIResponse = RequestData(finalURL, "GET"); // Send request to login API, store the response as string
-      //      loginAPIResponse resp = JsonConvert.DeserializeObject<loginAPIResponse>(APIResponse);
+            loginAPIResponse resp = JsonConvert.DeserializeObject<loginAPIResponse>(APIResponse);
             Console.WriteLine("[Info] Status: {0}", resp.status);
             Console.WriteLine("[Info] Reason: {0}", resp.reason);
             Console.WriteLine("[Info] Additional: {0}", resp.additional);
@@ -73,7 +72,8 @@ namespace ProjectAltisLauncher
                     lblInfo.Text = resp.reason;
                     break;
             }
-            Updater.RunWorkerAsync();
+            Play.LaunchGame(txtUser.Text, txtPass.Text);
+          //  Updater.RunWorkerAsync();
         }
         #endregion
 
@@ -104,7 +104,7 @@ namespace ProjectAltisLauncher
 
         private void Updater_DoWork(object sender, DoWorkEventArgs e)
         {
-            string responseFromServer = RequestData("http://projectaltis.com/api/manifest", "GET");
+            string responseFromServer = RequestData("https://www.projectaltis.com/api/manifest", "GET"); // We need to fix this API
             string[] array = responseFromServer.Split('#'); // Seperate each json value into an index
             
 
