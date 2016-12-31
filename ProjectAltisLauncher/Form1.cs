@@ -26,6 +26,7 @@ namespace ProjectAltisLauncher
         private double totalFiles = 0;
         private double totalProgress;
         private double currentFile = 0;
+        private string nowDownloading = "";
         #endregion
         #region Borderless Form Code
         Point mouseDownPoint = Point.Empty;
@@ -54,16 +55,23 @@ namespace ProjectAltisLauncher
         }
         private void btnPlay_Click(object sender, EventArgs e)
         {
+            if (cbSaveLogin.Checked == true)
+            {
+                Console.WriteLine("Save checked");
+                Properties.Settings.Default.username = txtUser.Text;
+                Properties.Settings.Default.password = txtPass.Text;
+                Properties.Settings.Default.Save();
+            }
             string finalURL = "https://www.projectaltis.com/api/?u=" + txtUser.Text + "&p=" + txtPass.Text;
             string APIResponse = RequestData(finalURL, "GET"); // Send request to login API, store the response as string
             loginAPIResponse resp = JsonConvert.DeserializeObject<loginAPIResponse>(APIResponse);
-            Console.WriteLine("[Info] Status: {0}", resp.status);
-            Console.WriteLine("[Info] Reason: {0}", resp.reason);
-            Console.WriteLine("[Info] Additional: {0}", resp.additional);
+
             switch (resp.status)
             {
                 case "true":
                     lblInfo.Text = resp.reason;
+                    btnPlay.Enabled = false;
+                    Updater.RunWorkerAsync();
                     break;
                 case "false":
                     lblInfo.Text = resp.reason;
@@ -75,8 +83,8 @@ namespace ProjectAltisLauncher
                     lblInfo.Text = resp.reason;
                     break;
             }
-            //  Play.LaunchGame(txtUser.Text, txtPass.Text);
-            Updater.RunWorkerAsync();
+            lblInfo.Visible = true;
+            
         }
         #endregion
 
@@ -127,9 +135,11 @@ namespace ProjectAltisLauncher
 
                 if (patchManifest.filename != null  || patchManifest.filename != "")
                 {
+                    nowDownloading = patchManifest.filename;
+                    Updater.ReportProgress(0); // Fire the progress changed event
                     if (patchManifest.filename.Contains("phase"))
                     {
-                        Console.WriteLine("Starting download for phase file: {0}", patchManifest.filename);
+                        Console.WriteLine("Starting download for phase file: {0}", patchManifest.filename);                       
                         client.DownloadFile(new Uri(patchManifest.url), currentDir + "resources\\default\\" + patchManifest.filename);
                         Console.WriteLine("Finished!");
                     }
@@ -156,16 +166,29 @@ namespace ProjectAltisLauncher
 
         private void Updater_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            
+            lblNowDownloading.Visible = true;
+            lblNowDownloading.Text = "Downloading " + nowDownloading;
             if (totalProgress == 100)
             {
+                btnPlay.Enabled = true;
+                lblNowDownloading.Text = "";
+                lblNowDownloading.Visible = false;
                 // Launch game once all files are download
                 Play.LaunchGame(txtUser.Text, txtPass.Text);
             }
 
         }
-        
 
-
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                txtUser.Text = Properties.Settings.Default.username;
+                txtPass.Text = Properties.Settings.Default.password;
+            }
+            catch { }
+            this.Select();
+            this.ActiveControl = null;
+        }
     }
 }
