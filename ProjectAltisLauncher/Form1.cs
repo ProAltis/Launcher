@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 /// <summary>
@@ -87,7 +88,49 @@ namespace ProjectAltisLauncher
             
         }
         #endregion
+        #region Hashing Functions
+        private bool CompareFileSize(string filePath, int size)
+        {
+            try
+            {
+                FileInfo myFile = new FileInfo(filePath);
+                long sizeInBytes = myFile.Length;
+                return sizeInBytes == size; // returns true or false
 
+            }
+            catch (Exception)
+            {
+                // The file doesn't exist
+                Console.WriteLine("{0} does not exist!", filePath);
+                return false;
+            }
+        }
+        private bool CompareSHA256(string filePath, string hash)
+        {
+            try
+            {
+                SHA256 mySHA256 = SHA256.Create();
+
+                FileInfo myFile = new FileInfo(filePath);
+                FileStream fileStream = myFile.Open(FileMode.Open);
+                byte[] hashValue = mySHA256.ComputeHash(fileStream);
+                string strHashValue = "";
+                foreach (byte x in hashValue)
+                {
+                    strHashValue += x.ToString("x2");
+                }
+                // Comparing the hash now
+                Console.WriteLine("The SHA256 of {0} is: {1}", filePath, strHashValue);
+                return strHashValue == hash;
+            }
+            catch (Exception)
+            {
+                // File doesn't exist
+                Console.WriteLine("{0} does not exist!", filePath);
+                return false;
+            }
+        }
+        #endregion
         private string RequestData(string URL, string Method)
         {
             try
@@ -116,7 +159,7 @@ namespace ProjectAltisLauncher
         private void Updater_DoWork(object sender, DoWorkEventArgs e)
         {
             currentFile = 0; // Reset the value so every time user plays totalProg
-            string responseFromServer = RequestData("https://www.projectaltis.com/api/manifest", "GET"); // We need to fix this API
+            string responseFromServer = RequestData("https://www.projectaltis.com/api/manifest", "GET");
             string[] array = responseFromServer.Split('#'); // Seperate each json value into an index
 
 
@@ -128,35 +171,43 @@ namespace ProjectAltisLauncher
             for (int i = 0; i < array.Length -1; i++)
             {
                 currentFile += 1;
-
+                
 
                 manifest patchManifest = JsonConvert.DeserializeObject<manifest>(array[i]);
-                WebClient client = new WebClient();
-
-                if (patchManifest.filename != null  || patchManifest.filename != "")
+                if (CompareSHA256(patchManifest.filename, patchManifest.sha256)) // If the hashes are the same skip the update
                 {
-                    nowDownloading = patchManifest.filename;
-                    Updater.ReportProgress(0); // Fire the progress changed event
-                    if (patchManifest.filename.Contains("phase"))
-                    {
-                        Console.WriteLine("Starting download for phase file: {0}", patchManifest.filename);                       
-                        client.DownloadFile(new Uri(patchManifest.url), currentDir + "resources\\default\\" + patchManifest.filename);
-                        Console.WriteLine("Finished!");
-                    }
-                    else if (patchManifest.filename.Contains("ProjectAltis"))
-                    {
+                    Console.WriteLine("{0} is up to date!", patchManifest.filename);
+                }
+                else
+                {
+                    WebClient client = new WebClient();
 
-                        Console.WriteLine("Starting download for config file: {0}", patchManifest.filename);
-                        client.DownloadFile(new Uri(patchManifest.url), currentDir + "config\\" + patchManifest.filename);
-                        Console.WriteLine("Finished!");
-                    }
-                    else
+                    if (patchManifest.filename != null || patchManifest.filename != "")
                     {
-                        Console.WriteLine("Starting download for file: {0}", patchManifest.filename);
-                        client.DownloadFile(new Uri(patchManifest.url), currentDir + patchManifest.filename);
-                        Console.WriteLine("Finished!");
+                        nowDownloading = patchManifest.filename;
+                        Updater.ReportProgress(0); // Fire the progress changed event
+                        if (patchManifest.filename.Contains("phase"))
+                        {
+                            Console.WriteLine("Starting download for phase file: {0}", patchManifest.filename);
+                            client.DownloadFile(new Uri(patchManifest.url), currentDir + "resources\\default\\" + patchManifest.filename);
+                            Console.WriteLine("Finished!");
+                        }
+                        else if (patchManifest.filename.Contains("ProjectAltis"))
+                        {
+
+                            Console.WriteLine("Starting download for config file: {0}", patchManifest.filename);
+                            client.DownloadFile(new Uri(patchManifest.url), currentDir + "config\\" + patchManifest.filename);
+                            Console.WriteLine("Finished!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Starting download for file: {0}", patchManifest.filename);
+                            client.DownloadFile(new Uri(patchManifest.url), currentDir + patchManifest.filename);
+                            Console.WriteLine("Finished!");
+                        }
                     }
                 }
+                    
                 totalProgress = ((currentFile / totalFiles) * 100);
                 Console.WriteLine("Total progress is {0}", totalProgress);
                 Updater.ReportProgress(Convert.ToInt32(totalProgress));
@@ -187,6 +238,7 @@ namespace ProjectAltisLauncher
                 txtPass.Text = Properties.Settings.Default.password;
             }
             catch { }
+            // This prevents other controls from being focused
             this.Select();
             this.ActiveControl = null;
         }

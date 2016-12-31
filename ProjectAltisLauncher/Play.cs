@@ -15,6 +15,7 @@ namespace ProjectAltisLauncher
             ProcessStartInfo startInfo = new ProcessStartInfo();
             
             startInfo.FileName = "Altis";
+            // The code below would hide the command window of Altis. Just showing
            // startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             Process.Start(startInfo);
         }
