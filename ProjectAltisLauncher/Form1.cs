@@ -23,6 +23,9 @@ namespace ProjectAltisLauncher
         }
         #region Global Variables
         private string currentDir = Directory.GetCurrentDirectory() + "\\";
+        private double totalFiles = 0;
+        private double totalProgress;
+        private double currentFile = 0;
         #endregion
         #region Borderless Form Code
         Point mouseDownPoint = Point.Empty;
@@ -72,8 +75,8 @@ namespace ProjectAltisLauncher
                     lblInfo.Text = resp.reason;
                     break;
             }
-            Play.LaunchGame(txtUser.Text, txtPass.Text);
-          //  Updater.RunWorkerAsync();
+            //  Play.LaunchGame(txtUser.Text, txtPass.Text);
+            Updater.RunWorkerAsync();
         }
         #endregion
 
@@ -104,42 +107,65 @@ namespace ProjectAltisLauncher
 
         private void Updater_DoWork(object sender, DoWorkEventArgs e)
         {
+            currentFile = 0; // Reset the value so every time user plays totalProg
             string responseFromServer = RequestData("https://www.projectaltis.com/api/manifest", "GET"); // We need to fix this API
             string[] array = responseFromServer.Split('#'); // Seperate each json value into an index
-            
 
-              
 
-            for (int i = 0; i < array.Length; i++)
+            Console.WriteLine("The length of array is {0}", array.Length);
+            Directory.CreateDirectory(currentDir + "config\\");
+            Directory.CreateDirectory(currentDir + "resources\\");
+            Directory.CreateDirectory(currentDir + "resources\\default\\");
+            totalFiles = array.Length - 1;
+            for (int i = 0; i < array.Length -1; i++)
             {
-                if (array[i] != "")
-                {
-                    manifest patchManifest = JsonConvert.DeserializeObject<manifest>(array[i]);
-                    WebClient client = new WebClient();
+                currentFile += 1;
 
+
+                manifest patchManifest = JsonConvert.DeserializeObject<manifest>(array[i]);
+                WebClient client = new WebClient();
+
+                if (patchManifest.filename != null  || patchManifest.filename != "")
+                {
                     if (patchManifest.filename.Contains("phase"))
                     {
-                        client.DownloadFileAsync(new Uri(patchManifest.url), currentDir + "resources\\default\\" + patchManifest.filename);
-                        return;
+                        Console.WriteLine("Starting download for phase file: {0}", patchManifest.filename);
+                        client.DownloadFile(new Uri(patchManifest.url), currentDir + "resources\\default\\" + patchManifest.filename);
+                        Console.WriteLine("Finished!");
                     }
                     else if (patchManifest.filename.Contains("ProjectAltis"))
                     {
-                        client.DownloadFileAsync(new Uri(patchManifest.url), currentDir + "config\\" + patchManifest.filename);
-                        return;
+
+                        Console.WriteLine("Starting download for config file: {0}", patchManifest.filename);
+                        client.DownloadFile(new Uri(patchManifest.url), currentDir + "config\\" + patchManifest.filename);
+                        Console.WriteLine("Finished!");
                     }
                     else
                     {
-                        client.DownloadFileAsync(new Uri(patchManifest.url), currentDir + patchManifest.filename);
+                        Console.WriteLine("Starting download for file: {0}", patchManifest.filename);
+                        client.DownloadFile(new Uri(patchManifest.url), currentDir + patchManifest.filename);
+                        Console.WriteLine("Finished!");
                     }
                 }
-                
+                totalProgress = ((currentFile / totalFiles) * 100);
+                Console.WriteLine("Total progress is {0}", totalProgress);
+                Updater.ReportProgress(Convert.ToInt32(totalProgress));
+
             }
         }
 
         private void Updater_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            // Launch game once all files are downloaded
-            // Play.LaunchGame(txtUser.Text, txtPass.Text);
+            
+            if (totalProgress == 100)
+            {
+                // Launch game once all files are download
+                Play.LaunchGame(txtUser.Text, txtPass.Text);
+            }
+
         }
+        
+
+
     }
 }
