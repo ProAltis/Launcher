@@ -63,19 +63,9 @@ namespace ProjectAltisLauncher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Project_Altis_Launcher_Resources_background {
+        internal static System.Drawing.Bitmap TTCLauncher {
             get {
-                object obj = ResourceManager.GetObject("Project_Altis_Launcher.Resources.background", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap test {
-            get {
-                object obj = ResourceManager.GetObject("test", resourceCulture);
+                object obj = ResourceManager.GetObject("TTCLauncher", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

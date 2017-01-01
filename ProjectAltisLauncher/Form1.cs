@@ -1,13 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Security.Cryptography;
-using System.Text;
 using System.Windows.Forms;
 /// <summary>
 /// There are a few things I still have to do before we can start designing the launcher.
@@ -238,9 +235,17 @@ namespace ProjectAltisLauncher
                 txtPass.Text = Properties.Settings.Default.password;
             }
             catch { }
+            webBrowser1.Navigate(new Uri("http://www.projectaltis.com/changelog"));
             // This prevents other controls from being focused
             this.Select();
             this.ActiveControl = null;
+        }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            HtmlElementCollection ulTags = webBrowser1.Document.GetElementsByTagName("UL");
+            Console.WriteLine(ulTags[2].InnerText);
+         //   webBrowser1.DocumentText = 
         }
     }
 }

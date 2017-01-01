@@ -87,10 +87,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Project_Altis_Launcher.Resources.background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\test.png" />
+    <None Include="Resources\TTC Launcher.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -38,18 +38,25 @@
             this.lblNowDownloading = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
+            this.btnOfficialSite = new System.Windows.Forms.Button();
+            this.btnGroupTracker = new System.Windows.Forms.Button();
+            this.btnChangeBg = new System.Windows.Forms.Button();
+            this.btnCredits = new System.Windows.Forms.Button();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.btnOptions = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(591, 244);
+            this.txtUser.Location = new System.Drawing.Point(622, 307);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(201, 20);
             this.txtUser.TabIndex = 0;
             // 
             // txtPass
             // 
-            this.txtPass.Location = new System.Drawing.Point(591, 270);
+            this.txtPass.Location = new System.Drawing.Point(622, 333);
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(201, 20);
             this.txtPass.TabIndex = 1;
@@ -57,9 +64,9 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(857, 0);
+            this.btnClose.Location = new System.Drawing.Point(958, -1);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(68, 20);
+            this.btnClose.Size = new System.Drawing.Size(43, 40);
             this.btnClose.TabIndex = 2;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -67,7 +74,7 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(798, 243);
+            this.btnPlay.Location = new System.Drawing.Point(829, 306);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(90, 33);
             this.btnPlay.TabIndex = 3;
@@ -85,8 +92,8 @@
             // 
             this.lblInfo.BackColor = System.Drawing.Color.Transparent;
             this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfo.ForeColor = System.Drawing.Color.White;
-            this.lblInfo.Location = new System.Drawing.Point(537, 313);
+            this.lblInfo.ForeColor = System.Drawing.Color.Black;
+            this.lblInfo.Location = new System.Drawing.Point(565, 399);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(341, 54);
             this.lblInfo.TabIndex = 4;
@@ -97,7 +104,7 @@
             // cbSaveLogin
             // 
             this.cbSaveLogin.BackColor = System.Drawing.Color.Transparent;
-            this.cbSaveLogin.Location = new System.Drawing.Point(798, 280);
+            this.cbSaveLogin.Location = new System.Drawing.Point(829, 343);
             this.cbSaveLogin.Name = "cbSaveLogin";
             this.cbSaveLogin.Size = new System.Drawing.Size(90, 17);
             this.cbSaveLogin.TabIndex = 5;
@@ -108,8 +115,8 @@
             // 
             this.lblNowDownloading.BackColor = System.Drawing.Color.Transparent;
             this.lblNowDownloading.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNowDownloading.ForeColor = System.Drawing.Color.White;
-            this.lblNowDownloading.Location = new System.Drawing.Point(538, 197);
+            this.lblNowDownloading.ForeColor = System.Drawing.Color.Black;
+            this.lblNowDownloading.Location = new System.Drawing.Point(566, 245);
             this.lblNowDownloading.Name = "lblNowDownloading";
             this.lblNowDownloading.Size = new System.Drawing.Size(340, 26);
             this.lblNowDownloading.TabIndex = 6;
@@ -122,7 +129,7 @@
             this.lblUsername.AutoSize = true;
             this.lblUsername.BackColor = System.Drawing.Color.Transparent;
             this.lblUsername.ForeColor = System.Drawing.Color.Black;
-            this.lblUsername.Location = new System.Drawing.Point(526, 247);
+            this.lblUsername.Location = new System.Drawing.Point(557, 310);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(58, 13);
             this.lblUsername.TabIndex = 7;
@@ -133,20 +140,101 @@
             this.lblPassword.AutoSize = true;
             this.lblPassword.BackColor = System.Drawing.Color.Transparent;
             this.lblPassword.ForeColor = System.Drawing.Color.Black;
-            this.lblPassword.Location = new System.Drawing.Point(526, 273);
+            this.lblPassword.Location = new System.Drawing.Point(557, 336);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(56, 13);
             this.lblPassword.TabIndex = 8;
             this.lblPassword.Text = "Password:";
             // 
+            // btnOfficialSite
+            // 
+            this.btnOfficialSite.Location = new System.Drawing.Point(12, 616);
+            this.btnOfficialSite.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
+            this.btnOfficialSite.Name = "btnOfficialSite";
+            this.btnOfficialSite.Size = new System.Drawing.Size(95, 35);
+            this.btnOfficialSite.TabIndex = 9;
+            this.btnOfficialSite.Text = "Official Site";
+            this.btnOfficialSite.UseVisualStyleBackColor = true;
+            // 
+            // btnGroupTracker
+            // 
+            this.btnGroupTracker.Location = new System.Drawing.Point(352, 616);
+            this.btnGroupTracker.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
+            this.btnGroupTracker.Name = "btnGroupTracker";
+            this.btnGroupTracker.Size = new System.Drawing.Size(95, 35);
+            this.btnGroupTracker.TabIndex = 11;
+            this.btnGroupTracker.Text = "Group Tracker";
+            this.btnGroupTracker.UseVisualStyleBackColor = true;
+            // 
+            // btnChangeBg
+            // 
+            this.btnChangeBg.Location = new System.Drawing.Point(525, 616);
+            this.btnChangeBg.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
+            this.btnChangeBg.Name = "btnChangeBg";
+            this.btnChangeBg.Size = new System.Drawing.Size(95, 35);
+            this.btnChangeBg.TabIndex = 12;
+            this.btnChangeBg.Text = "Change Background";
+            this.btnChangeBg.UseVisualStyleBackColor = true;
+            // 
+            // btnCredits
+            // 
+            this.btnCredits.Location = new System.Drawing.Point(871, 617);
+            this.btnCredits.Margin = new System.Windows.Forms.Padding(3, 3, 100, 3);
+            this.btnCredits.Name = "btnCredits";
+            this.btnCredits.Size = new System.Drawing.Size(95, 35);
+            this.btnCredits.TabIndex = 13;
+            this.btnCredits.Text = "Credits";
+            this.btnCredits.UseVisualStyleBackColor = true;
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.AllowNavigation = false;
+            this.webBrowser1.Location = new System.Drawing.Point(44, 90);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScriptErrorsSuppressed = true;
+            this.webBrowser1.ScrollBarsEnabled = false;
+            this.webBrowser1.Size = new System.Drawing.Size(430, 289);
+            this.webBrowser1.TabIndex = 14;
+            this.webBrowser1.Visible = false;
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
+            // 
+            // btnOptions
+            // 
+            this.btnOptions.Location = new System.Drawing.Point(698, 616);
+            this.btnOptions.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
+            this.btnOptions.Name = "btnOptions";
+            this.btnOptions.Size = new System.Drawing.Size(95, 36);
+            this.btnOptions.TabIndex = 15;
+            this.btnOptions.Text = "Game Options";
+            this.btnOptions.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(182, 616);
+            this.button1.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(95, 35);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Discord";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.SandyBrown;
-            this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.test;
+            this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.TTCLauncher;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(974, 502);
+            this.ClientSize = new System.Drawing.Size(1000, 650);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnOptions);
+            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.btnCredits);
+            this.Controls.Add(this.btnChangeBg);
+            this.Controls.Add(this.btnGroupTracker);
+            this.Controls.Add(this.btnOfficialSite);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.lblNowDownloading);
@@ -158,6 +246,8 @@
             this.Controls.Add(this.txtUser);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(1000, 650);
+            this.MinimumSize = new System.Drawing.Size(1000, 650);
             this.Name = "Form1";
             this.Text = "Project Altis Launcher";
             this.TransparencyKey = System.Drawing.Color.SandyBrown;
@@ -182,6 +272,13 @@
         private System.Windows.Forms.Label lblNowDownloading;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.Button btnOfficialSite;
+        private System.Windows.Forms.Button btnGroupTracker;
+        private System.Windows.Forms.Button btnChangeBg;
+        private System.Windows.Forms.Button btnCredits;
+        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.Button btnOptions;
+        private System.Windows.Forms.Button button1;
     }
 }
 
