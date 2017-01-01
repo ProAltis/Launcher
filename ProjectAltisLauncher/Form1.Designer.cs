@@ -43,7 +43,7 @@
             this.btnChangeBg = new System.Windows.Forms.Button();
             this.btnCredits = new System.Windows.Forms.Button();
             this.btnOptions = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnDiscord = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUser
@@ -154,6 +154,7 @@
             this.btnOfficialSite.TabIndex = 9;
             this.btnOfficialSite.Text = "Official Site";
             this.btnOfficialSite.UseVisualStyleBackColor = true;
+            this.btnOfficialSite.Click += new System.EventHandler(this.btnOfficialSite_Click);
             // 
             // btnGroupTracker
             // 
@@ -164,6 +165,7 @@
             this.btnGroupTracker.TabIndex = 11;
             this.btnGroupTracker.Text = "Group Tracker";
             this.btnGroupTracker.UseVisualStyleBackColor = true;
+            this.btnGroupTracker.Click += new System.EventHandler(this.btnGroupTracker_Click);
             // 
             // btnChangeBg
             // 
@@ -174,6 +176,7 @@
             this.btnChangeBg.TabIndex = 12;
             this.btnChangeBg.Text = "Change Background";
             this.btnChangeBg.UseVisualStyleBackColor = true;
+            this.btnChangeBg.Click += new System.EventHandler(this.btnChangeBg_Click);
             // 
             // btnCredits
             // 
@@ -184,6 +187,7 @@
             this.btnCredits.TabIndex = 13;
             this.btnCredits.Text = "Credits";
             this.btnCredits.UseVisualStyleBackColor = true;
+            this.btnCredits.Click += new System.EventHandler(this.btnCredits_Click);
             // 
             // btnOptions
             // 
@@ -194,16 +198,18 @@
             this.btnOptions.TabIndex = 15;
             this.btnOptions.Text = "Game Options";
             this.btnOptions.UseVisualStyleBackColor = true;
+            this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
             // 
-            // button1
+            // btnDiscord
             // 
-            this.button1.Location = new System.Drawing.Point(182, 616);
-            this.button1.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 35);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Discord";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnDiscord.Location = new System.Drawing.Point(182, 616);
+            this.btnDiscord.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
+            this.btnDiscord.Name = "btnDiscord";
+            this.btnDiscord.Size = new System.Drawing.Size(95, 35);
+            this.btnDiscord.TabIndex = 16;
+            this.btnDiscord.Text = "Discord";
+            this.btnDiscord.UseVisualStyleBackColor = true;
+            this.btnDiscord.Click += new System.EventHandler(this.btnDiscord_Click);
             // 
             // Form1
             // 
@@ -214,7 +220,7 @@
             this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.TTCLauncher;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1000, 650);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnDiscord);
             this.Controls.Add(this.btnOptions);
             this.Controls.Add(this.btnCredits);
             this.Controls.Add(this.btnChangeBg);
@@ -236,6 +242,8 @@
             this.Name = "Form1";
             this.Text = "Project Altis Launcher";
             this.TransparencyKey = System.Drawing.Color.SandyBrown;
+            this.Activated += new System.EventHandler(this.Form1_Activated);
+            this.Deactivate += new System.EventHandler(this.Form1_Deactivate);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
@@ -262,7 +270,7 @@
         private System.Windows.Forms.Button btnChangeBg;
         private System.Windows.Forms.Button btnCredits;
         private System.Windows.Forms.Button btnOptions;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDiscord;
     }
 }
 

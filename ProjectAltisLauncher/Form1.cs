@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -18,11 +19,34 @@ namespace ProjectAltisLauncher
 {
     public partial class Form1 : Form
     {
-
+        #region Main Form Events
         public Form1()
         {
             InitializeComponent();
         }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                txtUser.Text = Properties.Settings.Default.username;
+                txtPass.Text = Properties.Settings.Default.password;
+            }
+            catch { }
+            // This prevents other controls from being focused
+            this.Select();
+            this.ActiveControl = null;
+        }
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            this.Select();
+            this.ActiveControl = null;
+        }
+        private void Form1_Deactivate(object sender, EventArgs e)
+        {
+            this.Select();
+            this.ActiveControl = null;
+        }
+        #endregion
         #region Global Variables
         private string currentDir = Directory.GetCurrentDirectory() + "\\";
         private double totalFiles = 0;
@@ -90,7 +114,33 @@ namespace ProjectAltisLauncher
                     break;
             }
             lblInfo.Visible = true;
-            
+            this.ActiveControl = null;
+        }
+        private void btnOfficialSite_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.projectaltis.com/");
+            this.ActiveControl = null;
+        }
+        private void btnDiscord_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://discord.gg/szEPYtV");
+        }
+        private void btnGroupTracker_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Group Tracker will be implemented soon!", "Oops!");
+        }
+        private void btnCredits_Click(object sender, EventArgs e)
+        {
+            Credits f = new Credits();
+            f.ShowDialog();
+        }
+        private void btnChangeBg_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Changing the background will be implemented soon!", "Oops");
+        }
+        private void btnOptions_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Options will be implemented soon!", "Oops!");
         }
         #endregion
         #region Hashing Functions
@@ -164,7 +214,6 @@ namespace ProjectAltisLauncher
             }
             return "";
         }
-
         private void Updater_DoWork(object sender, DoWorkEventArgs e)
         {
             currentFile = 0; // Reset the value so every time user plays totalProg
@@ -235,7 +284,6 @@ namespace ProjectAltisLauncher
 
             }
         }
-
         private void Updater_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             lblNowDownloading.Visible = true;
@@ -251,17 +299,5 @@ namespace ProjectAltisLauncher
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                txtUser.Text = Properties.Settings.Default.username;
-                txtPass.Text = Properties.Settings.Default.password;
-            }
-            catch { }          
-            // This prevents other controls from being focused
-            this.Select();
-            this.ActiveControl = null;
-        }
     }
 }
