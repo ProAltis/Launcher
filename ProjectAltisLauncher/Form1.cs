@@ -15,6 +15,7 @@ namespace ProjectAltisLauncher
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
@@ -56,9 +57,13 @@ namespace ProjectAltisLauncher
             if (cbSaveLogin.Checked == true)
             {
                 Console.WriteLine("Save checked");
-                Properties.Settings.Default.username = txtUser.Text;
-                Properties.Settings.Default.password = txtPass.Text;
-                Properties.Settings.Default.Save();
+                if (txtUser.Text != null | txtPass.Text != null)
+                {
+                    Properties.Settings.Default.username = txtUser.Text;
+                    Properties.Settings.Default.password = txtPass.Text;
+                    Properties.Settings.Default.Save();
+                }
+
             }
             string finalURL = "https://www.projectaltis.com/api/?u=" + txtUser.Text + "&p=" + txtPass.Text;
             string APIResponse = RequestData(finalURL, "GET"); // Send request to login API, store the response as string
@@ -109,16 +114,20 @@ namespace ProjectAltisLauncher
                 SHA256 mySHA256 = SHA256.Create();
 
                 FileInfo myFile = new FileInfo(filePath);
-                FileStream fileStream = myFile.Open(FileMode.Open);
-                byte[] hashValue = mySHA256.ComputeHash(fileStream);
-                string strHashValue = "";
-                foreach (byte x in hashValue)
+                using (FileStream fileStream = myFile.Open(FileMode.Open))
                 {
-                    strHashValue += x.ToString("x2");
+                    byte[] hashValue = mySHA256.ComputeHash(fileStream);
+                    string strHashValue = "";
+                    foreach (byte x in hashValue)
+                    {
+                        strHashValue += x.ToString("x2");
+                    }
+                    // Comparing the hash now
+                    Console.WriteLine("The SHA256 of {0} is: {1}", filePath, strHashValue);
+
+                    return strHashValue == hash;
                 }
-                // Comparing the hash now
-                Console.WriteLine("The SHA256 of {0} is: {1}", filePath, strHashValue);
-                return strHashValue == hash;
+
             }
             catch (Exception)
             {
@@ -168,42 +177,54 @@ namespace ProjectAltisLauncher
             for (int i = 0; i < array.Length -1; i++)
             {
                 currentFile += 1;
-                
-
                 manifest patchManifest = JsonConvert.DeserializeObject<manifest>(array[i]);
-                if (CompareSHA256(patchManifest.filename, patchManifest.sha256)) // If the hashes are the same skip the update
+                WebClient client = new WebClient();
+                if (patchManifest.filename != null || patchManifest.filename != "")
                 {
-                    Console.WriteLine("{0} is up to date!", patchManifest.filename);
-                }
-                else
-                {
-                    WebClient client = new WebClient();
-
-                    if (patchManifest.filename != null || patchManifest.filename != "")
+                    if (patchManifest.filename.Contains("phase"))
                     {
-                        nowDownloading = patchManifest.filename;
-                        Updater.ReportProgress(0); // Fire the progress changed event
-                        if (patchManifest.filename.Contains("phase"))
+                        if (CompareSHA256(currentDir + "resources\\default\\" + patchManifest.filename, patchManifest.sha256))
                         {
+                            Console.WriteLine("Phase file: {0} is up to date!", patchManifest.filename);
+                        }
+                        else
+                        {
+                            nowDownloading = patchManifest.filename;
+                            Updater.ReportProgress(0); // Fire the progress changed event
                             Console.WriteLine("Starting download for phase file: {0}", patchManifest.filename);
                             client.DownloadFile(new Uri(patchManifest.url), currentDir + "resources\\default\\" + patchManifest.filename);
                             Console.WriteLine("Finished!");
                         }
-                        else if (patchManifest.filename.Contains("ProjectAltis"))
+                    }
+                    else if (patchManifest.filename.Contains("ProjectAltis"))
+                    {
+                        if (CompareSHA256(currentDir + "config\\" + patchManifest.filename, patchManifest.sha256))
                         {
 
-                            Console.WriteLine("Starting download for config file: {0}", patchManifest.filename);
-                            client.DownloadFile(new Uri(patchManifest.url), currentDir + "config\\" + patchManifest.filename);
-                            Console.WriteLine("Finished!");
                         }
                         else
                         {
-                            Console.WriteLine("Starting download for file: {0}", patchManifest.filename);
-                            client.DownloadFile(new Uri(patchManifest.url), currentDir + patchManifest.filename);
-                            Console.WriteLine("Finished!");
+                            nowDownloading = patchManifest.filename;
+                            Updater.ReportProgress(0); // Fire the progress changed event
+                            client.DownloadFile(new Uri(patchManifest.url), currentDir + "config\\" + patchManifest.filename);
                         }
+
+                    }
+                    else if (CompareSHA256(currentDir + patchManifest.filename, patchManifest.sha256)) // If the hashes are the same skip the update
+                    {
+                        Console.WriteLine("{0} is up to date!", patchManifest.filename);
+                    }
+                    else
+                    {
+                        nowDownloading = patchManifest.filename;
+                        Updater.ReportProgress(0); // Fire the progress changed event
+                        Console.WriteLine("Starting download for file: {0}", patchManifest.filename);
+                        client.DownloadFile(new Uri(patchManifest.url), currentDir + patchManifest.filename);
+                        Console.WriteLine("Finished!");
                     }
                 }
+            
+        
                     
                 totalProgress = ((currentFile / totalFiles) * 100);
                 Console.WriteLine("Total progress is {0}", totalProgress);
@@ -234,18 +255,10 @@ namespace ProjectAltisLauncher
                 txtUser.Text = Properties.Settings.Default.username;
                 txtPass.Text = Properties.Settings.Default.password;
             }
-            catch { }
-            webBrowser1.Navigate(new Uri("http://www.projectaltis.com/changelog"));
+            catch { }          
             // This prevents other controls from being focused
             this.Select();
             this.ActiveControl = null;
-        }
-
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            HtmlElementCollection ulTags = webBrowser1.Document.GetElementsByTagName("UL");
-            Console.WriteLine(ulTags[2].InnerText);
-         //   webBrowser1.DocumentText = 
         }
     }
 }

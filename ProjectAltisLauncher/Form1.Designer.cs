@@ -42,7 +42,6 @@
             this.btnGroupTracker = new System.Windows.Forms.Button();
             this.btnChangeBg = new System.Windows.Forms.Button();
             this.btnCredits = new System.Windows.Forms.Button();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.btnOptions = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -186,19 +185,6 @@
             this.btnCredits.Text = "Credits";
             this.btnCredits.UseVisualStyleBackColor = true;
             // 
-            // webBrowser1
-            // 
-            this.webBrowser1.AllowNavigation = false;
-            this.webBrowser1.Location = new System.Drawing.Point(44, 90);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.ScrollBarsEnabled = false;
-            this.webBrowser1.Size = new System.Drawing.Size(430, 289);
-            this.webBrowser1.TabIndex = 14;
-            this.webBrowser1.Visible = false;
-            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
-            // 
             // btnOptions
             // 
             this.btnOptions.Location = new System.Drawing.Point(698, 616);
@@ -230,7 +216,6 @@
             this.ClientSize = new System.Drawing.Size(1000, 650);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnOptions);
-            this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.btnCredits);
             this.Controls.Add(this.btnChangeBg);
             this.Controls.Add(this.btnGroupTracker);
@@ -276,7 +261,6 @@
         private System.Windows.Forms.Button btnGroupTracker;
         private System.Windows.Forms.Button btnChangeBg;
         private System.Windows.Forms.Button btnCredits;
-        private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.Button btnOptions;
         private System.Windows.Forms.Button button1;
     }
