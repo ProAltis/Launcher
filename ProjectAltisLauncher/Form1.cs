@@ -7,9 +7,12 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 /// <summary>
-/// There are a few things I still have to do before we can start designing the launcher.
-/// The download code needs to be finished. I haven't been able to finish it yet because the API's are down.
-/// Eventually we can add more features such as a group and invasion tracker. Also saving credentials.
+/// TODO:
+///     Work on background art.
+///     Improve Buttons Look
+///     Add changelog
+///     Add group tracker
+///     Add invasion tracker
 /// </summary>
 namespace ProjectAltisLauncher
 {
@@ -57,7 +60,7 @@ namespace ProjectAltisLauncher
             if (cbSaveLogin.Checked == true)
             {
                 Console.WriteLine("Save checked");
-                if (txtUser.Text != null | txtPass.Text != null)
+                if (txtUser.Text != null || txtPass.Text != null)
                 {
                     Properties.Settings.Default.username = txtUser.Text;
                     Properties.Settings.Default.password = txtPass.Text;
@@ -183,7 +186,7 @@ namespace ProjectAltisLauncher
                 {
                     if (patchManifest.filename.Contains("phase"))
                     {
-                        if (CompareSHA256(currentDir + "resources\\default\\" + patchManifest.filename, patchManifest.sha256))
+                        if (CompareFileSize(currentDir + "resources\\default\\" + patchManifest.filename, Convert.ToInt32(patchManifest.size)))
                         {
                             Console.WriteLine("Phase file: {0} is up to date!", patchManifest.filename);
                         }
