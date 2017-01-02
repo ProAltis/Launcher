@@ -107,6 +107,7 @@ namespace ProjectAltisLauncher
         #endregion
         private void btnPlay_Click(object sender, EventArgs e)
         {
+            btnPlay.Enabled = false;
             if (cbSaveLogin.Checked == true)
             {
                 Console.WriteLine("Save checked");
@@ -126,17 +127,19 @@ namespace ProjectAltisLauncher
             {
                 case "true":
                     lblInfo.Text = resp.reason;
-                    btnPlay.Enabled = false;
                     Updater.RunWorkerAsync();
                     break;
                 case "false":
                     lblInfo.Text = resp.reason;
+                    btnPlay.Enabled = true;
                     break;
                 case "critical":
                     lblInfo.Text = resp.additional;
+                    btnPlay.Enabled = true;
                     break;
                 case "info":
                     lblInfo.Text = resp.reason;
+                    btnPlay.Enabled = true;
                     break;
             }
             lblInfo.Visible = true;
