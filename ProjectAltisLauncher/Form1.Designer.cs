@@ -64,12 +64,13 @@
             // 
             // btnPlay
             // 
+            this.btnPlay.BackColor = System.Drawing.Color.Transparent;
             this.btnPlay.Location = new System.Drawing.Point(829, 306);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(90, 33);
             this.btnPlay.TabIndex = 3;
             this.btnPlay.Text = "Play";
-            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.UseVisualStyleBackColor = false;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // Updater
@@ -138,68 +139,74 @@
             // 
             // btnOfficialSite
             // 
+            this.btnOfficialSite.BackColor = System.Drawing.Color.Transparent;
             this.btnOfficialSite.Location = new System.Drawing.Point(12, 616);
             this.btnOfficialSite.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnOfficialSite.Name = "btnOfficialSite";
             this.btnOfficialSite.Size = new System.Drawing.Size(95, 35);
             this.btnOfficialSite.TabIndex = 9;
             this.btnOfficialSite.Text = "Official Site";
-            this.btnOfficialSite.UseVisualStyleBackColor = true;
+            this.btnOfficialSite.UseVisualStyleBackColor = false;
             this.btnOfficialSite.Click += new System.EventHandler(this.btnOfficialSite_Click);
             // 
             // btnGroupTracker
             // 
+            this.btnGroupTracker.BackColor = System.Drawing.Color.Transparent;
             this.btnGroupTracker.Location = new System.Drawing.Point(352, 616);
             this.btnGroupTracker.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnGroupTracker.Name = "btnGroupTracker";
             this.btnGroupTracker.Size = new System.Drawing.Size(95, 35);
             this.btnGroupTracker.TabIndex = 11;
             this.btnGroupTracker.Text = "Group Tracker";
-            this.btnGroupTracker.UseVisualStyleBackColor = true;
+            this.btnGroupTracker.UseVisualStyleBackColor = false;
             this.btnGroupTracker.Click += new System.EventHandler(this.btnGroupTracker_Click);
             // 
             // btnChangeBg
             // 
+            this.btnChangeBg.BackColor = System.Drawing.Color.Transparent;
             this.btnChangeBg.Location = new System.Drawing.Point(525, 616);
             this.btnChangeBg.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
             this.btnChangeBg.Name = "btnChangeBg";
             this.btnChangeBg.Size = new System.Drawing.Size(95, 35);
             this.btnChangeBg.TabIndex = 12;
             this.btnChangeBg.Text = "Change Background";
-            this.btnChangeBg.UseVisualStyleBackColor = true;
+            this.btnChangeBg.UseVisualStyleBackColor = false;
             this.btnChangeBg.Click += new System.EventHandler(this.btnChangeBg_Click);
             // 
             // btnCredits
             // 
+            this.btnCredits.BackColor = System.Drawing.Color.Transparent;
             this.btnCredits.Location = new System.Drawing.Point(871, 617);
             this.btnCredits.Margin = new System.Windows.Forms.Padding(3, 3, 100, 3);
             this.btnCredits.Name = "btnCredits";
             this.btnCredits.Size = new System.Drawing.Size(95, 35);
             this.btnCredits.TabIndex = 13;
             this.btnCredits.Text = "Credits";
-            this.btnCredits.UseVisualStyleBackColor = true;
+            this.btnCredits.UseVisualStyleBackColor = false;
             this.btnCredits.Click += new System.EventHandler(this.btnCredits_Click);
             // 
             // btnOptions
             // 
+            this.btnOptions.BackColor = System.Drawing.Color.Transparent;
             this.btnOptions.Location = new System.Drawing.Point(698, 616);
             this.btnOptions.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
             this.btnOptions.Name = "btnOptions";
             this.btnOptions.Size = new System.Drawing.Size(95, 36);
             this.btnOptions.TabIndex = 15;
             this.btnOptions.Text = "Game Options";
-            this.btnOptions.UseVisualStyleBackColor = true;
+            this.btnOptions.UseVisualStyleBackColor = false;
             this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
             // 
             // btnDiscord
             // 
+            this.btnDiscord.BackColor = System.Drawing.Color.Transparent;
             this.btnDiscord.Location = new System.Drawing.Point(182, 616);
             this.btnDiscord.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnDiscord.Name = "btnDiscord";
             this.btnDiscord.Size = new System.Drawing.Size(95, 35);
             this.btnDiscord.TabIndex = 16;
             this.btnDiscord.Text = "Discord";
-            this.btnDiscord.UseVisualStyleBackColor = true;
+            this.btnDiscord.UseVisualStyleBackColor = false;
             this.btnDiscord.Click += new System.EventHandler(this.btnDiscord_Click);
             // 
             // btnExit
