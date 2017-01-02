@@ -217,7 +217,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.SandyBrown;
-            this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.TTCLauncher;
+            this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.TTC;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1000, 650);
             this.Controls.Add(this.btnDiscord);
@@ -240,6 +240,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 650);
             this.MinimumSize = new System.Drawing.Size(1000, 650);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Project Altis Launcher";
             this.TransparencyKey = System.Drawing.Color.SandyBrown;
             this.Activated += new System.EventHandler(this.Form1_Activated);

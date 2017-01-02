@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackgroundChoices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackgroundChoices.Designer.cs">
+      <DependentUpon>BackgroundChoices.cs</DependentUpon>
+    </Compile>
     <Compile Include="Credits.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,9 @@
     <Compile Include="Play.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BackgroundChoices.resx">
+      <DependentUpon>BackgroundChoices.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Credits.resx">
       <DependentUpon>Credits.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,6 +111,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
+    <None Include="Resources\TTC.jpg" />
+    <None Include="Resources\MML.jpg" />
+    <None Include="Resources\DG.jpg" />
+    <None Include="Resources\DDL.jpg" />
+    <None Include="Resources\DD.jpg" />
+    <None Include="Resources\Brrrgh.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.28.3\build\Fody.targets" Condition="Exists('..\packages\Fody.1.28.3\build\Fody.targets')" />

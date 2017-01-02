@@ -8,5 +8,8 @@
     <Setting Name="password" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="background" Type="System.String" Scope="User">
+      <Value Profile="(Default)">TTC</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

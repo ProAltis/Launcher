@@ -63,9 +63,59 @@ namespace ProjectAltisLauncher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap TTCLauncher {
+        internal static System.Drawing.Bitmap Brrrgh {
             get {
-                object obj = ResourceManager.GetObject("TTCLauncher", resourceCulture);
+                object obj = ResourceManager.GetObject("Brrrgh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DD {
+            get {
+                object obj = ResourceManager.GetObject("DD", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DDL {
+            get {
+                object obj = ResourceManager.GetObject("DDL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DG {
+            get {
+                object obj = ResourceManager.GetObject("DG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MML {
+            get {
+                object obj = ResourceManager.GetObject("MML", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TTC {
+            get {
+                object obj = ResourceManager.GetObject("TTC", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -32,6 +32,8 @@ namespace ProjectAltisLauncher
                 txtPass.Text = Properties.Settings.Default.password;
             }
             catch { }
+            // Load last saved user background choice
+            SetBackground(Properties.Settings.Default.background);
             // This prevents other controls from being focused
             this.Select();
             this.ActiveControl = null;
@@ -136,7 +138,8 @@ namespace ProjectAltisLauncher
         }
         private void btnChangeBg_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Changing the background will be implemented soon!", "Oops");
+            BackgroundChoices bg = new BackgroundChoices();
+            bg.ShowDialog();
         }
         private void btnOptions_Click(object sender, EventArgs e)
         {
@@ -226,7 +229,7 @@ namespace ProjectAltisLauncher
             Directory.CreateDirectory(currentDir + "resources\\");
             Directory.CreateDirectory(currentDir + "resources\\default\\");
             totalFiles = array.Length - 1;
-            for (int i = 0; i < array.Length -1; i++)
+            for (int i = 0; i < array.Length - 1; i++)
             {
                 currentFile += 1;
                 manifest patchManifest = JsonConvert.DeserializeObject<manifest>(array[i]);
@@ -275,9 +278,9 @@ namespace ProjectAltisLauncher
                         Console.WriteLine("Finished!");
                     }
                 }
-            
-        
-                    
+
+
+
                 totalProgress = ((currentFile / totalFiles) * 100);
                 Console.WriteLine("Total progress is {0}", totalProgress);
                 Updater.ReportProgress(Convert.ToInt32(totalProgress));
@@ -298,6 +301,29 @@ namespace ProjectAltisLauncher
             }
 
         }
-
+        private void SetBackground(string bg)
+        {
+            switch (bg)
+            {
+                case "TTC":
+                    BackgroundImage = Properties.Resources.TTC;
+                    break;
+                case "DD":
+                    BackgroundImage = Properties.Resources.DD;
+                    break;
+                case "DG":
+                    BackgroundImage = Properties.Resources.DG;
+                    break;
+                case "MML":
+                    BackgroundImage = Properties.Resources.MML;
+                    break;
+                case "Brrrgh":
+                    BackgroundImage = Properties.Resources.Brrrgh;
+                    break;
+                case "DDL":
+                    BackgroundImage = Properties.Resources.DDL;
+                    break;
+            }
+        }
     }
 }

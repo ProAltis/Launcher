@@ -46,5 +46,17 @@ namespace ProjectAltisLauncher.Properties {
                 this["password"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("TTC")]
+        public string background {
+            get {
+                return ((string)(this["background"]));
+            }
+            set {
+                this["background"] = value;
+            }
+        }
     }
 }

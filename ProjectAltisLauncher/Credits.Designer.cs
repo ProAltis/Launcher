@@ -28,29 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlMain = new System.Windows.Forms.Panel();
-            this.lblCredits = new System.Windows.Forms.Label();
-            this.pnlMain.SuspendLayout();
+            this.rtfCredits = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // pnlMain
+            // rtfCredits
             // 
-            this.pnlMain.Controls.Add(this.lblCredits);
-            this.pnlMain.Location = new System.Drawing.Point(12, 12);
-            this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(388, 174);
-            this.pnlMain.TabIndex = 0;
-            // 
-            // lblCredits
-            // 
-            this.lblCredits.AutoSize = true;
-            this.lblCredits.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCredits.ForeColor = System.Drawing.Color.White;
-            this.lblCredits.Location = new System.Drawing.Point(3, 9);
-            this.lblCredits.Name = "lblCredits";
-            this.lblCredits.Size = new System.Drawing.Size(229, 48);
-            this.lblCredits.TabIndex = 0;
-            this.lblCredits.Text = "Developers\r\n    Lead Programmer && Designer: Ben\r\n    Programmer: Roast Duck ";
+            this.rtfCredits.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.rtfCredits.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtfCredits.ForeColor = System.Drawing.Color.White;
+            this.rtfCredits.Location = new System.Drawing.Point(12, 12);
+            this.rtfCredits.Name = "rtfCredits";
+            this.rtfCredits.ReadOnly = true;
+            this.rtfCredits.Size = new System.Drawing.Size(388, 174);
+            this.rtfCredits.TabIndex = 1;
+            this.rtfCredits.Text = "";
             // 
             // Credits
             // 
@@ -58,21 +49,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(412, 198);
-            this.Controls.Add(this.pnlMain);
+            this.Controls.Add(this.rtfCredits);
             this.MaximumSize = new System.Drawing.Size(428, 237);
             this.MinimumSize = new System.Drawing.Size(428, 237);
             this.Name = "Credits";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Credits";
-            this.pnlMain.ResumeLayout(false);
-            this.pnlMain.PerformLayout();
+            this.Load += new System.EventHandler(this.Credits_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlMain;
-        private System.Windows.Forms.Label lblCredits;
+        private System.Windows.Forms.RichTextBox rtfCredits;
     }
 }
