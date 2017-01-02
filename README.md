@@ -1,4 +1,4 @@
-Project Altis Launcher Source Code
+Universal Launcher Source Code
 ==================================
 This repository contains all launcher source code to launch into Project Altis
 

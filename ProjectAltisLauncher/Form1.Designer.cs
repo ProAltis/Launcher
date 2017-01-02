@@ -140,7 +140,7 @@
             // btnOfficialSite
             // 
             this.btnOfficialSite.BackColor = System.Drawing.Color.LightGray;
-            this.btnOfficialSite.Location = new System.Drawing.Point(12, 616);
+            this.btnOfficialSite.Location = new System.Drawing.Point(21, 616);
             this.btnOfficialSite.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnOfficialSite.Name = "btnOfficialSite";
             this.btnOfficialSite.Size = new System.Drawing.Size(95, 35);
@@ -152,7 +152,7 @@
             // btnGroupTracker
             // 
             this.btnGroupTracker.BackColor = System.Drawing.Color.LightGray;
-            this.btnGroupTracker.Location = new System.Drawing.Point(352, 616);
+            this.btnGroupTracker.Location = new System.Drawing.Point(361, 616);
             this.btnGroupTracker.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnGroupTracker.Name = "btnGroupTracker";
             this.btnGroupTracker.Size = new System.Drawing.Size(95, 35);
@@ -164,7 +164,7 @@
             // btnChangeBg
             // 
             this.btnChangeBg.BackColor = System.Drawing.Color.LightGray;
-            this.btnChangeBg.Location = new System.Drawing.Point(525, 616);
+            this.btnChangeBg.Location = new System.Drawing.Point(534, 616);
             this.btnChangeBg.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
             this.btnChangeBg.Name = "btnChangeBg";
             this.btnChangeBg.Size = new System.Drawing.Size(95, 35);
@@ -176,7 +176,7 @@
             // btnCredits
             // 
             this.btnCredits.BackColor = System.Drawing.Color.LightGray;
-            this.btnCredits.Location = new System.Drawing.Point(871, 617);
+            this.btnCredits.Location = new System.Drawing.Point(880, 617);
             this.btnCredits.Margin = new System.Windows.Forms.Padding(3, 3, 100, 3);
             this.btnCredits.Name = "btnCredits";
             this.btnCredits.Size = new System.Drawing.Size(95, 35);
@@ -188,7 +188,7 @@
             // btnOptions
             // 
             this.btnOptions.BackColor = System.Drawing.Color.LightGray;
-            this.btnOptions.Location = new System.Drawing.Point(698, 616);
+            this.btnOptions.Location = new System.Drawing.Point(707, 616);
             this.btnOptions.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
             this.btnOptions.Name = "btnOptions";
             this.btnOptions.Size = new System.Drawing.Size(95, 36);
@@ -200,7 +200,7 @@
             // btnDiscord
             // 
             this.btnDiscord.BackColor = System.Drawing.Color.LightGray;
-            this.btnDiscord.Location = new System.Drawing.Point(182, 616);
+            this.btnDiscord.Location = new System.Drawing.Point(191, 616);
             this.btnDiscord.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnDiscord.Name = "btnDiscord";
             this.btnDiscord.Size = new System.Drawing.Size(95, 35);
@@ -280,7 +280,7 @@
             this.MinimumSize = new System.Drawing.Size(1000, 650);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Project Altis Launcher";
+            this.Text = "Universal Launcher";
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Deactivate += new System.EventHandler(this.Form1_Deactivate);
             this.Load += new System.EventHandler(this.Form1_Load);
