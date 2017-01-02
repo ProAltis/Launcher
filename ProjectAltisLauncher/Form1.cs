@@ -77,10 +77,34 @@ namespace ProjectAltisLauncher
         }
         #endregion
         #region Button Behaviors
-        private void btnClose_Click(object sender, EventArgs e)
+        #region Exit Button
+        private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+        private void btnExit_MouseEnter(object sender, EventArgs e)
+        {
+            btnExit.BackgroundImage = Properties.Resources.cancel_h;
+        }
+        private void btnExit_MouseLeave(object sender, EventArgs e)
+        {
+            btnExit.BackgroundImage = Properties.Resources.cancel;
+        }
+        #endregion
+        #region Minimize Button
+        private void btnMin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+        private void btnMin_MouseEnter(object sender, EventArgs e)
+        {
+            btnMin.BackgroundImage = Properties.Resources.minus_h;
+        }
+        private void btnMin_MouseLeave(object sender, EventArgs e)
+        {
+            btnMin.BackgroundImage = Properties.Resources.minus;
+        }
+        #endregion
         private void btnPlay_Click(object sender, EventArgs e)
         {
             if (cbSaveLogin.Checked == true)

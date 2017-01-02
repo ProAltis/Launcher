@@ -30,7 +30,6 @@
         {
             this.txtUser = new System.Windows.Forms.TextBox();
             this.txtPass = new System.Windows.Forms.TextBox();
-            this.btnClose = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
             this.Updater = new System.ComponentModel.BackgroundWorker();
             this.lblInfo = new System.Windows.Forms.Label();
@@ -44,6 +43,8 @@
             this.btnCredits = new System.Windows.Forms.Button();
             this.btnOptions = new System.Windows.Forms.Button();
             this.btnDiscord = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnMin = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUser
@@ -60,16 +61,6 @@
             this.txtPass.Size = new System.Drawing.Size(201, 20);
             this.txtPass.TabIndex = 1;
             this.txtPass.UseSystemPasswordChar = true;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(958, -1);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(43, 40);
-            this.btnClose.TabIndex = 2;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnPlay
             // 
@@ -90,11 +81,11 @@
             // lblInfo
             // 
             this.lblInfo.BackColor = System.Drawing.Color.Transparent;
-            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInfo.ForeColor = System.Drawing.Color.Black;
-            this.lblInfo.Location = new System.Drawing.Point(565, 399);
+            this.lblInfo.Location = new System.Drawing.Point(565, 356);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(341, 54);
+            this.lblInfo.Size = new System.Drawing.Size(341, 34);
             this.lblInfo.TabIndex = 4;
             this.lblInfo.Text = "Info is displayed here";
             this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -113,11 +104,11 @@
             // lblNowDownloading
             // 
             this.lblNowDownloading.BackColor = System.Drawing.Color.Transparent;
-            this.lblNowDownloading.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNowDownloading.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.lblNowDownloading.ForeColor = System.Drawing.Color.Black;
-            this.lblNowDownloading.Location = new System.Drawing.Point(566, 245);
+            this.lblNowDownloading.Location = new System.Drawing.Point(566, 280);
             this.lblNowDownloading.Name = "lblNowDownloading";
-            this.lblNowDownloading.Size = new System.Drawing.Size(340, 26);
+            this.lblNowDownloading.Size = new System.Drawing.Size(340, 24);
             this.lblNowDownloading.TabIndex = 6;
             this.lblNowDownloading.Text = "Download info here";
             this.lblNowDownloading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -211,6 +202,46 @@
             this.btnDiscord.UseVisualStyleBackColor = true;
             this.btnDiscord.Click += new System.EventHandler(this.btnDiscord_Click);
             // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.Color.Transparent;
+            this.btnExit.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.cancel;
+            this.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.ForeColor = System.Drawing.Color.Transparent;
+            this.btnExit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnExit.Location = new System.Drawing.Point(974, 1);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(24, 24);
+            this.btnExit.TabIndex = 18;
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.MouseEnter += new System.EventHandler(this.btnExit_MouseEnter);
+            this.btnExit.MouseLeave += new System.EventHandler(this.btnExit_MouseLeave);
+            // 
+            // btnMin
+            // 
+            this.btnMin.BackColor = System.Drawing.Color.Transparent;
+            this.btnMin.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.minus;
+            this.btnMin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnMin.FlatAppearance.BorderSize = 0;
+            this.btnMin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnMin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMin.ForeColor = System.Drawing.Color.Transparent;
+            this.btnMin.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnMin.Location = new System.Drawing.Point(944, 1);
+            this.btnMin.Name = "btnMin";
+            this.btnMin.Size = new System.Drawing.Size(24, 24);
+            this.btnMin.TabIndex = 19;
+            this.btnMin.UseVisualStyleBackColor = false;
+            this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
+            this.btnMin.MouseEnter += new System.EventHandler(this.btnMin_MouseEnter);
+            this.btnMin.MouseLeave += new System.EventHandler(this.btnMin_MouseLeave);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,6 +251,8 @@
             this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.TTC;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1000, 650);
+            this.Controls.Add(this.btnMin);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnDiscord);
             this.Controls.Add(this.btnOptions);
             this.Controls.Add(this.btnCredits);
@@ -232,7 +265,6 @@
             this.Controls.Add(this.cbSaveLogin);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnPlay);
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.txtPass);
             this.Controls.Add(this.txtUser);
             this.DoubleBuffered = true;
@@ -258,7 +290,6 @@
 
         private System.Windows.Forms.TextBox txtUser;
         private System.Windows.Forms.TextBox txtPass;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnPlay;
         private System.ComponentModel.BackgroundWorker Updater;
         private System.Windows.Forms.Label lblInfo;
@@ -272,6 +303,8 @@
         private System.Windows.Forms.Button btnCredits;
         private System.Windows.Forms.Button btnOptions;
         private System.Windows.Forms.Button btnDiscord;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnMin;
     }
 }
 

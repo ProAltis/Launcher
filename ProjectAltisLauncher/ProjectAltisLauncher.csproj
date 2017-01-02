@@ -111,6 +111,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
+    <None Include="Resources\minus_h.png" />
+    <None Include="Resources\minus.png" />
+    <None Include="Resources\cancel_h.png" />
+    <None Include="Resources\cancel1.png" />
+    <None Include="Resources\cancel.png" />
     <None Include="Resources\TTC.jpg" />
     <None Include="Resources\MML.jpg" />
     <None Include="Resources\DG.jpg" />
