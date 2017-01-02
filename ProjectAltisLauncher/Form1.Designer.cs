@@ -64,7 +64,7 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.BackColor = System.Drawing.Color.Transparent;
+            this.btnPlay.BackColor = System.Drawing.Color.LightGray;
             this.btnPlay.Location = new System.Drawing.Point(829, 306);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(90, 33);
@@ -139,7 +139,7 @@
             // 
             // btnOfficialSite
             // 
-            this.btnOfficialSite.BackColor = System.Drawing.Color.Transparent;
+            this.btnOfficialSite.BackColor = System.Drawing.Color.LightGray;
             this.btnOfficialSite.Location = new System.Drawing.Point(12, 616);
             this.btnOfficialSite.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnOfficialSite.Name = "btnOfficialSite";
@@ -151,7 +151,7 @@
             // 
             // btnGroupTracker
             // 
-            this.btnGroupTracker.BackColor = System.Drawing.Color.Transparent;
+            this.btnGroupTracker.BackColor = System.Drawing.Color.LightGray;
             this.btnGroupTracker.Location = new System.Drawing.Point(352, 616);
             this.btnGroupTracker.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnGroupTracker.Name = "btnGroupTracker";
@@ -163,7 +163,7 @@
             // 
             // btnChangeBg
             // 
-            this.btnChangeBg.BackColor = System.Drawing.Color.Transparent;
+            this.btnChangeBg.BackColor = System.Drawing.Color.LightGray;
             this.btnChangeBg.Location = new System.Drawing.Point(525, 616);
             this.btnChangeBg.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
             this.btnChangeBg.Name = "btnChangeBg";
@@ -175,7 +175,7 @@
             // 
             // btnCredits
             // 
-            this.btnCredits.BackColor = System.Drawing.Color.Transparent;
+            this.btnCredits.BackColor = System.Drawing.Color.LightGray;
             this.btnCredits.Location = new System.Drawing.Point(871, 617);
             this.btnCredits.Margin = new System.Windows.Forms.Padding(3, 3, 100, 3);
             this.btnCredits.Name = "btnCredits";
@@ -187,7 +187,7 @@
             // 
             // btnOptions
             // 
-            this.btnOptions.BackColor = System.Drawing.Color.Transparent;
+            this.btnOptions.BackColor = System.Drawing.Color.LightGray;
             this.btnOptions.Location = new System.Drawing.Point(698, 616);
             this.btnOptions.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
             this.btnOptions.Name = "btnOptions";
@@ -199,7 +199,7 @@
             // 
             // btnDiscord
             // 
-            this.btnDiscord.BackColor = System.Drawing.Color.Transparent;
+            this.btnDiscord.BackColor = System.Drawing.Color.LightGray;
             this.btnDiscord.Location = new System.Drawing.Point(182, 616);
             this.btnDiscord.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnDiscord.Name = "btnDiscord";
@@ -254,7 +254,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.Color.SandyBrown;
+            this.BackColor = System.Drawing.Color.LightGray;
             this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.TTC;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1000, 650);
@@ -281,7 +281,6 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Project Altis Launcher";
-            this.TransparencyKey = System.Drawing.Color.SandyBrown;
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Deactivate += new System.EventHandler(this.Form1_Deactivate);
             this.Load += new System.EventHandler(this.Form1_Load);
