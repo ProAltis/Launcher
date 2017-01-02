@@ -196,8 +196,7 @@ namespace ProjectAltisLauncher
             {
                 SHA256 mySHA256 = SHA256.Create();
 
-                FileInfo myFile = new FileInfo(filePath);
-                using (FileStream fileStream = myFile.Open(FileMode.Open))
+                using (FileStream fileStream = File.OpenRead(filePath))
                 {
                     byte[] hashValue = mySHA256.ComputeHash(fileStream);
                     string strHashValue = "";
