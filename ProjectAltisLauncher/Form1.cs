@@ -9,7 +9,6 @@ using System.Security.Cryptography;
 using System.Windows.Forms;
 /// <summary>
 /// TODO:
-///     Work on background art.
 ///     Improve Buttons Look
 ///     Add changelog
 ///     Add group tracker
@@ -40,12 +39,10 @@ namespace ProjectAltisLauncher
         }
         private void Form1_Activated(object sender, EventArgs e)
         {
-            this.Select();
             this.ActiveControl = null;
         }
         private void Form1_Deactivate(object sender, EventArgs e)
         {
-            this.Select();
             this.ActiveControl = null;
         }
         #endregion
@@ -95,6 +92,7 @@ namespace ProjectAltisLauncher
         private void btnMin_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+            this.ActiveControl = null;
         }
         private void btnMin_MouseEnter(object sender, EventArgs e)
         {
@@ -153,24 +151,30 @@ namespace ProjectAltisLauncher
         private void btnDiscord_Click(object sender, EventArgs e)
         {
             Process.Start("https://discord.gg/szEPYtV");
+            this.ActiveControl = null;
         }
         private void btnGroupTracker_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Group Tracker will be implemented soon!", "Oops!");
+            this.ActiveControl = null;
         }
         private void btnCredits_Click(object sender, EventArgs e)
         {
             Credits f = new Credits();
             f.ShowDialog();
+            this.ActiveControl = null;
         }
         private void btnChangeBg_Click(object sender, EventArgs e)
         {
             BackgroundChoices bg = new BackgroundChoices();
             bg.ShowDialog();
+            SetBackground(Properties.Settings.Default.background);
+            this.ActiveControl = null;
         }
         private void btnOptions_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Options will be implemented soon!", "Oops!");
+            this.ActiveControl = null;
         }
         #endregion
         #region Hashing Functions

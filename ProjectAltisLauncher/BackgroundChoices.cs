@@ -49,7 +49,6 @@ namespace ProjectAltisLauncher
                 Properties.Settings.Default.background = "DDL";
             }
             Properties.Settings.Default.Save();
-            MessageBox.Show("Your settings will be applied the next time you start the launcher", "Success!");
             this.Close();
         }
 
