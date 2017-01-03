@@ -116,6 +116,7 @@
     <Content Include="FodyWeavers.xml" />
     <Content Include="pie icon.ico" />
     <Content Include="pieicon.ico" />
+    <None Include="Resources\toonmono.cur" />
     <None Include="Resources\pie icon.ico" />
     <None Include="Resources\minus_h.png" />
     <None Include="Resources\minus.png" />

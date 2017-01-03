@@ -31,6 +31,9 @@ namespace ProjectAltisLauncher
                 txtPass.Text = Properties.Settings.Default.password;
             }
             catch { }
+            // Load custom cursor
+            MemoryStream cursorMemoryStream = new MemoryStream(Properties.Resources.toonmono);
+            this.Cursor = new Cursor(cursorMemoryStream);
             // Load last saved user background choice
             SetBackground(Properties.Settings.Default.background);
             // This prevents other controls from being focused
