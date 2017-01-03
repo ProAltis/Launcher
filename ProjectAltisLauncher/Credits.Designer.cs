@@ -29,11 +29,14 @@
         private void InitializeComponent()
         {
             this.rtfCredits = new System.Windows.Forms.RichTextBox();
+            this.btnExit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // rtfCredits
             // 
             this.rtfCredits.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.rtfCredits.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtfCredits.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.rtfCredits.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtfCredits.ForeColor = System.Drawing.Color.White;
             this.rtfCredits.Location = new System.Drawing.Point(12, 12);
@@ -43,15 +46,26 @@
             this.rtfCredits.TabIndex = 1;
             this.rtfCredits.Text = "";
             // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.Color.LightGray;
+            this.btnExit.Location = new System.Drawing.Point(169, 163);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.TabIndex = 2;
+            this.btnExit.Text = "Close";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // Credits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(412, 198);
+            this.ClientSize = new System.Drawing.Size(410, 197);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.rtfCredits);
-            this.MaximumSize = new System.Drawing.Size(428, 237);
-            this.MinimumSize = new System.Drawing.Size(428, 237);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Credits";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Credits";
@@ -63,5 +77,6 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox rtfCredits;
+        private System.Windows.Forms.Button btnExit;
     }
 }

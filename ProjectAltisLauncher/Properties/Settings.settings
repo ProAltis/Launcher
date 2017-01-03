@@ -11,5 +11,11 @@
     <Setting Name="background" Type="System.String" Scope="User">
       <Value Profile="(Default)">TTC</Value>
     </Setting>
+    <Setting Name="wantsCursor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="wantsGameDebug" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -11,12 +11,12 @@ namespace ProjectAltisLauncher
         {
             Environment.SetEnvironmentVariable("TT_USERNAME", username);
             Environment.SetEnvironmentVariable("TT_PASSWORD", password);
-            
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            
+            if (Properties.Settings.Default.wantsGameDebug == false)
+            {
+                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            }         
             startInfo.FileName = "Altis";
-            // The code below would hide the command window of Altis. Just showing
-           // startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             Process.Start(startInfo);
         }
 

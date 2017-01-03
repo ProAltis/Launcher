@@ -23,5 +23,10 @@ namespace ProjectAltisLauncher
 
             rtfCredits.Rtf = string1;
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

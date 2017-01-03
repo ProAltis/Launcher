@@ -31,9 +31,12 @@ namespace ProjectAltisLauncher
                 txtPass.Text = Properties.Settings.Default.password;
             }
             catch { }
-            // Load custom cursor
-            MemoryStream cursorMemoryStream = new MemoryStream(Properties.Resources.toonmono);
-            this.Cursor = new Cursor(cursorMemoryStream);
+            // Read user settings
+            if (Properties.Settings.Default.wantsCursor == true) // Cursor
+            {
+                MemoryStream cursorMemoryStream = new MemoryStream(Properties.Resources.toonmono);
+                this.Cursor = new Cursor(cursorMemoryStream);
+            }
             // Load last saved user background choice
             SetBackground(Properties.Settings.Default.background);
             // This prevents other controls from being focused
@@ -186,7 +189,18 @@ namespace ProjectAltisLauncher
         private void btnOptions_Click(object sender, EventArgs e)
         {
             PlaySoundFile("sndclick");
-            MessageBox.Show("Options will be implemented soon!", "Oops!");
+            Options op = new Options();
+            op.ShowDialog();
+            // Apply user settings
+            if (Properties.Settings.Default.wantsCursor == true) // Cursor
+            {
+                MemoryStream cursorMemoryStream = new MemoryStream(Properties.Resources.toonmono);
+                this.Cursor = new Cursor(cursorMemoryStream);
+            }
+            else
+            {
+                this.Cursor = Cursors.Default;
+            }
             this.ActiveControl = null;
         }
         #endregion

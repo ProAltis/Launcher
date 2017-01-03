@@ -58,5 +58,29 @@ namespace ProjectAltisLauncher.Properties {
                 this["background"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool wantsCursor {
+            get {
+                return ((bool)(this["wantsCursor"]));
+            }
+            set {
+                this["wantsCursor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool wantsGameDebug {
+            get {
+                return ((bool)(this["wantsGameDebug"]));
+            }
+            set {
+                this["wantsGameDebug"] = value;
+            }
+        }
     }
 }
