@@ -94,6 +94,7 @@ namespace ProjectAltisLauncher
         #region Minimize Button
         private void btnMin_Click(object sender, EventArgs e)
         {
+            PlaySoundFile("sndclick");
             this.WindowState = FormWindowState.Minimized;
             this.ActiveControl = null;
         }
@@ -106,9 +107,11 @@ namespace ProjectAltisLauncher
             btnMin.BackgroundImage = Properties.Resources.minus;
         }
         #endregion
+        #region Play Button
         private void btnPlay_Click(object sender, EventArgs e)
         {
             btnPlay.Enabled = false;
+            PlaySoundFile("sndclick");
             if (cbSaveLogin.Checked == true)
             {
                 Console.WriteLine("Save checked");
@@ -146,29 +149,35 @@ namespace ProjectAltisLauncher
             lblInfo.Visible = true;
             this.ActiveControl = null;
         }
+        #endregion
         private void btnOfficialSite_Click(object sender, EventArgs e)
         {
+            PlaySoundFile("sndclick");
             Process.Start("https://www.projectaltis.com/");
             this.ActiveControl = null;
         }
         private void btnDiscord_Click(object sender, EventArgs e)
         {
+            PlaySoundFile("sndclick");
             Process.Start("https://discord.gg/szEPYtV");
             this.ActiveControl = null;
         }
         private void btnGroupTracker_Click(object sender, EventArgs e)
         {
+            PlaySoundFile("sndclick");
             MessageBox.Show("Group Tracker will be implemented soon!", "Oops!");
             this.ActiveControl = null;
         }
         private void btnCredits_Click(object sender, EventArgs e)
         {
+            PlaySoundFile("sndclick");
             Credits f = new Credits();
             f.ShowDialog();
             this.ActiveControl = null;
         }
         private void btnChangeBg_Click(object sender, EventArgs e)
         {
+            PlaySoundFile("sndclick");
             BackgroundChoices bg = new BackgroundChoices();
             bg.ShowDialog();
             SetBackground(Properties.Settings.Default.background);
@@ -176,6 +185,7 @@ namespace ProjectAltisLauncher
         }
         private void btnOptions_Click(object sender, EventArgs e)
         {
+            PlaySoundFile("sndclick");
             MessageBox.Show("Options will be implemented soon!", "Oops!");
             this.ActiveControl = null;
         }
@@ -226,6 +236,19 @@ namespace ProjectAltisLauncher
             }
         }
         #endregion
+        private static void PlaySoundFile(string filename)
+        {
+            System.Media.SoundPlayer player;
+            switch (filename.ToLower())
+            {
+                case "sndclick":
+                    player = new System.Media.SoundPlayer(Properties.Resources.sndclick);
+                    player.Load();
+                    player.Play();
+                    break;
+            }
+
+        }
         private string RequestData(string URL, string Method)
         {
             try
