@@ -269,14 +269,17 @@ namespace ProjectAltisLauncher
         #endregion
         private static void PlaySoundFile(string filename)
         {
-            System.Media.SoundPlayer player;
-            switch (filename.ToLower())
+            if (Properties.Settings.Default.wantsClickSounds)
             {
-                case "sndclick":
-                    player = new System.Media.SoundPlayer(Properties.Resources.sndclick);
-                    player.Load();
-                    player.Play();
-                    break;
+                System.Media.SoundPlayer player;
+                switch (filename.ToLower())
+                {
+                    case "sndclick":
+                        player = new System.Media.SoundPlayer(Properties.Resources.sndclick);
+                        player.Load();
+                        player.Play();
+                        break;
+                }
             }
 
         }

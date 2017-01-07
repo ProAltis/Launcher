@@ -82,5 +82,17 @@ namespace ProjectAltisLauncher.Properties {
                 this["wantsGameDebug"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool wantsClickSounds {
+            get {
+                return ((bool)(this["wantsClickSounds"]));
+            }
+            set {
+                this["wantsClickSounds"] = value;
+            }
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace ProjectAltisLauncher
         {
             Properties.Settings.Default.wantsCursor = chkCursor.Checked;
             Properties.Settings.Default.wantsGameDebug = chkDebugWindow.Checked;
+            Properties.Settings.Default.wantsClickSounds = chkClickSounds.Checked;
             Properties.Settings.Default.Save();
             this.Close();
         }
@@ -34,6 +35,7 @@ namespace ProjectAltisLauncher
         {
             chkCursor.Checked = Properties.Settings.Default.wantsCursor;
             chkDebugWindow.Checked = Properties.Settings.Default.wantsGameDebug;
+            chkClickSounds.Checked = Properties.Settings.Default.wantsClickSounds;
         }
     }
 }
