@@ -207,6 +207,17 @@ namespace ProjectAltisLauncher
             }
             this.ActiveControl = null;
         }
+        #region Play on Enter
+        private void txtPassAndUser_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnPlay.PerformClick();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
+        #endregion
         #endregion
         #region Hashing Functions
         private bool CompareFileSize(string filePath, int size)
@@ -437,8 +448,6 @@ namespace ProjectAltisLauncher
             }
         }
   
-
-
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
 
