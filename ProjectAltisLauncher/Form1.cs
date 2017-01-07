@@ -399,6 +399,7 @@ namespace ProjectAltisLauncher
                     break;
             }
         }
+
         /// <summary>
         /// Checks for the latest update of the launcher
         /// </summary>
@@ -407,7 +408,7 @@ namespace ProjectAltisLauncher
             string responseFromServer = RequestData("https://www.projectaltis.com/api/launcherManifest", "GET");
             string[] array = responseFromServer.Split('#'); // Seperate each json value into an index
 
-            for(int i = 0; i < array.Length - 1; i++) // - 1 Because string split creates one extra null line D:
+            for (int i = 0; i < array.Length - 1; i++) // - 1 Because string split creates one extra null line D:
             {
                 // First compare the file against current file and see if it needs to be updated
                 manifest patchManifest = JsonConvert.DeserializeObject<manifest>(array[i]);
@@ -420,21 +421,28 @@ namespace ProjectAltisLauncher
                     client.DownloadFile(patchManifest.url, patchManifest.filename);
                     return;
                 }
-                    client.DownloadFile(patchManifest.url, "Launcher_New.exe");
-                    File.Delete(Path.GetTempPath() + @"\script.vbs");
-                    using (StreamWriter file = new StreamWriter(Path.GetTempPath() + @"\updater.vbs", true))
-                    {
+                client.DownloadFile(patchManifest.url, "Launcher_New.exe");
+                File.Delete(Path.GetTempPath() + @"\script.vbs");
+                using (StreamWriter file = new StreamWriter(Path.GetTempPath() + @"\updater.vbs", true))
+                {
                     file.WriteLine("Dim f");
                     file.WriteLine("Set f = WScript.CreateObject(\"Scripting.FileSystemObject\")");
                     file.WriteLine("Set obj = CreateObject(\"Scripting.FileSystemObject\")");
                     file.WriteLine("obj.DeleteFile(\"{0}\")", currentDir + "Launcher.exe"); // Deletes current launcher to prevent IO Errors
-                    file.WriteLine("f.MoveFile " + "\"" + currentDir + "Launcher_New.exe" +"\", " + "\"" + currentDir + "Launcher.exe" + "\"");
+                    file.WriteLine("f.MoveFile " + "\"" + currentDir + "Launcher_New.exe" + "\", " + "\"" + currentDir + "Launcher.exe" + "\"");
                     file.WriteLine("WSHShell.Run(\"{0}\")", currentDir + "Launcher.exe");
-                        Process.Start(Path.GetTempPath() + @"\updater.vbs");
-                        Application.Exit();                   
+                    Process.Start(Path.GetTempPath() + @"\updater.vbs");
+                    Application.Exit();
                 }
+            }
+        }
+  
 
-  }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+
         }
     }
 }
