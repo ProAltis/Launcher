@@ -300,7 +300,7 @@ namespace ProjectAltisLauncher
             catch (Exception ex)
             {
                 MessageBox.Show("Exception Thrown: " + "\n  Type:    " + ex.GetType().Name + "\n  Message: " + ex.Message);
-                this.Close();
+                Application.Exit();
             }
             return "";
         }
@@ -418,35 +418,51 @@ namespace ProjectAltisLauncher
         /// </summary>
         private void CheckForUpdate()
         {
-            string responseFromServer = RequestData("https://www.projectaltis.com/api/launcherManifest", "GET");
+            string responseFromServer = RequestData(@"https://projectaltis.com/api/launcherManifest", "GET");
             string[] array = responseFromServer.Split('#'); // Seperate each json value into an index
-
+            bool restartRequired = false;
             for (int i = 0; i < array.Length - 1; i++) // - 1 Because string split creates one extra null line D:
             {
                 // First compare the file against current file and see if it needs to be updated
                 manifest patchManifest = JsonConvert.DeserializeObject<manifest>(array[i]);
 
                 WebClient client = new WebClient();
-                if (CompareSHA256(currentDir + patchManifest.filename, patchManifest.sha256)) { return; }
+                if (CompareSHA256(currentDir + patchManifest.filename, patchManifest.sha256))
+                {
 
-                if (patchManifest.filename.ToLower() != "launcher.exe")
+                }
+                else if (patchManifest.filename.ToLower() == "project altis launcher.exe")
+                {
+                    client.DownloadFile(patchManifest.url, "Launcher_New.exe");
+                    try
+                    {
+                        File.Delete(Path.GetTempPath() + @"\updater.vbs");
+                    }
+                    catch (Exception){ }
+                    
+                    using (StreamWriter file = new StreamWriter(Path.GetTempPath() + @"\updater.vbs", true))
+                    {
+                        file.WriteLine("WScript.Sleep 250"); // Wait .25 ms for main launcher to exit
+                        file.WriteLine("Dim f");
+                        file.WriteLine("Set f = WScript.CreateObject(\"Scripting.FileSystemObject\")");
+                        file.WriteLine("Set obj = CreateObject(\"Scripting.FileSystemObject\")");
+                        file.WriteLine("obj.DeleteFile(\"{0}\")", currentDir + "Project Altis Launcher.exe"); // Deletes current launcher to prevent IO Errors
+                        file.WriteLine("f.MoveFile " + "\"" + currentDir + "Launcher_New.exe" + "\", " + "\"" + currentDir + "Project Altis Launcher.exe" + "\"");
+                        file.WriteLine("Set objShell = WScript.CreateObject(\"WScript.Shell\")");
+                        file.WriteLine("objShell.Run(\"\"\"{0}\"\"\")", currentDir + "Project Altis Launcher");
+                        restartRequired = true;
+                    }
+                }
+                else
                 {
                     client.DownloadFile(patchManifest.url, patchManifest.filename);
-                    return;
                 }
-                client.DownloadFile(patchManifest.url, "Launcher_New.exe");
-                File.Delete(Path.GetTempPath() + @"\script.vbs");
-                using (StreamWriter file = new StreamWriter(Path.GetTempPath() + @"\updater.vbs", true))
-                {
-                    file.WriteLine("Dim f");
-                    file.WriteLine("Set f = WScript.CreateObject(\"Scripting.FileSystemObject\")");
-                    file.WriteLine("Set obj = CreateObject(\"Scripting.FileSystemObject\")");
-                    file.WriteLine("obj.DeleteFile(\"{0}\")", currentDir + "Launcher.exe"); // Deletes current launcher to prevent IO Errors
-                    file.WriteLine("f.MoveFile " + "\"" + currentDir + "Launcher_New.exe" + "\", " + "\"" + currentDir + "Launcher.exe" + "\"");
-                    file.WriteLine("WSHShell.Run(\"{0}\")", currentDir + "Launcher.exe");
-                    Process.Start(Path.GetTempPath() + @"\updater.vbs");
-                    Application.Exit();
-                }
+            }
+
+            if (restartRequired)
+            {
+                Process.Start(Path.GetTempPath() + @"\updater.vbs");
+                Application.Exit();
             }
         }
   
