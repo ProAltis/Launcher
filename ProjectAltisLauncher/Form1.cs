@@ -395,5 +395,10 @@ namespace ProjectAltisLauncher
                     break;
             }
         }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
     }
 }

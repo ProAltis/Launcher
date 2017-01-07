@@ -46,6 +46,7 @@
             this.btnDiscord = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnMin = new System.Windows.Forms.Button();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
             // txtUser
@@ -250,6 +251,19 @@
             this.btnMin.MouseEnter += new System.EventHandler(this.btnMin_MouseEnter);
             this.btnMin.MouseLeave += new System.EventHandler(this.btnMin_MouseLeave);
             // 
+            // webBrowser1
+            // 
+            this.webBrowser1.AllowNavigation = false;
+            this.webBrowser1.AllowWebBrowserDrop = false;
+            this.webBrowser1.Location = new System.Drawing.Point(38, 76);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScriptErrorsSuppressed = true;
+            this.webBrowser1.Size = new System.Drawing.Size(435, 518);
+            this.webBrowser1.TabIndex = 20;
+            this.webBrowser1.Url = new System.Uri("http://projectaltis.com/launcher", System.UriKind.Absolute);
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -259,6 +273,7 @@
             this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.TTC;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1000, 650);
+            this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.btnMin);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnDiscord);
@@ -313,6 +328,7 @@
         private System.Windows.Forms.Button btnDiscord;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnMin;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }
 
