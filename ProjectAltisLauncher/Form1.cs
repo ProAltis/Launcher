@@ -414,7 +414,7 @@ namespace ProjectAltisLauncher
         }
 
         /// <summary>
-        /// Checks for the latest update of the launcher
+        /// Checks for the latest update of the launcher manifest
         /// </summary>
         private void CheckForUpdate()
         {
@@ -429,8 +429,9 @@ namespace ProjectAltisLauncher
                 WebClient client = new WebClient();
                 if (CompareSHA256(currentDir + patchManifest.filename, patchManifest.sha256))
                 {
-
+                    // File is already up to date(Possibly Launcher)
                 }
+                #region Launcher Update
                 else if (patchManifest.filename.ToLower() == "project altis launcher.exe")
                 {
                     client.DownloadFile(patchManifest.url, "Launcher_New.exe");
@@ -442,6 +443,7 @@ namespace ProjectAltisLauncher
                     
                     using (StreamWriter file = new StreamWriter(Path.GetTempPath() + @"\updater.vbs", true))
                     {
+                        #region Write Update Script
                         file.WriteLine("WScript.Sleep 250"); // Wait .25 ms for main launcher to exit
                         file.WriteLine("Dim f");
                         file.WriteLine("Set f = WScript.CreateObject(\"Scripting.FileSystemObject\")");
@@ -450,16 +452,18 @@ namespace ProjectAltisLauncher
                         file.WriteLine("f.MoveFile " + "\"" + currentDir + "Launcher_New.exe" + "\", " + "\"" + currentDir + "Project Altis Launcher.exe" + "\"");
                         file.WriteLine("Set objShell = WScript.CreateObject(\"WScript.Shell\")");
                         file.WriteLine("objShell.Run(\"\"\"{0}\"\"\")", currentDir + "Project Altis Launcher");
+                        #endregion
                         restartRequired = true;
                     }
                 }
+                #endregion
                 else
                 {
                     client.DownloadFile(patchManifest.url, patchManifest.filename);
                 }
             }
 
-            if (restartRequired)
+            if (restartRequired) // Checks if restart is required to update
             {
                 Process.Start(Path.GetTempPath() + @"\updater.vbs");
                 Application.Exit();
