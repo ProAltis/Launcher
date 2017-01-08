@@ -478,5 +478,14 @@ namespace ProjectAltisLauncher
             webBrowser1.IsWebBrowserContextMenuEnabled = false;
 
         }
+
+        private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            if (e.Url.ToString().Contains("https://projectaltis.com/launcher"))
+            {
+                return;
+            }
+            Process.Start(e.Url.ToString());
+        }
     }
 }
