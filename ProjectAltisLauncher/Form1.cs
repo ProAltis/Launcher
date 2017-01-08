@@ -38,6 +38,7 @@ namespace ProjectAltisLauncher
                 this.Cursor = new Cursor(cursorMemoryStream);
             }
             // Load last saved user background choice
+            this.BackgroundImage.Dispose();
             SetBackground(Properties.Settings.Default.background);
             new System.Threading.Thread(() =>
             {
@@ -187,6 +188,7 @@ namespace ProjectAltisLauncher
             PlaySoundFile("sndclick");
             BackgroundChoices bg = new BackgroundChoices();
             bg.ShowDialog();
+            this.BackgroundImage.Dispose();
             SetBackground(Properties.Settings.Default.background);
             this.ActiveControl = null;
         }
