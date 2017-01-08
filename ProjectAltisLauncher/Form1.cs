@@ -485,6 +485,7 @@ namespace ProjectAltisLauncher
             {
                 return;
             }
+            e.Cancel = true;
             Process.Start(e.Url.ToString());
         }
     }
