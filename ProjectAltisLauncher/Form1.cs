@@ -475,7 +475,7 @@ namespace ProjectAltisLauncher
   
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-
+            webBrowser1.IsWebBrowserContextMenuEnabled = false;
 
         }
     }
