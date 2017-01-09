@@ -143,75 +143,132 @@
             // 
             // btnOfficialSite
             // 
-            this.btnOfficialSite.BackColor = System.Drawing.Color.LightGray;
-            this.btnOfficialSite.Location = new System.Drawing.Point(21, 616);
+            this.btnOfficialSite.BackColor = System.Drawing.Color.Transparent;
+            this.btnOfficialSite.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.website;
+            this.btnOfficialSite.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnOfficialSite.FlatAppearance.BorderSize = 0;
+            this.btnOfficialSite.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnOfficialSite.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnOfficialSite.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnOfficialSite.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOfficialSite.Location = new System.Drawing.Point(26, 622);
             this.btnOfficialSite.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnOfficialSite.Name = "btnOfficialSite";
-            this.btnOfficialSite.Size = new System.Drawing.Size(95, 51);
+            this.btnOfficialSite.Size = new System.Drawing.Size(90, 41);
             this.btnOfficialSite.TabIndex = 9;
-            this.btnOfficialSite.Text = "Official Site";
             this.btnOfficialSite.UseVisualStyleBackColor = false;
             this.btnOfficialSite.Click += new System.EventHandler(this.btnOfficialSite_Click);
+            this.btnOfficialSite.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnOfficialSite_MouseDown);
+            this.btnOfficialSite.MouseEnter += new System.EventHandler(this.btnOfficialSite_MouseEnter);
+            this.btnOfficialSite.MouseLeave += new System.EventHandler(this.btnOfficialSite_MouseLeave);
+            this.btnOfficialSite.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnOfficialSite_MouseUp);
             // 
             // btnGroupTracker
             // 
-            this.btnGroupTracker.BackColor = System.Drawing.Color.LightGray;
-            this.btnGroupTracker.Location = new System.Drawing.Point(361, 616);
+            this.btnGroupTracker.BackColor = System.Drawing.Color.Transparent;
+            this.btnGroupTracker.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.group;
+            this.btnGroupTracker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnGroupTracker.FlatAppearance.BorderSize = 0;
+            this.btnGroupTracker.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnGroupTracker.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnGroupTracker.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnGroupTracker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGroupTracker.Location = new System.Drawing.Point(366, 622);
             this.btnGroupTracker.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnGroupTracker.Name = "btnGroupTracker";
-            this.btnGroupTracker.Size = new System.Drawing.Size(95, 51);
+            this.btnGroupTracker.Size = new System.Drawing.Size(90, 41);
             this.btnGroupTracker.TabIndex = 11;
-            this.btnGroupTracker.Text = "Group Tracker";
             this.btnGroupTracker.UseVisualStyleBackColor = false;
             this.btnGroupTracker.Click += new System.EventHandler(this.btnGroupTracker_Click);
+            this.btnGroupTracker.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnGroupTracker_MouseDown);
+            this.btnGroupTracker.MouseEnter += new System.EventHandler(this.btnGroupTracker_MouseEnter);
+            this.btnGroupTracker.MouseLeave += new System.EventHandler(this.btnGroupTracker_MouseLeave);
+            this.btnGroupTracker.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnGroupTracker_MouseUp);
             // 
             // btnChangeBg
             // 
-            this.btnChangeBg.BackColor = System.Drawing.Color.LightGray;
-            this.btnChangeBg.Location = new System.Drawing.Point(534, 616);
+            this.btnChangeBg.BackColor = System.Drawing.Color.Transparent;
+            this.btnChangeBg.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.theme;
+            this.btnChangeBg.FlatAppearance.BorderSize = 0;
+            this.btnChangeBg.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnChangeBg.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnChangeBg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnChangeBg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangeBg.Location = new System.Drawing.Point(534, 622);
             this.btnChangeBg.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
             this.btnChangeBg.Name = "btnChangeBg";
-            this.btnChangeBg.Size = new System.Drawing.Size(95, 51);
+            this.btnChangeBg.Size = new System.Drawing.Size(90, 41);
             this.btnChangeBg.TabIndex = 12;
-            this.btnChangeBg.Text = "Change Background";
             this.btnChangeBg.UseVisualStyleBackColor = false;
             this.btnChangeBg.Click += new System.EventHandler(this.btnChangeBg_Click);
+            this.btnChangeBg.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnChangeBg_MouseDown);
+            this.btnChangeBg.MouseEnter += new System.EventHandler(this.btnChangeBg_MouseEnter);
+            this.btnChangeBg.MouseLeave += new System.EventHandler(this.btnChangeBg_MouseLeave);
+            this.btnChangeBg.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnChangeBg_MouseUp);
             // 
             // btnCredits
             // 
-            this.btnCredits.BackColor = System.Drawing.Color.LightGray;
-            this.btnCredits.Location = new System.Drawing.Point(880, 617);
+            this.btnCredits.BackColor = System.Drawing.Color.Transparent;
+            this.btnCredits.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.credits;
+            this.btnCredits.FlatAppearance.BorderSize = 0;
+            this.btnCredits.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnCredits.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnCredits.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnCredits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCredits.Location = new System.Drawing.Point(878, 622);
             this.btnCredits.Margin = new System.Windows.Forms.Padding(3, 3, 100, 3);
             this.btnCredits.Name = "btnCredits";
-            this.btnCredits.Size = new System.Drawing.Size(95, 50);
+            this.btnCredits.Size = new System.Drawing.Size(90, 41);
             this.btnCredits.TabIndex = 13;
-            this.btnCredits.Text = "Credits";
             this.btnCredits.UseVisualStyleBackColor = false;
             this.btnCredits.Click += new System.EventHandler(this.btnCredits_Click);
+            this.btnCredits.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnCredits_MouseDown);
+            this.btnCredits.MouseEnter += new System.EventHandler(this.btnCredits_MouseEnter);
+            this.btnCredits.MouseLeave += new System.EventHandler(this.btnCredits_MouseLeave);
+            this.btnCredits.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnCredits_MouseUp);
             // 
             // btnOptions
             // 
-            this.btnOptions.BackColor = System.Drawing.Color.LightGray;
-            this.btnOptions.Location = new System.Drawing.Point(707, 616);
+            this.btnOptions.BackColor = System.Drawing.Color.Transparent;
+            this.btnOptions.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.options;
+            this.btnOptions.FlatAppearance.BorderSize = 0;
+            this.btnOptions.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnOptions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnOptions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOptions.Location = new System.Drawing.Point(710, 622);
             this.btnOptions.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
             this.btnOptions.Name = "btnOptions";
-            this.btnOptions.Size = new System.Drawing.Size(95, 51);
+            this.btnOptions.Size = new System.Drawing.Size(90, 41);
             this.btnOptions.TabIndex = 15;
-            this.btnOptions.Text = "Options";
             this.btnOptions.UseVisualStyleBackColor = false;
             this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
+            this.btnOptions.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnOptions_MouseDown);
+            this.btnOptions.MouseEnter += new System.EventHandler(this.btnOptions_MouseEnter);
+            this.btnOptions.MouseLeave += new System.EventHandler(this.btnOptions_MouseLeave);
+            this.btnOptions.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnOptions_MouseUp);
             // 
             // btnDiscord
             // 
-            this.btnDiscord.BackColor = System.Drawing.Color.LightGray;
-            this.btnDiscord.Location = new System.Drawing.Point(191, 616);
+            this.btnDiscord.BackColor = System.Drawing.Color.Transparent;
+            this.btnDiscord.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.discord;
+            this.btnDiscord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnDiscord.FlatAppearance.BorderSize = 0;
+            this.btnDiscord.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnDiscord.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnDiscord.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnDiscord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDiscord.Location = new System.Drawing.Point(191, 622);
             this.btnDiscord.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnDiscord.Name = "btnDiscord";
-            this.btnDiscord.Size = new System.Drawing.Size(95, 51);
+            this.btnDiscord.Size = new System.Drawing.Size(90, 41);
             this.btnDiscord.TabIndex = 16;
-            this.btnDiscord.Text = "Discord";
             this.btnDiscord.UseVisualStyleBackColor = false;
             this.btnDiscord.Click += new System.EventHandler(this.btnDiscord_Click);
+            this.btnDiscord.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnDiscord_MouseDown);
+            this.btnDiscord.MouseEnter += new System.EventHandler(this.btnDiscord_MouseEnter);
+            this.btnDiscord.MouseLeave += new System.EventHandler(this.btnDiscord_MouseLeave);
+            this.btnDiscord.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnDiscord_MouseUp);
             // 
             // btnExit
             // 

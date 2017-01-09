@@ -125,6 +125,24 @@
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
     <Content Include="pieicon.ico" />
+    <None Include="Resources\credits_h.png" />
+    <None Include="Resources\credits_d.png" />
+    <None Include="Resources\credits.png" />
+    <None Include="Resources\website_h.png" />
+    <None Include="Resources\website_d.png" />
+    <None Include="Resources\website.png" />
+    <None Include="Resources\theme_h.png" />
+    <None Include="Resources\theme_d.png" />
+    <None Include="Resources\theme.png" />
+    <None Include="Resources\options_h.png" />
+    <None Include="Resources\options_d.png" />
+    <None Include="Resources\options.png" />
+    <None Include="Resources\group_h.png" />
+    <None Include="Resources\group_d.png" />
+    <None Include="Resources\group.png" />
+    <None Include="Resources\discord_h.png" />
+    <None Include="Resources\discord_d.png" />
+    <None Include="Resources\discord.png" />
     <None Include="Resources\sndclick.wav" />
     <None Include="Resources\toonmono.cur" />
     <None Include="Resources\minus_h.png" />
