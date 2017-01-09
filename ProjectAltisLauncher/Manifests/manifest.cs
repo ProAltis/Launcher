@@ -1,4 +1,4 @@
-﻿namespace ProjectAltisLauncher
+﻿namespace ProjectAltisLauncher.Manifests
 {
     class manifest
     {

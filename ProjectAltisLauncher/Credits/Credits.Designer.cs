@@ -1,4 +1,4 @@
-﻿namespace ProjectAltisLauncher
+﻿namespace ProjectAltisLauncher.Credits
 {
     partial class Credits
     {

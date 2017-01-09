@@ -1,4 +1,3 @@
-﻿namespace ProjectAltisLauncher
 {
     partial class Options
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace ProjectAltisLauncher
+namespace ProjectAltisLauncher.Core
 {
     class Play
     {
