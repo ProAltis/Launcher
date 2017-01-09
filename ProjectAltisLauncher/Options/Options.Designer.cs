@@ -1,3 +1,4 @@
+﻿namespace ProjectAltisLauncher.Options
 {
     partial class Options
     {

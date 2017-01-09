@@ -5,12 +5,12 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net;
-using System.Security.Cryptography;
 using System.Windows.Forms;
+using ProjectAltisLauncher.Core;
+using ProjectAltisLauncher.Manifests;
 /// <summary>
 /// TODO:
 ///     Improve Buttons Look
-///     Add changelog
 ///     Add group tracker
 ///     Add invasion tracker
 /// </summary>
@@ -179,7 +179,7 @@ namespace ProjectAltisLauncher
         private void btnCredits_Click(object sender, EventArgs e)
         {
             PlaySoundFile("sndclick");
-            Credits f = new Credits();
+            Credits.Credits f = new Credits.Credits();
             f.ShowDialog();
             this.ActiveControl = null;
         }
@@ -195,7 +195,7 @@ namespace ProjectAltisLauncher
         private void btnOptions_Click(object sender, EventArgs e)
         {
             PlaySoundFile("sndclick");
-            Options op = new Options();
+            Options.Options op = new Options.Options();
             op.ShowDialog();
             // Apply user settings
             if (Properties.Settings.Default.wantsCursor == true) // Cursor
@@ -220,52 +220,6 @@ namespace ProjectAltisLauncher
             }
         }
         #endregion
-        #endregion
-        #region Hashing Functions
-        private bool CompareFileSize(string filePath, int size)
-        {
-            try
-            {
-                FileInfo myFile = new FileInfo(filePath);
-                long sizeInBytes = myFile.Length;
-                return sizeInBytes == size; // returns true or false
-
-            }
-            catch (Exception)
-            {
-                // The file doesn't exist
-                Console.WriteLine("{0} does not exist!", filePath);
-                return false;
-            }
-        }
-        private bool CompareSHA256(string filePath, string hash)
-        {
-            try
-            {
-                SHA256 mySHA256 = SHA256.Create();
-
-                using (FileStream fileStream = File.OpenRead(filePath))
-                {
-                    byte[] hashValue = mySHA256.ComputeHash(fileStream);
-                    string strHashValue = "";
-                    foreach (byte x in hashValue)
-                    {
-                        strHashValue += x.ToString("x2");
-                    }
-                    // Comparing the hash now
-                    Console.WriteLine("The SHA256 of {0} is: {1}", filePath, strHashValue);
-
-                    return strHashValue == hash;
-                }
-
-            }
-            catch (Exception)
-            {
-                // File doesn't exist
-                Console.WriteLine("{0} does not exist!", filePath);
-                return false;
-            }
-        }
         #endregion
         private static void PlaySoundFile(string filename)
         {
@@ -328,7 +282,7 @@ namespace ProjectAltisLauncher
                 {
                     if (patchManifest.filename.Contains("phase"))
                     {
-                        if (CompareFileSize(currentDir + "resources\\default\\" + patchManifest.filename, Convert.ToInt32(patchManifest.size)))
+                        if (Hashing.CompareFileSize(currentDir + "resources\\default\\" + patchManifest.filename, Convert.ToInt32(patchManifest.size)))
                         {
                             Console.WriteLine("Phase file: {0} is up to date!", patchManifest.filename);
                         }
@@ -343,7 +297,7 @@ namespace ProjectAltisLauncher
                     }
                     else if (patchManifest.filename.Contains("ProjectAltis"))
                     {
-                        if (CompareSHA256(currentDir + "config\\" + patchManifest.filename, patchManifest.sha256))
+                        if (Hashing.CompareSHA256(currentDir + "config\\" + patchManifest.filename, patchManifest.sha256))
                         {
 
                         }
@@ -355,7 +309,7 @@ namespace ProjectAltisLauncher
                         }
 
                     }
-                    else if (CompareSHA256(currentDir + patchManifest.filename, patchManifest.sha256)) // If the hashes are the same skip the update
+                    else if (Hashing.CompareSHA256(currentDir + patchManifest.filename, patchManifest.sha256)) // If the hashes are the same skip the update
                     {
                         Console.WriteLine("{0} is up to date!", patchManifest.filename);
                     }
@@ -430,7 +384,7 @@ namespace ProjectAltisLauncher
                 manifest patchManifest = JsonConvert.DeserializeObject<manifest>(array[i]);
 
                 WebClient client = new WebClient();
-                if (CompareSHA256(currentDir + patchManifest.filename, patchManifest.sha256))
+                if (Hashing.CompareSHA256(currentDir + patchManifest.filename, patchManifest.sha256))
                 {
                     // File is already up to date(Possibly Launcher)
                 }
