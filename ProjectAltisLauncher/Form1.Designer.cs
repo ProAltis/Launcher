@@ -163,6 +163,7 @@
             this.btnOfficialSite.Name = "btnOfficialSite";
             this.btnOfficialSite.Size = new System.Drawing.Size(90, 41);
             this.btnOfficialSite.TabIndex = 9;
+            this.btnOfficialSite.TabStop = false;
             this.btnOfficialSite.UseVisualStyleBackColor = false;
             this.btnOfficialSite.Click += new System.EventHandler(this.btnOfficialSite_Click);
             this.btnOfficialSite.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnOfficialSite_MouseDown);
@@ -185,6 +186,7 @@
             this.btnGroupTracker.Name = "btnGroupTracker";
             this.btnGroupTracker.Size = new System.Drawing.Size(90, 41);
             this.btnGroupTracker.TabIndex = 11;
+            this.btnGroupTracker.TabStop = false;
             this.btnGroupTracker.UseVisualStyleBackColor = false;
             this.btnGroupTracker.Click += new System.EventHandler(this.btnGroupTracker_Click);
             this.btnGroupTracker.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnGroupTracker_MouseDown);
@@ -207,6 +209,7 @@
             this.btnChangeBg.Name = "btnChangeBg";
             this.btnChangeBg.Size = new System.Drawing.Size(90, 41);
             this.btnChangeBg.TabIndex = 12;
+            this.btnChangeBg.TabStop = false;
             this.btnChangeBg.UseVisualStyleBackColor = false;
             this.btnChangeBg.Click += new System.EventHandler(this.btnChangeBg_Click);
             this.btnChangeBg.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnChangeBg_MouseDown);
@@ -229,6 +232,7 @@
             this.btnCredits.Name = "btnCredits";
             this.btnCredits.Size = new System.Drawing.Size(90, 41);
             this.btnCredits.TabIndex = 13;
+            this.btnCredits.TabStop = false;
             this.btnCredits.UseVisualStyleBackColor = false;
             this.btnCredits.Click += new System.EventHandler(this.btnCredits_Click);
             this.btnCredits.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnCredits_MouseDown);
@@ -251,6 +255,7 @@
             this.btnOptions.Name = "btnOptions";
             this.btnOptions.Size = new System.Drawing.Size(90, 41);
             this.btnOptions.TabIndex = 15;
+            this.btnOptions.TabStop = false;
             this.btnOptions.UseVisualStyleBackColor = false;
             this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
             this.btnOptions.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnOptions_MouseDown);
@@ -273,6 +278,7 @@
             this.btnDiscord.Name = "btnDiscord";
             this.btnDiscord.Size = new System.Drawing.Size(90, 41);
             this.btnDiscord.TabIndex = 16;
+            this.btnDiscord.TabStop = false;
             this.btnDiscord.UseVisualStyleBackColor = false;
             this.btnDiscord.Click += new System.EventHandler(this.btnDiscord_Click);
             this.btnDiscord.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnDiscord_MouseDown);
@@ -329,6 +335,7 @@
             this.webBrowser1.ScriptErrorsSuppressed = true;
             this.webBrowser1.Size = new System.Drawing.Size(435, 518);
             this.webBrowser1.TabIndex = 20;
+            this.webBrowser1.TabStop = false;
             this.webBrowser1.Url = new System.Uri("https://projectaltis.com/launcher", System.UriKind.Absolute);
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
