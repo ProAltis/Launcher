@@ -125,6 +125,9 @@
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
     <Content Include="pieicon.ico" />
+    <None Include="Resources\play_h.png" />
+    <None Include="Resources\play_d.png" />
+    <None Include="Resources\play.png" />
     <None Include="Resources\credits_h.png" />
     <None Include="Resources\credits_d.png" />
     <None Include="Resources\credits.png" />

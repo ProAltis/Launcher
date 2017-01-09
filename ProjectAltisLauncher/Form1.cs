@@ -157,6 +157,22 @@ namespace ProjectAltisLauncher
             lblInfo.Visible = true;
             this.ActiveControl = null;
         }
+        private void btnPlay_MouseDown(object sender, MouseEventArgs e)
+        {
+            btnPlay.BackgroundImage = Properties.Resources.play_d;
+        }
+        private void btnPlay_MouseUp(object sender, MouseEventArgs e)
+        {
+            btnPlay.BackgroundImage = Properties.Resources.play;
+        }
+        private void btnPlay_MouseEnter(object sender, EventArgs e)
+        {
+            btnPlay.BackgroundImage = Properties.Resources.play_h;
+        }
+        private void btnPlay_MouseLeave(object sender, EventArgs e)
+        {
+            btnPlay.BackgroundImage = Properties.Resources.play;
+        }
         #endregion
         #region Site Button
         private void btnOfficialSite_Click(object sender, EventArgs e)
@@ -317,7 +333,6 @@ namespace ProjectAltisLauncher
             btnCredits.BackgroundImage = Properties.Resources.credits;
         }
         #endregion
-
         #region Play on Enter
         private void txtPassAndUser_KeyDown(object sender, KeyEventArgs e)
         {
@@ -478,7 +493,6 @@ namespace ProjectAltisLauncher
                     break;
             }
         }
-
         /// <summary>
         /// Checks for the latest update of the launcher manifest
         /// </summary>
@@ -534,14 +548,12 @@ namespace ProjectAltisLauncher
                 Process.Start(Path.GetTempPath() + @"\updater.vbs");
                 Application.Exit();
             }
-        }
-  
+        } 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             webBrowser1.IsWebBrowserContextMenuEnabled = false;
 
         }
-
         private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             if (e.Url.ToString().Contains("https://projectaltis.com/launcher"))
@@ -551,7 +563,5 @@ namespace ProjectAltisLauncher
             e.Cancel = true;
             Process.Start(e.Url.ToString());
         }
-
-
     }
 }

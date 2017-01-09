@@ -68,14 +68,21 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.BackColor = System.Drawing.Color.LightGray;
-            this.btnPlay.Location = new System.Drawing.Point(829, 306);
+            this.btnPlay.BackColor = System.Drawing.Color.Transparent;
+            this.btnPlay.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.play;
+            this.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnPlay.FlatAppearance.BorderSize = 0;
+            this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPlay.Location = new System.Drawing.Point(826, 302);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(90, 33);
+            this.btnPlay.Size = new System.Drawing.Size(90, 41);
             this.btnPlay.TabIndex = 3;
-            this.btnPlay.Text = "Play";
             this.btnPlay.UseVisualStyleBackColor = false;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            this.btnPlay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnPlay_MouseDown);
+            this.btnPlay.MouseEnter += new System.EventHandler(this.btnPlay_MouseEnter);
+            this.btnPlay.MouseLeave += new System.EventHandler(this.btnPlay_MouseLeave);
+            this.btnPlay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnPlay_MouseUp);
             // 
             // Updater
             // 
@@ -189,6 +196,7 @@
             // 
             this.btnChangeBg.BackColor = System.Drawing.Color.Transparent;
             this.btnChangeBg.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.theme;
+            this.btnChangeBg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnChangeBg.FlatAppearance.BorderSize = 0;
             this.btnChangeBg.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnChangeBg.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -210,6 +218,7 @@
             // 
             this.btnCredits.BackColor = System.Drawing.Color.Transparent;
             this.btnCredits.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.credits;
+            this.btnCredits.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnCredits.FlatAppearance.BorderSize = 0;
             this.btnCredits.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnCredits.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -231,6 +240,7 @@
             // 
             this.btnOptions.BackColor = System.Drawing.Color.Transparent;
             this.btnOptions.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.options;
+            this.btnOptions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnOptions.FlatAppearance.BorderSize = 0;
             this.btnOptions.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
             this.btnOptions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -332,6 +342,7 @@
             this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.TTC;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1000, 666);
+            this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.btnMin);
             this.Controls.Add(this.btnExit);
@@ -346,7 +357,6 @@
             this.Controls.Add(this.lblNowDownloading);
             this.Controls.Add(this.cbSaveLogin);
             this.Controls.Add(this.lblInfo);
-            this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.txtPass);
             this.Controls.Add(this.txtUser);
             this.DoubleBuffered = true;
