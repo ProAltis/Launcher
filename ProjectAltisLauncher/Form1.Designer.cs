@@ -147,7 +147,7 @@
             this.btnOfficialSite.Location = new System.Drawing.Point(21, 616);
             this.btnOfficialSite.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnOfficialSite.Name = "btnOfficialSite";
-            this.btnOfficialSite.Size = new System.Drawing.Size(95, 35);
+            this.btnOfficialSite.Size = new System.Drawing.Size(95, 51);
             this.btnOfficialSite.TabIndex = 9;
             this.btnOfficialSite.Text = "Official Site";
             this.btnOfficialSite.UseVisualStyleBackColor = false;
@@ -159,7 +159,7 @@
             this.btnGroupTracker.Location = new System.Drawing.Point(361, 616);
             this.btnGroupTracker.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnGroupTracker.Name = "btnGroupTracker";
-            this.btnGroupTracker.Size = new System.Drawing.Size(95, 35);
+            this.btnGroupTracker.Size = new System.Drawing.Size(95, 51);
             this.btnGroupTracker.TabIndex = 11;
             this.btnGroupTracker.Text = "Group Tracker";
             this.btnGroupTracker.UseVisualStyleBackColor = false;
@@ -171,7 +171,7 @@
             this.btnChangeBg.Location = new System.Drawing.Point(534, 616);
             this.btnChangeBg.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
             this.btnChangeBg.Name = "btnChangeBg";
-            this.btnChangeBg.Size = new System.Drawing.Size(95, 35);
+            this.btnChangeBg.Size = new System.Drawing.Size(95, 51);
             this.btnChangeBg.TabIndex = 12;
             this.btnChangeBg.Text = "Change Background";
             this.btnChangeBg.UseVisualStyleBackColor = false;
@@ -183,7 +183,7 @@
             this.btnCredits.Location = new System.Drawing.Point(880, 617);
             this.btnCredits.Margin = new System.Windows.Forms.Padding(3, 3, 100, 3);
             this.btnCredits.Name = "btnCredits";
-            this.btnCredits.Size = new System.Drawing.Size(95, 35);
+            this.btnCredits.Size = new System.Drawing.Size(95, 50);
             this.btnCredits.TabIndex = 13;
             this.btnCredits.Text = "Credits";
             this.btnCredits.UseVisualStyleBackColor = false;
@@ -195,7 +195,7 @@
             this.btnOptions.Location = new System.Drawing.Point(707, 616);
             this.btnOptions.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
             this.btnOptions.Name = "btnOptions";
-            this.btnOptions.Size = new System.Drawing.Size(95, 36);
+            this.btnOptions.Size = new System.Drawing.Size(95, 51);
             this.btnOptions.TabIndex = 15;
             this.btnOptions.Text = "Options";
             this.btnOptions.UseVisualStyleBackColor = false;
@@ -207,7 +207,7 @@
             this.btnDiscord.Location = new System.Drawing.Point(191, 616);
             this.btnDiscord.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
             this.btnDiscord.Name = "btnDiscord";
-            this.btnDiscord.Size = new System.Drawing.Size(95, 35);
+            this.btnDiscord.Size = new System.Drawing.Size(95, 51);
             this.btnDiscord.TabIndex = 16;
             this.btnDiscord.Text = "Discord";
             this.btnDiscord.UseVisualStyleBackColor = false;
@@ -274,7 +274,7 @@
             this.BackColor = System.Drawing.Color.LightGray;
             this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.TTC;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1000, 650);
+            this.ClientSize = new System.Drawing.Size(1000, 666);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.btnMin);
             this.Controls.Add(this.btnExit);
@@ -295,8 +295,8 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(1000, 650);
-            this.MinimumSize = new System.Drawing.Size(1000, 650);
+            this.MaximumSize = new System.Drawing.Size(1000, 666);
+            this.MinimumSize = new System.Drawing.Size(1000, 666);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Universal Launcher";
