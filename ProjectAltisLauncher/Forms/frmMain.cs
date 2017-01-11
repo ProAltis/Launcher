@@ -8,6 +8,7 @@ using System.Net;
 using System.Windows.Forms;
 using ProjectAltisLauncher.Core;
 using ProjectAltisLauncher.Manifests;
+using System.Threading;
 /// <summary>
 /// TODO:
 ///     Clean up code
@@ -47,10 +48,8 @@ namespace ProjectAltisLauncher.Forms
                 SetBackground(Properties.Settings.Default.background);
             }
 
-            new System.Threading.Thread(() =>
-            {
-                AutoUpdater.CheckForUpdate();
-            }).Start(); 
+            var AutoUpdateThread = new Thread(AutoUpdater.CheckForUpdate);
+            AutoUpdateThread.Start();
             // This prevents other controls from being focused
             this.Select();
             this.ActiveControl = null;
@@ -370,7 +369,16 @@ namespace ProjectAltisLauncher.Forms
         private void Updater_DoWork(object sender, DoWorkEventArgs e)
         {
             currentFile = 0; // Reset the value so every time user plays totalProg
-            string responseFromServer = Data.RequestData("https://www.projectaltis.com/api/manifest", "GET");
+            string responseFromServer = "";
+            try
+            {
+                responseFromServer = Data.RequestData("https://www.projectaltis.com/api/manifest", "GET");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("An exception was generated while requesting data to the manifest.");
+            }
+            
             string[] array = responseFromServer.Split('#'); // Seperate each json value into an index
 
 

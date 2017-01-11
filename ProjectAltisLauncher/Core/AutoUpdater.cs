@@ -20,7 +20,16 @@ namespace ProjectAltisLauncher.Core
         public static void CheckForUpdate()
         {
             string currentDir = Directory.GetCurrentDirectory() + "\\";
-            string responseFromServer = Data.RequestData(@"https://projectaltis.com/api/launcherManifest", "GET");
+            string responseFromServer = "";
+            try
+            {
+               responseFromServer = Data.RequestData(@"https://projectaltis.com/api/launcherManifest", "GET");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Failed to check for autoupdates!");
+            }
+            
             string[] array = responseFromServer.Split('#'); // Seperate each json value into an index
             bool restartRequired = false;
             for (int i = 0; i < array.Length - 1; i++) // - 1 Because string split creates one extra null line D:
