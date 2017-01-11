@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCredits));
             this.rtfCredits = new System.Windows.Forms.RichTextBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -57,7 +58,7 @@
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // Credits
+            // frmCredits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -66,7 +67,8 @@
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.rtfCredits);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Credits";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "frmCredits";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Credits";
             this.Load += new System.EventHandler(this.Credits_Load);

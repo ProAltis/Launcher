@@ -123,9 +123,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\TTC Launcher.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="FodyWeavers.xml" />
     <Content Include="pieicon.ico" />
     <None Include="Resources\play_h.png" />

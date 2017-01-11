@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBackgroundChoices));
             this.grpMain = new System.Windows.Forms.GroupBox();
             this.radDD = new System.Windows.Forms.RadioButton();
             this.radTTC = new System.Windows.Forms.RadioButton();
@@ -35,9 +36,9 @@
             this.radBrrrgh = new System.Windows.Forms.RadioButton();
             this.radDG = new System.Windows.Forms.RadioButton();
             this.radMML = new System.Windows.Forms.RadioButton();
+            this.lblRandBG = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
-            this.lblRandBG = new System.Windows.Forms.Label();
             this.grpMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -124,6 +125,18 @@
             this.radMML.Text = "Minnies Melody Land";
             this.radMML.UseVisualStyleBackColor = true;
             // 
+            // lblRandBG
+            // 
+            this.lblRandBG.AutoSize = true;
+            this.lblRandBG.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblRandBG.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblRandBG.Location = new System.Drawing.Point(26, 84);
+            this.lblRandBG.Name = "lblRandBG";
+            this.lblRandBG.Size = new System.Drawing.Size(258, 20);
+            this.lblRandBG.TabIndex = 6;
+            this.lblRandBG.Text = "Random backgrounds are enabled!";
+            this.lblRandBG.Visible = false;
+            // 
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.LightGray;
@@ -146,19 +159,7 @@
             this.btnConfirm.UseVisualStyleBackColor = false;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
-            // lblRandBG
-            // 
-            this.lblRandBG.AutoSize = true;
-            this.lblRandBG.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblRandBG.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblRandBG.Location = new System.Drawing.Point(26, 84);
-            this.lblRandBG.Name = "lblRandBG";
-            this.lblRandBG.Size = new System.Drawing.Size(258, 20);
-            this.lblRandBG.TabIndex = 6;
-            this.lblRandBG.Text = "Random backgrounds are enabled!";
-            this.lblRandBG.Visible = false;
-            // 
-            // BackgroundChoices
+            // frmBackgroundChoices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -168,7 +169,8 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.grpMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "BackgroundChoices";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "frmBackgroundChoices";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Background Choices";
             this.Load += new System.EventHandler(this.BackgroundChoices_Load);

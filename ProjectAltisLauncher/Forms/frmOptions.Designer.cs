@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOptions));
             this.grpOptions = new System.Windows.Forms.GroupBox();
             this.chkRandomBackgrounds = new System.Windows.Forms.CheckBox();
             this.chkClickSounds = new System.Windows.Forms.CheckBox();
@@ -114,7 +115,7 @@
             this.btnConfirm.UseVisualStyleBackColor = false;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
-            // Options
+            // frmOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -124,7 +125,8 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.grpOptions);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Options";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "frmOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Options";
             this.Load += new System.EventHandler(this.Options_Load);

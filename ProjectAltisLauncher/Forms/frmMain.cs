@@ -73,8 +73,6 @@ namespace ProjectAltisLauncher.Forms
         #endregion
         #region Borderless Form Code
         Point mouseDownPoint = Point.Empty;
-
-
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDownPoint = new Point(e.X, e.Y);
@@ -95,7 +93,7 @@ namespace ProjectAltisLauncher.Forms
         #region Exit Button
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
         private void btnExit_MouseEnter(object sender, EventArgs e)
         {
@@ -460,6 +458,10 @@ namespace ProjectAltisLauncher.Forms
 
         }
         #endregion
+
+
+
+
         #region Web Browser / News
         // Place any web browser events inside here
         private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
