@@ -460,6 +460,8 @@ namespace ProjectAltisLauncher.Forms
 
         }
         #endregion
+        #region Web Browser / News
+        // Place any web browser events inside here
         private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             if (e.Url.ToString().Contains("https://projectaltis.com/launcher"))
@@ -469,6 +471,7 @@ namespace ProjectAltisLauncher.Forms
             e.Cancel = true;
             Process.Start(e.Url.ToString());
         }
+        #endregion
         #region Background Methods
         private void SetRandomBackground()
         {
