@@ -25,6 +25,7 @@ namespace ProjectAltisLauncher.Forms
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            #region Loading Settings
             try
             {
                 txtUser.Text = Properties.Settings.Default.username;
@@ -47,7 +48,7 @@ namespace ProjectAltisLauncher.Forms
             {
                 SetBackground(Properties.Settings.Default.background);
             }
-
+            #endregion
             var AutoUpdateThread = new Thread(AutoUpdater.CheckForUpdate);
             AutoUpdateThread.Start();
             // This prevents other controls from being focused
@@ -140,32 +141,42 @@ namespace ProjectAltisLauncher.Forms
             #endregion
             string finalURL = "https://www.projectaltis.com/api/?u=" + txtUser.Text + "&p=" + txtPass.Text;
             string APIResponse = "";
-            try
-            {
-               APIResponse = Data.RequestData(finalURL, "GET"); // Send request to login API, store the response as string
-            }    
-            catch (Exception ex)
-            {
-                MessageBox.Show("Exception Thrown: " + "\n  Type:    " + ex.GetType().Name + "\n  Message: " + ex.Message + "\n Further errors may occur");                
-            }       
+                try
+                {
+                    APIResponse = Data.RequestData(finalURL, "GET"); // Send request to login API, store the response as string
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("An error contacting the login API occured");
+                }
             loginAPIResponse resp = JsonConvert.DeserializeObject<loginAPIResponse>(APIResponse); // Deserialize API response into vars
+            
+            lblInfo.ForeColor = Color.Black; // Reset the label color
             switch (resp.status)
             {
                 case "true":
+                    lblInfo.ForeColor = Color.Green;
                     lblInfo.Text = resp.reason;
                     Updater.RunWorkerAsync();
                     break;
                 case "false":
+                    lblInfo.ForeColor = Color.Red;
                     lblInfo.Text = resp.reason;
                     btnPlay.Enabled = true;
                     break;
                 case "critical":
+                    lblInfo.ForeColor = Color.Red;
                     lblInfo.Text = resp.additional;
                     btnPlay.Enabled = true;
                     break;
                 case "info":
+                    lblInfo.ForeColor = Color.Orange;
                     lblInfo.Text = resp.reason;
                     btnPlay.Enabled = true;
+                    break;
+                default:
+                    MessageBox.Show("There was an error logging you in!", "Oops!");
+                    lblInfo.Text = "Error";
                     break;
             }
             lblInfo.Visible = true;
@@ -266,6 +277,7 @@ namespace ProjectAltisLauncher.Forms
             Audio.PlaySoundFile("sndclick");
             frmBackgroundChoices bg = new frmBackgroundChoices();
             bg.ShowDialog();
+            /// Applying the background after the user closes the Change Theme form
             if (!Properties.Settings.Default.wantsRandomBg)
             {
                 this.BackgroundImage.Dispose();
@@ -458,10 +470,6 @@ namespace ProjectAltisLauncher.Forms
 
         }
         #endregion
-
-
-
-
         #region Web Browser / News
         // Place any web browser events inside here
         private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
@@ -525,6 +533,5 @@ namespace ProjectAltisLauncher.Forms
             }
         }
         #endregion
-
     }
 }
