@@ -29,16 +29,18 @@
         private void InitializeComponent()
         {
             this.grpOptions = new System.Windows.Forms.GroupBox();
+            this.chkRandomBackgrounds = new System.Windows.Forms.CheckBox();
+            this.chkClickSounds = new System.Windows.Forms.CheckBox();
             this.chkCursor = new System.Windows.Forms.CheckBox();
             this.chkDebugWindow = new System.Windows.Forms.CheckBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
-            this.chkClickSounds = new System.Windows.Forms.CheckBox();
             this.grpOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpOptions
             // 
+            this.grpOptions.Controls.Add(this.chkRandomBackgrounds);
             this.grpOptions.Controls.Add(this.chkClickSounds);
             this.grpOptions.Controls.Add(this.chkCursor);
             this.grpOptions.Controls.Add(this.chkDebugWindow);
@@ -49,6 +51,26 @@
             this.grpOptions.TabIndex = 0;
             this.grpOptions.TabStop = false;
             this.grpOptions.Text = "Options";
+            // 
+            // chkRandomBackgrounds
+            // 
+            this.chkRandomBackgrounds.AutoSize = true;
+            this.chkRandomBackgrounds.Location = new System.Drawing.Point(6, 88);
+            this.chkRandomBackgrounds.Name = "chkRandomBackgrounds";
+            this.chkRandomBackgrounds.Size = new System.Drawing.Size(162, 17);
+            this.chkRandomBackgrounds.TabIndex = 4;
+            this.chkRandomBackgrounds.Text = "Enable random backgrounds";
+            this.chkRandomBackgrounds.UseVisualStyleBackColor = true;
+            // 
+            // chkClickSounds
+            // 
+            this.chkClickSounds.AutoSize = true;
+            this.chkClickSounds.Location = new System.Drawing.Point(6, 65);
+            this.chkClickSounds.Name = "chkClickSounds";
+            this.chkClickSounds.Size = new System.Drawing.Size(124, 17);
+            this.chkClickSounds.TabIndex = 3;
+            this.chkClickSounds.Text = "Enable Click Sounds";
+            this.chkClickSounds.UseVisualStyleBackColor = true;
             // 
             // chkCursor
             // 
@@ -92,16 +114,6 @@
             this.btnConfirm.UseVisualStyleBackColor = false;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
-            // chkClickSounds
-            // 
-            this.chkClickSounds.AutoSize = true;
-            this.chkClickSounds.Location = new System.Drawing.Point(6, 65);
-            this.chkClickSounds.Name = "chkClickSounds";
-            this.chkClickSounds.Size = new System.Drawing.Size(124, 17);
-            this.chkClickSounds.TabIndex = 3;
-            this.chkClickSounds.Text = "Enable Click Sounds";
-            this.chkClickSounds.UseVisualStyleBackColor = true;
-            // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -130,5 +142,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.CheckBox chkClickSounds;
+        private System.Windows.Forms.CheckBox chkRandomBackgrounds;
     }
 }

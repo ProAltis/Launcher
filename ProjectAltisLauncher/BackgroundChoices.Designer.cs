@@ -37,6 +37,7 @@
             this.radMML = new System.Windows.Forms.RadioButton();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
+            this.lblRandBG = new System.Windows.Forms.Label();
             this.grpMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,6 +49,7 @@
             this.grpMain.Controls.Add(this.radBrrrgh);
             this.grpMain.Controls.Add(this.radDG);
             this.grpMain.Controls.Add(this.radMML);
+            this.grpMain.Controls.Add(this.lblRandBG);
             this.grpMain.ForeColor = System.Drawing.Color.White;
             this.grpMain.Location = new System.Drawing.Point(12, 12);
             this.grpMain.Name = "grpMain";
@@ -105,10 +107,10 @@
             this.radDG.AutoSize = true;
             this.radDG.Location = new System.Drawing.Point(6, 64);
             this.radDG.Name = "radDG";
-            this.radDG.Size = new System.Drawing.Size(96, 17);
+            this.radDG.Size = new System.Drawing.Size(101, 17);
             this.radDG.TabIndex = 1;
             this.radDG.TabStop = true;
-            this.radDG.Text = "Daisy\'s Garden";
+            this.radDG.Text = "Daisy\'s Gardens";
             this.radDG.UseVisualStyleBackColor = true;
             // 
             // radMML
@@ -144,6 +146,18 @@
             this.btnConfirm.UseVisualStyleBackColor = false;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
+            // lblRandBG
+            // 
+            this.lblRandBG.AutoSize = true;
+            this.lblRandBG.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblRandBG.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblRandBG.Location = new System.Drawing.Point(26, 84);
+            this.lblRandBG.Name = "lblRandBG";
+            this.lblRandBG.Size = new System.Drawing.Size(258, 20);
+            this.lblRandBG.TabIndex = 6;
+            this.lblRandBG.Text = "Random backgrounds are enabled!";
+            this.lblRandBG.Visible = false;
+            // 
             // BackgroundChoices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,5 +189,6 @@
         private System.Windows.Forms.RadioButton radMML;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.Label lblRandBG;
     }
 }

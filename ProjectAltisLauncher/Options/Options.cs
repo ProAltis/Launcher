@@ -13,7 +13,7 @@ namespace ProjectAltisLauncher.Options
     public partial class Options : Form
     {
         public Options()
-        {
+        {           
             InitializeComponent();
         }
 
@@ -27,15 +27,17 @@ namespace ProjectAltisLauncher.Options
             Properties.Settings.Default.wantsCursor = chkCursor.Checked;
             Properties.Settings.Default.wantsGameDebug = chkDebugWindow.Checked;
             Properties.Settings.Default.wantsClickSounds = chkClickSounds.Checked;
+            Properties.Settings.Default.wantsRandomBg = chkRandomBackgrounds.Checked;
             Properties.Settings.Default.Save();
             this.Close();
         }
 
         private void Options_Load(object sender, EventArgs e)
         {
-            chkCursor.Checked = Properties.Settings.Default.wantsCursor;
-            chkDebugWindow.Checked = Properties.Settings.Default.wantsGameDebug;
-            chkClickSounds.Checked = Properties.Settings.Default.wantsClickSounds;
+                chkCursor.Checked = Properties.Settings.Default.wantsCursor;
+                chkDebugWindow.Checked = Properties.Settings.Default.wantsGameDebug;
+                chkClickSounds.Checked = Properties.Settings.Default.wantsClickSounds;
+                chkRandomBackgrounds.Checked = Properties.Settings.Default.wantsRandomBg;
         }
     }
 }

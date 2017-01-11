@@ -10,9 +10,7 @@ using ProjectAltisLauncher.Core;
 using ProjectAltisLauncher.Manifests;
 /// <summary>
 /// TODO:
-///     Improve Buttons Look
 ///     Add group tracker
-///     Add invasion tracker
 /// </summary>
 namespace ProjectAltisLauncher
 {
@@ -39,7 +37,15 @@ namespace ProjectAltisLauncher
             }
             // Load last saved user background choice
             this.BackgroundImage.Dispose();
-            SetBackground(Properties.Settings.Default.background);
+            if (Properties.Settings.Default.wantsRandomBg)
+            {
+                SetRandomBackground();
+            }
+            else
+            {
+                SetBackground(Properties.Settings.Default.background);
+            }
+
             new System.Threading.Thread(() =>
             {
                 CheckForUpdate();
@@ -63,6 +69,7 @@ namespace ProjectAltisLauncher
         private double totalProgress;
         private double currentFile = 0;
         private string nowDownloading = "";
+        private Random _rand = new Random(); // Pretty random
         #endregion
         #region Borderless Form Code
         Point mouseDownPoint = Point.Empty;
@@ -252,8 +259,12 @@ namespace ProjectAltisLauncher
             PlaySoundFile("sndclick");
             BackgroundChoices bg = new BackgroundChoices();
             bg.ShowDialog();
-            this.BackgroundImage.Dispose();
-            SetBackground(Properties.Settings.Default.background);
+            if (!Properties.Settings.Default.wantsRandomBg)
+            {
+                this.BackgroundImage.Dispose();
+                SetBackground(Properties.Settings.Default.background);
+            }
+
             this.ActiveControl = null;
         }
         private void btnChangeBg_MouseDown(object sender, MouseEventArgs e)
@@ -380,11 +391,11 @@ namespace ProjectAltisLauncher
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exception Thrown: " + "\n  Type:    " + ex.GetType().Name + "\n  Message: " + ex.Message);
-                Application.Exit();
+                MessageBox.Show("Exception Thrown: " + "\n  Type:    " + ex.GetType().Name + "\n  Message: " + ex.Message + "\n Further errors may occur");
             }
             return "";
         }
+        #region File Updater
         private void Updater_DoWork(object sender, DoWorkEventArgs e)
         {
             currentFile = 0; // Reset the value so every time user plays totalProg
@@ -469,30 +480,7 @@ namespace ProjectAltisLauncher
             }
 
         }
-        private void SetBackground(string bg)
-        {
-            switch (bg)
-            {
-                case "TTC":
-                    BackgroundImage = Properties.Resources.TTC;
-                    break;
-                case "DD":
-                    BackgroundImage = Properties.Resources.DD;
-                    break;
-                case "DG":
-                    BackgroundImage = Properties.Resources.DG;
-                    break;
-                case "MML":
-                    BackgroundImage = Properties.Resources.MML;
-                    break;
-                case "Brrrgh":
-                    BackgroundImage = Properties.Resources.Brrrgh;
-                    break;
-                case "DDL":
-                    BackgroundImage = Properties.Resources.DDL;
-                    break;
-            }
-        }
+        #endregion
         /// <summary>
         /// Checks for the latest update of the launcher manifest
         /// </summary>
@@ -563,5 +551,57 @@ namespace ProjectAltisLauncher
             e.Cancel = true;
             Process.Start(e.Url.ToString());
         }
+        #region Background Methods
+        private void SetRandomBackground()
+        {
+            int val = _rand.Next(1, 7); // Generates a random number 1-6
+            switch (val)
+            {
+                case 1:
+                    BackgroundImage = Properties.Resources.TTC;
+                    break;
+                case 2:
+                    BackgroundImage = Properties.Resources.DD;
+                    break;
+                case 3:
+                    BackgroundImage = Properties.Resources.DG;
+                    break;
+                case 4:
+                    BackgroundImage = Properties.Resources.MML;
+                    break;
+                case 5:
+                    BackgroundImage = Properties.Resources.Brrrgh;
+                    break;
+                case 6:
+                    BackgroundImage = Properties.Resources.DDL;
+                    break;
+            }
+        }
+        private void SetBackground(string bg)
+        {
+            switch (bg)
+            {
+                case "TTC":
+                    BackgroundImage = Properties.Resources.TTC;
+                    break;
+                case "DD":
+                    BackgroundImage = Properties.Resources.DD;
+                    break;
+                case "DG":
+                    BackgroundImage = Properties.Resources.DG;
+                    break;
+                case "MML":
+                    BackgroundImage = Properties.Resources.MML;
+                    break;
+                case "Brrrgh":
+                    BackgroundImage = Properties.Resources.Brrrgh;
+                    break;
+                case "DDL":
+                    BackgroundImage = Properties.Resources.DDL;
+                    break;
+            }
+        }
+        #endregion
+
     }
 }

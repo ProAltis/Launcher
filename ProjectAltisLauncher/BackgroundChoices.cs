@@ -54,6 +54,16 @@ namespace ProjectAltisLauncher
 
         private void BackgroundChoices_Load(object sender, EventArgs e)
         {
+            if (Properties.Settings.Default.wantsRandomBg)
+            {
+                radBrrrgh.Visible = false;
+                radDD.Visible = false;
+                radTTC.Visible = false;
+                radDG.Visible = false;
+                radDDL.Visible = false;
+                radMML.Visible = false;
+                lblRandBG.Visible = true;
+            }
             switch (Properties.Settings.Default.background)
             {
                 case "TTC":
