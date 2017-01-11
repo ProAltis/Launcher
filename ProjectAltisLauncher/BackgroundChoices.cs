@@ -64,27 +64,31 @@ namespace ProjectAltisLauncher
                 radMML.Visible = false;
                 lblRandBG.Visible = true;
             }
-            switch (Properties.Settings.Default.background)
+            else
             {
-                case "TTC":
-                    radTTC.Checked = true;
-                    break;
-                case "DD":
-                    radDD.Checked = true;
-                    break;
-                case "DG":
-                    radDG.Checked = true;
-                    break;
-                case "MML":
-                    radMML.Checked = true;
-                    break;
-                case "Brrrgh":
-                    radBrrrgh.Checked = true;
-                    break;
-                case "DDL":
-                    radDDL.Checked = true;
-                    break;
+                switch (Properties.Settings.Default.background)
+                {
+                    case "TTC":
+                        radTTC.Checked = true;
+                        break;
+                    case "DD":
+                        radDD.Checked = true;
+                        break;
+                    case "DG":
+                        radDG.Checked = true;
+                        break;
+                    case "MML":
+                        radMML.Checked = true;
+                        break;
+                    case "Brrrgh":
+                        radBrrrgh.Checked = true;
+                        break;
+                    case "DDL":
+                        radDDL.Checked = true;
+                        break;
+                }
             }
+
         }
     }
 }
