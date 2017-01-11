@@ -61,16 +61,17 @@
     <Compile Include="BackgroundChoices.Designer.cs">
       <DependentUpon>BackgroundChoices.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\Audio.cs" />
     <Compile Include="Credits\Credits.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Credits\Credits.Designer.cs">
       <DependentUpon>Credits.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Hashing.cs" />
@@ -91,7 +92,7 @@
     <EmbeddedResource Include="Credits\Credits.resx">
       <DependentUpon>Credits.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Options\Options.resx">

@@ -10,6 +10,7 @@ using ProjectAltisLauncher.Core;
 using ProjectAltisLauncher.Manifests;
 /// <summary>
 /// TODO:
+///     Clean up code
 ///     Add group tracker
 /// </summary>
 namespace ProjectAltisLauncher
@@ -109,7 +110,7 @@ namespace ProjectAltisLauncher
         #region Minimize Button
         private void btnMin_Click(object sender, EventArgs e)
         {
-            PlaySoundFile("sndclick");
+            Audio.PlaySoundFile("sndclick");
             this.WindowState = FormWindowState.Minimized;
             this.ActiveControl = null;
         }
@@ -126,7 +127,7 @@ namespace ProjectAltisLauncher
         private void btnPlay_Click(object sender, EventArgs e)
         {
             btnPlay.Enabled = false;
-            PlaySoundFile("sndclick");
+            Audio.PlaySoundFile("sndclick");
             if (cbSaveLogin.Checked == true)
             {
                 Console.WriteLine("Save checked");
@@ -184,7 +185,7 @@ namespace ProjectAltisLauncher
         #region Site Button
         private void btnOfficialSite_Click(object sender, EventArgs e)
         {
-            PlaySoundFile("sndclick");
+            Audio.PlaySoundFile("sndclick");
             Process.Start("https://www.projectaltis.com/");
             this.ActiveControl = null;
         }
@@ -208,7 +209,7 @@ namespace ProjectAltisLauncher
         #region Discord Button
         private void btnDiscord_Click(object sender, EventArgs e)
         {
-            PlaySoundFile("sndclick");
+            Audio.PlaySoundFile("sndclick");
             Process.Start("https://discord.gg/szEPYtV");
             this.ActiveControl = null;
         }
@@ -232,7 +233,7 @@ namespace ProjectAltisLauncher
         #region Group Tracker
         private void btnGroupTracker_Click(object sender, EventArgs e)
         {
-            PlaySoundFile("sndclick");
+            Audio.PlaySoundFile("sndclick");
             MessageBox.Show("Group Tracker will be implemented soon!", "Oops!");
             this.ActiveControl = null;
         }
@@ -256,7 +257,7 @@ namespace ProjectAltisLauncher
         #region Change Theme
         private void btnChangeBg_Click(object sender, EventArgs e)
         {
-            PlaySoundFile("sndclick");
+            Audio.PlaySoundFile("sndclick");
             BackgroundChoices bg = new BackgroundChoices();
             bg.ShowDialog();
             if (!Properties.Settings.Default.wantsRandomBg)
@@ -287,7 +288,7 @@ namespace ProjectAltisLauncher
         #region Options Button
         private void btnOptions_Click(object sender, EventArgs e)
         {
-            PlaySoundFile("sndclick");
+            Audio.PlaySoundFile("sndclick");
             Options.Options op = new Options.Options();
             op.ShowDialog();
             // Apply user settings
@@ -322,7 +323,7 @@ namespace ProjectAltisLauncher
         #region Credits
         private void btnCredits_Click(object sender, EventArgs e)
         {
-            PlaySoundFile("sndclick");
+            Audio.PlaySoundFile("sndclick");
             Credits.Credits f = new Credits.Credits();
             f.ShowDialog();
             this.ActiveControl = null;
@@ -356,22 +357,6 @@ namespace ProjectAltisLauncher
         }
         #endregion
         #endregion
-        private static void PlaySoundFile(string filename)
-        {
-            if (Properties.Settings.Default.wantsClickSounds)
-            {
-                System.Media.SoundPlayer player;
-                switch (filename.ToLower())
-                {
-                    case "sndclick":
-                        player = new System.Media.SoundPlayer(Properties.Resources.sndclick);
-                        player.Load();
-                        player.Play();
-                        break;
-                }
-            }
-
-        }
         private string RequestData(string URL, string Method)
         {
             try
@@ -537,11 +522,6 @@ namespace ProjectAltisLauncher
                 Application.Exit();
             }
         } 
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            webBrowser1.IsWebBrowserContextMenuEnabled = false;
-
-        }
         private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             if (e.Url.ToString().Contains("https://projectaltis.com/launcher"))
