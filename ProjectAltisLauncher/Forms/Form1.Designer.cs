@@ -373,7 +373,7 @@
             this.MinimumSize = new System.Drawing.Size(1000, 666);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Universal Launcher";
+            this.Text = "Project Altis - Launcher";
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Deactivate += new System.EventHandler(this.Form1_Deactivate);
             this.Load += new System.EventHandler(this.Form1_Load);
