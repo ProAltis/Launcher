@@ -49,7 +49,7 @@ namespace ProjectAltisLauncher.Forms
 
             new System.Threading.Thread(() =>
             {
-                CheckForUpdate();
+                AutoUpdater.CheckForUpdate();
             }).Start(); 
             // This prevents other controls from being focused
             this.Select();
@@ -128,6 +128,7 @@ namespace ProjectAltisLauncher.Forms
         {
             btnPlay.Enabled = false;
             Audio.PlaySoundFile("sndclick");
+            #region Save credentials if necessary
             if (cbSaveLogin.Checked == true)
             {
                 Console.WriteLine("Save checked");
@@ -139,10 +140,18 @@ namespace ProjectAltisLauncher.Forms
                 }
 
             }
+            #endregion
             string finalURL = "https://www.projectaltis.com/api/?u=" + txtUser.Text + "&p=" + txtPass.Text;
-            string APIResponse = RequestData(finalURL, "GET"); // Send request to login API, store the response as string
-            loginAPIResponse resp = JsonConvert.DeserializeObject<loginAPIResponse>(APIResponse);
-
+            string APIResponse = "";
+            try
+            {
+               APIResponse = Data.RequestData(finalURL, "GET"); // Send request to login API, store the response as string
+            }    
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception Thrown: " + "\n  Type:    " + ex.GetType().Name + "\n  Message: " + ex.Message + "\n Further errors may occur");                
+            }       
+            loginAPIResponse resp = JsonConvert.DeserializeObject<loginAPIResponse>(APIResponse); // Deserialize API response into vars
             switch (resp.status)
             {
                 case "true":
@@ -177,7 +186,7 @@ namespace ProjectAltisLauncher.Forms
         {
             btnPlay.BackgroundImage = Properties.Resources.play_h;
         }
-        private void btnPlay_MouseLeave(object sender, EventArgs e)
+        private void btnPlay_MouseLeaveAndUp(object sender, EventArgs e)
         {
             btnPlay.BackgroundImage = Properties.Resources.play;
         }
@@ -258,7 +267,7 @@ namespace ProjectAltisLauncher.Forms
         private void btnChangeBg_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
-            BackgroundChoices bg = new BackgroundChoices();
+            frmBackgroundChoices bg = new frmBackgroundChoices();
             bg.ShowDialog();
             if (!Properties.Settings.Default.wantsRandomBg)
             {
@@ -357,34 +366,11 @@ namespace ProjectAltisLauncher.Forms
         }
         #endregion
         #endregion
-        private string RequestData(string URL, string Method)
-        {
-            try
-            {
-                WebRequest request = WebRequest.Create(URL);
-                request.Method = Method;
-                WebResponse response = request.GetResponse();
-                Stream dataStream = default(Stream);
-                dataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(dataStream);
-                string responseFromServer = reader.ReadToEnd();
-                reader.Close();
-                dataStream.Close();
-                response.Close();
-
-                return responseFromServer;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Exception Thrown: " + "\n  Type:    " + ex.GetType().Name + "\n  Message: " + ex.Message + "\n Further errors may occur");
-            }
-            return "";
-        }
         #region File Updater
         private void Updater_DoWork(object sender, DoWorkEventArgs e)
         {
             currentFile = 0; // Reset the value so every time user plays totalProg
-            string responseFromServer = RequestData("https://www.projectaltis.com/api/manifest", "GET");
+            string responseFromServer = Data.RequestData("https://www.projectaltis.com/api/manifest", "GET");
             string[] array = responseFromServer.Split('#'); // Seperate each json value into an index
 
 
@@ -466,62 +452,6 @@ namespace ProjectAltisLauncher.Forms
 
         }
         #endregion
-        /// <summary>
-        /// Checks for the latest update of the launcher manifest
-        /// </summary>
-        private void CheckForUpdate()
-        {
-            string responseFromServer = RequestData(@"https://projectaltis.com/api/launcherManifest", "GET");
-            string[] array = responseFromServer.Split('#'); // Seperate each json value into an index
-            bool restartRequired = false;
-            for (int i = 0; i < array.Length - 1; i++) // - 1 Because string split creates one extra null line D:
-            {
-                // First compare the file against current file and see if it needs to be updated
-                manifest patchManifest = JsonConvert.DeserializeObject<manifest>(array[i]);
-
-                WebClient client = new WebClient();
-                if (Hashing.CompareSHA256(currentDir + patchManifest.filename, patchManifest.sha256))
-                {
-                    // File is already up to date(Possibly Launcher)
-                }
-                #region Launcher Update
-                else if (patchManifest.filename.ToLower() == "project altis launcher.exe")
-                {
-                    client.DownloadFile(patchManifest.url, "Launcher_New.exe");
-                    try
-                    {
-                        File.Delete(Path.GetTempPath() + @"\updater.vbs");
-                    }
-                    catch (Exception){ }
-                    
-                    using (StreamWriter file = new StreamWriter(Path.GetTempPath() + @"\updater.vbs", true))
-                    {
-                        #region Write Update Script
-                        file.WriteLine("WScript.Sleep 250"); // Wait .25 ms for main launcher to exit
-                        file.WriteLine("Dim f");
-                        file.WriteLine("Set f = WScript.CreateObject(\"Scripting.FileSystemObject\")");
-                        file.WriteLine("Set obj = CreateObject(\"Scripting.FileSystemObject\")");
-                        file.WriteLine("obj.DeleteFile(\"{0}\")", currentDir + "Project Altis Launcher.exe"); // Deletes current launcher to prevent IO Errors
-                        file.WriteLine("f.MoveFile " + "\"" + currentDir + "Launcher_New.exe" + "\", " + "\"" + currentDir + "Project Altis Launcher.exe" + "\"");
-                        file.WriteLine("Set objShell = WScript.CreateObject(\"WScript.Shell\")");
-                        file.WriteLine("objShell.Run(\"\"\"{0}\"\"\")", currentDir + "Project Altis Launcher");
-                        #endregion
-                        restartRequired = true;
-                    }
-                }
-                #endregion
-                else
-                {
-                    client.DownloadFile(patchManifest.url, patchManifest.filename);
-                }
-            }
-
-            if (restartRequired) // Checks if restart is required to update
-            {
-                Process.Start(Path.GetTempPath() + @"\updater.vbs");
-                Application.Exit();
-            }
-        } 
         private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             if (e.Url.ToString().Contains("https://projectaltis.com/launcher"))

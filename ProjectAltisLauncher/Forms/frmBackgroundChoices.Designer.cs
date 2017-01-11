@@ -1,6 +1,6 @@
-﻿namespace ProjectAltisLauncher
+﻿namespace ProjectAltisLauncher.Forms
 {
-    partial class BackgroundChoices
+    partial class frmBackgroundChoices
     {
         /// <summary>
         /// Required designer variable.

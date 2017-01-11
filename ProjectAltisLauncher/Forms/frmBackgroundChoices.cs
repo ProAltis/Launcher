@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProjectAltisLauncher
+namespace ProjectAltisLauncher.Forms
 {
-    public partial class BackgroundChoices : Form
+    public partial class frmBackgroundChoices : Form
     {
-        public BackgroundChoices()
+        public frmBackgroundChoices()
         {
             InitializeComponent();
         }

@@ -81,8 +81,6 @@
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             this.btnPlay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnPlay_MouseDown);
             this.btnPlay.MouseEnter += new System.EventHandler(this.btnPlay_MouseEnter);
-            this.btnPlay.MouseLeave += new System.EventHandler(this.btnPlay_MouseLeave);
-            this.btnPlay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnPlay_MouseUp);
             // 
             // Updater
             // 

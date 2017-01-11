@@ -55,48 +55,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackgroundChoices.cs">
+    <Compile Include="Core\AutoUpdater.cs" />
+    <Compile Include="Core\Data.cs" />
+    <Compile Include="Forms\frmBackgroundChoices.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BackgroundChoices.Designer.cs">
-      <DependentUpon>BackgroundChoices.cs</DependentUpon>
+    <Compile Include="Forms\frmBackgroundChoices.Designer.cs">
+      <DependentUpon>frmBackgroundChoices.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Audio.cs" />
-    <Compile Include="Credits\Credits.cs">
+    <Compile Include="Forms\frmCredits.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Credits\Credits.Designer.cs">
-      <DependentUpon>Credits.cs</DependentUpon>
+    <Compile Include="Forms\frmCredits.Designer.cs">
+      <DependentUpon>frmCredits.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form1.cs">
+    <Compile Include="Forms\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Hashing.cs" />
     <Compile Include="Manifests\loginAPIResponse.cs" />
     <Compile Include="Manifests\manifest.cs" />
-    <Compile Include="Options\Options.cs">
+    <Compile Include="Forms\frmOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Options\Options.Designer.cs">
-      <DependentUpon>Options.cs</DependentUpon>
+    <Compile Include="Forms\frmOptions.Designer.cs">
+      <DependentUpon>frmOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Play.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BackgroundChoices.resx">
-      <DependentUpon>BackgroundChoices.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmBackgroundChoices.resx">
+      <DependentUpon>frmBackgroundChoices.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Credits\Credits.resx">
-      <DependentUpon>Credits.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmCredits.resx">
+      <DependentUpon>frmCredits.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Options\Options.resx">
-      <DependentUpon>Options.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmOptions.resx">
+      <DependentUpon>frmOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
