@@ -1,6 +1,6 @@
-﻿namespace ProjectAltisLauncher.Options
+﻿namespace ProjectAltisLauncher.Forms
 {
-    partial class Options
+    partial class frmOptions
     {
         /// <summary>
         /// Required designer variable.

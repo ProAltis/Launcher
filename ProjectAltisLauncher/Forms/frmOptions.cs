@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProjectAltisLauncher.Options
+namespace ProjectAltisLauncher.Forms
 {
-    public partial class Options : Form
+    public partial class frmOptions : Form
     {
-        public Options()
+        public frmOptions()
         {           
             InitializeComponent();
         }

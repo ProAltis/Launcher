@@ -1,6 +1,6 @@
-﻿namespace ProjectAltisLauncher.Credits
+﻿namespace ProjectAltisLauncher.Forms
 {
-    partial class Credits
+    partial class frmCredits
     {
         /// <summary>
         /// Required designer variable.

@@ -13,12 +13,12 @@ using ProjectAltisLauncher.Manifests;
 ///     Clean up code
 ///     Add group tracker
 /// </summary>
-namespace ProjectAltisLauncher
+namespace ProjectAltisLauncher.Forms
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
         #region Main Form Events
-        public Form1()
+        public frmMain()
         {
             InitializeComponent();
         }
@@ -289,7 +289,7 @@ namespace ProjectAltisLauncher
         private void btnOptions_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
-            Options.Options op = new Options.Options();
+            frmOptions op = new frmOptions();
             op.ShowDialog();
             // Apply user settings
             if (Properties.Settings.Default.wantsCursor == true) // Cursor
@@ -324,8 +324,8 @@ namespace ProjectAltisLauncher
         private void btnCredits_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
-            Credits.Credits f = new Credits.Credits();
-            f.ShowDialog();
+            frmCredits cred = new frmCredits();
+            cred.ShowDialog();
             this.ActiveControl = null;
         }
         private void btnCredits_MouseDown(object sender, MouseEventArgs e)

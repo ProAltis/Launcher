@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ProjectAltisLauncher.Credits
+namespace ProjectAltisLauncher.Forms
 {
-    public partial class Credits : Form
+    public partial class frmCredits : Form
     {
-        public Credits()
+        public frmCredits()
         {
             InitializeComponent();
         }
