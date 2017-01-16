@@ -81,12 +81,14 @@
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             this.btnPlay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnPlay_MouseDown);
             this.btnPlay.MouseEnter += new System.EventHandler(this.btnPlay_MouseEnter);
+            this.btnPlay.MouseLeave += new System.EventHandler(this.btnPlay_MouseLeaveAndUp);
             // 
             // Updater
             // 
             this.Updater.WorkerReportsProgress = true;
             this.Updater.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Updater_DoWork);
             this.Updater.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Updater_ProgressChanged);
+            this.Updater.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Updater_RunWorkerCompleted);
             // 
             // lblInfo
             // 
@@ -338,7 +340,7 @@
             this.webBrowser1.Url = new System.Uri("https://projectaltis.com/launcher", System.UriKind.Absolute);
             this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
             // 
-            // Form1
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -369,7 +371,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1000, 666);
             this.MinimumSize = new System.Drawing.Size(1000, 666);
-            this.Name = "Form1";
+            this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Project Altis - Launcher";
             this.Activated += new System.EventHandler(this.Form1_Activated);

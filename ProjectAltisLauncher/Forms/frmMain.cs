@@ -70,6 +70,7 @@ namespace ProjectAltisLauncher.Forms
         private double totalProgress;
         private double currentFile = 0;
         private string nowDownloading = "";
+        private string playcookie;
         private Random _rand = new Random(); // Pretty random
         #endregion
         #region Borderless Form Code
@@ -136,7 +137,6 @@ namespace ProjectAltisLauncher.Forms
                     Properties.Settings.Default.password = txtPass.Text;
                     Properties.Settings.Default.Save();
                 }
-
             }
             #endregion
             string finalURL = "https://www.projectaltis.com/api/?u=" + txtUser.Text + "&p=" + txtPass.Text;
@@ -157,6 +157,7 @@ namespace ProjectAltisLauncher.Forms
                 case "true":
                     lblInfo.ForeColor = Color.Green;
                     lblInfo.Text = resp.reason;
+                    playcookie = resp.additional;
                     Updater.RunWorkerAsync();
                     break;
                 case "false":
@@ -368,7 +369,10 @@ namespace ProjectAltisLauncher.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                btnPlay.PerformClick();
+                if (btnPlay.Enabled)
+                {
+                    btnPlay.PerformClick();
+                }
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
@@ -461,7 +465,7 @@ namespace ProjectAltisLauncher.Forms
             lblNowDownloading.Text = "Downloading " + nowDownloading;
             if (totalProgress == 100)
             {
-                btnPlay.Enabled = true;
+                
                 lblNowDownloading.Text = "";
                 lblNowDownloading.Visible = false;
                 // Launch game once all files are download
@@ -533,5 +537,10 @@ namespace ProjectAltisLauncher.Forms
             }
         }
         #endregion
+
+        private void Updater_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            btnPlay.Enabled = true; // Re-enable button
+        }
     }
 }
