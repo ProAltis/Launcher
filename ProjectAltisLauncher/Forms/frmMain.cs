@@ -423,7 +423,7 @@ namespace ProjectAltisLauncher.Forms
                             Console.WriteLine("Finished!");
                         }
                     }
-                    else if (patchManifest.filename.Contains("ProjectAltis"))
+                    else if (patchManifest.filename.Contains("toon"))
                     {
                         if (Hashing.CompareSHA256(currentDir + "config\\" + patchManifest.filename, patchManifest.sha256))
                         {
