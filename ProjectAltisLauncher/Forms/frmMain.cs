@@ -228,7 +228,7 @@ namespace ProjectAltisLauncher.Forms
         private void btnDiscord_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
-            Process.Start("https://discord.gg/szEPYtV");
+            Process.Start("https://discordapp.com/invite/qzJ3d");
             this.ActiveControl = null;
         }
         private void btnDiscord_MouseDown(object sender, MouseEventArgs e)
