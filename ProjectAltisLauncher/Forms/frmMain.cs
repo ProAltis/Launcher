@@ -433,7 +433,7 @@ namespace ProjectAltisLauncher.Forms
                 {
                     if (patchManifest.filename.Contains("phase"))
                     {
-                        if (Hashing.CompareFileSize(currentDir + "resources\\default\\" + patchManifest.filename, Convert.ToInt32(patchManifest.size)))
+                        if (Hashing.CompareSHA256(currentDir + "resources\\default\\" + patchManifest.filename, patchManifest.sha256))
                         {
                             Console.WriteLine("Phase file: {0} is up to date!", patchManifest.filename);
                         }
