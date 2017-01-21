@@ -5,9 +5,6 @@
     <Setting Name="username" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="password" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="background" Type="System.String" Scope="User">
       <Value Profile="(Default)">TTC</Value>
     </Setting>
@@ -22,6 +19,9 @@
     </Setting>
     <Setting Name="wantsRandomBg" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Deprecated</Value>
     </Setting>
   </Settings>
 </SettingsFile>

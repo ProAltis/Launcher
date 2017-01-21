@@ -18,10 +18,12 @@ namespace ProjectAltisLauncher.Forms
 {
     public partial class frmMain : Form
     {
+
         #region Main Form Events
         public frmMain()
         {
             InitializeComponent();
+            Properties.Settings.Default.password = "Deprecated";
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -29,7 +31,6 @@ namespace ProjectAltisLauncher.Forms
             try
             {
                 txtUser.Text = Properties.Settings.Default.username;
-                txtPass.Text = Properties.Settings.Default.password;
             }
             catch { }
             // Read user settings
@@ -134,23 +135,45 @@ namespace ProjectAltisLauncher.Forms
                 if (txtUser.Text != null || txtPass.Text != null)
                 {
                     Properties.Settings.Default.username = txtUser.Text;
-                    Properties.Settings.Default.password = txtPass.Text;
                     Properties.Settings.Default.Save();
                 }
             }
             #endregion
-            string finalURL = "https://www.projectaltis.com/api/?u=" + txtUser.Text + "&p=" + txtPass.Text;
-            string APIResponse = "";
-                try
-                {
-                    APIResponse = Data.RequestData(finalURL, "GET"); // Send request to login API, store the response as string
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("An error contacting the login API occured");
-                }
-            loginAPIResponse resp = JsonConvert.DeserializeObject<loginAPIResponse>(APIResponse); // Deserialize API response into vars
+            //string finalURL = "https://www.projectaltis.com/api/?u=" + txtUser.Text + "&p=" + txtPass.Text;
+            //string APIResponse = "";
+            //    try
+            //    {
+            //        APIResponse = Data.RequestData(finalURL, "GET"); // Send request to login API, store the response as string
+            //    }
+            //    catch (Exception)
+            //    {
+            //        Console.WriteLine("An error contacting the login API occured");
+            //    }
+            //loginAPIResponse resp = JsonConvert.DeserializeObject<loginAPIResponse>(APIResponse); // Deserialize API response into vars
+
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://www.projectaltis.com/api/login");
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+            loginAPIResponse resp;
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                string json = "{\"u\":\""+ txtUser.Text +"\"," +
+                              "\"p\":\"" + txtPass.Text + "\"}";
+
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+                resp = JsonConvert.DeserializeObject<loginAPIResponse>(result);
+            }
             
+
             lblInfo.ForeColor = Color.Black; // Reset the label color
             switch (resp.status)
             {
