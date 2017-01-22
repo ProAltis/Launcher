@@ -17,13 +17,19 @@ namespace ProjectAltisLauncher.Core
         /// <summary>
         /// Checks for the latest update of the launcher manifest
         /// </summary>
+        /// 
         public static void CheckForUpdate()
         {
             string currentDir = Directory.GetCurrentDirectory() + "\\";
             string responseFromServer = "";
             try
             {
-               responseFromServer = Data.RequestData(@"https://projectaltis.com/api/launcherManifest", "GET");
+#if DEBUG
+                responseFromServer = Data.RequestData(@"https://raw.githubusercontent.com/SodiumFine/test/master/response.json", "GET");
+#endif
+#if !DEBUG
+                responseFromServer = Data.RequestData(@"https://projectaltis.com/api/launcherManifest", "GET");
+#endif
             }
             catch (Exception)
             {
@@ -42,7 +48,7 @@ namespace ProjectAltisLauncher.Core
                 {
                     // File is already up to date(Possibly Launcher)
                 }
-                #region Launcher Update
+#region Launcher Update
                 else if (patchManifest.filename.ToLower() == "project altis launcher.exe")
                 {
                     client.DownloadFile(patchManifest.url, "Launcher_New.exe");
@@ -54,20 +60,19 @@ namespace ProjectAltisLauncher.Core
 
                     using (StreamWriter file = new StreamWriter(Path.GetTempPath() + @"\updater.vbs", true))
                     {
-                        #region Write Update Script
-                        file.WriteLine("WScript.Sleep 250"); // Wait .25 ms for main launcher to exit
-                        file.WriteLine("Dim f");
+#region Write Update Script
+                        file.WriteLine("WScript.Sleep 250"); // Wait 250 ms for main launcher to exit
                         file.WriteLine("Set f = WScript.CreateObject(\"Scripting.FileSystemObject\")");
                         file.WriteLine("Set obj = CreateObject(\"Scripting.FileSystemObject\")");
                         file.WriteLine("obj.DeleteFile(\"{0}\")", currentDir + "Project Altis Launcher.exe"); // Deletes current launcher to prevent IO Errors
                         file.WriteLine("f.MoveFile " + "\"" + currentDir + "Launcher_New.exe" + "\", " + "\"" + currentDir + "Project Altis Launcher.exe" + "\"");
                         file.WriteLine("Set objShell = WScript.CreateObject(\"WScript.Shell\")");
                         file.WriteLine("objShell.Run(\"\"\"{0}\"\"\")", currentDir + "Project Altis Launcher");
-                        #endregion
+#endregion
                         restartRequired = true;
                     }
                 }
-                #endregion
+#endregion
                 else
                 {
                     client.DownloadFile(patchManifest.url, patchManifest.filename);
