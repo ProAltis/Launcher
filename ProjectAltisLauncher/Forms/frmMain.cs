@@ -27,6 +27,10 @@ namespace ProjectAltisLauncher.Forms
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+#if DEBUG
+            MessageBox.Show("This is a debug build, do not put this into production",
+                "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+#endif
             #region Loading Settings
             try
             {
