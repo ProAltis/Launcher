@@ -105,14 +105,6 @@ namespace ProjectAltisLauncher.Forms
         {
             Application.Exit();
         }
-        private void btnExit_MouseEnter(object sender, EventArgs e)
-        {
-            btnExit.BackgroundImage = Properties.Resources.cancel_h;
-        }
-        private void btnExit_MouseLeave(object sender, EventArgs e)
-        {
-            btnExit.BackgroundImage = Properties.Resources.cancel;
-        }
         #endregion
         #region Minimize Button
         private void btnMin_Click(object sender, EventArgs e)
@@ -120,14 +112,6 @@ namespace ProjectAltisLauncher.Forms
             Audio.PlaySoundFile("sndclick");
             this.WindowState = FormWindowState.Minimized;
             this.ActiveControl = null;
-        }
-        private void btnMin_MouseEnter(object sender, EventArgs e)
-        {
-            btnMin.BackgroundImage = Properties.Resources.minus_h;
-        }
-        private void btnMin_MouseLeave(object sender, EventArgs e)
-        {
-            btnMin.BackgroundImage = Properties.Resources.minus;
         }
         #endregion
         #region Play Button
@@ -213,22 +197,6 @@ namespace ProjectAltisLauncher.Forms
             lblInfo.Visible = true;
             this.ActiveControl = null;
         }
-        private void btnPlay_MouseDown(object sender, MouseEventArgs e)
-        {
-            btnPlay.BackgroundImage = Properties.Resources.play_d;
-        }
-        private void btnPlay_MouseUp(object sender, MouseEventArgs e)
-        {
-            btnPlay.BackgroundImage = Properties.Resources.play;
-        }
-        private void btnPlay_MouseEnter(object sender, EventArgs e)
-        {
-            btnPlay.BackgroundImage = Properties.Resources.play_h;
-        }
-        private void btnPlay_MouseLeaveAndUp(object sender, EventArgs e)
-        {
-            btnPlay.BackgroundImage = Properties.Resources.play;
-        }
         #endregion
         #region Site Button
         private void btnOfficialSite_Click(object sender, EventArgs e)
@@ -236,22 +204,6 @@ namespace ProjectAltisLauncher.Forms
             Audio.PlaySoundFile("sndclick");
             Process.Start("https://www.projectaltis.com/");
             this.ActiveControl = null;
-        }
-        private void btnOfficialSite_MouseLeave(object sender, EventArgs e)
-        {
-            btnOfficialSite.BackgroundImage = Properties.Resources.website;
-        }
-        private void btnOfficialSite_MouseDown(object sender, MouseEventArgs e)
-        {
-            btnOfficialSite.BackgroundImage = Properties.Resources.website_d;
-        }
-        private void btnOfficialSite_MouseEnter(object sender, EventArgs e)
-        {
-            btnOfficialSite.BackgroundImage = Properties.Resources.website_h;
-        }
-        private void btnOfficialSite_MouseUp(object sender, MouseEventArgs e)
-        {
-            btnOfficialSite.BackgroundImage = Properties.Resources.website;
         }
         #endregion
         #region Discord Button
@@ -261,22 +213,6 @@ namespace ProjectAltisLauncher.Forms
             Process.Start("https://discord.me/ttprojectaltis");
             this.ActiveControl = null;
         }
-        private void btnDiscord_MouseDown(object sender, MouseEventArgs e)
-        {
-            btnDiscord.BackgroundImage = Properties.Resources.discord_d;
-        }
-        private void btnDiscord_MouseEnter(object sender, EventArgs e)
-        {
-            btnDiscord.BackgroundImage = Properties.Resources.discord_h;
-        }
-        private void btnDiscord_MouseLeave(object sender, EventArgs e)
-        {
-            btnDiscord.BackgroundImage = Properties.Resources.discord;
-        }
-        private void btnDiscord_MouseUp(object sender, MouseEventArgs e)
-        {
-            btnDiscord.BackgroundImage = Properties.Resources.discord;
-        }
         #endregion
         #region Group Tracker
         private void btnGroupTracker_Click(object sender, EventArgs e)
@@ -284,22 +220,6 @@ namespace ProjectAltisLauncher.Forms
             Audio.PlaySoundFile("sndclick");
             MessageBox.Show("Group Tracker will be implemented soon!", "Oops!");
             this.ActiveControl = null;
-        }
-        private void btnGroupTracker_MouseDown(object sender, MouseEventArgs e)
-        {
-            btnGroupTracker.BackgroundImage = Properties.Resources.group_d;
-        }
-        private void btnGroupTracker_MouseEnter(object sender, EventArgs e)
-        {
-            btnGroupTracker.BackgroundImage = Properties.Resources.group_h;
-        }
-        private void btnGroupTracker_MouseLeave(object sender, EventArgs e)
-        {
-            btnGroupTracker.BackgroundImage = Properties.Resources.group;
-        }
-        private void btnGroupTracker_MouseUp(object sender, MouseEventArgs e)
-        {
-            btnGroupTracker.BackgroundImage = Properties.Resources.group;
         }
         #endregion
         #region Change Theme
@@ -317,22 +237,6 @@ namespace ProjectAltisLauncher.Forms
 
             this.ActiveControl = null;
         }
-        private void btnChangeBg_MouseDown(object sender, MouseEventArgs e)
-        {
-            btnChangeBg.BackgroundImage = Properties.Resources.theme_d;
-        }
-        private void btnChangeBg_MouseEnter(object sender, EventArgs e)
-        {
-            btnChangeBg.BackgroundImage = Properties.Resources.theme_h;
-        }
-        private void btnChangeBg_MouseLeave(object sender, EventArgs e)
-        {
-            btnChangeBg.BackgroundImage = Properties.Resources.theme;
-        }
-        private void btnChangeBg_MouseUp(object sender, MouseEventArgs e)
-        {
-            btnChangeBg.BackgroundImage = Properties.Resources.theme;
-        }
         #endregion
         #region Options Button
         private void btnOptions_Click(object sender, EventArgs e)
@@ -341,7 +245,7 @@ namespace ProjectAltisLauncher.Forms
             frmOptions op = new frmOptions();
             op.ShowDialog();
             // Apply user settings
-            if (Properties.Settings.Default.wantsCursor == true) // Cursor
+            if (Properties.Settings.Default.wantsCursor) // Cursor
             {
                 MemoryStream cursorMemoryStream = new MemoryStream(Properties.Resources.toonmono);
                 this.Cursor = new Cursor(cursorMemoryStream);
@@ -352,22 +256,6 @@ namespace ProjectAltisLauncher.Forms
             }
             this.ActiveControl = null;
         }
-        private void btnOptions_MouseDown(object sender, MouseEventArgs e)
-        {
-            btnOptions.BackgroundImage = Properties.Resources.options_d;
-        }
-        private void btnOptions_MouseEnter(object sender, EventArgs e)
-        {
-            btnOptions.BackgroundImage = Properties.Resources.options_h;
-        }
-        private void btnOptions_MouseLeave(object sender, EventArgs e)
-        {
-            btnOptions.BackgroundImage = Properties.Resources.options;
-        }
-        private void btnOptions_MouseUp(object sender, MouseEventArgs e)
-        {
-            btnOptions.BackgroundImage = Properties.Resources.options;
-        }
         #endregion
         #region Credits
         private void btnCredits_Click(object sender, EventArgs e)
@@ -377,21 +265,39 @@ namespace ProjectAltisLauncher.Forms
             cred.ShowDialog();
             this.ActiveControl = null;
         }
-        private void btnCredits_MouseDown(object sender, MouseEventArgs e)
+        #endregion
+        #region Main Button Events
+        private void Button_MouseEnter(object sender, EventArgs e)
         {
-            btnCredits.BackgroundImage = Properties.Resources.credits_d;
+            // Take the name of the button
+            Button btnSender = (Button)sender;
+            string btnName = btnSender.Name;
+            btnName = btnName.Replace("btn", "").ToLower();
+            btnSender.BackgroundImage = Background.ImageChooser(btnName, "MouseEnter");
         }
-        private void btnCredits_MouseEnter(object sender, EventArgs e)
+        private void Button_MouseLeave(object sender, EventArgs e)
         {
-            btnCredits.BackgroundImage = Properties.Resources.credits_h;
+            // Take the name of the button
+            Button btnSender = (Button)sender;
+            string btnName = btnSender.Name;
+            btnName = btnName.Replace("btn", "").ToLower();
+            btnSender.BackgroundImage = Background.ImageChooser(btnName, "MouseLeave");
         }
-        private void btnCredits_MouseLeave(object sender, EventArgs e)
+        private void Button_MouseDown(object sender, MouseEventArgs e)
         {
-            btnCredits.BackgroundImage = Properties.Resources.credits;
+            // Take the name of the button
+            Button btnSender = (Button)sender;
+            string btnName = btnSender.Name;
+            btnName = btnName.Replace("btn", "").ToLower();
+            btnSender.BackgroundImage = Background.ImageChooser(btnName, "MouseDown");
         }
-        private void btnCredits_MouseUp(object sender, MouseEventArgs e)
+        private void Button_MouseUp(object sender, MouseEventArgs e)
         {
-            btnCredits.BackgroundImage = Properties.Resources.credits;
+            // Take the name of the button
+            Button btnSender = (Button)sender;
+            string btnName = btnSender.Name;
+            btnName = btnName.Replace("btn", "").ToLower();
+            btnSender.BackgroundImage = Background.ImageChooser(btnName, "MouseUp");
         }
         #endregion
         #region Play on Enter
