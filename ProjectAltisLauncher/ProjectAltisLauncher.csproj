@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AutoUpdater.cs" />
+    <Compile Include="Core\Background.cs" />
     <Compile Include="Core\Data.cs" />
     <Compile Include="Forms\frmBackgroundChoices.cs">
       <SubType>Form</SubType>

@@ -18,11 +18,23 @@ namespace ProjectAltisLauncher.Forms
 {
     public partial class frmMain : Form
     {
-
+        #region Fields
+        private string _currentDir;
+        private double _totalFiles;
+        private double _totalProgress;
+        private double _currentFile;
+        private string _nowDownloading;
+        private string _playcookie;
+        #endregion
         #region Main Form Events
         public frmMain()
         {
             InitializeComponent();
+            _currentDir = Directory.GetCurrentDirectory() + "\\";
+            _totalFiles = 0;
+            _currentFile = 0;
+            _nowDownloading = "";
+
             Properties.Settings.Default.password = "Deprecated";
         }
         private void Form1_Load(object sender, EventArgs e)
@@ -47,11 +59,11 @@ namespace ProjectAltisLauncher.Forms
             this.BackgroundImage.Dispose();
             if (Properties.Settings.Default.wantsRandomBg)
             {
-                SetRandomBackground();
+                BackgroundImage = Background.ReturnRandomBackground();
             }
             else
             {
-                SetBackground(Properties.Settings.Default.background);
+                BackgroundImage = Background.ReturnBackground(Properties.Settings.Default.background);
             }
             #endregion
             var AutoUpdateThread = new Thread(AutoUpdater.CheckForUpdate);
@@ -68,15 +80,6 @@ namespace ProjectAltisLauncher.Forms
         {
             this.ActiveControl = null;
         }
-        #endregion
-        #region Global Variables
-        private string currentDir = Directory.GetCurrentDirectory() + "\\";
-        private double totalFiles = 0;
-        private double totalProgress;
-        private double currentFile = 0;
-        private string nowDownloading = "";
-        private string playcookie;
-        private Random _rand = new Random(); // Pretty random
         #endregion
         #region Borderless Form Code
         Point mouseDownPoint = Point.Empty;
@@ -184,7 +187,7 @@ namespace ProjectAltisLauncher.Forms
                 case "true":
                     lblInfo.ForeColor = Color.Green;
                     lblInfo.Text = resp.reason;
-                    playcookie = resp.additional;
+                    _playcookie = resp.additional;
                     Updater.RunWorkerAsync();
                     break;
                 case "false":
@@ -308,8 +311,8 @@ namespace ProjectAltisLauncher.Forms
             /// Applying the background after the user closes the Change Theme form
             if (!Properties.Settings.Default.wantsRandomBg)
             {
-                this.BackgroundImage.Dispose();
-                SetBackground(Properties.Settings.Default.background);
+                BackgroundImage.Dispose();
+                BackgroundImage = Background.ReturnBackground(Properties.Settings.Default.background);
             }
 
             this.ActiveControl = null;
@@ -409,7 +412,7 @@ namespace ProjectAltisLauncher.Forms
         #region File Updater
         private void Updater_DoWork(object sender, DoWorkEventArgs e)
         {
-            currentFile = 0; // Reset the value so every time user plays totalProg
+            _currentFile = 0; // Reset the value so every time user plays totalProg
             string responseFromServer = "";
             try
             {
@@ -424,73 +427,73 @@ namespace ProjectAltisLauncher.Forms
 
 
             Console.WriteLine("The length of array is {0}", array.Length);
-            Directory.CreateDirectory(currentDir + "config\\");
-            Directory.CreateDirectory(currentDir + "resources\\");
-            Directory.CreateDirectory(currentDir + "resources\\default\\");
-            totalFiles = array.Length - 1;
+            Directory.CreateDirectory(_currentDir + "config\\");
+            Directory.CreateDirectory(_currentDir + "resources\\");
+            Directory.CreateDirectory(_currentDir + "resources\\default\\");
+            _totalFiles = array.Length - 1;
             for (int i = 0; i < array.Length - 1; i++)
             {
-                currentFile += 1;
+                _currentFile += 1;
                 manifest patchManifest = JsonConvert.DeserializeObject<manifest>(array[i]);
                 WebClient client = new WebClient();
                 if (patchManifest.filename != null || patchManifest.filename != "")
                 {
                     if (patchManifest.filename.Contains("phase"))
                     {
-                        if (Hashing.CompareSHA256(currentDir + "resources\\default\\" + patchManifest.filename, patchManifest.sha256))
+                        if (Hashing.CompareSHA256(_currentDir + "resources\\default\\" + patchManifest.filename, patchManifest.sha256))
                         {
                             Console.WriteLine("Phase file: {0} is up to date!", patchManifest.filename);
                         }
                         else
                         {
-                            nowDownloading = patchManifest.filename;
+                            _nowDownloading = patchManifest.filename;
                             Updater.ReportProgress(0); // Fire the progress changed event
                             Console.WriteLine("Starting download for phase file: {0}", patchManifest.filename);
-                            client.DownloadFile(new Uri(patchManifest.url), currentDir + "resources\\default\\" + patchManifest.filename);
+                            client.DownloadFile(new Uri(patchManifest.url), _currentDir + "resources\\default\\" + patchManifest.filename);
                             Console.WriteLine("Finished!");
                         }
                     }
                     else if (patchManifest.filename.Contains("toon"))
                     {
-                        if (Hashing.CompareSHA256(currentDir + "config\\" + patchManifest.filename, patchManifest.sha256))
+                        if (Hashing.CompareSHA256(_currentDir + "config\\" + patchManifest.filename, patchManifest.sha256))
                         {
 
                         }
                         else
                         {
-                            nowDownloading = patchManifest.filename;
+                            _nowDownloading = patchManifest.filename;
                             Updater.ReportProgress(0); // Fire the progress changed event
-                            client.DownloadFile(new Uri(patchManifest.url), currentDir + "config\\" + patchManifest.filename);
+                            client.DownloadFile(new Uri(patchManifest.url), _currentDir + "config\\" + patchManifest.filename);
                         }
 
                     }
-                    else if (Hashing.CompareSHA256(currentDir + patchManifest.filename, patchManifest.sha256)) // If the hashes are the same skip the update
+                    else if (Hashing.CompareSHA256(_currentDir + patchManifest.filename, patchManifest.sha256)) // If the hashes are the same skip the update
                     {
                         Console.WriteLine("{0} is up to date!", patchManifest.filename);
                     }
                     else
                     {
-                        nowDownloading = patchManifest.filename;
+                        _nowDownloading = patchManifest.filename;
                         Updater.ReportProgress(0); // Fire the progress changed event
                         Console.WriteLine("Starting download for file: {0}", patchManifest.filename);
-                        client.DownloadFile(new Uri(patchManifest.url), currentDir + patchManifest.filename);
+                        client.DownloadFile(new Uri(patchManifest.url), _currentDir + patchManifest.filename);
                         Console.WriteLine("Finished!");
                     }
                 }
 
 
 
-                totalProgress = ((currentFile / totalFiles) * 100);
-                Console.WriteLine("Total progress is {0}", totalProgress);
-                Updater.ReportProgress(Convert.ToInt32(totalProgress));
+                _totalProgress = ((_currentFile / _totalFiles) * 100);
+                Console.WriteLine("Total progress is {0}", _totalProgress);
+                Updater.ReportProgress(Convert.ToInt32(_totalProgress));
 
             }
         }
         private void Updater_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             lblNowDownloading.Visible = true;
-            lblNowDownloading.Text = "Downloading " + nowDownloading;
-            if (totalProgress == 100)
+            lblNowDownloading.Text = "Downloading " + _nowDownloading;
+            if (_totalProgress == 100)
             {
                 
                 lblNowDownloading.Text = "";
@@ -513,58 +516,6 @@ namespace ProjectAltisLauncher.Forms
             Process.Start(e.Url.ToString());
         }
         #endregion
-        #region Background Methods
-        private void SetRandomBackground()
-        {
-            int val = _rand.Next(1, 7); // Generates a random number 1-6
-            switch (val)
-            {
-                case 1:
-                    BackgroundImage = Properties.Resources.TTC;
-                    break;
-                case 2:
-                    BackgroundImage = Properties.Resources.DD;
-                    break;
-                case 3:
-                    BackgroundImage = Properties.Resources.DG;
-                    break;
-                case 4:
-                    BackgroundImage = Properties.Resources.MML;
-                    break;
-                case 5:
-                    BackgroundImage = Properties.Resources.Brrrgh;
-                    break;
-                case 6:
-                    BackgroundImage = Properties.Resources.DDL;
-                    break;
-            }
-        }
-        private void SetBackground(string bg)
-        {
-            switch (bg)
-            {
-                case "TTC":
-                    BackgroundImage = Properties.Resources.TTC;
-                    break;
-                case "DD":
-                    BackgroundImage = Properties.Resources.DD;
-                    break;
-                case "DG":
-                    BackgroundImage = Properties.Resources.DG;
-                    break;
-                case "MML":
-                    BackgroundImage = Properties.Resources.MML;
-                    break;
-                case "Brrrgh":
-                    BackgroundImage = Properties.Resources.Brrrgh;
-                    break;
-                case "DDL":
-                    BackgroundImage = Properties.Resources.DDL;
-                    break;
-            }
-        }
-        #endregion
-
         private void Updater_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             btnPlay.Enabled = true; // Re-enable button
