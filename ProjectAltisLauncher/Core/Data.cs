@@ -21,5 +21,26 @@ namespace ProjectAltisLauncher.Core
             }
                 return responseFromServer;
         }
+        public static string ConvertToNetworkDataType(long bytes)
+        {
+            // Determine whether it should be converted, to bytes, kb, mb, gb etc.
+
+            if (bytes >= 1000000000)
+            {
+                return (bytes / 1000000000).ToString() + " GB";
+            }
+            else if (bytes >= 1000000)
+            {
+                return (bytes / 1000000).ToString() + " MB";
+            }
+            else if (bytes >= 1000)
+            {
+                return (bytes / 1000).ToString() + " KB";
+            }
+            else
+            {
+                return bytes.ToString() + " bytes";
+            }
+        }
     }
 }

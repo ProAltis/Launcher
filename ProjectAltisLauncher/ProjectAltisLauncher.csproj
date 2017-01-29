@@ -76,6 +76,7 @@
     <Compile Include="Core\AutoUpdater.cs" />
     <Compile Include="Core\Background.cs" />
     <Compile Include="Core\Data.cs" />
+    <Compile Include="Enums\FileTypes.cs" />
     <Compile Include="Forms\frmBackgroundChoices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,7 +98,7 @@
     </Compile>
     <Compile Include="Core\Hashing.cs" />
     <Compile Include="Manifests\loginAPIResponse.cs" />
-    <Compile Include="Manifests\manifest.cs" />
+    <Compile Include="Manifests\ManifestJson.cs" />
     <Compile Include="Forms\frmOptions.cs">
       <SubType>Form</SubType>
     </Compile>

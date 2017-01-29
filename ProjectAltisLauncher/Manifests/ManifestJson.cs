@@ -1,6 +1,6 @@
 ﻿namespace ProjectAltisLauncher.Manifests
 {
-    class manifest
+    class ManifestJson
     {
         public string filename { get; set; }
         public string url { get; set; }

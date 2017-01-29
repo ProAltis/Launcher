@@ -41,7 +41,7 @@ namespace ProjectAltisLauncher.Core
             for (int i = 0; i < array.Length - 1; i++) // - 1 Because string split creates one extra null line D:
             {
                 // First compare the file against current file and see if it needs to be updated
-                manifest patchManifest = JsonConvert.DeserializeObject<manifest>(array[i]);
+                ManifestJson patchManifest = JsonConvert.DeserializeObject<ManifestJson>(array[i]);
 
                 WebClient client = new WebClient();
                 if (Hashing.CompareSHA256(currentDir + patchManifest.filename, patchManifest.sha256))

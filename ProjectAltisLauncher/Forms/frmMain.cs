@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -9,6 +8,9 @@ using System.Windows.Forms;
 using ProjectAltisLauncher.Core;
 using ProjectAltisLauncher.Manifests;
 using System.Threading;
+using System.Collections.Generic;
+using ProjectAltisLauncher.Enums;
+using System.ComponentModel;
 /// <summary>
 /// TODO:
 ///     Clean up code
@@ -19,12 +21,13 @@ namespace ProjectAltisLauncher.Forms
     public partial class frmMain : Form
     {
         #region Fields
-        private string _currentDir;
         private double _totalFiles;
         private double _totalProgress;
         private double _currentFile;
-        private string _nowDownloading;
         private string _playcookie;
+        private SortedList<string, string> _downloadList = new SortedList<string, string>(); // Filename, URL
+        private readonly string _currentDir = Directory.GetCurrentDirectory();
+        private string _nowDownloading = String.Empty;
         #endregion
         #region Main Form Events
         public frmMain()
@@ -130,40 +133,25 @@ namespace ProjectAltisLauncher.Forms
                 }
             }
             #endregion
-            //string finalURL = "https://www.projectaltis.com/api/?u=" + txtUser.Text + "&p=" + txtPass.Text;
-            //string APIResponse = "";
-            //    try
-            //    {
-            //        APIResponse = Data.RequestData(finalURL, "GET"); // Send request to login API, store the response as string
-            //    }
-            //    catch (Exception)
-            //    {
-            //        Console.WriteLine("An error contacting the login API occured");
-            //    }
-            //loginAPIResponse resp = JsonConvert.DeserializeObject<loginAPIResponse>(APIResponse); // Deserialize API response into vars
-
-
             var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://www.projectaltis.com/api/login");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             loginAPIResponse resp;
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
-                string json = "{\"u\":\""+ txtUser.Text +"\"," +
+                string json = "{\"u\":\"" + txtUser.Text + "\"," +
                               "\"p\":\"" + txtPass.Text + "\"}";
 
                 streamWriter.Write(json);
                 streamWriter.Flush();
                 streamWriter.Close();
             }
-
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
                 resp = JsonConvert.DeserializeObject<loginAPIResponse>(result);
             }
-            
 
             lblInfo.ForeColor = Color.Black; // Reset the label color
             switch (resp.status)
@@ -172,7 +160,7 @@ namespace ProjectAltisLauncher.Forms
                     lblInfo.ForeColor = Color.Green;
                     lblInfo.Text = resp.reason;
                     _playcookie = resp.additional;
-                    Updater.RunWorkerAsync();
+                    UpdateFilesAndPlay();
                     break;
                 case "false":
                     lblInfo.ForeColor = Color.Red;
@@ -315,99 +303,160 @@ namespace ProjectAltisLauncher.Forms
         }
         #endregion
         #endregion
-        #region File Updater
-        private void Updater_DoWork(object sender, DoWorkEventArgs e)
+        #region File Downloader / Verifier
+        private void UpdateFilesAndPlay()
         {
-            _currentFile = 0; // Reset the value so every time user plays totalProg
-            string responseFromServer = "";
-            try
+            lblNowDownloading.Visible = true;
+            var myThread = new Thread(() =>
             {
-                responseFromServer = Data.RequestData("https://www.projectaltis.com/api/manifest", "GET");
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("An exception was generated while requesting data to the manifest.");
-            }
-            
-            string[] array = responseFromServer.Split('#'); // Seperate each json value into an index
-
-
-            Console.WriteLine("The length of array is {0}", array.Length);
-            Directory.CreateDirectory(_currentDir + "config\\");
-            Directory.CreateDirectory(_currentDir + "resources\\");
-            Directory.CreateDirectory(_currentDir + "resources\\default\\");
-            _totalFiles = array.Length - 1;
-            for (int i = 0; i < array.Length - 1; i++)
-            {
-                _currentFile += 1;
-                manifest patchManifest = JsonConvert.DeserializeObject<manifest>(array[i]);
-                WebClient client = new WebClient();
-                if (patchManifest.filename != null || patchManifest.filename != "")
+                Directory.CreateDirectory(@"resources");
+                Directory.CreateDirectory(@"resources\default\");
+                Directory.CreateDirectory(@"config");
+                string rawManifest = RetrieveManifest();
+                string[] rawManifestArray = rawManifest.Split('#');
+                foreach (string item in rawManifestArray)
                 {
-                    if (patchManifest.filename.Contains("phase"))
-                    {
-                        if (Hashing.CompareSHA256(_currentDir + "resources\\default\\" + patchManifest.filename, patchManifest.sha256))
-                        {
-                            Console.WriteLine("Phase file: {0} is up to date!", patchManifest.filename);
-                        }
-                        else
-                        {
-                            _nowDownloading = patchManifest.filename;
-                            Updater.ReportProgress(0); // Fire the progress changed event
-                            Console.WriteLine("Starting download for phase file: {0}", patchManifest.filename);
-                            client.DownloadFile(new Uri(patchManifest.url), _currentDir + "resources\\default\\" + patchManifest.filename);
-                            Console.WriteLine("Finished!");
-                        }
-                    }
-                    else if (patchManifest.filename.Contains("toon"))
-                    {
-                        if (Hashing.CompareSHA256(_currentDir + "config\\" + patchManifest.filename, patchManifest.sha256))
-                        {
+                    string workingDir;
+                    string path;
+                    // Make sure the item is not an empty value.
+                    // An empty value is added when the raw manifest is split
+                    if (item == "") continue;
 
-                        }
-                        else
-                        {
-                            _nowDownloading = patchManifest.filename;
-                            Updater.ReportProgress(0); // Fire the progress changed event
-                            client.DownloadFile(new Uri(patchManifest.url), _currentDir + "config\\" + patchManifest.filename);
-                        }
+                    FileTypes type;
 
-                    }
-                    else if (Hashing.CompareSHA256(_currentDir + patchManifest.filename, patchManifest.sha256)) // If the hashes are the same skip the update
+                    ManifestJson manifest = JsonConvert.DeserializeObject<ManifestJson>(item.Replace("#", ""));
+
+                    #region Determine the File Type and Set Working Directory
+
+                    if (manifest.filename.Contains("phase"))
                     {
-                        Console.WriteLine("{0} is up to date!", patchManifest.filename);
+                        type = FileTypes.Phase;
+                        workingDir = _currentDir + @"\resources\default\";
+                    }
+                    else if (manifest.filename.Equals("toon.dc"))
+                    {
+                        type = FileTypes.Config;
+                        workingDir = _currentDir + @"\config\";
                     }
                     else
                     {
-                        _nowDownloading = patchManifest.filename;
-                        Updater.ReportProgress(0); // Fire the progress changed event
-                        Console.WriteLine("Starting download for file: {0}", patchManifest.filename);
-                        client.DownloadFile(new Uri(patchManifest.url), _currentDir + patchManifest.filename);
-                        Console.WriteLine("Finished!");
+                        type = FileTypes.Default;
+                        workingDir = _currentDir;
                     }
-                }
 
+                    #endregion
 
+                    path = Path.Combine(workingDir, manifest.filename);
 
-                _totalProgress = ((_currentFile / _totalFiles) * 100);
-                Console.WriteLine("Total progress is {0}", _totalProgress);
-                Updater.ReportProgress(Convert.ToInt32(_totalProgress));
+                    BeginInvoke((MethodInvoker)delegate
+                    {
+                        lblNowDownloading.Text = "Verifying " + manifest.filename;
+                    });
 
-            }
+                    if (type == FileTypes.Phase && File.Exists(path) && Hashing.CalculateSHA256(path) == manifest.sha256)
+                    {
+                        Console.WriteLine("Phase file: {0} is up to date", manifest.filename);
+                    }
+                    else if (type == FileTypes.Config && File.Exists(path) && Hashing.CalculateSHA256(path) == manifest.sha256)
+                    {
+                        Console.WriteLine("File {0} exists and it has the latest checksum", path);
+                    }
+                    else if (type == FileTypes.Default && File.Exists(path) && Hashing.CalculateSHA256(path) == manifest.sha256)
+                    {
+                        Console.WriteLine("File {0} exists and it has the latest checksum", path);
+                    }
+                    else // The file probably does not exist or does not have the same hash
+                    {
+                        AddFileToDownloadList(manifest.filename, manifest.url);
+                        Console.WriteLine("Added {0} to the download list! Total Items: {1}", manifest.filename, _downloadList.Count);
+                    }
+                } // Add items to list
+                Console.WriteLine("Added all items to the list, starting download...");
+                DownloadItemsFromList(_downloadList);
+            });
+            myThread.Start();
         }
-        private void Updater_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void AddFileToDownloadList(string filename, string url)
         {
-            lblNowDownloading.Visible = true;
-            lblNowDownloading.Text = "Downloading " + _nowDownloading;
-            if (_totalProgress == 100)
-            {
-                
-                lblNowDownloading.Text = "";
-                lblNowDownloading.Visible = false;
-                // Launch game once all files are download
-                Play.LaunchGame(txtUser.Text, txtPass.Text);
-            }
+            _downloadList.Add(filename, url);
+        }
+        private void DownloadItemsFromList(SortedList<string, string> list)
+        {
+            WebClient client = new WebClient();
+            client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
+            client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
 
+            string Filename = String.Empty;
+            string URL = String.Empty;
+            var myThread = new Thread(() =>
+            {
+                if (_downloadList.Count > 0)
+                {
+                    BeginInvoke((MethodInvoker)delegate
+                    {
+                        pbDownload.Visible = true;
+                        lblNowDownloading.Visible = true;
+                    });
+                    foreach (KeyValuePair<string, string> kvp in _downloadList) // Let it iterate here, we'll just take the last in the list
+                    {
+                        Filename = kvp.Key;
+                        URL = kvp.Value;
+                    }
+                    _nowDownloading = Filename;
+                    if (Filename.Contains("phase"))
+                    {
+                        client.DownloadFileAsync(new Uri(URL), _currentDir + @"\resources\default\" + Filename);
+                    }
+                    else if (Filename.Contains("toon"))
+                    {
+                        client.DownloadFileAsync(new Uri(URL), _currentDir + @"\config\" + Filename);
+                    }
+                    else
+                    {
+                        client.DownloadFileAsync(new Uri(URL), _currentDir + @"\" + Filename);
+                    }
+
+                }
+                else
+                {
+                    BeginInvoke((MethodInvoker)delegate
+                    {
+                        lblNowDownloading.Text = "Finished...";
+                        pbDownload.Visible = false;
+                    });
+                    Play.LaunchGame(txtUser.Text, txtPass.Text);
+                }
+            });
+            myThread.Start();
+        }
+        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            this.BeginInvoke((MethodInvoker)delegate
+            {
+                double bytesIn = double.Parse(e.BytesReceived.ToString());
+                double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
+                double percentage = bytesIn / totalBytes * 100;
+                lblNowDownloading.Text = _nowDownloading + ": " + "Downloaded " + Data.ConvertToNetworkDataType(e.BytesReceived) + " of " + Data.ConvertToNetworkDataType(e.TotalBytesToReceive);
+                pbDownload.Value = Convert.ToInt32(percentage);
+            });
+        }
+        private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            this.BeginInvoke((MethodInvoker)delegate
+            {
+                _downloadList.Remove(_nowDownloading);
+                lblNowDownloading.Text = "Completed";
+                DownloadItemsFromList(_downloadList);
+            });
+        }
+        private static string RetrieveManifest()
+        {
+            string rawManifest;
+            using (WebClient client = new WebClient())
+            {
+                rawManifest = client.DownloadString("http://projectaltis.com/api/manifest");
+            }
+            return rawManifest;
         }
         #endregion
         #region Web Browser / News
@@ -422,9 +471,5 @@ namespace ProjectAltisLauncher.Forms
             Process.Start(e.Url.ToString());
         }
         #endregion
-        private void Updater_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            btnPlay.Enabled = true; // Re-enable button
-        }
     }
 }

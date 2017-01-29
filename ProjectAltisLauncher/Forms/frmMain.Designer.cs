@@ -32,7 +32,6 @@
             this.txtUser = new System.Windows.Forms.TextBox();
             this.txtPass = new System.Windows.Forms.TextBox();
             this.btnPlay = new System.Windows.Forms.Button();
-            this.Updater = new System.ComponentModel.BackgroundWorker();
             this.lblInfo = new System.Windows.Forms.Label();
             this.cbSaveLogin = new System.Windows.Forms.CheckBox();
             this.lblNowDownloading = new System.Windows.Forms.Label();
@@ -47,6 +46,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnMin = new System.Windows.Forms.Button();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.pbDownload = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // txtUser
@@ -84,13 +84,6 @@
             this.btnPlay.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             this.btnPlay.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_MouseUp);
             // 
-            // Updater
-            // 
-            this.Updater.WorkerReportsProgress = true;
-            this.Updater.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Updater_DoWork);
-            this.Updater.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Updater_ProgressChanged);
-            this.Updater.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Updater_RunWorkerCompleted);
-            // 
             // lblInfo
             // 
             this.lblInfo.BackColor = System.Drawing.Color.Transparent;
@@ -123,7 +116,6 @@
             this.lblNowDownloading.Name = "lblNowDownloading";
             this.lblNowDownloading.Size = new System.Drawing.Size(340, 24);
             this.lblNowDownloading.TabIndex = 6;
-            this.lblNowDownloading.Text = "Download info here";
             this.lblNowDownloading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblNowDownloading.Visible = false;
             // 
@@ -341,6 +333,14 @@
             this.webBrowser1.Url = new System.Uri("https://projectaltis.com/launcher", System.UriKind.Absolute);
             this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
             // 
+            // pbDownload
+            // 
+            this.pbDownload.Location = new System.Drawing.Point(566, 359);
+            this.pbDownload.Name = "pbDownload";
+            this.pbDownload.Size = new System.Drawing.Size(340, 24);
+            this.pbDownload.TabIndex = 21;
+            this.pbDownload.Visible = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -350,6 +350,7 @@
             this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.TTC;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1000, 666);
+            this.Controls.Add(this.pbDownload);
             this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.btnMin);
@@ -391,7 +392,6 @@
         private System.Windows.Forms.TextBox txtUser;
         private System.Windows.Forms.TextBox txtPass;
         private System.Windows.Forms.Button btnPlay;
-        private System.ComponentModel.BackgroundWorker Updater;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.CheckBox cbSaveLogin;
         private System.Windows.Forms.Label lblNowDownloading;
@@ -406,6 +406,7 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnMin;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.ProgressBar pbDownload;
     }
 }
 
