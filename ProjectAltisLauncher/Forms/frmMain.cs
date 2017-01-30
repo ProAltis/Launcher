@@ -139,8 +139,8 @@ namespace ProjectAltisLauncher.Forms
             loginAPIResponse resp;
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
-                string json = "{\"u\":\"" + txtUser.Text + "\"," +
-                              "\"p\":\"" + txtPass.Text + "\"}";
+                string json = "{\"u\":\"" + Uri.EscapeDataString(txtUser.Text) + "\"," +
+                              "\"p\":\"" + Uri.EscapeDataString(txtPass.Text) + "\"}";
 
                 streamWriter.Write(json);
                 streamWriter.Flush();
