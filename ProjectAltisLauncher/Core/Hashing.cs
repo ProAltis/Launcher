@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO;
+
 namespace ProjectAltisLauncher.Core
 {
     class Hashing
@@ -51,8 +51,7 @@ namespace ProjectAltisLauncher.Core
         public static string CalculateSHA256(string filePath)
         {
             System.Security.Cryptography.SHA256 mySHA256 = System.Security.Cryptography.SHA256.Create();
-            
-            using (FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (System.IO.FileStream fileStream = System.IO.File.OpenRead(filePath))
             {
                 byte[] hashValue = mySHA256.ComputeHash(fileStream);
                 string strHashValue = "";
