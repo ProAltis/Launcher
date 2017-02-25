@@ -321,7 +321,7 @@
             // btnContentPacks
             // 
             this.btnContentPacks.BackColor = System.Drawing.Color.Transparent;
-            this.btnContentPacks.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.contentpacks1;
+            this.btnContentPacks.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.contentpacks;
             this.btnContentPacks.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnContentPacks.FlatAppearance.BorderSize = 0;
             this.btnContentPacks.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -336,6 +336,7 @@
             this.btnContentPacks.TabStop = false;
             this.btnContentPacks.UseVisualStyleBackColor = false;
             this.btnContentPacks.Click += new System.EventHandler(this.btnContentPacks_Click);
+            this.btnContentPacks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_MouseDown);
             this.btnContentPacks.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnContentPacks.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 

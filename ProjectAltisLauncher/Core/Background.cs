@@ -185,6 +185,10 @@ namespace ProjectAltisLauncher.Core
                             return Properties.Resources.contentpacks_h;
                         case "mouseleave":
                             return Properties.Resources.contentpacks;
+                        case "mousedown":
+                            return Properties.Resources.contentpacks_d;
+                        case "mouseup":
+                            return Properties.Resources.contentpacks;
                     }
                     break;
             }

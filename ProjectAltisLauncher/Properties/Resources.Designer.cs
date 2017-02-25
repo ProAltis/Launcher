@@ -123,16 +123,6 @@ namespace ProjectAltisLauncher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap contentpacks1 {
-            get {
-                object obj = ResourceManager.GetObject("contentpacks1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap credits {
             get {
                 object obj = ResourceManager.GetObject("credits", resourceCulture);

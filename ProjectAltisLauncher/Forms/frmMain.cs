@@ -206,6 +206,7 @@ namespace ProjectAltisLauncher.Forms
         private void btnContentPacks_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
+            btnContentPacks.BackgroundImage = Properties.Resources.contentpacks_d;
             frmContentPacks contentPack = new frmContentPacks();
             contentPack.ShowDialog(this);
             this.ActiveControl = null;

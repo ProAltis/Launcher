@@ -169,7 +169,6 @@
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
     <Content Include="pieicon.ico" />
-    <None Include="Resources\contentpacks1.png" />
     <None Include="Resources\contentpacks_h.png" />
     <None Include="Resources\contentpacks_d.png" />
     <None Include="Resources\contentpacks.png" />
