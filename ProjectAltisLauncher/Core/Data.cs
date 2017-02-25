@@ -5,6 +5,12 @@ namespace ProjectAltisLauncher.Core
 {
     class Data
     {
+        /// <summary>
+        /// Requests the data.
+        /// </summary>
+        /// <param name="URL">The URL.</param>
+        /// <param name="Method">The method.</param>
+        /// <returns>System.String.</returns>
         public static string RequestData(string URL, string Method)
         {
             string responseFromServer;
@@ -21,6 +27,11 @@ namespace ProjectAltisLauncher.Core
             }
                 return responseFromServer;
         }
+        /// <summary>
+        /// Converts the type of to network data.
+        /// </summary>
+        /// <param name="bytes">The bytes.</param>
+        /// <returns>System.String.</returns>
         public static string ConvertToNetworkDataType(long bytes)
         {
             // Determine whether it should be converted, to bytes, kb, mb, gb etc.

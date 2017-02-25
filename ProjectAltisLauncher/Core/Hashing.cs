@@ -4,6 +4,12 @@ namespace ProjectAltisLauncher.Core
 {
     class Hashing
     {
+        /// <summary>
+        /// Compares the size of the file.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
+        /// <param name="size">The size.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool CompareFileSize(string filePath, int size)
         {
             try
@@ -20,6 +26,12 @@ namespace ProjectAltisLauncher.Core
                 return false;
             }
         }
+        /// <summary>
+        /// Compares the sha256.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
+        /// <param name="hash">The hash.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool CompareSHA256(string filePath, string hash)
         {
             try
@@ -48,6 +60,11 @@ namespace ProjectAltisLauncher.Core
                 return false;
             }
         }
+        /// <summary>
+        /// Calculates the sha256.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
+        /// <returns>System.String.</returns>
         public static string CalculateSHA256(string filePath)
         {
             System.Security.Cryptography.SHA256 mySHA256 = System.Security.Cryptography.SHA256.Create();
@@ -65,6 +82,11 @@ namespace ProjectAltisLauncher.Core
                 return strHashValue;
             }
         }
+        /// <summary>
+        /// Calculates the size of the file.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
+        /// <returns>System.Int32.</returns>
         public static int CalculateFileSize(string filePath)
         {
             System.IO.FileInfo myFile = new System.IO.FileInfo(filePath);

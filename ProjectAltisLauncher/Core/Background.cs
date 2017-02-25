@@ -178,6 +178,15 @@ namespace ProjectAltisLauncher.Core
                             return Properties.Resources.minus;
                     }
                     break;
+                case "contentpacks":
+                    switch(method)
+                    {
+                        case "mouseenter":
+                            return Properties.Resources.contentpacks_h;
+                        case "mouseleave":
+                            return Properties.Resources.contentpacks;
+                    }
+                    break;
             }
             return img;
         }

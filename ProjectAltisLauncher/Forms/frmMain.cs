@@ -202,11 +202,12 @@ namespace ProjectAltisLauncher.Forms
             this.ActiveControl = null;
         }
         #endregion
-        #region Group Tracker
-        private void btnGroupTracker_Click(object sender, EventArgs e)
+        #region Content Packs
+        private void btnContentPacks_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
-            MessageBox.Show("Group Tracker will be implemented soon!", "Oops!");
+            frmContentPacks contentPack = new frmContentPacks();
+            contentPack.ShowDialog(this);
             this.ActiveControl = null;
         }
         #endregion
@@ -470,6 +471,11 @@ namespace ProjectAltisLauncher.Forms
             e.Cancel = true;
             Process.Start(e.Url.ToString());
         }
+
+
+
         #endregion
+
+
     }
 }

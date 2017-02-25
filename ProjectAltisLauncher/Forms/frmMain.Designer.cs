@@ -38,7 +38,6 @@
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.btnWebsite = new System.Windows.Forms.Button();
-            this.btnGroup = new System.Windows.Forms.Button();
             this.btnTheme = new System.Windows.Forms.Button();
             this.btnCredits = new System.Windows.Forms.Button();
             this.btnOptions = new System.Windows.Forms.Button();
@@ -47,6 +46,7 @@
             this.btnMin = new System.Windows.Forms.Button();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.pbDownload = new System.Windows.Forms.ProgressBar();
+            this.btnContentPacks = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUser
@@ -163,29 +163,6 @@
             this.btnWebsite.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnWebsite.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             this.btnWebsite.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_MouseUp);
-            // 
-            // btnGroup
-            // 
-            this.btnGroup.BackColor = System.Drawing.Color.Transparent;
-            this.btnGroup.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.group;
-            this.btnGroup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnGroup.FlatAppearance.BorderSize = 0;
-            this.btnGroup.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.btnGroup.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnGroup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGroup.Location = new System.Drawing.Point(366, 622);
-            this.btnGroup.Margin = new System.Windows.Forms.Padding(0, 0, 75, 0);
-            this.btnGroup.Name = "btnGroup";
-            this.btnGroup.Size = new System.Drawing.Size(90, 41);
-            this.btnGroup.TabIndex = 11;
-            this.btnGroup.TabStop = false;
-            this.btnGroup.UseVisualStyleBackColor = false;
-            this.btnGroup.Click += new System.EventHandler(this.btnGroupTracker_Click);
-            this.btnGroup.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_MouseDown);
-            this.btnGroup.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
-            this.btnGroup.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
-            this.btnGroup.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_MouseUp);
             // 
             // btnTheme
             // 
@@ -341,6 +318,27 @@
             this.pbDownload.TabIndex = 21;
             this.pbDownload.Visible = false;
             // 
+            // btnContentPacks
+            // 
+            this.btnContentPacks.BackColor = System.Drawing.Color.Transparent;
+            this.btnContentPacks.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.contentpacks1;
+            this.btnContentPacks.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnContentPacks.FlatAppearance.BorderSize = 0;
+            this.btnContentPacks.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnContentPacks.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnContentPacks.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnContentPacks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnContentPacks.Location = new System.Drawing.Point(359, 622);
+            this.btnContentPacks.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
+            this.btnContentPacks.Name = "btnContentPacks";
+            this.btnContentPacks.Size = new System.Drawing.Size(90, 41);
+            this.btnContentPacks.TabIndex = 23;
+            this.btnContentPacks.TabStop = false;
+            this.btnContentPacks.UseVisualStyleBackColor = false;
+            this.btnContentPacks.Click += new System.EventHandler(this.btnContentPacks_Click);
+            this.btnContentPacks.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
+            this.btnContentPacks.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -350,6 +348,7 @@
             this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.TTC;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1000, 666);
+            this.Controls.Add(this.btnContentPacks);
             this.Controls.Add(this.pbDownload);
             this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.webBrowser1);
@@ -359,7 +358,6 @@
             this.Controls.Add(this.btnOptions);
             this.Controls.Add(this.btnCredits);
             this.Controls.Add(this.btnTheme);
-            this.Controls.Add(this.btnGroup);
             this.Controls.Add(this.btnWebsite);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
@@ -398,7 +396,6 @@
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Button btnWebsite;
-        private System.Windows.Forms.Button btnGroup;
         private System.Windows.Forms.Button btnTheme;
         private System.Windows.Forms.Button btnCredits;
         private System.Windows.Forms.Button btnOptions;
@@ -407,6 +404,7 @@
         private System.Windows.Forms.Button btnMin;
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.ProgressBar pbDownload;
+        private System.Windows.Forms.Button btnContentPacks;
     }
 }
 

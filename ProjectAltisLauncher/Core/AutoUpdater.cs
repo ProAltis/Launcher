@@ -12,12 +12,11 @@ using System.Windows.Forms;
 
 namespace ProjectAltisLauncher.Core
 {
-    class AutoUpdater
+    public class AutoUpdater
     {
         /// <summary>
         /// Checks for the latest update of the launcher manifest
         /// </summary>
-        /// 
         public static void CheckForUpdate()
         {
             string currentDir = Directory.GetCurrentDirectory() + "\\";
