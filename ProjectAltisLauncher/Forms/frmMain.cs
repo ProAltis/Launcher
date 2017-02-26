@@ -13,8 +13,8 @@ using ProjectAltisLauncher.Enums;
 using System.ComponentModel;
 /// <summary>
 /// TODO:
-///     Clean up code
-///     Add group tracker
+///     Catch Exceptions
+///     Enable uploading of logs to pastebin - Idea suggested by Judge2020
 /// </summary>
 namespace ProjectAltisLauncher.Forms
 {
