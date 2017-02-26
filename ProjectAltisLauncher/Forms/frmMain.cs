@@ -21,9 +21,6 @@ namespace ProjectAltisLauncher.Forms
     public partial class frmMain : Form
     {
         #region Fields
-        private double _totalFiles;
-        private double _totalProgress;
-        private double _currentFile;
         private string _playcookie;
         private SortedList<string, string> _downloadList = new SortedList<string, string>(); // Filename, URL
         private readonly string _currentDir = Directory.GetCurrentDirectory();
@@ -33,9 +30,7 @@ namespace ProjectAltisLauncher.Forms
         public frmMain()
         {
             InitializeComponent();
-            _currentDir = Directory.GetCurrentDirectory() + "\\";
-            _totalFiles = 0;
-            _currentFile = 0;
+            _currentDir = Directory.GetCurrentDirectory() + @"\";
             _nowDownloading = "";
 
             Properties.Settings.Default.password = "Deprecated";
