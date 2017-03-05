@@ -418,7 +418,7 @@ namespace ProjectAltisLauncher.Forms
                 {
                     BeginInvoke((MethodInvoker)delegate
                     {
-                        lblNowDownloading.Text = "Finished...";
+                        lblNowDownloading.Text = "Have fun!";
                         pbDownload.Visible = false;
                     });
                     Play.LaunchGame(txtUser.Text, txtPass.Text);
