@@ -1,6 +1,6 @@
 ﻿namespace ProjectAltisLauncher.Manifests
 {
-    class loginAPIResponse
+    public class LoginApiResponse
     {
         public string status { get; set; }
 

@@ -13,7 +13,7 @@ namespace ProjectAltisLauncher.Forms
     public partial class frmOptions : Form
     {
         public frmOptions()
-        {           
+        {
             InitializeComponent();
         }
 
@@ -34,10 +34,10 @@ namespace ProjectAltisLauncher.Forms
 
         private void Options_Load(object sender, EventArgs e)
         {
-                chkCursor.Checked = Properties.Settings.Default.wantsCursor;
-                chkDebugWindow.Checked = Properties.Settings.Default.wantsGameDebug;
-                chkClickSounds.Checked = Properties.Settings.Default.wantsClickSounds;
-                chkRandomBackgrounds.Checked = Properties.Settings.Default.wantsRandomBg;
+            chkCursor.Checked = Properties.Settings.Default.wantsCursor;
+            chkDebugWindow.Checked = Properties.Settings.Default.wantsGameDebug;
+            chkClickSounds.Checked = Properties.Settings.Default.wantsClickSounds;
+            chkRandomBackgrounds.Checked = Properties.Settings.Default.wantsRandomBg;
         }
     }
 }

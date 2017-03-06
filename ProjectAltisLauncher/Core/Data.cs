@@ -3,7 +3,7 @@ using System.Net;
 
 namespace ProjectAltisLauncher.Core
 {
-    class Data
+    public static class Data
     {
         /// <summary>
         /// Requests the data.
@@ -18,14 +18,13 @@ namespace ProjectAltisLauncher.Core
             request.Method = Method;
             using (WebResponse response = request.GetResponse())
             {
-                using (Stream dataStream = default(Stream))
+                using (Stream dataStream = response.GetResponseStream())
                 {
-                    var myStream = response.GetResponseStream();
-                    StreamReader reader = new StreamReader(myStream);
+                    StreamReader reader = new StreamReader(dataStream);
                     responseFromServer = reader.ReadToEnd();
                 }
             }
-                return responseFromServer;
+            return responseFromServer;
         }
         /// <summary>
         /// Converts the type of to network data.
@@ -38,20 +37,17 @@ namespace ProjectAltisLauncher.Core
 
             if (bytes >= 1000000000)
             {
-                return (bytes / 1000000000).ToString() + " GB";
+                return (bytes / 1000000000) + " GB";
             }
-            else if (bytes >= 1000000)
+            if (bytes >= 1000000)
             {
-                return (bytes / 1000000).ToString() + " MB";
+                return (bytes / 1000000) + " MB";
             }
-            else if (bytes >= 1000)
+            if (bytes >= 1000)
             {
-                return (bytes / 1000).ToString() + " KB";
+                return (bytes / 1000) + " KB";
             }
-            else
-            {
-                return bytes.ToString() + " bytes";
-            }
+            return bytes + " bytes";
         }
     }
 }

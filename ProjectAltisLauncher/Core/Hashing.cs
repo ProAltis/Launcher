@@ -2,7 +2,7 @@
 
 namespace ProjectAltisLauncher.Core
 {
-    class Hashing
+    public static class Hashing
     {
         /// <summary>
         /// Compares the size of the file.

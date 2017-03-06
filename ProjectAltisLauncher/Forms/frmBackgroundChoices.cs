@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjectAltisLauncher.Properties;
 
 namespace ProjectAltisLauncher.Forms
 {
@@ -19,42 +13,42 @@ namespace ProjectAltisLauncher.Forms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (radTTC.Checked == true)
+            if (radTTC.Checked)
             {
-                Properties.Settings.Default.background = "TTC";
+                Settings.Default.background = "TTC";
             }
-            else if (radDD.Checked == true)
+            else if (radDD.Checked)
             {
-                Properties.Settings.Default.background = "DD";
+                Settings.Default.background = "DD";
             }
-            else if (radDG.Checked == true)
+            else if (radDG.Checked)
             {
-                Properties.Settings.Default.background = "DG";
+                Settings.Default.background = "DG";
             }
-            else if (radMML.Checked == true)
+            else if (radMML.Checked)
             {
-                Properties.Settings.Default.background = "MML";
+                Settings.Default.background = "MML";
             }
-            else if (radBrrrgh.Checked == true)
+            else if (radBrrrgh.Checked)
             {
-                Properties.Settings.Default.background = "Brrrgh";
+                Settings.Default.background = "Brrrgh";
             }
-            else if(radDDL.Checked == true)
+            else if(radDDL.Checked)
             {
-                Properties.Settings.Default.background = "DDL";
+                Settings.Default.background = "DDL";
             }
-            Properties.Settings.Default.Save();
-            this.Close();
+            Settings.Default.Save();
+            Close();
         }
 
         private void BackgroundChoices_Load(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.wantsRandomBg)
+            if (Settings.Default.wantsRandomBg)
             {
                 radBrrrgh.Visible = false;
                 radDD.Visible = false;
@@ -66,7 +60,7 @@ namespace ProjectAltisLauncher.Forms
             }
             else
             {
-                switch (Properties.Settings.Default.background)
+                switch (Settings.Default.background)
                 {
                     case "TTC":
                         radTTC.Checked = true;

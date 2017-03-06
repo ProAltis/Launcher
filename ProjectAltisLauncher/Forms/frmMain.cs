@@ -11,20 +11,19 @@ using System.Threading;
 using System.Collections.Generic;
 using ProjectAltisLauncher.Enums;
 using System.ComponentModel;
-/// <summary>
-/// TODO:
-///     Catch Exceptions
-///     Enable uploading of logs to pastebin - Idea suggested by Judge2020
-/// </summary>
+/* 
+* TODO:
+*    Catch Exceptions
+*    Enable uploading of logs to pastebin - Idea suggested by Judge2020
+*/ 
 namespace ProjectAltisLauncher.Forms
 {
     public partial class frmMain : Form
     {
         #region Fields
-        private string _playcookie;
-        private SortedList<string, string> _downloadList = new SortedList<string, string>(); // Filename, URL
+        private readonly SortedList<string, string> _downloadList = new SortedList<string, string>(); // Filename, URL
         private readonly string _currentDir = Directory.GetCurrentDirectory();
-        private string _nowDownloading = String.Empty;
+        private string _nowDownloading = "";
         #endregion
         #region Main Form Events
         public frmMain()
@@ -34,7 +33,17 @@ namespace ProjectAltisLauncher.Forms
             _nowDownloading = "";
 
             Properties.Settings.Default.password = "Deprecated";
+
+            if (!IsWriteable())
+            {
+                MessageBox.Show("It appears you do not have permission to write the the current directory: " + _currentDir + "\n" +
+                                "The launcher may not work correctly without permissions. \n" +
+                                "Try running the launcher with administrator rights or installing in a different location.");
+            }
+
         }
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
 #if DEBUG
@@ -64,8 +73,8 @@ namespace ProjectAltisLauncher.Forms
                 BackgroundImage = Background.ReturnBackground(Properties.Settings.Default.background);
             }
             #endregion
-            var AutoUpdateThread = new Thread(AutoUpdater.CheckForUpdate);
-            AutoUpdateThread.Start();
+            Thread autoUpdateThread = new Thread(AutoUpdater.CheckForUpdate);
+            autoUpdateThread.Start();
             // This prevents other controls from being focused
             this.Select();
             this.ActiveControl = null;
@@ -80,7 +89,8 @@ namespace ProjectAltisLauncher.Forms
         }
         #endregion
         #region Borderless Form Code
-        Point mouseDownPoint = Point.Empty;
+
+        private Point mouseDownPoint = Point.Empty;
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDownPoint = new Point(e.X, e.Y);
@@ -131,7 +141,7 @@ namespace ProjectAltisLauncher.Forms
             var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://www.projectaltis.com/api/login");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
-            loginAPIResponse resp;
+            LoginApiResponse resp;
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 string json = "{\"u\":\"" + txtUser.Text + "\"," +
@@ -145,7 +155,7 @@ namespace ProjectAltisLauncher.Forms
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
-                resp = JsonConvert.DeserializeObject<loginAPIResponse>(result);
+                resp = JsonConvert.DeserializeObject<LoginApiResponse>(result);
             }
 
             lblInfo.ForeColor = Color.Black; // Reset the label color
@@ -154,7 +164,6 @@ namespace ProjectAltisLauncher.Forms
                 case "true":
                     lblInfo.ForeColor = Color.Green;
                     lblInfo.Text = resp.reason;
-                    _playcookie = resp.additional;
                     UpdateFilesAndPlay();
                     break;
                 case "false":
@@ -473,5 +482,41 @@ namespace ProjectAltisLauncher.Forms
         #endregion
 
 
+        #region Directory Things
+        /// <summary>
+        /// Determines whether this instance is administrator.
+        /// </summary>
+        /// <returns><c>true</c> if this instance is administrator; otherwise, <c>false</c>.</returns>
+        private static bool IsAdministrator()
+        {
+            Console.WriteLine("Is Administrator called");
+            return (new System.Security.Principal.WindowsPrincipal(System.Security.Principal.WindowsIdentity.GetCurrent()))
+                    .IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator);
+        }
+
+
+        /// <summary>
+        /// Determines whether the current directory can be written to.
+        /// </summary>
+        /// <returns><c>true</c> if the directory is writeable; otherwise, <c>false</c>.</returns>
+        private bool IsWriteable()
+        {
+            Console.WriteLine("Is writable called");
+            try
+            {
+                using(FileStream fs = File.Create(_currentDir + "writeText")) { }
+                File.Delete(_currentDir + "writeText");
+                Console.WriteLine("Directory is writeable");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Type: " + ex.GetType() + "\n" +
+                                  "\tException Message: " + ex.Message);
+                Console.WriteLine("Exception thrown, not writeable");
+                return false;
+            }
+            return true;
+        }
+        #endregion
     }
 }

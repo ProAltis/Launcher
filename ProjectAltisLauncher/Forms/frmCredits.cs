@@ -12,12 +12,11 @@ namespace ProjectAltisLauncher.Forms
 
         private void Credits_Load(object sender, EventArgs e)
         {
-
-            string string1 = @"{\rtf1\ansi \b Credits\b0\par"+ 
-                @"     • Lead Programmer & Designer: Ben\par" +
-                @"     • Designer: Ask Alice\par" + 
-                @"     • Programmer: Dubito\par" + 
-                @"     • Programmer: Judge2020}";
+            const string string1 = @"{\rtf1\ansi \b Credits\b0\par"+ 
+                                   @"     • Lead Programmer & Designer: Ben\par" +
+                                   @"     • Designer: Ask Alice\par" + 
+                                   @"     • Programmer: Dubito\par" + 
+                                   @"     • Programmer: Judge2020}";
 
             rtfCredits.Rtf = string1;
         }

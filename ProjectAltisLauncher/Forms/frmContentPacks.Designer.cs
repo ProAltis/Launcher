@@ -145,6 +145,7 @@
             this.Name = "frmContentPacks";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Content Pack Chooser";
+            this.Load += new System.EventHandler(this.frmContentPacks_Load);
             this.grpContentPacks.ResumeLayout(false);
             this.ResumeLayout(false);
 

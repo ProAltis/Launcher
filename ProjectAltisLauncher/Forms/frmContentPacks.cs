@@ -21,17 +21,28 @@ namespace ProjectAltisLauncher.Forms
         /// </summary>
         private readonly string _currentDirectory = Directory.GetCurrentDirectory() + @"\";
 
+        private bool _needsToBeClosed;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="frmContentPacks"/> class.
         /// </summary>
         public frmContentPacks()
         {
             InitializeComponent();
-            string[] dirFiles = File.ReadAllLines(_currentDirectory + @"resources\contentpacks\pack-load-order.yaml");
-            foreach (var item in dirFiles)
+            try
             {
-                lstPacks.Items.Add(Path.GetFileName(item.Replace("- ", "")));
+                string[] dirFiles = File.ReadAllLines(_currentDirectory + @"resources\contentpacks\pack-load-order.yaml");
+                foreach (string item in dirFiles)
+                {
+                    lstPacks.Items.Add(Path.GetFileName(item.Replace("- ", "")));
+                }
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to load content pack loader file. Try and download the latest game files");
+                _needsToBeClosed = true;
+            }
+
         }
 
         /// <summary>
@@ -161,7 +172,7 @@ namespace ProjectAltisLauncher.Forms
         /// Moves the item.
         /// </summary>
         /// <param name="direction">The direction.</param>
-        public void MoveItem(int direction)
+        private void MoveItem(int direction)
         {
             // Checking selected item
             if (lstPacks.SelectedItem == null || lstPacks.SelectedIndex < 0)
@@ -191,6 +202,13 @@ namespace ProjectAltisLauncher.Forms
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
+
+        private void frmContentPacks_Load(object sender, EventArgs e)
+        {
+            if (!_needsToBeClosed) return;
+
             this.Close();
         }
     }

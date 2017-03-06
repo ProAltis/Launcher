@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace ProjectAltisLauncher.Core
 {
-    public class AutoUpdater
+    public static class AutoUpdater
     {
         /// <summary>
         /// Checks for the latest update of the launcher manifest
