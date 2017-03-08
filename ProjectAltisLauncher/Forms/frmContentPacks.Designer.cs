@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmContentPacks));
             this.grpContentPacks = new System.Windows.Forms.GroupBox();
             this.lstPacks = new System.Windows.Forms.ListBox();
             this.btnImport = new System.Windows.Forms.Button();
@@ -142,6 +143,7 @@
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.grpContentPacks);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmContentPacks";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Content Pack Chooser";
