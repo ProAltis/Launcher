@@ -11,11 +11,11 @@ using System.Threading;
 using System.Collections.Generic;
 using ProjectAltisLauncher.Enums;
 using System.ComponentModel;
-/* 
+/*
 * TODO:
 *    Catch Exceptions
 *    Enable uploading of logs to pastebin - Idea suggested by Judge2020
-*/ 
+*/
 namespace ProjectAltisLauncher.Forms
 {
     public partial class frmMain : Form
@@ -429,8 +429,11 @@ namespace ProjectAltisLauncher.Forms
                     {
                         lblNowDownloading.Text = "Have fun!";
                         pbDownload.Visible = false;
+                        btnPlay.Enabled = true;
                     });
-                    Play.LaunchGame(txtUser.Text, txtPass.Text);
+                    Thread t = new Thread(() => Play.LaunchGame(txtUser.Text, txtPass.Text));
+                    t.Start();
+
                 }
             });
             myThread.Start();
@@ -504,7 +507,7 @@ namespace ProjectAltisLauncher.Forms
             Console.WriteLine("Is writable called");
             try
             {
-                using(FileStream fs = File.Create(_currentDir + "writeText")) { }
+                using (FileStream fs = File.Create(_currentDir + "writeText")) { }
                 File.Delete(_currentDir + "writeText");
                 Console.WriteLine("Directory is writeable");
             }
