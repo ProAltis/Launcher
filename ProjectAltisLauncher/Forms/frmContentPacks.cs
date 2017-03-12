@@ -119,7 +119,7 @@ namespace ProjectAltisLauncher.Forms
                 Console.WriteLine("An exception with the packloader was thrown");
                 Console.WriteLine("Type: {0}\n\tStacktrace: {1}", ex.GetType(), ex.StackTrace);
             }
-            this.ActiveControl = null;
+            this.Close();
         }
 
         /// <summary>
