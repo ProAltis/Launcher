@@ -431,7 +431,7 @@ namespace ProjectAltisLauncher.Forms
                         pbDownload.Visible = false;
                         btnPlay.Enabled = true;
                     });
-                    Thread t = new Thread(() => Play.LaunchGame(txtUser.Text, txtPass.Text));
+                    Thread t = new Thread(() => Play.LaunchGame(txtUser.Text, txtPass.Text, this));
                     t.Start();
 
                 }

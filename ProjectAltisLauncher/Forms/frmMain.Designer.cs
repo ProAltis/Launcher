@@ -393,7 +393,6 @@
         private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.CheckBox cbSaveLogin;
-        private System.Windows.Forms.Label lblNowDownloading;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Button btnWebsite;
@@ -406,6 +405,7 @@
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.ProgressBar pbDownload;
         private System.Windows.Forms.Button btnContentPacks;
+        public System.Windows.Forms.Label lblNowDownloading;
     }
 }
 

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ProjectAltisLauncher.Forms;
+using System;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace ProjectAltisLauncher.Core
 {
@@ -10,7 +12,7 @@ namespace ProjectAltisLauncher.Core
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
-        public static void LaunchGame(string username, string password)
+        public static void LaunchGame(string username, string password, frmMain frmInstance)
         {
             Environment.SetEnvironmentVariable("TT_USERNAME", username);
             Environment.SetEnvironmentVariable("TT_PASSWORD", password);
@@ -21,7 +23,16 @@ namespace ProjectAltisLauncher.Core
                 startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             }         
             startInfo.FileName = "ProjectAltis";
-            Process.Start(startInfo);
+            Process altis = Process.Start(startInfo);
+            
+            frmInstance.BeginInvoke((MethodInvoker)delegate
+            {
+                frmInstance.Hide();
+                altis.WaitForExit();
+                frmInstance.lblNowDownloading.Text = "Thanks for playing!";
+                frmInstance.Show();
+            });          
+
         }
 
     }
