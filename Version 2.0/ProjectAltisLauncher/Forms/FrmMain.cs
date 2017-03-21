@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using ProjectAltisLauncher.Core;
+using System.Threading;
 
 namespace ProjectAltisLauncher.Forms
 {
@@ -148,7 +149,12 @@ namespace ProjectAltisLauncher.Forms
                 }
             }
             Updater updater = new Updater(this);
-            updater.DoWork();
+            Thread update = new Thread(() =>
+            {
+                updater.DoWork();
+            });
+
+            update.Start();
             this.ActiveControl = null;
         }
 

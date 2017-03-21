@@ -39,7 +39,10 @@ namespace ProjectAltisLauncher.Core
 
         public void DoWork()
         {
-            instance.btnPlay.Enabled = false;
+            instance.BeginInvoke((MethodInvoker)delegate
+            {
+                instance.btnPlay.Enabled = false;
+            });
 
             var resp = GetLoginAPIResponse(instance.txtUser.Text, instance.txtPass.Text);
 
@@ -47,43 +50,61 @@ namespace ProjectAltisLauncher.Core
             {
                 case "true":
                     {
-                        instance.lblInfo.ForeColor = Color.Green;
-                        instance.lblInfo.Text = resp.reason;
+                        instance.BeginInvoke((MethodInvoker)delegate
+                        {
+                            instance.lblInfo.ForeColor = Color.Green;
+                            instance.lblInfo.Text = resp.reason;
+                        });
                         UpdateFilesAndPlay();
                         break;
                     }
                 case "false":
                     {
-                        instance.lblInfo.ForeColor = Color.Red;
-                        instance.lblInfo.Text = resp.reason;
-                        instance.btnPlay.Enabled = true;
+                        instance.BeginInvoke((MethodInvoker)delegate
+                        {
+                            instance.lblInfo.ForeColor = Color.Red;
+                            instance.lblInfo.Text = resp.reason;
+                            instance.btnPlay.Enabled = true;
+                        });
                         break;
                     }
                 case "critical":
                     {
-                        instance.lblInfo.ForeColor = Color.Red;
-                        instance.lblInfo.Text = resp.additional;
-                        instance.btnPlay.Enabled = true;
+                        instance.BeginInvoke((MethodInvoker)delegate
+                        {
+                            instance.lblInfo.ForeColor = Color.Red;
+                            instance.lblInfo.Text = resp.additional;
+                            instance.btnPlay.Enabled = true;
+                        });
                         break;
                     }
                 case "info":
                     {
-                        instance.lblInfo.ForeColor = Color.Orange;
-                        instance.lblInfo.Text = resp.reason;
-                        instance.btnPlay.Enabled = true;
+                        instance.BeginInvoke((MethodInvoker)delegate
+                        {
+                            instance.lblInfo.ForeColor = Color.Orange;
+                            instance.lblInfo.Text = resp.reason;
+                            instance.btnPlay.Enabled = true;
+                        });
                         break;
                     }
                 default:
                     {
-                        MessageBox.Show(instance, "There was an error logging you in!", "Oops!");
-                        instance.lblInfo.ForeColor = Color.Red;
-                        instance.lblInfo.Text = "Error";
+                        instance.BeginInvoke((MethodInvoker)delegate
+                        {
+                            MessageBox.Show(instance, "There was an error logging you in!", "Oops!");
+                            instance.lblInfo.ForeColor = Color.Red;
+                            instance.lblInfo.Text = "Error";
+                        });
                         break;
                     }
             }
+            instance.BeginInvoke((MethodInvoker)delegate
+            {
+                instance.lblInfo.Visible = true;
+                instance.ActiveControl = null;
+            });
 
-            instance.lblInfo.Visible = true;
-            instance.ActiveControl = null;
         }
 
         /// <summary>
@@ -95,8 +116,12 @@ namespace ProjectAltisLauncher.Core
         /// <returns>True if credentials are valid; otherwise false.</returns>
         private LoginAPIResponse GetLoginAPIResponse(string user, string pass)
         {
-            instance.lblInfo.ForeColor = Color.Black;
-            instance.lblInfo.Text = "Contacting login server...";
+            instance.BeginInvoke((MethodInvoker)delegate
+            {
+                instance.lblNowDownloading.Visible = true;
+                instance.lblInfo.ForeColor = Color.Black;
+                instance.lblInfo.Text = "Contacting login server...";
+            });
             var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://www.projectaltis.com/api/login");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
@@ -115,7 +140,11 @@ namespace ProjectAltisLauncher.Core
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
-                instance.lblNowDownloading.Text = "";
+                instance.BeginInvoke((MethodInvoker)delegate
+                {
+                    instance.lblNowDownloading.Text = "";
+                });
+
                 return JsonConvert.DeserializeObject<LoginAPIResponse>(result);
             }
         }
@@ -125,9 +154,11 @@ namespace ProjectAltisLauncher.Core
         /// </summary>
         private void UpdateFilesAndPlay()
         {
-            instance.lblNowDownloading.Visible = true;
-            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-            sw.Start();
+            instance.BeginInvoke((MethodInvoker)delegate
+            {
+                instance.lblNowDownloading.Visible = true;
+            });
+
             var main = new Thread(() =>
             {
                 CreateGameDirectorys();
@@ -147,13 +178,13 @@ namespace ProjectAltisLauncher.Core
                     var fileThread = new Thread(() =>
                     {
                         string workingDir;
-                        string path;                        
+                        string path;
                         ManifestJson manifest = JsonConvert.DeserializeObject<ManifestJson>(item.Replace("#", ""));
                         instance.BeginInvoke((MethodInvoker)delegate
                         {
                             instance.lblNowDownloading.Text = "Verified files: " + _verifyCount + "/" + (rawManifestArray.Length - 1);
                         });
-                        
+
                         #region Determine the File Type and Set Working Directory
 
                         if (manifest.filename.Contains("phase"))
@@ -184,7 +215,7 @@ namespace ProjectAltisLauncher.Core
                     fileThread.Start();
                 } // Add items to list
 
-                while (!(_verifyCount == rawManifestArray.Length -1))
+                while (!(_verifyCount == rawManifestArray.Length - 1))
                 {
                     Thread.Sleep(30);
                 }
@@ -232,7 +263,6 @@ namespace ProjectAltisLauncher.Core
                     {
                         client.DownloadFileAsync(new Uri(URL), _currentDir + @"\" + Filename);
                     }
-
                 }
                 else
                 {
@@ -244,7 +274,6 @@ namespace ProjectAltisLauncher.Core
                     });
                     Thread t = new Thread(() => Play.LaunchGame(user, pass, instance));
                     t.Start();
-
                 }
             });
             myThread.Start();
@@ -281,7 +310,7 @@ namespace ProjectAltisLauncher.Core
                 DownloadItemsFromList(_downloadList);
             });
         }
- 
+
         /// <summary>
         /// Creates the game directories necessary for file updating.
         /// </summary>
