@@ -313,6 +313,8 @@ namespace ProjectAltisLauncher.Forms
         private void UpdateFilesAndPlay()
         {
             lblNowDownloading.Visible = true;
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             var myThread = new Thread(() =>
             {
                 Directory.CreateDirectory(@"resources");
@@ -378,6 +380,8 @@ namespace ProjectAltisLauncher.Forms
                     }
                 } // Add items to list
                 Console.WriteLine("Added all items to the list, starting download...");
+                sw.Stop();
+                Console.WriteLine("Total time elapsed (seconds): " + sw.Elapsed.TotalSeconds);
                 DownloadItemsFromList(_downloadList);
             });
             myThread.Start();
