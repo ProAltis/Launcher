@@ -46,6 +46,8 @@ namespace ProjectAltisLauncher.Core
 
             var resp = GetLoginAPIResponse(instance.txtUser.Text, instance.txtPass.Text);
 
+            if (resp == null) return;
+
             switch (resp.status)
             {
                 case "true":
@@ -116,37 +118,49 @@ namespace ProjectAltisLauncher.Core
         /// <returns>True if credentials are valid; otherwise false.</returns>
         private LoginAPIResponse GetLoginAPIResponse(string user, string pass)
         {
-            instance.BeginInvoke((MethodInvoker)delegate
+            try
             {
-                instance.lblNowDownloading.Visible = true;
-                instance.lblInfo.ForeColor = Color.Black;
-                instance.lblInfo.Text = "Contacting login server...";
-            });
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://www.projectaltis.com/api/login");
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            {
-                string json = "{\"u\":\"" + user + "\"," +
-                              "\"p\":\"" + pass + "\"}";
-                streamWriter.Write(json);
-                streamWriter.Flush();
-                streamWriter.Close();
-            }
-
-
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
                 instance.BeginInvoke((MethodInvoker)delegate
                 {
-                    instance.lblNowDownloading.Text = "";
+                    instance.lblNowDownloading.Visible = true;
+                    instance.lblInfo.ForeColor = Color.Black;
+                    instance.lblInfo.Text = "Contacting login server...";
                 });
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://www.projectaltis.com/api/login");
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    string json = "{\"u\":\"" + user + "\"," +
+                                  "\"p\":\"" + pass + "\"}";
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
 
-                return JsonConvert.DeserializeObject<LoginAPIResponse>(result);
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                    instance.BeginInvoke((MethodInvoker)delegate
+                    {
+                        instance.lblNowDownloading.Text = "";
+                    });
+
+                    return JsonConvert.DeserializeObject<LoginAPIResponse>(result);
+                }
             }
+            catch (Exception ex)
+            {
+                instance.BeginInvoke((MethodInvoker)delegate
+                {
+                    MessageBox.Show(instance, "Failed to contact the login server.");
+                });
+                
+                return null;
+            }
+
         }
 
         /// <summary>
@@ -161,9 +175,27 @@ namespace ProjectAltisLauncher.Core
 
             var main = new Thread(() =>
             {
-                CreateGameDirectorys();
+                if (!CreateGameDirectorys())
+                {
+                    instance.BeginInvoke((MethodInvoker)delegate
+                    {
+                        MessageBox.Show(instance, "Unable to create game directories. Exiting update process.");
+                    });
+                    
+                    return; // Not able to create directorys, exit out of thread.
+                }
 
                 string rawManifest = RetrieveManifest();
+                if(rawManifest == null)
+                {
+                    instance.BeginInvoke((MethodInvoker)delegate
+                    {
+                        MessageBox.Show(instance, "Unable to retrieve the latest file manifest. Exiting update process.");
+                    });             
+                    return;
+                }
+
+
                 string[] rawManifestArray = rawManifest.Split('#');
                 instance.BeginInvoke((MethodInvoker)delegate
                 {
@@ -236,7 +268,7 @@ namespace ProjectAltisLauncher.Core
 
             string Filename = String.Empty;
             string URL = String.Empty;
-            var myThread = new Thread(() =>
+            var aThread = new Thread(() =>
             {
                 if (_downloadList.Count > 0)
                 {
@@ -276,7 +308,7 @@ namespace ProjectAltisLauncher.Core
                     t.Start();
                 }
             });
-            myThread.Start();
+            aThread.Start();
         }
 
         /// <summary>
@@ -311,14 +343,25 @@ namespace ProjectAltisLauncher.Core
             });
         }
 
+
         /// <summary>
         /// Creates the game directories necessary for file updating.
         /// </summary>
-        private static void CreateGameDirectorys()
+        /// <returns>True if directories were created successfully, otherwise false.</returns>
+        private static bool CreateGameDirectorys()
         {
-            Directory.CreateDirectory(@"resources");
-            Directory.CreateDirectory(@"resources\default\");
-            Directory.CreateDirectory(@"config");
+            try
+            {
+                Directory.CreateDirectory(@"resources");
+                Directory.CreateDirectory(@"resources\default\");
+                Directory.CreateDirectory(@"config");
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
 
         /// <summary>
@@ -327,12 +370,18 @@ namespace ProjectAltisLauncher.Core
         /// <returns></returns>
         private static string RetrieveManifest()
         {
-            string rawManifest;
-            using (WebClient client = new WebClient())
+            try
             {
-                rawManifest = client.DownloadString("http://projectaltis.com/api/manifest");
+                using (WebClient client = new WebClient())
+                {
+                    return client.DownloadString("http://projectaltis.com/api/manifest");
+                }
             }
-            return rawManifest;
+            catch (Exception)
+            {
+                return null;
+            }
+
         }
 
     }

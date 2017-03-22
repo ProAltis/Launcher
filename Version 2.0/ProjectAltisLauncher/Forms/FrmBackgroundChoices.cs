@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using ProjectAltisLauncher.Properties;
 using ProjectAltisLauncher.Core;
 
 namespace ProjectAltisLauncher.Forms
@@ -55,9 +54,9 @@ namespace ProjectAltisLauncher.Forms
                 Properties.Settings.Default.Background = "DDL";
             }
             Properties.Settings.Default.Save();
-            if (!Settings.Default.RandomBackgrounds)
+            if (!Properties.Settings.Default.RandomBackgrounds)
             {
-                instance.BackgroundImage = Graphics.ReturnBackground(Settings.Default.Background);
+                instance.BackgroundImage = Graphics.ReturnBackground(Properties.Settings.Default.Background);
             }
 
             this.Close();
@@ -65,7 +64,7 @@ namespace ProjectAltisLauncher.Forms
 
         private void BackgroundChoices_Load(object sender, EventArgs e)
         {
-            if (Settings.Default.RandomBackgrounds)
+            if (Properties.Settings.Default.RandomBackgrounds)
             {
 
                 radBrrrgh.Visible = false;
@@ -78,7 +77,7 @@ namespace ProjectAltisLauncher.Forms
             }
             else
             {
-                switch (Settings.Default.Background)
+                switch (Properties.Settings.Default.Background)
                 {
                     case "TTC":
                         radTTC.Checked = true;

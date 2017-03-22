@@ -150,8 +150,19 @@ namespace ProjectAltisLauncher.Forms
             {
                 updater.DoWork();
             });
-
-            update.Start();
+            try
+            {
+                update.Start();
+            }
+            catch (OutOfMemoryException)
+            {
+                MessageBox.Show("Unable to start the updating process. It appears your computer is out of memory.");
+            }
+            catch (ThreadStateException)
+            {
+                MessageBox.Show("The updater thread could not be started. Try and restarting the launcher.");
+            }
+            
             this.ActiveControl = null;
         }
 

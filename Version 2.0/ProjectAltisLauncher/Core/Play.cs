@@ -11,6 +11,7 @@ namespace ProjectAltisLauncher.Core
 {
     public static class Play
     {
+
         /// <summary>
         /// Launches the game.
         /// </summary>
@@ -27,7 +28,21 @@ namespace ProjectAltisLauncher.Core
                 startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             }
             startInfo.FileName = "ProjectAltis";
-            Process altis = Process.Start(startInfo);
+            Process altis;
+
+            try
+            {
+                altis = Process.Start(startInfo);
+            }
+            catch (Exception)
+            {
+                
+                frmInstance.BeginInvoke((MethodInvoker)delegate
+                {
+                    MessageBox.Show(frmInstance, "Unable to start Project Altis.");
+                });
+                return;
+            }
 
             frmInstance.BeginInvoke((MethodInvoker)delegate
             {
@@ -36,21 +51,28 @@ namespace ProjectAltisLauncher.Core
                 foreach (Form f in Application.OpenForms)
                 {
                     openForms.Add(f);
-                }                 
+                }
 
                 foreach (Form f in openForms)
                 {
-                    if (!f.Name.Contains("Launcher"))
+                    if (!f.Name.Contains("FrmMain"))
                     {
                         f.Close();
-                    }                 
+                    }
                 }
+
                 frmInstance.Hide();
-                altis.WaitForExit();
+            });
+
+            altis.WaitForExit(Int32.MaxValue);
+
+            frmInstance.BeginInvoke((MethodInvoker)delegate
+            {
                 frmInstance.lblNowDownloading.Text = "Thanks for playing!";
                 frmInstance.Show();
             });
 
+            
         }
     }
 }
