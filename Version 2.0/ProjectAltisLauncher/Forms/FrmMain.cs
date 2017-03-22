@@ -35,9 +35,7 @@ namespace ProjectAltisLauncher.Forms
             catch (Exception)
             {
                 Console.WriteLine("[FrmMain] Error al navegar por Internet");
-            }
-               
-            
+            }        
         }
 
         #region FrmMain
@@ -134,7 +132,6 @@ namespace ProjectAltisLauncher.Forms
             FrmCredits credits = new FrmCredits();
             this.ActiveControl = null;
             credits.ShowDialog();
-            
         }
 
         private void btnPlay_Click(object sender, EventArgs e)

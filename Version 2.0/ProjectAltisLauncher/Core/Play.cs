@@ -31,6 +31,20 @@ namespace ProjectAltisLauncher.Core
 
             frmInstance.BeginInvoke((MethodInvoker)delegate
             {
+                List<Form> openForms = new List<Form>();
+
+                foreach (Form f in Application.OpenForms)
+                {
+                    openForms.Add(f);
+                }                 
+
+                foreach (Form f in openForms)
+                {
+                    if (!f.Name.Contains("Launcher"))
+                    {
+                        f.Close();
+                    }                 
+                }
                 frmInstance.Hide();
                 altis.WaitForExit();
                 frmInstance.lblNowDownloading.Text = "Thanks for playing!";
