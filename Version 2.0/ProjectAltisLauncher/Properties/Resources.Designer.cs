@@ -221,6 +221,67 @@ namespace ProjectAltisLauncher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error has occured with the content pack loader. Try and restart the launcher..
+        /// </summary>
+        internal static string FrmContentPacks_FrmContentPacks_An_error_has_occured_with_the_content_pack_loader__Try_and_restart_the_launcher_ {
+            get {
+                return ResourceManager.GetString("FrmContentPacks_FrmContentPacks_An_error_has_occured_with_the_content_pack_loader" +
+                        "__Try_and_restart_the_launcher_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///If that does not work, show a developer the following stacktrace.
+        ///Type: .
+        /// </summary>
+        internal static string FrmContentPacks_FrmContentPacks_If_that_does_not_work_show_a_developer_the_following_stacktrace {
+            get {
+                return ResourceManager.GetString("FrmContentPacks_FrmContentPacks_If_that_does_not_work_show_a_developer_the_follow" +
+                        "ing_stacktrace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///Message: .
+        /// </summary>
+        internal static string FrmContentPacks_FrmContentPacks_Message {
+            get {
+                return ResourceManager.GetString("FrmContentPacks_FrmContentPacks_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stacktrace: .
+        /// </summary>
+        internal static string FrmContentPacks_FrmContentPacks_Stacktrace__ {
+            get {
+                return ResourceManager.GetString("FrmContentPacks_FrmContentPacks_Stacktrace__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The updater thread could not be started. Try and restarting the launcher..
+        /// </summary>
+        internal static string FrmMain_btnPlay_Click_The_updater_thread_could_not_be_started__Try_and_restarting_the_launcher_ {
+            get {
+                return ResourceManager.GetString("FrmMain_btnPlay_Click_The_updater_thread_could_not_be_started__Try_and_restarting" +
+                        "_the_launcher_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to start the updating process. It appears your computer is out of memory..
+        /// </summary>
+        internal static string FrmMain_btnPlay_Click_Unable_to_start_the_updating_process__It_appears_your_computer_is_out_of_memory_ {
+            get {
+                return ResourceManager.GetString("FrmMain_btnPlay_Click_Unable_to_start_the_updating_process__It_appears_your_compu" +
+                        "ter_is_out_of_memory_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap group {
@@ -351,6 +412,15 @@ namespace ProjectAltisLauncher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thanks for playing!.
+        /// </summary>
+        internal static string Play_LaunchGame_Thanks_for_playing_ {
+            get {
+                return ResourceManager.GetString("Play_LaunchGame_Thanks_for_playing_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream sndclick {
@@ -406,6 +476,15 @@ namespace ProjectAltisLauncher.Properties {
             get {
                 object obj = ResourceManager.GetObject("TTC", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to contact the login server..
+        /// </summary>
+        internal static string Updater_GetLoginAPIResponse_Failed_to_contact_the_login_server_ {
+            get {
+                return ResourceManager.GetString("Updater_GetLoginAPIResponse_Failed_to_contact_the_login_server_", resourceCulture);
             }
         }
         

@@ -1,105 +1,109 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿#region License
 
+// The MIT License
+// 
+// Copyright (c) 2017 Project Altis
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+#endregion
+
+using System;
+using System.Windows.Forms;
 using ProjectAltisLauncher.Core;
+using ProjectAltisLauncher.Properties;
 
 namespace ProjectAltisLauncher.Forms
 {
     public partial class FrmBackgroundChoices : Form
     {
-        private Form instance;
+        private readonly Form instance;
 
         public FrmBackgroundChoices(Form form)
         {
-            this.Icon = Properties.Resources.pieicon;
+            this.Icon = Resources.pieicon;
             InitializeComponent();
-            instance = form;
+            this.instance = form;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (radTTC.Checked)
-            {
-                Properties.Settings.Default.Background = "TTC";
-            }
-            else if (radDD.Checked)
-            {
-                Properties.Settings.Default.Background = "DD";
-            }
-            else if (radDG.Checked)
-            {
-                Properties.Settings.Default.Background = "DG";
-            }
-            else if (radMML.Checked)
-            {
-                Properties.Settings.Default.Background = "MML";
-            }
-            else if (radBrrrgh.Checked)
-            {
-                Properties.Settings.Default.Background = "Brrrgh";
-            }
-            else if (radDDL.Checked)
-            {
-                Properties.Settings.Default.Background = "DDL";
-            }
-            Properties.Settings.Default.Save();
-            if (!Properties.Settings.Default.RandomBackgrounds)
-            {
-                instance.BackgroundImage = Graphics.ReturnBackground(Properties.Settings.Default.Background);
-            }
+            if (this.radTTC.Checked)
+                Settings.Default.Background = "TTC";
+            else if (this.radDD.Checked)
+                Settings.Default.Background = "DD";
+            else if (this.radDG.Checked)
+                Settings.Default.Background = "DG";
+            else if (this.radMML.Checked)
+                Settings.Default.Background = "MML";
+            else if (this.radBrrrgh.Checked)
+                Settings.Default.Background = "Brrrgh";
+            else if (this.radDDL.Checked)
+                Settings.Default.Background = "DDL";
+            Settings.Default.Save();
+            if (!Settings.Default.RandomBackgrounds)
+                this.instance.BackgroundImage = Graphics.ReturnBackground(Settings.Default.Background);
 
-            this.Close();
+            Close();
         }
 
         private void BackgroundChoices_Load(object sender, EventArgs e)
         {
-            if (Properties.Settings.Default.RandomBackgrounds)
+            if (Settings.Default.RandomBackgrounds)
             {
-
-                radBrrrgh.Visible = false;
-                radDD.Visible = false;
-                radTTC.Visible = false;
-                radDG.Visible = false;
-                radDDL.Visible = false;
-                radMML.Visible = false;
-                lblRandBG.Visible = true;
+                this.radBrrrgh.Visible = false;
+                this.radDD.Visible = false;
+                this.radTTC.Visible = false;
+                this.radDG.Visible = false;
+                this.radDDL.Visible = false;
+                this.radMML.Visible = false;
+                this.lblRandBG.Visible = true;
             }
             else
             {
-                switch (Properties.Settings.Default.Background)
+                switch (Settings.Default.Background)
                 {
                     case "TTC":
-                        radTTC.Checked = true;
+                        this.radTTC.Checked = true;
                         break;
                     case "DD":
-                        radDD.Checked = true;
+                        this.radDD.Checked = true;
                         break;
                     case "DG":
-                        radDG.Checked = true;
+                        this.radDG.Checked = true;
                         break;
                     case "MML":
-                        radMML.Checked = true;
+                        this.radMML.Checked = true;
                         break;
                     case "Brrrgh":
-                        radBrrrgh.Checked = true;
+                        this.radBrrrgh.Checked = true;
                         break;
                     case "DDL":
-                        radDDL.Checked = true;
+                        this.radDDL.Checked = true;
                         break;
                 }
             }
         }
-
     }
 }

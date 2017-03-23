@@ -232,4 +232,31 @@
   <data name="pieicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pieicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="FrmMain_btnPlay_Click_Unable_to_start_the_updating_process__It_appears_your_computer_is_out_of_memory_" xml:space="preserve">
+    <value>Unable to start the updating process. It appears your computer is out of memory.</value>
+  </data>
+  <data name="FrmMain_btnPlay_Click_The_updater_thread_could_not_be_started__Try_and_restarting_the_launcher_" xml:space="preserve">
+    <value>The updater thread could not be started. Try and restarting the launcher.</value>
+  </data>
+  <data name="Updater_GetLoginAPIResponse_Failed_to_contact_the_login_server_" xml:space="preserve">
+    <value>Failed to contact the login server.</value>
+  </data>
+  <data name="FrmContentPacks_FrmContentPacks_An_error_has_occured_with_the_content_pack_loader__Try_and_restart_the_launcher_" xml:space="preserve">
+    <value>An error has occured with the content pack loader. Try and restart the launcher.</value>
+  </data>
+  <data name="FrmContentPacks_FrmContentPacks_If_that_does_not_work_show_a_developer_the_following_stacktrace" xml:space="preserve">
+    <value>
+If that does not work, show a developer the following stacktrace.
+Type: </value>
+  </data>
+  <data name="FrmContentPacks_FrmContentPacks_Message" xml:space="preserve">
+    <value>
+Message: </value>
+  </data>
+  <data name="FrmContentPacks_FrmContentPacks_Stacktrace__" xml:space="preserve">
+    <value>Stacktrace: </value>
+  </data>
+  <data name="Play_LaunchGame_Thanks_for_playing_" xml:space="preserve">
+    <value>Thanks for playing!</value>
+  </data>
 </root>

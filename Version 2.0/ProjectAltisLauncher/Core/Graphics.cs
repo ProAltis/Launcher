@@ -1,39 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region License
+
+// The MIT License
+// 
+// Copyright (c) 2017 Project Altis
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+#endregion
+
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ProjectAltisLauncher.Properties;
 
 namespace ProjectAltisLauncher.Core
 {
-    class Graphics
+    public static class Graphics
     {
-        private static Random _rand = new Random();
+        private static readonly Random _rand = new Random();
 
         public static Image ReturnRandomBackground()
         {
             int val = _rand.Next(1, 7); // Generates a random number 1-6
-            Image backgroundImage = Properties.Resources.TTC;
+            Image backgroundImage = Resources.TTC;
             switch (val)
             {
                 case 1:
-                    backgroundImage = Properties.Resources.TTC;
+                    backgroundImage = Resources.TTC;
                     break;
                 case 2:
-                    backgroundImage = Properties.Resources.DD;
+                    backgroundImage = Resources.DD;
                     break;
                 case 3:
-                    backgroundImage = Properties.Resources.DG;
+                    backgroundImage = Resources.DG;
                     break;
                 case 4:
-                    backgroundImage = Properties.Resources.MML;
+                    backgroundImage = Resources.MML;
                     break;
                 case 5:
-                    backgroundImage = Properties.Resources.Brrrgh;
+                    backgroundImage = Resources.Brrrgh;
                     break;
                 case 6:
-                    backgroundImage = Properties.Resources.DDL;
+                    backgroundImage = Resources.DDL;
                     break;
             }
             return backgroundImage;
@@ -41,26 +64,26 @@ namespace ProjectAltisLauncher.Core
 
         public static Image ReturnBackground(string bg)
         {
-            Image backgroundImage = Properties.Resources.TTC;
+            Image backgroundImage = Resources.TTC;
             switch (bg)
             {
                 case "TTC":
-                    backgroundImage = Properties.Resources.TTC;
+                    backgroundImage = Resources.TTC;
                     break;
                 case "DD":
-                    backgroundImage = Properties.Resources.DD;
+                    backgroundImage = Resources.DD;
                     break;
                 case "DG":
-                    backgroundImage = Properties.Resources.DG;
+                    backgroundImage = Resources.DG;
                     break;
                 case "MML":
-                    backgroundImage = Properties.Resources.MML;
+                    backgroundImage = Resources.MML;
                     break;
                 case "Brrrgh":
-                    backgroundImage = Properties.Resources.Brrrgh;
+                    backgroundImage = Resources.Brrrgh;
                     break;
                 case "DDL":
-                    backgroundImage = Properties.Resources.DDL;
+                    backgroundImage = Resources.DDL;
                     break;
             }
             return backgroundImage;
@@ -76,122 +99,122 @@ namespace ProjectAltisLauncher.Core
                     switch (method)
                     {
                         case "mouseenter":
-                            return Properties.Resources.website_h;
+                            return Resources.website_h;
                         case "mouseleave":
-                            return Properties.Resources.website;
+                            return Resources.website;
                         case "mousedown":
-                            return Properties.Resources.website_d;
+                            return Resources.website_d;
                         case "mouseup":
-                            return Properties.Resources.website;
+                            return Resources.website;
                     }
                     break;
                 case "discord":
                     switch (method)
                     {
                         case "mouseenter":
-                            return Properties.Resources.discord_h;
+                            return Resources.discord_h;
                         case "mouseleave":
-                            return Properties.Resources.discord;
+                            return Resources.discord;
                         case "mousedown":
-                            return Properties.Resources.discord_d;
+                            return Resources.discord_d;
                         case "mouseup":
-                            return Properties.Resources.discord;
+                            return Resources.discord;
                     }
                     break;
                 case "group":
                     switch (method)
                     {
                         case "mouseenter":
-                            return Properties.Resources.group_h;
+                            return Resources.group_h;
                         case "mouseleave":
-                            return Properties.Resources.group;
+                            return Resources.group;
                         case "mousedown":
-                            return Properties.Resources.group_d;
+                            return Resources.group_d;
                         case "mouseup":
-                            return Properties.Resources.group;
+                            return Resources.group;
                     }
                     break;
                 case "theme":
                     switch (method)
                     {
                         case "mouseenter":
-                            return Properties.Resources.theme_h;
+                            return Resources.theme_h;
                         case "mouseleave":
-                            return Properties.Resources.theme;
+                            return Resources.theme;
                         case "mousedown":
-                            return Properties.Resources.theme_d;
+                            return Resources.theme_d;
                         case "mouseup":
-                            return Properties.Resources.theme;
+                            return Resources.theme;
                     }
                     break;
                 case "options":
                     switch (method)
                     {
                         case "mouseenter":
-                            return Properties.Resources.options_h;
+                            return Resources.options_h;
                         case "mouseleave":
-                            return Properties.Resources.options;
+                            return Resources.options;
                         case "mousedown":
-                            return Properties.Resources.options_d;
+                            return Resources.options_d;
                         case "mouseup":
-                            return Properties.Resources.options;
+                            return Resources.options;
                     }
                     break;
                 case "credits":
                     switch (method)
                     {
                         case "mouseenter":
-                            return Properties.Resources.credits_h;
+                            return Resources.credits_h;
                         case "mouseleave":
-                            return Properties.Resources.credits;
+                            return Resources.credits;
                         case "mousedown":
-                            return Properties.Resources.credits_d;
+                            return Resources.credits_d;
                         case "mouseup":
-                            return Properties.Resources.credits;
+                            return Resources.credits;
                     }
                     break;
                 case "play":
                     switch (method)
                     {
                         case "mouseenter":
-                            return Properties.Resources.play_h;
+                            return Resources.play_h;
                         case "mouseleave":
-                            return Properties.Resources.play;
+                            return Resources.play;
                         case "mousedown":
-                            return Properties.Resources.play_d;
+                            return Resources.play_d;
                         case "mouseup":
-                            return Properties.Resources.play;
+                            return Resources.play;
                     }
                     break;
                 case "exit":
                     switch (method)
                     {
                         case "mouseenter":
-                            return Properties.Resources.cancel_h;
+                            return Resources.cancel_h;
                         case "mouseleave":
-                            return Properties.Resources.cancel;
+                            return Resources.cancel;
                     }
                     break;
                 case "min":
                     switch (method)
                     {
                         case "mouseenter":
-                            return Properties.Resources.minus_h;
+                            return Resources.minus_h;
                         case "mouseleave":
-                            return Properties.Resources.minus;
+                            return Resources.minus;
                     }
                     break;
                 case "contentpacks":
                     switch (method)
                     {
                         case "mouseenter":
-                            return Properties.Resources.contentpacks_h;
+                            return Resources.contentpacks_h;
                         case "mouseleave":
-                            return Properties.Resources.contentpacks;
+                            return Resources.contentpacks;
                         case "mousedown":
-                            return Properties.Resources.contentpacks_d;
+                            return Resources.contentpacks_d;
                         case "mouseup":
-                            return Properties.Resources.contentpacks;
+                            return Resources.contentpacks;
                     }
                     break;
             }

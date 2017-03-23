@@ -1,15 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿#region License
 
-using ProjectAltisLauncher.Core;
+// The MIT License
+// 
+// Copyright (c) 2017 Project Altis
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+#endregion
+
+using System;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Threading;
+using System.Windows.Forms;
+using ProjectAltisLauncher.Core;
+using ProjectAltisLauncher.Properties;
+using Graphics = ProjectAltisLauncher.Core.Graphics;
 
 namespace ProjectAltisLauncher.Forms
 {
@@ -26,65 +49,17 @@ namespace ProjectAltisLauncher.Forms
     {
         public FrmMain()
         {
-            this.Icon = Properties.Resources.pieicon;
+            this.Icon = Resources.pieicon;
             InitializeComponent();
             try
             {
-                wbNews.Navigate(new Uri("https://projectaltis.com/launcher"));
+                this.wbNews.Navigate(new Uri("https://projectaltis.com/launcher"));
             }
             catch (Exception)
             {
                 Console.WriteLine("[FrmMain] Error al navegar por Internet");
-            }        
-        }
-
-        #region FrmMain
-
-        private void FrmMain_Load(object sender, EventArgs e)
-        {
-            #region Set background image
-
-            if (!Properties.Settings.Default.RandomBackgrounds)
-            {
-                this.BackgroundImage = Graphics.ReturnBackground(Properties.Settings.Default.Background);
             }
-            else
-            {
-                this.BackgroundImage = Graphics.ReturnRandomBackground();
-            }
-
-            #endregion
-
-            #region Apply Cursor
-            if (Properties.Settings.Default.WantsToontownCursor)
-            {
-                System.IO.MemoryStream cursorMemoryStream = new System.IO.MemoryStream(Properties.Resources.toonmono);
-                Cursor = new Cursor(cursorMemoryStream);
-            }
-            #endregion
         }
-
-        private System.Drawing.Point mouseDownPoint = System.Drawing.Point.Empty;
-
-        private void FrmMain_MouseDown(object sender, MouseEventArgs e)
-        {
-            mouseDownPoint = new System.Drawing.Point(e.X, e.Y);
-        }
-
-        private void FrmMain_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDownPoint = System.Drawing.Point.Empty;
-        }
-
-        private void FrmMain_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (mouseDownPoint.IsEmpty)
-                return;
-            Form f = sender as Form;
-            f.Location = new System.Drawing.Point(f.Location.X + (e.X - mouseDownPoint.X), f.Location.Y + (e.Y - mouseDownPoint.Y));
-        }
-
-        #endregion
 
         private void btnWebsite_Click(object sender, EventArgs e)
         {
@@ -107,7 +82,6 @@ namespace ProjectAltisLauncher.Forms
             this.ActiveControl = null;
             contentPack.ShowDialog(this);
             this.ActiveControl = null;
-
         }
 
         private void btnTheme_Click(object sender, EventArgs e)
@@ -137,32 +111,31 @@ namespace ProjectAltisLauncher.Forms
         private void btnPlay_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
-            if (cbSaveLogin.Checked)
-            {
-                if (!string.IsNullOrEmpty(txtUser.Text))
+            if (this.cbSaveLogin.Checked)
+                if (!string.IsNullOrEmpty(this.txtUser.Text))
                 {
-                    Properties.Settings.Default.Username = txtUser.Text;
-                    Properties.Settings.Default.Save();
+                    Settings.Default.Username = this.txtUser.Text;
+                    Settings.Default.Save();
                 }
-            }
             Updater updater = new Updater(this);
-            Thread update = new Thread(() =>
-            {
-                updater.DoWork();
-            });
+            Thread update = new Thread(() => { updater.DoWork(); });
             try
             {
                 update.Start();
             }
             catch (OutOfMemoryException)
             {
-                MessageBox.Show("Unable to start the updating process. It appears your computer is out of memory.");
+                MessageBox.Show(
+                    Resources
+                        .FrmMain_btnPlay_Click_Unable_to_start_the_updating_process__It_appears_your_computer_is_out_of_memory_);
             }
             catch (ThreadStateException)
             {
-                MessageBox.Show("The updater thread could not be started. Try and restarting the launcher.");
+                MessageBox.Show(
+                    Resources
+                        .FrmMain_btnPlay_Click_The_updater_thread_could_not_be_started__Try_and_restarting_the_launcher_);
             }
-            
+
             this.ActiveControl = null;
         }
 
@@ -170,60 +143,108 @@ namespace ProjectAltisLauncher.Forms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (btnPlay.Enabled)
-                {
-                    btnPlay.PerformClick();
-                }
+                if (this.btnPlay.Enabled)
+                    this.btnPlay.PerformClick();
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
         }
 
         #region News Events
+
         private void wbNews_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
-            if (!(e.Url.ToString().Contains("https://projectaltis.com/launcher")))
+            if (!e.Url.ToString().Contains("https://projectaltis.com/launcher"))
             {
                 e.Cancel = true;
                 Process.Start(e.Url.ToString());
             }
         }
+
+        #endregion
+
+        #region FrmMain
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            #region Set background image
+
+            if (!Settings.Default.RandomBackgrounds)
+                this.BackgroundImage = Graphics.ReturnBackground(Settings.Default.Background);
+            else
+                this.BackgroundImage = Graphics.ReturnRandomBackground();
+
+            #endregion
+
+            #region Apply Cursor
+
+            if (Settings.Default.WantsToontownCursor)
+            {
+                MemoryStream cursorMemoryStream = new MemoryStream(Resources.toonmono);
+                this.Cursor = new Cursor(cursorMemoryStream);
+            }
+
+            #endregion
+        }
+
+        private Point mouseDownPoint = Point.Empty;
+
+        private void FrmMain_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.mouseDownPoint = new Point(e.X, e.Y);
+        }
+
+        private void FrmMain_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.mouseDownPoint = Point.Empty;
+        }
+
+        private void FrmMain_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.mouseDownPoint.IsEmpty)
+                return;
+            Form f = sender as Form;
+            f.Location = new Point(f.Location.X + (e.X - this.mouseDownPoint.X),
+                f.Location.Y + (e.Y - this.mouseDownPoint.Y));
+        }
+
         #endregion
 
         #region Mouse Enter
+
         private void btnWebsite_MouseEnter(object sender, EventArgs e)
         {
-            btnWebsite.BackgroundImage = Properties.Resources.website_h;
+            this.btnWebsite.BackgroundImage = Resources.website_h;
         }
 
         private void btnDiscord_MouseEnter(object sender, EventArgs e)
         {
-            btnDiscord.BackgroundImage = Properties.Resources.discord_h;
+            this.btnDiscord.BackgroundImage = Resources.discord_h;
         }
 
         private void btnContentPacks_MouseEnter(object sender, EventArgs e)
         {
-            btnContentPacks.BackgroundImage = Properties.Resources.contentpacks_h;
+            this.btnContentPacks.BackgroundImage = Resources.contentpacks_h;
         }
 
         private void btnTheme_MouseEnter(object sender, EventArgs e)
         {
-            btnTheme.BackgroundImage = Properties.Resources.theme_h;
+            this.btnTheme.BackgroundImage = Resources.theme_h;
         }
 
         private void btnOptions_MouseEnter(object sender, EventArgs e)
         {
-            btnOptions.BackgroundImage = Properties.Resources.options_h;
+            this.btnOptions.BackgroundImage = Resources.options_h;
         }
 
         private void btnCredits_MouseEnter(object sender, EventArgs e)
         {
-            btnCredits.BackgroundImage = Properties.Resources.credits_h;
+            this.btnCredits.BackgroundImage = Resources.credits_h;
         }
 
         private void btnPlay_MouseEnter(object sender, EventArgs e)
         {
-            btnPlay.BackgroundImage = Properties.Resources.play_h;
+            this.btnPlay.BackgroundImage = Resources.play_h;
         }
 
         #endregion
@@ -232,37 +253,37 @@ namespace ProjectAltisLauncher.Forms
 
         private void btnWebsite_MouseLeave(object sender, EventArgs e)
         {
-            btnWebsite.BackgroundImage = Properties.Resources.website;
+            this.btnWebsite.BackgroundImage = Resources.website;
         }
 
         private void btnDiscord_MouseLeave(object sender, EventArgs e)
         {
-            btnDiscord.BackgroundImage = Properties.Resources.discord;
+            this.btnDiscord.BackgroundImage = Resources.discord;
         }
 
         private void btnContentPacks_MouseLeave(object sender, EventArgs e)
         {
-            btnContentPacks.BackgroundImage = Properties.Resources.contentpacks;
+            this.btnContentPacks.BackgroundImage = Resources.contentpacks;
         }
 
         private void btnTheme_MouseLeave(object sender, EventArgs e)
         {
-            btnTheme.BackgroundImage = Properties.Resources.theme;
+            this.btnTheme.BackgroundImage = Resources.theme;
         }
 
         private void btnOptions_MouseLeave(object sender, EventArgs e)
         {
-            btnOptions.BackgroundImage = Properties.Resources.options;
+            this.btnOptions.BackgroundImage = Resources.options;
         }
 
         private void btnCredits_MouseLeave(object sender, EventArgs e)
         {
-            btnCredits.BackgroundImage = Properties.Resources.credits;
+            this.btnCredits.BackgroundImage = Resources.credits;
         }
 
         private void btnPlay_MouseLeave(object sender, EventArgs e)
         {
-            btnPlay.BackgroundImage = Properties.Resources.play;
+            this.btnPlay.BackgroundImage = Resources.play;
         }
 
         #endregion
@@ -271,37 +292,37 @@ namespace ProjectAltisLauncher.Forms
 
         private void btnWebsite_MouseDown(object sender, MouseEventArgs e)
         {
-            btnWebsite.BackgroundImage = Properties.Resources.website_d;
+            this.btnWebsite.BackgroundImage = Resources.website_d;
         }
 
         private void btnDiscord_MouseDown(object sender, MouseEventArgs e)
         {
-            btnDiscord.BackgroundImage = Properties.Resources.discord_d;
+            this.btnDiscord.BackgroundImage = Resources.discord_d;
         }
 
         private void btnContentPacks_MouseDown(object sender, MouseEventArgs e)
         {
-            btnContentPacks.BackgroundImage = Properties.Resources.contentpacks_d;
+            this.btnContentPacks.BackgroundImage = Resources.contentpacks_d;
         }
 
         private void btnTheme_MouseDown(object sender, MouseEventArgs e)
         {
-            btnTheme.BackgroundImage = Properties.Resources.theme_d;
+            this.btnTheme.BackgroundImage = Resources.theme_d;
         }
 
         private void btnOptions_MouseDown(object sender, MouseEventArgs e)
         {
-            btnOptions.BackgroundImage = Properties.Resources.options_d;
+            this.btnOptions.BackgroundImage = Resources.options_d;
         }
 
         private void btnCredits_MouseDown(object sender, MouseEventArgs e)
         {
-            btnCredits.BackgroundImage = Properties.Resources.credits_d;
+            this.btnCredits.BackgroundImage = Resources.credits_d;
         }
 
         private void btnPlay_MouseDown(object sender, MouseEventArgs e)
         {
-            btnPlay.BackgroundImage = Properties.Resources.play_d;
+            this.btnPlay.BackgroundImage = Resources.play_d;
         }
 
         #endregion
@@ -310,37 +331,37 @@ namespace ProjectAltisLauncher.Forms
 
         private void btnWebsite_MouseUp(object sender, MouseEventArgs e)
         {
-            btnWebsite.BackgroundImage = Properties.Resources.website;
+            this.btnWebsite.BackgroundImage = Resources.website;
         }
 
         private void btnDiscord_MouseUp(object sender, MouseEventArgs e)
         {
-            btnDiscord.BackgroundImage = Properties.Resources.discord;
+            this.btnDiscord.BackgroundImage = Resources.discord;
         }
 
         private void btnContentPacks_MouseUp(object sender, MouseEventArgs e)
         {
-            btnContentPacks.BackgroundImage = Properties.Resources.contentpacks;
+            this.btnContentPacks.BackgroundImage = Resources.contentpacks;
         }
 
         private void btnTheme_MouseUp(object sender, MouseEventArgs e)
         {
-            btnTheme.BackgroundImage = Properties.Resources.theme;
+            this.btnTheme.BackgroundImage = Resources.theme;
         }
 
         private void btnOptions_MouseUp(object sender, MouseEventArgs e)
         {
-            btnOptions.BackgroundImage = Properties.Resources.options;
+            this.btnOptions.BackgroundImage = Resources.options;
         }
 
         private void btnCredits_MouseUp(object sender, MouseEventArgs e)
         {
-            btnCredits.BackgroundImage = Properties.Resources.credits;
+            this.btnCredits.BackgroundImage = Resources.credits;
         }
 
         private void btnPlay_MouseUp(object sender, MouseEventArgs e)
         {
-            btnPlay.BackgroundImage = Properties.Resources.play;
+            this.btnPlay.BackgroundImage = Resources.play;
         }
 
         #endregion
