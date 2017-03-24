@@ -167,7 +167,7 @@ namespace ProjectAltisLauncher.Core
                     return JsonConvert.DeserializeObject<LoginAPIResponse>(result);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 this.instance.BeginInvoke(
                     (MethodInvoker)

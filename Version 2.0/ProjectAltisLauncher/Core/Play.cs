@@ -59,7 +59,7 @@ namespace ProjectAltisLauncher.Core
             catch (Exception)
             {
                 frmInstance.BeginInvoke(
-                    (MethodInvoker) delegate { MessageBox.Show(frmInstance, "Unable to start Project Altis."); });
+                    (MethodInvoker) delegate { MessageBox.Show(frmInstance, Resources.Play_LaunchGame_Unable_to_start_Project_Altis_); });
                 return;
             }
 
