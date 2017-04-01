@@ -77,12 +77,20 @@ namespace ProjectAltisLauncher.Core
                 frmInstance.Hide();
             });
 
-            altis?.WaitForExit(int.MaxValue);
-
+            altis?.WaitForExit(int.MaxValue); // If Altis is not null, wait for exit
+            Console.WriteLine("Exit code: " + altis?.ExitCode); // Exit code 3 is normal exit 0 for crash. will use later
             frmInstance.BeginInvoke((MethodInvoker) delegate
             {
                 frmInstance.lblNowDownloading.Text = Resources.Play_LaunchGame_Thanks_for_playing_;
                 frmInstance.Show();
+                if (altis.ExitCode == 0)
+                {
+                    var result = MessageBox.Show(frmInstance, "It appears you have crashed. Would you like to relaunch?", "Project Altis crashed!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if(result == DialogResult.Yes)
+                    {
+                        LaunchGame(frmInstance.txtUser.Text, frmInstance.txtPass.Text, frmInstance); // Hopefully this isn't too recursive
+                    }
+                }
             });
         }
     }
