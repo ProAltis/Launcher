@@ -180,6 +180,9 @@ namespace ProjectAltisLauncher.Forms
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+
+            AutoUpdater.CheckForLauncherUpdate(this);
+
             #region Set background image
 
             if (!Settings.Default.RandomBackgrounds)

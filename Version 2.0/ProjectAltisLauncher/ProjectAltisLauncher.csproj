@@ -66,10 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Audio.cs" />
+    <Compile Include="Core\AutoUpdater.cs" />
     <Compile Include="Core\Crypto.cs" />
     <Compile Include="Core\Data.cs" />
     <Compile Include="Core\Enums\FileTypes.cs" />
     <Compile Include="Core\Graphics.cs" />
+    <Compile Include="Core\Manifests\LauncherUpdateManifest.cs" />
     <Compile Include="Core\Manifests\LoginAPIResponse.cs" />
     <Compile Include="Core\Manifests\ManifestJson.cs" />
     <Compile Include="Core\Play.cs" />
