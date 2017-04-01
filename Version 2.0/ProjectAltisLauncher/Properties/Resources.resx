@@ -118,145 +118,163 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Brrrgh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Brrrgh.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cancel_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cancel_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cancel1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cancel1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="contentpacks" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\contentpacks.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="contentpacks_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\contentpacks_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="contentpacks_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\contentpacks_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="credits" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\credits.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="credits_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\credits_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="credits_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\credits_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DD" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DD.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DDL" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DDL.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DG.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="discord" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\discord.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="discord_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\discord_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="discord_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\discord_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="group" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\group.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="group_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\group_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="group_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\group_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="minus_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\minus_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MML" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MML.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="options" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\options.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="options_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\options_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="options_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\options_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="play_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\play_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="play_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\play_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="theme" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\theme.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="theme_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\theme_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="theme_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\theme_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TTC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TTC.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="website" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\website.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="website_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\website_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="minimize_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minimize_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="website_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\website_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="MML" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MML.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="sndclick" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sndclick.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="toonmono" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\toonmono.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="discord" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\discord.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pieicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pieicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FrmContentPacks_FrmContentPacks_Message" xml:space="preserve">
+    <value>
+Message: </value>
+  </data>
+  <data name="discord_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\discord_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FrmMain_btnPlay_Click_Unable_to_start_the_updating_process__It_appears_your_computer_is_out_of_memory_" xml:space="preserve">
     <value>Unable to start the updating process. It appears your computer is out of memory.</value>
   </data>
-  <data name="FrmMain_btnPlay_Click_The_updater_thread_could_not_be_started__Try_and_restarting_the_launcher_" xml:space="preserve">
-    <value>The updater thread could not be started. Try and restarting the launcher.</value>
+  <data name="minimize_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minimize_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="discord_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\discord_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="group_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\group_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="theme_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\theme_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="contentpacks_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\contentpacks_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DD.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="group" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\group.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pieicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pieicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FrmContentPacks_FrmContentPacks_Stacktrace__" xml:space="preserve">
+    <value>Stacktrace: </value>
+  </data>
+  <data name="cancel_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="credits" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\credits.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="group_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\group_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="options" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\options.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="contentpacks" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\contentpacks.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minus_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minus_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Brrrgh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Brrrgh.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Updater_GetLoginAPIResponse_Failed_to_contact_the_login_server_" xml:space="preserve">
     <value>Failed to contact the login server.</value>
   </data>
+  <data name="options_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\options_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TTC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TTC.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="FrmContentPacks_FrmContentPacks_An_error_has_occured_with_the_content_pack_loader__Try_and_restart_the_launcher_" xml:space="preserve">
     <value>An error has occured with the content pack loader. Try and restart the launcher.</value>
+  </data>
+  <data name="minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="website_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\website_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DG.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Play_LaunchGame_Thanks_for_playing_" xml:space="preserve">
+    <value>Thanks for playing!</value>
+  </data>
+  <data name="contentpacks_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\contentpacks_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="options_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\options_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="play_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\play_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="credits_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\credits_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FrmContentPacks_FrmContentPacks_If_that_does_not_work_show_a_developer_the_following_stacktrace" xml:space="preserve">
     <value>
 If that does not work, show a developer the following stacktrace.
 Type: </value>
   </data>
-  <data name="FrmContentPacks_FrmContentPacks_Message" xml:space="preserve">
-    <value>
-Message: </value>
+  <data name="play_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\play_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FrmContentPacks_FrmContentPacks_Stacktrace__" xml:space="preserve">
-    <value>Stacktrace: </value>
+  <data name="credits_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\credits_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Play_LaunchGame_Thanks_for_playing_" xml:space="preserve">
-    <value>Thanks for playing!</value>
+  <data name="DDL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DDL.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="theme_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\theme_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="website" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\website.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="toonmono" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\toonmono.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="theme" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\theme.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FrmMain_btnPlay_Click_The_updater_thread_could_not_be_started__Try_and_restarting_the_launcher_" xml:space="preserve">
+    <value>The updater thread could not be started. Try and restarting the launcher.</value>
+  </data>
+  <data name="cancel1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="close_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\close_d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="close_h" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\close_h.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

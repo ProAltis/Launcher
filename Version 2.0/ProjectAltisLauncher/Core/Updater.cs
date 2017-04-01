@@ -175,6 +175,7 @@ namespace ProjectAltisLauncher.Core
                     {
                         MessageBox.Show(this.instance,
                             Resources.Updater_GetLoginAPIResponse_Failed_to_contact_the_login_server_);
+                        this.instance.btnPlay.Enabled = true;
                     });
 
                 return null;
@@ -352,7 +353,6 @@ namespace ProjectAltisLauncher.Core
                 DownloadItemsFromList(this._downloadList);
             });
         }
-
 
         /// <summary>
         ///     Creates the game directories necessary for file updating.

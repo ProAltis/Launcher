@@ -108,6 +108,19 @@ namespace ProjectAltisLauncher.Forms
             credits.ShowDialog();
         }
 
+        private void btnMinimize_Click(object sender, EventArgs e)
+        {
+            Audio.PlaySoundFile("sndclick");
+            this.WindowState = FormWindowState.Minimized;
+            this.ActiveControl = null;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Audio.PlaySoundFile("sndclick");
+            Application.Exit();
+        }
+
         private void btnPlay_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
@@ -247,6 +260,17 @@ namespace ProjectAltisLauncher.Forms
             this.btnPlay.BackgroundImage = Resources.play_h;
         }
 
+
+        private void btnMinimize_MouseEnter(object sender, EventArgs e)
+        {
+            this.btnMinimize.BackgroundImage = Resources.minimize_h;
+        }
+
+        private void btnExit_MouseEnter(object sender, EventArgs e)
+        {
+            this.btnExit.BackgroundImage = Resources.close_h;
+        }
+
         #endregion
 
         #region Mouse Leave
@@ -284,6 +308,16 @@ namespace ProjectAltisLauncher.Forms
         private void btnPlay_MouseLeave(object sender, EventArgs e)
         {
             this.btnPlay.BackgroundImage = Resources.play;
+        }
+
+        private void btnMinimize_MouseLeave(object sender, EventArgs e)
+        {
+            this.btnMinimize.BackgroundImage = Resources.minimize;
+        }
+
+        private void btnExit_MouseLeave(object sender, EventArgs e)
+        {
+            this.btnExit.BackgroundImage = Resources.close;
         }
 
         #endregion
@@ -325,6 +359,16 @@ namespace ProjectAltisLauncher.Forms
             this.btnPlay.BackgroundImage = Resources.play_d;
         }
 
+        private void btnMinimize_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.btnMinimize.BackgroundImage = Resources.minimize_d;
+        }
+
+        private void btnExit_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.btnExit.BackgroundImage = Resources.close_d;
+        }
+
         #endregion
 
         #region Mouse Up
@@ -364,6 +408,17 @@ namespace ProjectAltisLauncher.Forms
             this.btnPlay.BackgroundImage = Resources.play;
         }
 
+        private void btnMinimize_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.btnMinimize.BackgroundImage = Resources.minimize;
+        }
+
+        private void btnExit_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.btnExit.BackgroundImage = Resources.close;
+        }
+
         #endregion
+
     }
 }

@@ -46,6 +46,8 @@ namespace ProjectAltisLauncher.Forms
             this.pbDownload = new System.Windows.Forms.ProgressBar();
             this.lblNowDownloading = new System.Windows.Forms.Label();
             this.lblInfo = new System.Windows.Forms.Label();
+            this.btnMinimize = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // wbNews
@@ -305,12 +307,60 @@ namespace ProjectAltisLauncher.Forms
             this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblInfo.Visible = false;
             // 
+            // btnMinimize
+            // 
+            this.btnMinimize.BackColor = System.Drawing.Color.Transparent;
+            this.btnMinimize.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.minimize;
+            this.btnMinimize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnMinimize.FlatAppearance.BorderSize = 0;
+            this.btnMinimize.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinimize.Location = new System.Drawing.Point(943, 3);
+            this.btnMinimize.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
+            this.btnMinimize.Name = "btnMinimize";
+            this.btnMinimize.Size = new System.Drawing.Size(25, 25);
+            this.btnMinimize.TabIndex = 38;
+            this.btnMinimize.TabStop = false;
+            this.btnMinimize.UseVisualStyleBackColor = false;
+            this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
+            this.btnMinimize.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnMinimize_MouseDown);
+            this.btnMinimize.MouseEnter += new System.EventHandler(this.btnMinimize_MouseEnter);
+            this.btnMinimize.MouseLeave += new System.EventHandler(this.btnMinimize_MouseLeave);
+            this.btnMinimize.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnMinimize_MouseUp);
+            // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.Color.Transparent;
+            this.btnExit.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.close;
+            this.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Location = new System.Drawing.Point(971, 3);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(3, 3, 75, 3);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(25, 25);
+            this.btnExit.TabIndex = 39;
+            this.btnExit.TabStop = false;
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnExit_MouseDown);
+            this.btnExit.MouseEnter += new System.EventHandler(this.btnExit_MouseEnter);
+            this.btnExit.MouseLeave += new System.EventHandler(this.btnExit_MouseLeave);
+            this.btnExit.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnExit_MouseUp);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.TTC;
             this.ClientSize = new System.Drawing.Size(1000, 666);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.btnMinimize);
             this.Controls.Add(this.lblNowDownloading);
             this.Controls.Add(this.pbDownload);
             this.Controls.Add(this.cbSaveLogin);
@@ -362,6 +412,8 @@ namespace ProjectAltisLauncher.Forms
         public System.Windows.Forms.ProgressBar pbDownload;
         public System.Windows.Forms.Label lblNowDownloading;
         public System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Button btnMinimize;
+        private System.Windows.Forms.Button btnExit;
     }
 }
 
