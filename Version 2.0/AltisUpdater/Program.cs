@@ -21,6 +21,11 @@ namespace AltisUpdater
                 string launcherName = Path.GetFileName(args[0]).Replace("%20", " ");
                 using (WebClient client = new WebClient())
                 {
+                    var processes = Process.GetProcessesByName(launcherName);
+                    foreach (var process in processes)
+                    {
+                        process.Kill();
+                    }
                     File.Delete(Directory.GetCurrentDirectory() + @"\" + launcherName);
                     client.DownloadFile(args[0], launcherName);
                 }
