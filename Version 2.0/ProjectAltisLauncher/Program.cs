@@ -25,7 +25,6 @@
 #endregion
 
 using System;
-using System.Globalization;
 using System.Windows.Forms;
 using ProjectAltisLauncher.Forms;
 
@@ -39,7 +38,6 @@ namespace ProjectAltisLauncher
         [STAThread]
         private static void Main()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-ES");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmMain());

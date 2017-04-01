@@ -221,7 +221,7 @@ namespace ProjectAltisLauncher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error has occurred with the content pack loader. Try and restart the launcher..
+        ///   Looks up a localized string similar to An error has occured with the content pack loader. Try and restart the launcher..
         /// </summary>
         internal static string FrmContentPacks_FrmContentPacks_An_error_has_occured_with_the_content_pack_loader__Try_and_restart_the_launcher_ {
             get {
@@ -417,15 +417,6 @@ namespace ProjectAltisLauncher.Properties {
         internal static string Play_LaunchGame_Thanks_for_playing_ {
             get {
                 return ResourceManager.GetString("Play_LaunchGame_Thanks_for_playing_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to start Project Altis..
-        /// </summary>
-        internal static string Play_LaunchGame_Unable_to_start_Project_Altis_ {
-            get {
-                return ResourceManager.GetString("Play_LaunchGame_Unable_to_start_Project_Altis_", resourceCulture);
             }
         }
         
