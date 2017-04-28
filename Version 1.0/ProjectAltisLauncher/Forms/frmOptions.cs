@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,5 +40,10 @@ namespace ProjectAltisLauncher.Forms
             chkClickSounds.Checked = Properties.Settings.Default.wantsClickSounds;
             chkRandomBackgrounds.Checked = Properties.Settings.Default.wantsRandomBg;
         }
-    }
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			Log.TryOpenUrl(Path.Combine(Directory.GetCurrentDirectory(), "Logs"));
+		}
+	}
 }

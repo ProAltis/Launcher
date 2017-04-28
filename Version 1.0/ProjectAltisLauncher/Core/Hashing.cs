@@ -20,10 +20,11 @@ namespace ProjectAltisLauncher.Core
                 return sizeInBytes == size; // returns true or false
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // The file doesn't exist
-                Console.WriteLine("{0} does not exist!", filePath);
+                Log.Error("{0} does not exist!", filePath);
+				Log.Error(ex);
                 return false;
             }
         }
@@ -54,10 +55,11 @@ namespace ProjectAltisLauncher.Core
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // File doesn't exist
-                Console.WriteLine("{0} does not exist!", filePath);
+                Log.Error("{0} does not exist!", filePath);
+				Log.Error(ex);
                 return false;
             }
         }
@@ -68,20 +70,29 @@ namespace ProjectAltisLauncher.Core
         /// <returns>System.String.</returns>
         public static string CalculateSHA256(string filePath)
         {
-            System.Security.Cryptography.SHA256 mySHA256 = System.Security.Cryptography.SHA256.Create();
-            using (FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
-                byte[] hashValue = mySHA256.ComputeHash(fileStream);
-                string strHashValue = "";
-                foreach (byte x in hashValue)
-                {
-                    strHashValue += x.ToString("x2");
-                }
-                // Comparing the hash now
-                Console.WriteLine("The SHA256 of {0} is: {1}", filePath, strHashValue);
+			try
+			{
+				System.Security.Cryptography.SHA256 mySHA256 = System.Security.Cryptography.SHA256.Create();
+				using(FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+				{
+					byte[] hashValue = mySHA256.ComputeHash(fileStream);
+					string strHashValue = "";
+					foreach(byte x in hashValue)
+					{
+						strHashValue += x.ToString("x2");
+					}
+					// Comparing the hash now
+					Console.WriteLine("The SHA256 of {0} is: {1}", filePath, strHashValue);
 
-                return strHashValue;
-            }
+					return strHashValue;
+				}
+			}
+			catch(Exception ex)
+			{
+				Log.Error("Unable to calculate hash of file " + filePath);
+				Log.Error(ex);
+				throw;
+			}
         }
         /// <summary>
         /// Calculates the size of the file.
