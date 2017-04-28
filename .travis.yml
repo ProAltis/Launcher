@@ -1,2 +1,7 @@
 language: csharp
-solution: "Version 1.0\ProjectAltisLauncher.sln"
+solution: ProjectAltisLauncher.sln
+
+install:
+  - cd Version\ 1.0
+  - sudo apt-get install -y gtk-sharp2
+  - nuget restore solution-name.sln
