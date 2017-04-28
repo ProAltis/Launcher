@@ -1,5 +1,6 @@
 language: csharp
 solution: ProjectAltisLauncher.sln
+dist: trusty
 
 install:
   - cd Version\ 1.0
