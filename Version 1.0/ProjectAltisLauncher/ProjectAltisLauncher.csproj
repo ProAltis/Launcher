@@ -94,6 +94,7 @@
     <Compile Include="Core\AutoUpdater.cs" />
     <Compile Include="Core\Background.cs" />
     <Compile Include="Core\Data.cs" />
+    <Compile Include="Core\DateTimeExtensions.cs" />
     <Compile Include="Enums\FileTypes.cs" />
     <Compile Include="Forms\frmBackgroundChoices.cs">
       <SubType>Form</SubType>
@@ -121,6 +122,8 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\Hashing.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Enums\LogType.cs" />
     <Compile Include="Manifests\loginAPIResponse.cs" />
     <Compile Include="Manifests\ManifestJson.cs" />
     <Compile Include="Forms\frmOptions.cs">

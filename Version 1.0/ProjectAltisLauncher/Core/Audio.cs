@@ -10,18 +10,26 @@ namespace ProjectAltisLauncher.Core
     {
         public static void PlaySoundFile(string filename)
         {
-            if (!Properties.Settings.Default.wantsClickSounds) return;
-            System.Media.SoundPlayer player;
-            switch (filename.ToLower())
-            {
-                case "sndclick":
-                    {
-                        player = new System.Media.SoundPlayer(Properties.Resources.sndclick);
-                        player.Load();
-                        player.Play();
-                        break;
-                    }
-            }
+			try
+			{
+				if(!Properties.Settings.Default.wantsClickSounds) return;
+				System.Media.SoundPlayer player;
+				switch(filename.ToLower())
+				{
+					case "sndclick":
+						{
+							player = new System.Media.SoundPlayer(Properties.Resources.sndclick);
+							player.Load();
+							player.Play();
+							break;
+						}
+				}
+			}
+			catch(Exception ex)
+			{
+				Log.Error("UNABLE TO PLAY SOUND: ");
+				Log.Error(ex);
+			}
         }
     }
 }
