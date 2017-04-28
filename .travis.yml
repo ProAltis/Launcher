@@ -4,4 +4,4 @@ solution: ProjectAltisLauncher.sln
 install:
   - cd Version\ 1.0
   - sudo apt-get install -y gtk-sharp2
-  - nuget restore solution-name.sln
+  - nuget restore
