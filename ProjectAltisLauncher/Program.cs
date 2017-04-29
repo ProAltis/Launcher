@@ -49,6 +49,5 @@ namespace ProjectAltisLauncher
 			    Log.Info("checking for update: " + manager.RootAppDirectory);
 			    await manager.UpdateApp();
 		    }
-		}
     }
 }
