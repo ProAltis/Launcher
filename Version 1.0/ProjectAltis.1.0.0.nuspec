@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>ProjectAltis</id>
+        <version>1.0.0</version>
+        <title>Project Altis</title>
+        <authors>Project Altis Team</authors>
+        <owners>Judge2020,Ben,Alice,Drew,Dubito,Roast Duck</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Installer for Project Altis game launcher.</description>
+        <copyright>Project Altis</copyright>
+        <language>en-US</language>
+    </metadata>
+    <files>
+        <file src="ProjectAltisLauncher\bin\Release\DeltaCompressionDotNet.dll" target="lib\net45\DeltaCompressionDotNet.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\DeltaCompressionDotNet.MsDelta.dll" target="lib\net45\DeltaCompressionDotNet.MsDelta.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\DeltaCompressionDotNet.PatchApi.dll" target="lib\net45\DeltaCompressionDotNet.PatchApi.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\ICSharpCode.SharpZipLib.dll" target="lib\net45\ICSharpCode.SharpZipLib.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\ICSharpCode.SharpZipLib.xml" target="lib\net45\ICSharpCode.SharpZipLib.xml" />
+        <file src="ProjectAltisLauncher\bin\Release\Mono.Cecil.dll" target="lib\net45\Mono.Cecil.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Mono.Cecil.Mdb.dll" target="lib\net45\Mono.Cecil.Mdb.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Mono.Cecil.Pdb.dll" target="lib\net45\Mono.Cecil.Pdb.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Mono.Cecil.Rocks.dll" target="lib\net45\Mono.Cecil.Rocks.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Newtonsoft.Json.dll" target="lib\net45\Newtonsoft.Json.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Newtonsoft.Json.xml" target="lib\net45\Newtonsoft.Json.xml" />
+        <file src="ProjectAltisLauncher\bin\Release\NuGet.Squirrel.dll" target="lib\net45\NuGet.Squirrel.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Project Altis Launcher.exe" target="lib\net45\Project Altis Launcher.exe" />
+        <file src="ProjectAltisLauncher\bin\Release\Project Altis Launcher.exe.config" target="lib\net45\Project Altis Launcher.exe.config" />
+        <file src="ProjectAltisLauncher\bin\Release\Splat.dll" target="lib\net45\Splat.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Squirrel.dll" target="lib\net45\Squirrel.dll" />
+    </files>
+</package>

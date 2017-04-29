@@ -481,7 +481,7 @@ namespace ProjectAltisLauncher.Forms
                 return;
             }
             e.Cancel = true;
-            Process.Start(e.Url.ToString());
+            Log.TryOpenUrl(e.Url.ToString());
         }
 
 
