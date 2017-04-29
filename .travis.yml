@@ -1,8 +1,3 @@
 language: csharp
-solution: ProjectAltisLauncher.sln
+solution: Altis.sln
 dist: trusty
-
-install:
-  - cd Version\ 1.0
-  - sudo apt-get install -y gtk-sharp2
-  - nuget restore
