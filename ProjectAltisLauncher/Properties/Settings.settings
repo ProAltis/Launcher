@@ -23,8 +23,5 @@
     <Setting Name="password" Type="System.String" Scope="User">
       <Value Profile="(Default)">Deprecated</Value>
     </Setting>
-    <Setting Name="filesDir" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
   </Settings>
 </SettingsFile>

@@ -1,1 +1,0 @@
-: I can check if the launcher doesn't have write permissions to the current folder and if they are not running as admin it will make a pop-up.
