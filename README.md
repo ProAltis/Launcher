@@ -11,10 +11,11 @@ This repository contains all launcher source code to launch into Project Altis
 * Create a temporary branch if you are uncertain your changes will have a negative effect to the repository.
 * DONT PISS OFF DUBITO
 
+---
 
 ## Releasing with Squirrel
 
-https://youtu.be/PJuIsbCYIaw
+https://youtu.be/rh78BdfvNfc
 
 Squirrel is a lightning fast installer and update manager framework. It is a c++ bootstraper application and installs within seconds on first run.
 
@@ -35,12 +36,13 @@ Advantages:
 1. Set the launcher version in properties/AssemblyInfo.cs to the next version
 2. In visual studio **build release**
 2. Open NuGet Package Exporer
-3. File -> open -> ProjectAltisLauncher.x.x.x.nuspec (latest nuspec)
+3. File -> open -> ProjectAltis.x.x.x.nuspec (latest nuspec)
 4. Change version to the version you want to release
 5. file -> save metadata as -> save the default name
 6. file -> save -> save the default name
 7. in visual studio, click toolbar -> VIEW -> other windows -> package manager console
 8. in the console, type `Squirrel --releasify `(TAB COMPLETE the nupkg you just made)
 9. upload the entire releases folder to web server (specifically to the folder link at Program.cs:MainAsync())
+10. **commit** your changes, including the releases folder. If someone leaves the team, the Releases folder's contents will still be needed to provide updates.
 
 Done! Clients will start updating to that and since Setup.exe has been renamed new people will download latest release.
