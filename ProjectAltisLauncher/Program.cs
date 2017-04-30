@@ -40,7 +40,7 @@ namespace ProjectAltisLauncher
 			{
 				Log.Error(e);
 			}
-		}
+		} 
 
 		private static async Task MainAsync()
 		{
