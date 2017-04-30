@@ -5,3 +5,6 @@ dist: trusty
 install:
   - sudo apt-get install -y gtk-sharp2
   - nuget restore
+
+script:
+  - "xbuild /p:Configuration="Release Project Altis Launcher.sln"
