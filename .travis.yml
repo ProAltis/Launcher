@@ -1,5 +1,5 @@
 language: csharp
-solution: "Project Altis Launcher.sln"
+solution: Project Altis Launcher.sln
 dist: trusty
 
 install:
@@ -7,4 +7,4 @@ install:
   - nuget restore
 
 script:
-  - "xbuild /p:Configuration="Release Project Altis Launcher.sln"
+  - xbuild /p:Configuration=Release "Project Altis Launcher.sln"
