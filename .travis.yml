@@ -1,3 +1,7 @@
 language: csharp
 solution: "Project Altis Launcher.sln"
 dist: trusty
+
+install:
+  - sudo apt-get install -y gtk-sharp2
+  - nuget restore
