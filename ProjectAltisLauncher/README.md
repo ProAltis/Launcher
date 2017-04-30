@@ -1,5 +1,7 @@
 ## Releasing with Squirrel
 
+https://youtu.be/PJuIsbCYIaw
+
 Squirrel is a lightning fast installer and update manager framework. It is a c++ bootstraper application and installs within seconds on first run.
 
 Advantages:
