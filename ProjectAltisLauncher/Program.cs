@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using ProjectAltisLauncher.Enums;
+using Splat;
 using Squirrel;
 
 namespace ProjectAltisLauncher
@@ -20,8 +21,8 @@ namespace ProjectAltisLauncher
 		{
 			try
 			{
-				var AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-				Properties.Settings.Default.filesDir = Path.Combine(AppDataPath, "Project Altis");
+				var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+				Properties.Settings.Default.filesDir = Path.Combine(appDataPath, "Project Altis");
 				if (!Directory.Exists(Properties.Settings.Default.filesDir))
 					Directory.CreateDirectory(Properties.Settings.Default.filesDir);
 				Directory.SetCurrentDirectory(Properties.Settings.Default.filesDir);
@@ -38,7 +39,6 @@ namespace ProjectAltisLauncher
 			catch (Exception e)
 			{
 				Log.Error(e);
-				throw;
 			}
 		}
 
