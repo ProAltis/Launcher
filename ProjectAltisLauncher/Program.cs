@@ -1,19 +1,10 @@
 ﻿using System;
-<<<<<<< HEAD
-using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Reflection;
-using System.Diagnostics;
 using ProjectAltisLauncher.Enums;
-=======
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using ProjectAltisLauncher.Enums;
 using ProjectAltisLauncher.Forms;
-using ProjectAltisLauncher.Properties;
 using Squirrel;
->>>>>>> squirrel
 
 namespace ProjectAltisLauncher
 {
@@ -28,10 +19,10 @@ namespace ProjectAltisLauncher
             try
             {
                 var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                Settings.Default.filesDir = Path.Combine(appDataPath, "Project Altis");
-                if(!Directory.Exists(Settings.Default.filesDir))
-                    Directory.CreateDirectory(Settings.Default.filesDir);
-                Directory.SetCurrentDirectory(Settings.Default.filesDir);
+                var filesDir = Path.Combine(appDataPath, "Project Altis");
+                if(!Directory.Exists(filesDir))
+                    Directory.CreateDirectory(filesDir);
+                Directory.SetCurrentDirectory(filesDir);
                 Log.Initialize(LogType.Info);
                 Log.Info("Loaded altis launcher v" + typeof(Program).Assembly.GetName().Version);
                 Log.Info("Current time: " + DateTime.Now.ToLongDateString() + "|" + DateTime.Now.TimeOfDay);
