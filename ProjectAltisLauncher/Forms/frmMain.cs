@@ -126,7 +126,7 @@ namespace ProjectAltisLauncher.Forms
         private void btnPlay_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
-            if (string.IsNullOrEmpty(btnPlay.Text))
+            if (string.IsNullOrEmpty(txtUser.Text))
             {
                 Log.TryOpenUrl("https://projectaltis.com/register");
                 return;
