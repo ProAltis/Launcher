@@ -1,13 +1,6 @@
 language: csharp
-solution: Project Altis Launcher.sln
+solution: ProjectAltisLauncher.sln
 dist: trusty
 
-cache:
-  apt: true
-
-install:
-  - sudo apt-get install -y gtk-sharp2
-  - nuget restore
-
 script:
-  - xbuild /p:Configuration=Release "Project Altis Launcher.sln"
+  - MONO_IOMAP=case xbuild
