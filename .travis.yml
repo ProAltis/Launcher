@@ -1,3 +1,6 @@
 language: csharp
 solution: ProjectAltisLauncher.sln
 dist: trusty
+
+script:
+  - MONO_IOMAP=case xbuild
