@@ -29,6 +29,7 @@ namespace ProjectAltisLauncher.Forms
         public frmMain()
         {
             InitializeComponent();
+            
             _currentDir = Directory.GetCurrentDirectory() + @"\";
             _nowDownloading = "";
 
@@ -73,11 +74,10 @@ namespace ProjectAltisLauncher.Forms
                 BackgroundImage = Background.ReturnBackground(Properties.Settings.Default.background);
             }
             #endregion
-            Thread autoUpdateThread = new Thread(AutoUpdater.CheckForUpdate);
-            autoUpdateThread.Start();
             // This prevents other controls from being focused
             this.Select();
             this.ActiveControl = null;
+            Button_MouseLeave(btnPlay, EventArgs.Empty);
         }
         private void Form1_Activated(object sender, EventArgs e)
         {
@@ -125,8 +125,13 @@ namespace ProjectAltisLauncher.Forms
         #region Play Button
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            btnPlay.Enabled = false;
             Audio.PlaySoundFile("sndclick");
+            if (string.IsNullOrEmpty(btnPlay.Text))
+            {
+                Log.TryOpenUrl("https://projectaltis.com/register");
+                return;
+            }
+            btnPlay.Enabled = false;
             #region Save credentials if necessary
             if (cbSaveLogin.Checked == true)
             {
@@ -267,6 +272,10 @@ namespace ProjectAltisLauncher.Forms
             Button btnSender = (Button)sender;
             string btnName = btnSender.Name;
             btnName = btnName.Replace("btn", "").ToLower();
+            if(string.IsNullOrEmpty(txtUser.Text) && btnName == "play")
+            {
+                btnName = "create";
+            }
             btnSender.BackgroundImage = Background.ImageChooser(btnName, "MouseEnter");
         }
         private void Button_MouseLeave(object sender, EventArgs e)
@@ -275,6 +284,10 @@ namespace ProjectAltisLauncher.Forms
             Button btnSender = (Button)sender;
             string btnName = btnSender.Name;
             btnName = btnName.Replace("btn", "").ToLower();
+            if (string.IsNullOrEmpty(txtUser.Text) && btnName == "play")
+            {
+                btnName = "create";
+            }
             btnSender.BackgroundImage = Background.ImageChooser(btnName, "MouseLeave");
         }
         private void Button_MouseDown(object sender, MouseEventArgs e)
@@ -283,6 +296,10 @@ namespace ProjectAltisLauncher.Forms
             Button btnSender = (Button)sender;
             string btnName = btnSender.Name;
             btnName = btnName.Replace("btn", "").ToLower();
+            if (string.IsNullOrEmpty(txtUser.Text) && btnName == "play")
+            {
+                btnName = "create";
+            }
             btnSender.BackgroundImage = Background.ImageChooser(btnName, "MouseDown");
         }
         private void Button_MouseUp(object sender, MouseEventArgs e)
@@ -291,6 +308,10 @@ namespace ProjectAltisLauncher.Forms
             Button btnSender = (Button)sender;
             string btnName = btnSender.Name;
             btnName = btnName.Replace("btn", "").ToLower();
+            if (string.IsNullOrEmpty(txtUser.Text) && btnName == "play")
+            {
+                btnName = "create";
+            }
             btnSender.BackgroundImage = Background.ImageChooser(btnName, "MouseUp");
         }
         #endregion
@@ -513,17 +534,21 @@ namespace ProjectAltisLauncher.Forms
             {
                 using (FileStream fs = File.Create(_currentDir + "writeText")) { }
                 File.Delete(_currentDir + "writeText");
-                Console.WriteLine("Directory is writeable");
+                Log.Info("Directory is writeable");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Type: " + ex.GetType() + "\n" +
-                                  "\tException Message: " + ex.Message);
-                Console.WriteLine("Exception thrown, not writeable");
+                                Console.WriteLine("Exception thrown, not writeable");
+                Log.Error(ex);
                 return false;
             }
             return true;
         }
         #endregion
+
+        private void txtUser_TextChanged(object sender, EventArgs e)
+        {
+            Button_MouseLeave(btnPlay, EventArgs.Empty);
+        }
     }
 }

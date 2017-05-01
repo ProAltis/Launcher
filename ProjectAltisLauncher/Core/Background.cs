@@ -65,6 +65,19 @@ namespace ProjectAltisLauncher.Core
             Image img = null;
             switch (name)
             {
+                case "create":
+                    switch (method)
+                    {
+                        case "mouseenter":
+                            return Properties.Resources.create_h;
+                        case "mouseleave":
+                            return Properties.Resources.create;
+                        case "mousedown":
+                            return Properties.Resources.create_d;
+                        case "mouseup":
+                            return Properties.Resources.create;
+                    }
+                    break;
                 case "website":
                     switch (method)
                     {
