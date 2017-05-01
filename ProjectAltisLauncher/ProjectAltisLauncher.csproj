@@ -176,6 +176,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\create.png" />
+    <Content Include="Resources\create_d.png" />
+    <Content Include="Resources\create_h.png" />
     <None Include="FodyWeavers.xml" />
     <Content Include="pieicon.ico" />
     <None Include="Resources\contentpacks_h.png" />
