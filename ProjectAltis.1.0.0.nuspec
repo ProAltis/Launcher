@@ -27,13 +27,9 @@
         <file src="ProjectAltisLauncher\bin\Release\Newtonsoft.Json.dll" target="lib\net45\Newtonsoft.Json.dll" />
         <file src="ProjectAltisLauncher\bin\Release\Newtonsoft.Json.xml" target="lib\net45\Newtonsoft.Json.xml" />
         <file src="ProjectAltisLauncher\bin\Release\NuGet.Squirrel.dll" target="lib\net45\NuGet.Squirrel.dll" />
-        <file src="ProjectAltisLauncher\bin\Release\NuGet.Squirrel.pdb" target="lib\net45\NuGet.Squirrel.pdb" />
         <file src="ProjectAltisLauncher\bin\Release\Project Altis Launcher.exe" target="lib\net45\Project Altis Launcher.exe" />
         <file src="ProjectAltisLauncher\bin\Release\Project Altis Launcher.exe.config" target="lib\net45\Project Altis Launcher.exe.config" />
-        <file src="ProjectAltisLauncher\bin\Release\Project Altis Launcher.pdb" target="lib\net45\Project Altis Launcher.pdb" />
         <file src="ProjectAltisLauncher\bin\Release\Splat.dll" target="lib\net45\Splat.dll" />
-        <file src="ProjectAltisLauncher\bin\Release\Splat.pdb" target="lib\net45\Splat.pdb" />
         <file src="ProjectAltisLauncher\bin\Release\Squirrel.dll" target="lib\net45\Squirrel.dll" />
-        <file src="ProjectAltisLauncher\bin\Release\Squirrel.pdb" target="lib\net45\Squirrel.pdb" />
     </files>
 </package>
