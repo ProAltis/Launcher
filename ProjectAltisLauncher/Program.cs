@@ -41,11 +41,7 @@ namespace ProjectAltisLauncher
 
         private static async Task MainAsync()
         {
-            using (var manager = new UpdateManager("https://judge2020.com/altis"))
-            {
-                Log.Info("checking for update: " + manager.RootAppDirectory);
-                await manager.UpdateApp();
-            }
+            await UpdateManager.GitHubUpdateManager("https://github.com/Jakebooy/altis-releases");
         }
     }
 }
