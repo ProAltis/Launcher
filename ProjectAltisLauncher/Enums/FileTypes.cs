@@ -1,4 +1,4 @@
-﻿namespace ProjectAltisLauncher.Enums
+﻿namespace ProjectAltis.Enums
 {
     public enum FileTypes
     {

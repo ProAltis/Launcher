@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using ProjectAltisLauncher.Properties;
+using ProjectAltis.Properties;
 
-namespace ProjectAltisLauncher.Forms
+namespace ProjectAltis.Forms
 {
     public partial class frmBackgroundChoices : Form
     {

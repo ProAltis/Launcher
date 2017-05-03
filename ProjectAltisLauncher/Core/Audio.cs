@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectAltisLauncher.Core
+namespace ProjectAltis.Core
 {
     public static class Audio
     {

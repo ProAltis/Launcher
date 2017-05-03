@@ -5,20 +5,20 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
-using ProjectAltisLauncher.Core;
-using ProjectAltisLauncher.Manifests;
 using System.Threading;
 using System.Collections.Generic;
-using ProjectAltisLauncher.Enums;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using ProjectAltis.Core;
+using ProjectAltis.Enums;
+using ProjectAltis.Manifests;
 
 /*
 * TODO:
 *    Catch Exceptions
 *    Enable uploading of logs to pastebin - Idea suggested by Judge2020
 */
-namespace ProjectAltisLauncher.Forms
+namespace ProjectAltis.Forms
 {
     public partial class frmMain : Form
     {

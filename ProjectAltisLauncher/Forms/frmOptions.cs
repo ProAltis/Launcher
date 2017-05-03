@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProjectAltisLauncher.Forms
+namespace ProjectAltis.Forms
 {
     public partial class frmOptions : Form
     {

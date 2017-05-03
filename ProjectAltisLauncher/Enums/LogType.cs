@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProjectAltisLauncher.Enums
+namespace ProjectAltis.Enums
 {
 	[Flags]
 	public enum LogType

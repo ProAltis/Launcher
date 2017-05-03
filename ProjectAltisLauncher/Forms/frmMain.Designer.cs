@@ -1,4 +1,4 @@
-﻿namespace ProjectAltisLauncher.Forms
+﻿namespace ProjectAltis.Forms
 {
     partial class frmMain
     {
@@ -70,7 +70,7 @@
             // btnPlay
             // 
             this.btnPlay.BackColor = System.Drawing.Color.Transparent;
-            this.btnPlay.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.play;
+            this.btnPlay.BackgroundImage = global::ProjectAltis.Properties.Resources.play;
             this.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnPlay.FlatAppearance.BorderSize = 0;
             this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -144,7 +144,7 @@
             // btnWebsite
             // 
             this.btnWebsite.BackColor = System.Drawing.Color.Transparent;
-            this.btnWebsite.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.website;
+            this.btnWebsite.BackgroundImage = global::ProjectAltis.Properties.Resources.website;
             this.btnWebsite.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnWebsite.FlatAppearance.BorderSize = 0;
             this.btnWebsite.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -167,7 +167,7 @@
             // btnTheme
             // 
             this.btnTheme.BackColor = System.Drawing.Color.Transparent;
-            this.btnTheme.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.theme;
+            this.btnTheme.BackgroundImage = global::ProjectAltis.Properties.Resources.theme;
             this.btnTheme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnTheme.FlatAppearance.BorderSize = 0;
             this.btnTheme.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -190,7 +190,7 @@
             // btnCredits
             // 
             this.btnCredits.BackColor = System.Drawing.Color.Transparent;
-            this.btnCredits.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.credits;
+            this.btnCredits.BackgroundImage = global::ProjectAltis.Properties.Resources.credits;
             this.btnCredits.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnCredits.FlatAppearance.BorderSize = 0;
             this.btnCredits.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -213,7 +213,7 @@
             // btnOptions
             // 
             this.btnOptions.BackColor = System.Drawing.Color.Transparent;
-            this.btnOptions.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.options;
+            this.btnOptions.BackgroundImage = global::ProjectAltis.Properties.Resources.options;
             this.btnOptions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnOptions.FlatAppearance.BorderSize = 0;
             this.btnOptions.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -236,7 +236,7 @@
             // btnDiscord
             // 
             this.btnDiscord.BackColor = System.Drawing.Color.Transparent;
-            this.btnDiscord.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.discord;
+            this.btnDiscord.BackgroundImage = global::ProjectAltis.Properties.Resources.discord;
             this.btnDiscord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnDiscord.FlatAppearance.BorderSize = 0;
             this.btnDiscord.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -259,7 +259,7 @@
             // btnExit
             // 
             this.btnExit.BackColor = System.Drawing.Color.Transparent;
-            this.btnExit.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.cancel;
+            this.btnExit.BackgroundImage = global::ProjectAltis.Properties.Resources.cancel;
             this.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnExit.FlatAppearance.BorderSize = 0;
             this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -279,7 +279,7 @@
             // btnMin
             // 
             this.btnMin.BackColor = System.Drawing.Color.Transparent;
-            this.btnMin.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.minus;
+            this.btnMin.BackgroundImage = global::ProjectAltis.Properties.Resources.minus;
             this.btnMin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnMin.FlatAppearance.BorderSize = 0;
             this.btnMin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
@@ -321,7 +321,7 @@
             // btnContentPacks
             // 
             this.btnContentPacks.BackColor = System.Drawing.Color.Transparent;
-            this.btnContentPacks.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.contentpacks;
+            this.btnContentPacks.BackgroundImage = global::ProjectAltis.Properties.Resources.contentpacks;
             this.btnContentPacks.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnContentPacks.FlatAppearance.BorderSize = 0;
             this.btnContentPacks.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -346,7 +346,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.BackgroundImage = global::ProjectAltisLauncher.Properties.Resources.TTC;
+            this.BackgroundImage = global::ProjectAltis.Properties.Resources.TTC;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1000, 666);
             this.Controls.Add(this.btnContentPacks);

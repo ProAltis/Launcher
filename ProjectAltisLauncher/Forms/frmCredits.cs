@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ProjectAltisLauncher.Forms
+namespace ProjectAltis.Forms
 {
     public partial class frmCredits : Form
     {

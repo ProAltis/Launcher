@@ -1,4 +1,4 @@
-﻿namespace ProjectAltisLauncher.Forms
+﻿namespace ProjectAltis.Forms
 {
     partial class frmOptions
     {

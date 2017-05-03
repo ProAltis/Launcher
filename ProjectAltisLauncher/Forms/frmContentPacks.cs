@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace ProjectAltisLauncher.Forms
+namespace ProjectAltis.Forms
 {
     /// <summary>
     /// Class frmContentPacks.

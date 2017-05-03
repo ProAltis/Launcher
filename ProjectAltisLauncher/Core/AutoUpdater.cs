@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using ProjectAltisLauncher.Manifests;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,8 +8,9 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjectAltis.Manifests;
 
-namespace ProjectAltisLauncher.Core
+namespace ProjectAltis.Core
 {
     public static class AutoUpdater
     {

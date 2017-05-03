@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
-using ProjectAltisLauncher.Enums;
 using System.IO;
 using System.Threading.Tasks;
-using ProjectAltisLauncher.Forms;
+using ProjectAltis.Enums;
+using ProjectAltis.Forms;
 using Squirrel;
 
-namespace ProjectAltisLauncher
+namespace ProjectAltis
 {
     public static class Program
     {

@@ -1,9 +1,9 @@
-﻿using ProjectAltisLauncher.Forms;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using ProjectAltis.Forms;
 
-namespace ProjectAltisLauncher.Core
+namespace ProjectAltis.Core
 {
     public static class Play
     {

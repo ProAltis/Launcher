@@ -1,4 +1,4 @@
-﻿namespace ProjectAltisLauncher.Manifests
+﻿namespace ProjectAltis.Manifests
 {
     public class ManifestJson
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ProjectAltisLauncher.Core
+namespace ProjectAltis.Core
 {
     public static class Hashing
     {

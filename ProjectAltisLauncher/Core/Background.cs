@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace ProjectAltisLauncher.Core
+namespace ProjectAltis.Core
 {
     public static class Background
     {

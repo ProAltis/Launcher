@@ -7,10 +7,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ProjectAltisLauncher.Core;
-using ProjectAltisLauncher.Enums;
+using ProjectAltis.Enums;
+using ProjectAltis.Core;
 
-namespace ProjectAltisLauncher
+namespace ProjectAltis
 {
 	[DebuggerStepThrough]
 	public class Log

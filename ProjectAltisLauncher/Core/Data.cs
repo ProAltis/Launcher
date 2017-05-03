@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Net;
 
-namespace ProjectAltisLauncher.Core
+namespace ProjectAltis.Core
 {
     public static class Data
     {
