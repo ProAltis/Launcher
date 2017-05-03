@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>ProjectAltis</id>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <title>Project Altis</title>
         <authors>Project Altis Team</authors>
         <owners>Project Altis Team</owners>
         <projectUrl>https://projectaltis.com</projectUrl>
         <iconUrl>https://projectaltis.com/favicon.ico</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Project Altis Launcher squirrel update manager package.</description>
+        <description>Project Altis Launcher</description>
         <copyright>2017 Project Altis</copyright>
         <language>en-US</language>
         <tags>Game,Toontown</tags>
