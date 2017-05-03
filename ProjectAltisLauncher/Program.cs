@@ -18,6 +18,9 @@ namespace ProjectAltis
         {
             try
             {
+                #if (!DEBUG)
+                MainAsync().Wait();
+                #endif
                 var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 var filesDir = Path.Combine(appDataPath, "Project Altis");
                 if(!Directory.Exists(filesDir))
@@ -30,8 +33,7 @@ namespace ProjectAltis
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new frmMain());
-                //It'll update in the background while it's running. The update is in effect the next time they restart app.
-                MainAsync().Wait();
+                
             }
             catch (Exception e)
             {

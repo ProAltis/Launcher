@@ -16,6 +16,7 @@ namespace ProjectAltis.Forms
         public frmOptions()
         {
             InitializeComponent();
+            versionLabel.Text = typeof(Program).Assembly.GetName().Version.ToString();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
