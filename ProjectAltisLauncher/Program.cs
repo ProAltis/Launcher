@@ -4,7 +4,6 @@ using System.IO;
 using System.Threading.Tasks;
 using ProjectAltis.Enums;
 using ProjectAltis.Forms;
-using Squirrel;
 
 namespace ProjectAltis
 {
@@ -18,11 +17,8 @@ namespace ProjectAltis
         {
             try
             {
-                #if (!DEBUG)
-                MainAsync().Wait();
-                #endif
-                var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                var filesDir = Path.Combine(appDataPath, "Project Altis");
+                string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string filesDir = Path.Combine(appDataPath, "Project Altis");
                 if(!Directory.Exists(filesDir))
                     Directory.CreateDirectory(filesDir);
                 Directory.SetCurrentDirectory(filesDir);
@@ -38,12 +34,9 @@ namespace ProjectAltis
             catch (Exception e)
             {
                 Log.Error(e);
+                Log.TryOpenUrl(Path.Combine(Directory.GetCurrentDirectory(), "Logs"));
+                Environment.Exit(1);
             }
-        }
-
-        private static async Task MainAsync()
-        {
-            await UpdateManager.GitHubUpdateManager("https://github.com/Jakebooy/altis-releases");
         }
     }
 }
