@@ -31,7 +31,7 @@
     <PublisherName>Project Altis</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -114,6 +114,7 @@
     <Compile Include="Core\Background.cs" />
     <Compile Include="Core\Data.cs" />
     <Compile Include="Core\DateTimeExtensions.cs" />
+    <Compile Include="Core\RedistCheck.cs" />
     <Compile Include="Enums\FileTypes.cs" />
     <Compile Include="Forms\frmBackgroundChoices.cs">
       <SubType>Form</SubType>
