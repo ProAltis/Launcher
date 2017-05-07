@@ -15,11 +15,21 @@ namespace ProjectAltis
         [STAThread]
         public static void Main()
         {
+            Initialize();
+           
+        }
+
+        private static async void Initialize()
+        {
+
             try
             {
+#if (!DEBUG)
+                Updater.CheckForUpdates();
+#endif
                 string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 string filesDir = Path.Combine(appDataPath, "Project Altis");
-                if(!Directory.Exists(filesDir))
+                if (!Directory.Exists(filesDir))
                     Directory.CreateDirectory(filesDir);
                 Directory.SetCurrentDirectory(filesDir);
                 Log.Initialize(LogType.Info);
@@ -29,7 +39,7 @@ namespace ProjectAltis
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new frmMain());
-                
+
             }
             catch (Exception e)
             {
