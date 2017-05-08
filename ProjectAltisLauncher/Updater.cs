@@ -29,7 +29,7 @@ namespace ProjectAltis
 
         private static async Task<UpdateManager> GetUpdateManager()
         {
-            return await UpdateManager.GitHubUpdateManager("");
+            return await UpdateManager.GitHubUpdateManager("https://github.com/ProAltis/Launcher-Releases");
         }
 
         public static async Task StartupUpdateCheck()
