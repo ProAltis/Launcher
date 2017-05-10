@@ -1,17 +1,18 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net;
-using System.Windows.Forms;
-using System.Threading;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
+using Newtonsoft.Json;
 using ProjectAltis.Core;
 using ProjectAltis.Enums;
 using ProjectAltis.Manifests;
+using ProjectAltis.Properties;
 
 /*
 * TODO:
@@ -20,15 +21,15 @@ using ProjectAltis.Manifests;
 */
 namespace ProjectAltis.Forms
 {
-    public partial class frmMain : Form
+    public partial class FrmMain : Form
     {
         #region Fields
         private readonly SortedList<string, string> _downloadList = new SortedList<string, string>(); // Filename, URL
-        private readonly string _currentDir = Directory.GetCurrentDirectory();
-        private string _nowDownloading = "";
+        private readonly string _currentDir;
+        private string _nowDownloading;
         #endregion
         #region Main Form Events
-        public frmMain()
+        public FrmMain()
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.None;
@@ -36,13 +37,15 @@ namespace ProjectAltis.Forms
             _currentDir = Directory.GetCurrentDirectory() + @"\";
             _nowDownloading = "";
 
-            Properties.Settings.Default.password = "Deprecated";
+            Settings.Default.password = "Deprecated";
 
             if (!IsWriteable())
             {
-                MessageBox.Show("It appears you do not have permission to write the the current directory: " + _currentDir + "\n" +
-                                "The launcher may not work correctly without permissions. \n" +
-                                "Try running the launcher with administrator rights or installing in a different location.");
+                MessageBox.Show(@"It appears you do not have permission to write the the current directory: " + _currentDir + @"
+" +
+                                @"The launcher may not work correctly without permissions. 
+" +
+                                @"Try running the launcher with administrator rights or installing in a different location.");
             }
         }
 
@@ -50,36 +53,39 @@ namespace ProjectAltis.Forms
         private void Form1_Load(object sender, EventArgs e)
         {
 #if DEBUG
-            MessageBox.Show("This is a debug build, do not put this into production",
-                "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(@"This is a debug build, do not put this into production",
+                @"Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #endif
             #region Loading Settings
             try
             {
-                txtUser.Text = Properties.Settings.Default.username;
+                txtUser.Text = Settings.Default.username;
             }
-            catch { }
-            // Read user settings
-            if (Properties.Settings.Default.wantsCursor == true) // Cursor
+            catch(Exception ex)
             {
-                MemoryStream cursorMemoryStream = new MemoryStream(Properties.Resources.toonmono);
-                this.Cursor = new Cursor(cursorMemoryStream);
+                Log.Error(ex);
+            }
+            // Read user settings
+            if (Settings.Default.wantsCursor) // Cursor
+            {
+                MemoryStream cursorMemoryStream = new MemoryStream(Resources.toonmono);
+                Cursor = new Cursor(cursorMemoryStream);
             }
             // Load last saved user background choice
-            this.BackgroundImage.Dispose();
-            if (Properties.Settings.Default.wantsRandomBg)
+            BackgroundImage.Dispose();
+            if (Settings.Default.wantsRandomBg)
             {
                 BackgroundImage = Background.ReturnRandomBackground();
             }
             else
             {
-                BackgroundImage = Background.ReturnBackground(Properties.Settings.Default.background);
+                BackgroundImage = Background.ReturnBackground(Settings.Default.background);
             }
             #endregion
             // This prevents other controls from being focused
-            this.Select();
-            this.ActiveControl = null;
-            this.ActiveControl = string.IsNullOrEmpty(txtUser.Text) ? txtUser : txtPass;
+            Select();
+            ActiveControl = null;
+            ActiveControl = string.IsNullOrEmpty(txtUser.Text) ? txtUser : txtPass;
             Button_MouseLeave(btnPlay, EventArgs.Empty);
 
             webBrowser1.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, webBrowser1.Width, webBrowser1.Height, 20, 20));
@@ -88,30 +94,32 @@ namespace ProjectAltis.Forms
         }
         private void Form1_Activated(object sender, EventArgs e)
         {
-            this.ActiveControl = null;
+            ActiveControl = null;
         }
         private void Form1_Deactivate(object sender, EventArgs e)
         {
-            this.ActiveControl = null;
+            ActiveControl = null;
         }
         #endregion
         #region Borderless Form Code
 
-        private Point mouseDownPoint = Point.Empty;
+        private Point _mouseDownPoint = Point.Empty;
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            mouseDownPoint = new Point(e.X, e.Y);
+            _mouseDownPoint = new Point(e.X, e.Y);
         }
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
-            mouseDownPoint = Point.Empty;
+            _mouseDownPoint = Point.Empty;
         }
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mouseDownPoint.IsEmpty)
+            if (_mouseDownPoint.IsEmpty)
                 return;
             Form f = sender as Form;
-            f.Location = new Point(f.Location.X + (e.X - mouseDownPoint.X), f.Location.Y + (e.Y - mouseDownPoint.Y));
+            if (f != null)
+                f.Location = new Point(f.Location.X + (e.X - _mouseDownPoint.X),
+                    f.Location.Y + (e.Y - _mouseDownPoint.Y));
         }
         #endregion
         #region Button Behaviors
@@ -125,8 +133,8 @@ namespace ProjectAltis.Forms
         private void btnMin_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
-            this.WindowState = FormWindowState.Minimized;
-            this.ActiveControl = null;
+            WindowState = FormWindowState.Minimized;
+            ActiveControl = null;
         }
         #endregion
         #region Play Button
@@ -140,13 +148,13 @@ namespace ProjectAltis.Forms
             }
             btnPlay.Enabled = false;
             #region Save credentials if necessary
-            if (cbSaveLogin.Checked == true)
+            if (cbSaveLogin.Checked)
             {
-                Console.WriteLine("Save checked");
+                Console.WriteLine(@"Save checked");
                 if (txtUser.Text != null || txtPass.Text != null)
                 {
-                    Properties.Settings.Default.username = txtUser.Text;
-                    Properties.Settings.Default.Save();
+                    Settings.Default.username = txtUser.Text;
+                    Settings.Default.Save();
                 }
             }
             #endregion
@@ -164,6 +172,7 @@ namespace ProjectAltis.Forms
                 streamWriter.Close();
             }
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            // ReSharper disable once AssignNullToNotNullAttribute
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
@@ -194,12 +203,12 @@ namespace ProjectAltis.Forms
                     btnPlay.Enabled = true;
                     break;
                 default:
-                    MessageBox.Show("There was an error logging you in!", "Oops!");
-                    lblInfo.Text = "Error";
+                    MessageBox.Show(@"There was an error logging you in!", @"Oops!");
+                    lblInfo.Text = @"Error";
                     break;
             }
             lblInfo.Visible = true;
-            this.ActiveControl = null;
+            ActiveControl = null;
         }
         #endregion
         #region Site Button
@@ -207,7 +216,7 @@ namespace ProjectAltis.Forms
         {
             Audio.PlaySoundFile("sndclick");
             Process.Start("https://www.projectaltis.com/");
-            this.ActiveControl = null;
+            ActiveControl = null;
         }
         #endregion
         #region Discord Button
@@ -215,17 +224,17 @@ namespace ProjectAltis.Forms
         {
             Audio.PlaySoundFile("sndclick");
             Log.TryOpenUrl("https://discord.me/ttprojectaltis");
-            this.ActiveControl = null;
+            ActiveControl = null;
         }
         #endregion
         #region Content Packs
         private void btnContentPacks_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
-            btnContentPacks.BackgroundImage = Properties.Resources.contentpacks_d;
+            btnContentPacks.BackgroundImage = Resources.contentpacks_d;
             frmContentPacks contentPack = new frmContentPacks();
             contentPack.ShowDialog(this);
-            this.ActiveControl = null;
+            ActiveControl = null;
         }
         #endregion
         #region Change Theme
@@ -234,14 +243,13 @@ namespace ProjectAltis.Forms
             Audio.PlaySoundFile("sndclick");
             frmBackgroundChoices bg = new frmBackgroundChoices();
             bg.ShowDialog();
-            /// Applying the background after the user closes the Change Theme form
-            if (!Properties.Settings.Default.wantsRandomBg)
+            if (!Settings.Default.wantsRandomBg)
             {
                 BackgroundImage.Dispose();
-                BackgroundImage = Background.ReturnBackground(Properties.Settings.Default.background);
+                BackgroundImage = Background.ReturnBackground(Settings.Default.background);
             }
 
-            this.ActiveControl = null;
+            ActiveControl = null;
         }
         #endregion
         #region Options Button
@@ -251,16 +259,16 @@ namespace ProjectAltis.Forms
             frmOptions op = new frmOptions();
             op.ShowDialog();
             // Apply user settings
-            if (Properties.Settings.Default.wantsCursor) // Cursor
+            if (Settings.Default.wantsCursor) // Cursor
             {
-                MemoryStream cursorMemoryStream = new MemoryStream(Properties.Resources.toonmono);
-                this.Cursor = new Cursor(cursorMemoryStream);
+                MemoryStream cursorMemoryStream = new MemoryStream(Resources.toonmono);
+                Cursor = new Cursor(cursorMemoryStream);
             }
             else
             {
-                this.Cursor = Cursors.Default;
+                Cursor = Cursors.Default;
             }
-            this.ActiveControl = null;
+            ActiveControl = null;
         }
         #endregion
         #region Credits
@@ -269,7 +277,7 @@ namespace ProjectAltis.Forms
             Audio.PlaySoundFile("sndclick");
             frmCredits cred = new frmCredits();
             cred.ShowDialog();
-            this.ActiveControl = null;
+            ActiveControl = null;
         }
         #endregion
         #region Main Button Events
@@ -386,31 +394,31 @@ namespace ProjectAltis.Forms
 
                     BeginInvoke((MethodInvoker)delegate
                     {
-                        lblNowDownloading.Text = "Verifying " + manifest.filename;
+                        lblNowDownloading.Text = @"Verifying " + manifest.filename;
                     });
 
                     if (type == FileTypes.Phase && File.Exists(path) && Hashing.CalculateSHA256(path) == manifest.sha256)
                     {
-                        Console.WriteLine("Phase file: {0} is up to date", manifest.filename);
+                        Console.WriteLine(@"File {0} exists and it has the latest checksum", manifest.filename);
                     }
                     else if (type == FileTypes.Config && File.Exists(path) && Hashing.CalculateSHA256(path) == manifest.sha256)
                     {
-                        Console.WriteLine("File {0} exists and it has the latest checksum", path);
+                        Console.WriteLine(@"File {0} exists and it has the latest checksum", path);
                     }
                     else if (type == FileTypes.Default && File.Exists(path) && Hashing.CalculateSHA256(path) == manifest.sha256)
                     {
-                        Console.WriteLine("File {0} exists and it has the latest checksum", path);
+                        Console.WriteLine(@"File {0} exists and it has the latest checksum", path);
                     }
                     else // The file probably does not exist or does not have the same hash
                     {
                         AddFileToDownloadList(manifest.filename, manifest.url);
-                        Console.WriteLine("Added {0} to the download list! Total Items: {1}", manifest.filename, _downloadList.Count);
+                        Console.WriteLine(@"Added {0} to the download list! Total Items: {1}", manifest.filename, _downloadList.Count);
                     }
                 } // Add items to list
-                Console.WriteLine("Added all items to the list, starting download...");
+                Console.WriteLine(@"Added all items to the list, starting download...");
                 sw.Stop();
-                Console.WriteLine("Total time elapsed (seconds): " + sw.Elapsed.TotalSeconds);
-                DownloadItemsFromList(_downloadList);
+                Console.WriteLine(@"Total time elapsed (seconds): " + sw.Elapsed.TotalSeconds);
+                DownloadItemsFromList();
             });
             myThread.Start();
         }
@@ -418,14 +426,14 @@ namespace ProjectAltis.Forms
         {
             _downloadList.Add(filename, url);
         }
-        private void DownloadItemsFromList(SortedList<string, string> list)
+        private void DownloadItemsFromList()
         {
             WebClient client = new WebClient();
-            client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
-            client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
+            client.DownloadProgressChanged += client_DownloadProgressChanged;
+            client.DownloadFileCompleted += client_DownloadFileCompleted;
 
-            string Filename = String.Empty;
-            string URL = String.Empty;
+            string filename = String.Empty;
+            string url = String.Empty;
             var myThread = new Thread(() =>
             {
                 if (_downloadList.Count > 0)
@@ -437,21 +445,21 @@ namespace ProjectAltis.Forms
                     });
                     foreach (KeyValuePair<string, string> kvp in _downloadList) // Let it iterate here, we'll just take the last in the list
                     {
-                        Filename = kvp.Key;
-                        URL = kvp.Value;
+                        filename = kvp.Key;
+                        url = kvp.Value;
                     }
-                    _nowDownloading = Filename;
-                    if (Filename.Contains("phase"))
+                    _nowDownloading = filename;
+                    if (filename.Contains("phase"))
                     {
-                        client.DownloadFileAsync(new Uri(URL), _currentDir + @"\resources\default\" + Filename);
+                        client.DownloadFileAsync(new Uri(url), _currentDir + @"\resources\default\" + filename);
                     }
-                    else if (Filename.Contains("toon"))
+                    else if (filename.Contains("toon"))
                     {
-                        client.DownloadFileAsync(new Uri(URL), _currentDir + @"\config\" + Filename);
+                        client.DownloadFileAsync(new Uri(url), _currentDir + @"\config\" + filename);
                     }
                     else
                     {
-                        client.DownloadFileAsync(new Uri(URL), _currentDir + @"\" + Filename);
+                        client.DownloadFileAsync(new Uri(url), _currentDir + @"\" + filename);
                     }
 
                 }
@@ -459,7 +467,7 @@ namespace ProjectAltis.Forms
                 {
                     BeginInvoke((MethodInvoker)delegate
                     {
-                        lblNowDownloading.Text = "Have fun!";
+                        lblNowDownloading.Text = @"Have fun!";
                         pbDownload.Visible = false;
                         btnPlay.Enabled = true;
                     });
@@ -472,22 +480,22 @@ namespace ProjectAltis.Forms
         }
         private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            this.BeginInvoke((MethodInvoker)delegate
+            BeginInvoke((MethodInvoker)delegate
             {
                 double bytesIn = double.Parse(e.BytesReceived.ToString());
                 double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
                 double percentage = bytesIn / totalBytes * 100;
-                lblNowDownloading.Text = _nowDownloading + ": " + "Downloaded " + Data.ConvertToNetworkDataType(e.BytesReceived) + " of " + Data.ConvertToNetworkDataType(e.TotalBytesToReceive);
+                lblNowDownloading.Text = _nowDownloading + @": " + @"Downloaded " + Data.ConvertToNetworkDataType(e.BytesReceived) + @" of " + Data.ConvertToNetworkDataType(e.TotalBytesToReceive);
                 pbDownload.Value = Convert.ToInt32(percentage);
             });
         }
         private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            this.BeginInvoke((MethodInvoker)delegate
+            BeginInvoke((MethodInvoker)delegate
             {
                 _downloadList.Remove(_nowDownloading);
-                lblNowDownloading.Text = "Completed";
-                DownloadItemsFromList(_downloadList);
+                lblNowDownloading.Text = @"Completed";
+                DownloadItemsFromList();
             });
         }
         private static string RetrieveManifest()
@@ -509,7 +517,7 @@ namespace ProjectAltis.Forms
                 return;
             }
             e.Cancel = true;
-            Process.Start(e.Url.ToString());
+            Log.TryOpenUrl(e.Url.ToString());
         }
 
 
@@ -518,17 +526,6 @@ namespace ProjectAltis.Forms
 
 
         #region Directory Things
-        /// <summary>
-        /// Determines whether this instance is administrator.
-        /// </summary>
-        /// <returns><c>true</c> if this instance is administrator; otherwise, <c>false</c>.</returns>
-        private static bool IsAdministrator()
-        {
-            Console.WriteLine("Is Administrator called");
-            return (new System.Security.Principal.WindowsPrincipal(System.Security.Principal.WindowsIdentity.GetCurrent()))
-                    .IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator);
-        }
-
 
         /// <summary>
         /// Determines whether the current directory can be written to.
@@ -536,16 +533,17 @@ namespace ProjectAltis.Forms
         /// <returns><c>true</c> if the directory is writeable; otherwise, <c>false</c>.</returns>
         private bool IsWriteable()
         {
-            Console.WriteLine("Is writable called");
+            Log.Info("Is writable called");
             try
             {
-                using (FileStream fs = File.Create(_currentDir + "writeText")) { }
+                using (File.Create(_currentDir + "writeText"))
+                { }
                 File.Delete(_currentDir + "writeText");
                 Log.Info("Directory is writeable");
             }
             catch (Exception ex)
             {
-                                Console.WriteLine("Exception thrown, not writeable");
+                Log.Error("Exception thrown, not writeable");
                 Log.Error(ex);
                 return false;
             }

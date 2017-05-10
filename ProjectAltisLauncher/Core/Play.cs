@@ -12,7 +12,7 @@ namespace ProjectAltis.Core
         /// </summary>
         /// <param name="username">The username.</param>
         /// <param name="password">The password.</param>
-        public static void LaunchGame(string username, string password, frmMain frmInstance)
+        public static void LaunchGame(string username, string password, FrmMain frmInstance)
         {
 			try
 			{
