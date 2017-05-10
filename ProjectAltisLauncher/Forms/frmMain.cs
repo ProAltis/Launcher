@@ -81,6 +81,9 @@ namespace ProjectAltis.Forms
             this.ActiveControl = null;
             this.ActiveControl = string.IsNullOrEmpty(txtUser.Text) ? txtUser : txtPass;
             Button_MouseLeave(btnPlay, EventArgs.Empty);
+
+            webBrowser1.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, webBrowser1.Width, webBrowser1.Height, 20, 20));
+
             RedistCheck.CheckRedistHandler();
         }
         private void Form1_Activated(object sender, EventArgs e)

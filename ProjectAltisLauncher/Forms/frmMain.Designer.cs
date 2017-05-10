@@ -304,7 +304,7 @@
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.Size = new System.Drawing.Size(435, 518);
+            this.webBrowser1.Size = new System.Drawing.Size(435, 525);
             this.webBrowser1.TabIndex = 20;
             this.webBrowser1.TabStop = false;
             this.webBrowser1.Url = new System.Uri("https://projectaltis.com/launcher", System.UriKind.Absolute);
