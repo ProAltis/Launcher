@@ -44,9 +44,6 @@ namespace ProjectAltis.Forms
                                 "The launcher may not work correctly without permissions. \n" +
                                 "Try running the launcher with administrator rights or installing in a different location.");
             }
-
-            RedistCheck.CheckRedistHandler();
-
         }
 
 
@@ -82,7 +79,9 @@ namespace ProjectAltis.Forms
             // This prevents other controls from being focused
             this.Select();
             this.ActiveControl = null;
+            this.ActiveControl = string.IsNullOrEmpty(txtUser.Text) ? txtUser : txtPass;
             Button_MouseLeave(btnPlay, EventArgs.Empty);
+            RedistCheck.CheckRedistHandler();
         }
         private void Form1_Activated(object sender, EventArgs e)
         {
@@ -212,7 +211,7 @@ namespace ProjectAltis.Forms
         private void btnDiscord_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
-            Process.Start("https://discord.me/ttprojectaltis");
+            Log.TryOpenUrl("https://discord.me/ttprojectaltis");
             this.ActiveControl = null;
         }
         #endregion
