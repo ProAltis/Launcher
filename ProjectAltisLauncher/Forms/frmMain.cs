@@ -13,6 +13,7 @@ using ProjectAltis.Core;
 using ProjectAltis.Enums;
 using ProjectAltis.Manifests;
 using ProjectAltis.Properties;
+using ProjectAltisLauncher.Core;
 
 /*
 * TODO:
@@ -24,9 +25,9 @@ namespace ProjectAltis.Forms
     public partial class FrmMain : Form
     {
         #region Fields
-        private readonly SortedList<string, string> _downloadList = new SortedList<string, string>(); // Filename, URL
-        private readonly string _currentDir;
-        private string _nowDownloading;
+        private readonly SortedList<string, string> downloadList = new SortedList<string, string>(); // Filename, URL
+        private readonly string currentDir;
+        private string nowDownloading;
         #endregion
         #region Main Form Events
         public FrmMain()
@@ -34,14 +35,14 @@ namespace ProjectAltis.Forms
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.None;
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
-            _currentDir = Directory.GetCurrentDirectory() + @"\";
-            _nowDownloading = "";
+            currentDir = Directory.GetCurrentDirectory() + @"\";
+            nowDownloading = "";
 
             Settings.Default.password = "Deprecated";
 
             if (!IsWriteable())
             {
-                MessageBox.Show(@"It appears you do not have permission to write the the current directory: " + _currentDir + @"
+                MessageBox.Show(@"It appears you do not have permission to write the the current directory: " + currentDir + @"
 " +
                                 @"The launcher may not work correctly without permissions. 
 " +
@@ -103,24 +104,24 @@ namespace ProjectAltis.Forms
         #endregion
         #region Borderless Form Code
 
-        private Point _mouseDownPoint = Point.Empty;
+        private Point mouseDownPoint = Point.Empty;
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            _mouseDownPoint = new Point(e.X, e.Y);
+            mouseDownPoint = new Point(e.X, e.Y);
         }
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
-            _mouseDownPoint = Point.Empty;
+            mouseDownPoint = Point.Empty;
         }
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (_mouseDownPoint.IsEmpty)
+            if (mouseDownPoint.IsEmpty)
                 return;
-            Form f = sender as Form;
-            if (f != null)
-                f.Location = new Point(f.Location.X + (e.X - _mouseDownPoint.X),
-                    f.Location.Y + (e.Y - _mouseDownPoint.Y));
+            if (sender is Form f)
+                f.Location = new Point(f.Location.X + (e.X - mouseDownPoint.X),
+                    f.Location.Y + (e.Y - mouseDownPoint.Y));
         }
+
         #endregion
         #region Button Behaviors
         #region Exit Button
@@ -158,56 +159,20 @@ namespace ProjectAltis.Forms
                 }
             }
             #endregion
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://www.projectaltis.com/api/login");
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-            LoginApiResponse resp;
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            FileUpdater updater = new FileUpdater(this);
+            Thread update = new Thread(() => { updater.DoWork(); });
+            try
             {
-                string json = "{\"u\":\"" + txtUser.Text + "\"," +
-                              "\"p\":\"" + txtPass.Text + "\"}";
-
-                streamWriter.Write(json);
-                streamWriter.Flush();
-                streamWriter.Close();
+                update.Start();
             }
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            // ReSharper disable once AssignNullToNotNullAttribute
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            catch (OutOfMemoryException)
             {
-                var result = streamReader.ReadToEnd();
-                resp = JsonConvert.DeserializeObject<LoginApiResponse>(result);
+                MessageBox.Show("Unable to start the updating process. It appears your computer is out of memory.");
             }
-
-            lblInfo.ForeColor = Color.Black; // Reset the label color
-            switch (resp.status)
+            catch (ThreadStateException)
             {
-                case "true":
-                    lblInfo.ForeColor = Color.Green;
-                    lblInfo.Text = resp.reason;
-                    UpdateFilesAndPlay();
-                    break;
-                case "false":
-                    lblInfo.ForeColor = Color.Red;
-                    lblInfo.Text = resp.reason;
-                    btnPlay.Enabled = true;
-                    break;
-                case "critical":
-                    lblInfo.ForeColor = Color.Red;
-                    lblInfo.Text = resp.additional;
-                    btnPlay.Enabled = true;
-                    break;
-                case "info":
-                    lblInfo.ForeColor = Color.Orange;
-                    lblInfo.Text = resp.reason;
-                    btnPlay.Enabled = true;
-                    break;
-                default:
-                    MessageBox.Show(@"There was an error logging you in!", @"Oops!");
-                    lblInfo.Text = @"Error";
-                    break;
+                MessageBox.Show("The updater thread could not be started. Try and restarting the launcher.");
             }
-            lblInfo.Visible = true;
             ActiveControl = null;
         }
         #endregion
@@ -345,169 +310,6 @@ namespace ProjectAltis.Forms
         }
         #endregion
         #endregion
-        #region File Downloader / Verifier
-        private void UpdateFilesAndPlay()
-        {
-            lblNowDownloading.Visible = true;
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            var myThread = new Thread(() =>
-            {
-                Directory.CreateDirectory(@"resources");
-                Directory.CreateDirectory(@"resources\default\");
-                Directory.CreateDirectory(@"config");
-                string rawManifest = RetrieveManifest();
-                string[] rawManifestArray = rawManifest.Split('#');
-                foreach (string item in rawManifestArray)
-                {
-                    string workingDir;
-                    string path;
-                    // Make sure the item is not an empty value.
-                    // An empty value is added when the raw manifest is split
-                    if (item == "") continue;
-
-                    FileTypes type;
-
-                    ManifestJson manifest = JsonConvert.DeserializeObject<ManifestJson>(item.Replace("#", ""));
-
-                    #region Determine the File Type and Set Working Directory
-
-                    if (manifest.filename.Contains("phase"))
-                    {
-                        type = FileTypes.Phase;
-                        workingDir = _currentDir + @"\resources\default\";
-                    }
-                    else if (manifest.filename.Equals("toon.dc"))
-                    {
-                        type = FileTypes.Config;
-                        workingDir = _currentDir + @"\config\";
-                    }
-                    else
-                    {
-                        type = FileTypes.Default;
-                        workingDir = _currentDir;
-                    }
-
-                    #endregion
-
-                    path = Path.Combine(workingDir, manifest.filename);
-
-                    BeginInvoke((MethodInvoker)delegate
-                    {
-                        lblNowDownloading.Text = @"Verifying " + manifest.filename;
-                    });
-
-                    if (type == FileTypes.Phase && File.Exists(path) && Hashing.CalculateSHA256(path) == manifest.sha256)
-                    {
-                        Console.WriteLine(@"File {0} exists and it has the latest checksum", manifest.filename);
-                    }
-                    else if (type == FileTypes.Config && File.Exists(path) && Hashing.CalculateSHA256(path) == manifest.sha256)
-                    {
-                        Console.WriteLine(@"File {0} exists and it has the latest checksum", path);
-                    }
-                    else if (type == FileTypes.Default && File.Exists(path) && Hashing.CalculateSHA256(path) == manifest.sha256)
-                    {
-                        Console.WriteLine(@"File {0} exists and it has the latest checksum", path);
-                    }
-                    else // The file probably does not exist or does not have the same hash
-                    {
-                        AddFileToDownloadList(manifest.filename, manifest.url);
-                        Console.WriteLine(@"Added {0} to the download list! Total Items: {1}", manifest.filename, _downloadList.Count);
-                    }
-                } // Add items to list
-                Console.WriteLine(@"Added all items to the list, starting download...");
-                sw.Stop();
-                Console.WriteLine(@"Total time elapsed (seconds): " + sw.Elapsed.TotalSeconds);
-                DownloadItemsFromList();
-            });
-            myThread.Start();
-        }
-        private void AddFileToDownloadList(string filename, string url)
-        {
-            _downloadList.Add(filename, url);
-        }
-        private void DownloadItemsFromList()
-        {
-            WebClient client = new WebClient();
-            client.DownloadProgressChanged += client_DownloadProgressChanged;
-            client.DownloadFileCompleted += client_DownloadFileCompleted;
-
-            string filename = String.Empty;
-            string url = String.Empty;
-            var myThread = new Thread(() =>
-            {
-                if (_downloadList.Count > 0)
-                {
-                    BeginInvoke((MethodInvoker)delegate
-                    {
-                        pbDownload.Visible = true;
-                        lblNowDownloading.Visible = true;
-                    });
-                    foreach (KeyValuePair<string, string> kvp in _downloadList) // Let it iterate here, we'll just take the last in the list
-                    {
-                        filename = kvp.Key;
-                        url = kvp.Value;
-                    }
-                    _nowDownloading = filename;
-                    if (filename.Contains("phase"))
-                    {
-                        client.DownloadFileAsync(new Uri(url), _currentDir + @"\resources\default\" + filename);
-                    }
-                    else if (filename.Contains("toon"))
-                    {
-                        client.DownloadFileAsync(new Uri(url), _currentDir + @"\config\" + filename);
-                    }
-                    else
-                    {
-                        client.DownloadFileAsync(new Uri(url), _currentDir + @"\" + filename);
-                    }
-
-                }
-                else
-                {
-                    BeginInvoke((MethodInvoker)delegate
-                    {
-                        lblNowDownloading.Text = @"Have fun!";
-                        pbDownload.Visible = false;
-                        btnPlay.Enabled = true;
-                    });
-                    Thread t = new Thread(() => Play.LaunchGame(txtUser.Text, txtPass.Text, this));
-                    t.Start();
-
-                }
-            });
-            myThread.Start();
-        }
-        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            BeginInvoke((MethodInvoker)delegate
-            {
-                double bytesIn = double.Parse(e.BytesReceived.ToString());
-                double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
-                double percentage = bytesIn / totalBytes * 100;
-                lblNowDownloading.Text = _nowDownloading + @": " + @"Downloaded " + Data.ConvertToNetworkDataType(e.BytesReceived) + @" of " + Data.ConvertToNetworkDataType(e.TotalBytesToReceive);
-                pbDownload.Value = Convert.ToInt32(percentage);
-            });
-        }
-        private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            BeginInvoke((MethodInvoker)delegate
-            {
-                _downloadList.Remove(_nowDownloading);
-                lblNowDownloading.Text = @"Completed";
-                DownloadItemsFromList();
-            });
-        }
-        private static string RetrieveManifest()
-        {
-            string rawManifest;
-            using (WebClient client = new WebClient())
-            {
-                rawManifest = client.DownloadString("http://projectaltis.com/api/manifest");
-            }
-            return rawManifest;
-        }
-        #endregion
         #region Web Browser / News
         // Place any web browser events inside here
         private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
@@ -519,9 +321,6 @@ namespace ProjectAltis.Forms
             e.Cancel = true;
             Log.TryOpenUrl(e.Url.ToString());
         }
-
-
-
         #endregion
 
 
@@ -536,9 +335,9 @@ namespace ProjectAltis.Forms
             Log.Info("Is writable called");
             try
             {
-                using (File.Create(_currentDir + "writeText"))
+                using (File.Create(currentDir + "writeText"))
                 { }
-                File.Delete(_currentDir + "writeText");
+                File.Delete(currentDir + "writeText");
                 Log.Info("Directory is writeable");
             }
             catch (Exception ex)

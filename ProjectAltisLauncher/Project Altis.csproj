@@ -149,6 +149,7 @@
     <Compile Include="Core\Background.cs" />
     <Compile Include="Core\Data.cs" />
     <Compile Include="Core\DateTimeExtensions.cs" />
+    <Compile Include="Core\FileUpdater.cs" />
     <Compile Include="Core\RedistCheck.cs" />
     <Compile Include="Enums\FileTypes.cs" />
     <Compile Include="Forms\frmBackgroundChoices.cs">

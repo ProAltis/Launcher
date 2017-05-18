@@ -388,10 +388,10 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtUser;
-        private System.Windows.Forms.TextBox txtPass;
-        private System.Windows.Forms.Button btnPlay;
-        private System.Windows.Forms.Label lblInfo;
+        public System.Windows.Forms.TextBox txtUser;
+        public System.Windows.Forms.TextBox txtPass;
+        public System.Windows.Forms.Button btnPlay;
+        public System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.CheckBox cbSaveLogin;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
@@ -403,7 +403,7 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnMin;
         private System.Windows.Forms.WebBrowser webBrowser1;
-        private System.Windows.Forms.ProgressBar pbDownload;
+        public System.Windows.Forms.ProgressBar pbDownload;
         private System.Windows.Forms.Button btnContentPacks;
         public System.Windows.Forms.Label lblNowDownloading;
     }
