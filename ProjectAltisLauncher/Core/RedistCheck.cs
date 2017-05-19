@@ -17,11 +17,11 @@ namespace ProjectAltis.Core
             if(!RedistInstalled())
             {
                 DialogResult f = MessageBox.Show(
-                    @"The Microsoft Visual C++ redistributable\n 2010 x86 was not found. It may be required to play Project Altis.\nGo to the download page?", @"Project Altis", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    "The Microsoft Visual C++ redistributable\n 2010 x86 was not found. It may be required to play Project Altis.\nGo to the download page?", @"Project Altis", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if(f == DialogResult.Yes)
                 {
                     Log.TryOpenUrl(
-                        @"https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe");
+                        "https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe");
                 }
             }
         }
