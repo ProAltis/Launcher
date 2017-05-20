@@ -147,6 +147,7 @@
   <ItemGroup>
     <Compile Include="Core\AutoUpdater.cs" />
     <Compile Include="Core\Background.cs" />
+    <Compile Include="Core\CpBrowser.cs" />
     <Compile Include="Core\Data.cs" />
     <Compile Include="Core\DateTimeExtensions.cs" />
     <Compile Include="Core\FileUpdater.cs" />
