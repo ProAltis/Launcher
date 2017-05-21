@@ -7,6 +7,7 @@ using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using ProjectAltis;
 using ProjectAltis.Forms;
 using ProjectAltis.Manifests;
 using ProjectAltis.Core;
@@ -179,13 +180,14 @@ namespace ProjectAltisLauncher.Core
                 string rawManifest = RetrieveManifest();
                 if (rawManifest == null)
                 {
-                    this.instance.BeginInvoke(
-                        (MethodInvoker)
-                        delegate
-                        {
-                            MessageBox.Show(this.instance,
-                                "Unable to retrieve the latest file manifest. Exiting update process.");
-                        });
+                    this.instance.BeginInvoke((MethodInvoker)delegate
+                    {
+                        this.instance.lblNowDownloading.Text = "Have fun!";
+                        this.instance.pbDownload.Visible = false;
+                        this.instance.btnPlay.Enabled = true;
+                    });
+                    Thread t = new Thread(() => Play.LaunchGame(this.user, this.pass, this.instance));
+                    t.Start();
                     return;
                 }
 
@@ -353,7 +355,21 @@ namespace ProjectAltisLauncher.Core
             {
                 using (WebClient client = new WebClient())
                 {
-                    return client.DownloadString("http://projectaltis.com/api/manifest");
+                    try
+                    {
+                        
+                        string manifest = client.DownloadString("http://projectaltis.com/api/manifest");
+                        if(!manifest.StartsWith("{"))
+                        {
+                            return null;
+                        }
+                        return manifest;
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex);
+                        return null;
+                    }
                 }
             }
             catch (Exception)
