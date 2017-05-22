@@ -37,7 +37,6 @@
             this.chkDebugWindow = new System.Windows.Forms.CheckBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
-            this.versionLabel = new System.Windows.Forms.Label();
             this.grpOptions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,22 +128,12 @@
             this.btnConfirm.UseVisualStyleBackColor = false;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
-            // versionLabel
-            // 
-            this.versionLabel.AutoSize = true;
-            this.versionLabel.Location = new System.Drawing.Point(145, 185);
-            this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(35, 13);
-            this.versionLabel.TabIndex = 5;
-            this.versionLabel.Text = "label1";
-            // 
             // frmOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(328, 214);
-            this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.grpOptions);
@@ -157,7 +146,6 @@
             this.grpOptions.ResumeLayout(false);
             this.grpOptions.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -171,6 +159,5 @@
         private System.Windows.Forms.CheckBox chkClickSounds;
         private System.Windows.Forms.CheckBox chkRandomBackgrounds;
 		private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label versionLabel;
     }
 }

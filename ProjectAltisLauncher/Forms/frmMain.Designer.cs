@@ -47,6 +47,7 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.pbDownload = new System.Windows.Forms.ProgressBar();
             this.btnContentPacks = new System.Windows.Forms.Button();
+            this.versionLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtUser
@@ -340,7 +341,17 @@
             this.btnContentPacks.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnContentPacks.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
-            // frmMain
+            // versionLabel
+            // 
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.BackColor = System.Drawing.Color.Transparent;
+            this.versionLabel.Location = new System.Drawing.Point(65, 50);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(35, 13);
+            this.versionLabel.TabIndex = 24;
+            this.versionLabel.Text = "label1";
+            // 
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -349,6 +360,7 @@
             this.BackgroundImage = global::ProjectAltis.Properties.Resources.TTC;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1000, 666);
+            this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.btnContentPacks);
             this.Controls.Add(this.pbDownload);
             this.Controls.Add(this.btnPlay);
@@ -406,6 +418,7 @@
         public System.Windows.Forms.ProgressBar pbDownload;
         private System.Windows.Forms.Button btnContentPacks;
         public System.Windows.Forms.Label lblNowDownloading;
+        private System.Windows.Forms.Label versionLabel;
     }
 }
 

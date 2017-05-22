@@ -48,6 +48,8 @@ namespace ProjectAltis.Forms
 " +
                                 @"Try running the launcher with administrator rights or installing in a different location.");
             }
+
+            versionLabel.Text = "Launcher v" + typeof(Program).Assembly.GetName().Version.ToString();
         }
 
 
