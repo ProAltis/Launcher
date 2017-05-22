@@ -40,12 +40,21 @@ namespace ProjectAltisLauncher.Core
 
             LoginApiResponse resp = GetLoginAPIResponse(this.instance.txtUser.Text, this.instance.txtPass.Text);
 
-            if (resp == null) return;
+            if(resp == null)
+            {
+                Log.Info("API response was null.");
+                return;
+            }
+            Log.Info("Response Status info:");
+            Log.Info("Status: " + resp.status);
+            Log.Info("Reason: " + resp.reason);
+            Log.Info("Additi: " + resp.additional);
 
             switch (resp.status)
             {
                 case "true":
                     {
+                        
                         this.instance.BeginInvoke((MethodInvoker)delegate
                         {
                             this.instance.lblInfo.ForeColor = Color.Green;
@@ -113,6 +122,7 @@ namespace ProjectAltisLauncher.Core
         {
             try
             {
+                Log.Info("Querying API for response.");
                 this.instance.BeginInvoke((MethodInvoker)delegate
                 {
                     this.instance.lblNowDownloading.Visible = true;
@@ -144,6 +154,7 @@ namespace ProjectAltisLauncher.Core
             }
             catch (Exception ex)
             {
+                Log.Error(ex);
                 this.instance.BeginInvoke(
                     (MethodInvoker)
                     delegate
@@ -161,25 +172,35 @@ namespace ProjectAltisLauncher.Core
         /// </summary>
         private void UpdateFilesAndPlay()
         {
+            Log.Info("||||||||||");
+            Log.Info("||||||||||");
+            Log.Info("Started to update files and play!");
+            Log.Info("||||||||||");
+            Log.Info("||||||||||");
             this.instance.BeginInvoke((MethodInvoker)delegate { this.instance.lblNowDownloading.Visible = true; });
 
             Thread main = new Thread(() =>
             {
+                Log.Info("Checking if directories exist.");
                 if (!CreateGameDirectorys())
                 {
                     this.instance.BeginInvoke(
                         (MethodInvoker)
                         delegate
                         {
+                            Log.Error("Unable to check/create directories.");
                             MessageBox.Show(this.instance, "Unable to create game directories. Exiting update process.");
                         });
 
                     return; // Not able to create directorys, exit out of thread.
                 }
-
+                Log.Info("Checking/creating directories succeeded.");
+                Log.Info("Retrieving manifest.");
                 string rawManifest = RetrieveManifest();
                 if (rawManifest == null)
                 {
+                    Log.Info("Manifest was null, likely web server maintenance.");
+                    Log.Info("Starting game anyways.");
                     this.instance.BeginInvoke((MethodInvoker)delegate
                     {
                         this.instance.lblNowDownloading.Text = "Have fun!";
@@ -190,8 +211,8 @@ namespace ProjectAltisLauncher.Core
                     t.Start();
                     return;
                 }
-
-
+                Log.Info("Manifest wasn't null, verifying files.");
+                Log.Info("---------");
                 string[] rawManifestArray = rawManifest.Split('#');
                 this.instance.BeginInvoke(
                     (MethodInvoker)delegate { this.instance.lblNowDownloading.Text = "Verifying game files..."; });
@@ -206,6 +227,7 @@ namespace ProjectAltisLauncher.Core
                         string workingDir;
                         string path;
                         ManifestJson manifest = JsonConvert.DeserializeObject<ManifestJson>(item.Replace("#", ""));
+                        Log.Info("Verifying file " + manifest.filename);
                         this.instance.BeginInvoke(
                             (MethodInvoker)
                             delegate
@@ -226,16 +248,22 @@ namespace ProjectAltisLauncher.Core
                         #endregion
 
                         path = Path.Combine(workingDir, manifest.filename);
-                        if (!(File.Exists(path) && Hashing.CalculateSHA256(path) == manifest.sha256))
+                        string fileSha = Hashing.CalculateSHA256(path);
+                        if (!(File.Exists(path) && fileSha == manifest.sha256))
                         {
+                            Log.Info(manifest.filename + " : Outdated.");
                             this.downloadList.Add(manifest.filename, manifest.url);
+                        }
+                        else
+                        {
+                            Log.Info(manifest.filename + " : Up to date");
                         }
                         this.verifyCount++;
                     });
                     fileThread.Start();
                 } // Add items to list
 
-                while (!(this.verifyCount == rawManifestArray.Length - 1))
+                while (this.verifyCount != rawManifestArray.Length - 1)
                     Thread.Sleep(30);
                 DownloadItemsFromList(this.downloadList);
             });
@@ -270,6 +298,7 @@ namespace ProjectAltisLauncher.Core
                         URL = kvp.Value;
                     }
                     this.nowDownloading = Filename;
+                    Log.Info("Downloading " + nowDownloading);
                     if (Filename.Contains("phase"))
                         client.DownloadFileAsync(new Uri(URL), this.currentDir + @"\resources\default\" + Filename);
                     else if (Filename.Contains("toon"))
@@ -279,6 +308,9 @@ namespace ProjectAltisLauncher.Core
                 }
                 else
                 {
+                    Log.Info("||||||||||");
+                    Log.Info("Files have been verified. Starting game!");
+                    Log.Info("||||||||||");
                     this.instance.BeginInvoke((MethodInvoker)delegate
                     {
                         this.instance.lblNowDownloading.Text = "Have fun!";
@@ -318,6 +350,7 @@ namespace ProjectAltisLauncher.Core
         /// <param name="e"></param>
         private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
+            Log.Info("Finished downloading " + this.nowDownloading);
             this.instance.BeginInvoke((MethodInvoker)delegate
             {
                 this.downloadList.Remove(this.nowDownloading);
@@ -353,6 +386,7 @@ namespace ProjectAltisLauncher.Core
         {
             try
             {
+                Log.Info("Retrieving manifest");
                 using (WebClient client = new WebClient())
                 {
                     try
@@ -361,19 +395,24 @@ namespace ProjectAltisLauncher.Core
                         string manifest = client.DownloadString("http://projectaltis.com/api/manifest");
                         if(!manifest.StartsWith("{"))
                         {
+                            Log.Error("Manifest doesn't look like it's there or is good.");
                             return null;
                         }
                         return manifest;
                     }
                     catch (Exception ex)
                     {
+                        Log.Error("I think the manifest host is down.");
                         Log.Error(ex);
+
                         return null;
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception eex)
             {
+                Log.Error("random Exception");
+                Log.Error(eex);
                 return null;
             }
         }

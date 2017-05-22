@@ -31,6 +31,7 @@ namespace ProjectAltis.Core
 
 				frmInstance.BeginInvoke((MethodInvoker)delegate
 				{
+                    Log.Info("Game process ended.");
 					frmInstance.Hide();
 					altis.WaitForExit();
 					frmInstance.lblNowDownloading.Text = "Thanks for playing!";

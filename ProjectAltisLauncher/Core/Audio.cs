@@ -18,6 +18,7 @@ namespace ProjectAltis.Core
 				{
 					case "sndclick":
 						{
+                            Log.Info("playing sound click");
 							player = new System.Media.SoundPlayer(Properties.Resources.sndclick);
 							player.Load();
 							player.Play();
@@ -27,7 +28,7 @@ namespace ProjectAltis.Core
 			}
 			catch(Exception ex)
 			{
-				Log.Error("UNABLE TO PLAY SOUND: ");
+				Log.Error("UNABLE TO PLAY SOUND");
 				Log.Error(ex);
 			}
         }

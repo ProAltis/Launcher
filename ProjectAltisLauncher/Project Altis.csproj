@@ -145,7 +145,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\AutoUpdater.cs" />
     <Compile Include="Core\Background.cs" />
     <Compile Include="Core\Data.cs" />
     <Compile Include="Core\DateTimeExtensions.cs" />
