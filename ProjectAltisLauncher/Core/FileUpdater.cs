@@ -248,8 +248,12 @@ namespace ProjectAltisLauncher.Core
                         #endregion
 
                         path = Path.Combine(workingDir, manifest.filename);
-                        string fileSha = Hashing.CalculateSHA256(path);
-                        if (!(File.Exists(path) && fileSha == manifest.sha256))
+                        if(!File.Exists(path))
+                        {
+                            Log.Info(manifest.filename + " : Missing.");
+                            this.downloadList.Add(manifest.filename, manifest.url);
+                        }
+                        else if (Hashing.CalculateSHA256(path) != manifest.sha256)
                         {
                             Log.Info(manifest.filename + " : Outdated.");
                             this.downloadList.Add(manifest.filename, manifest.url);
