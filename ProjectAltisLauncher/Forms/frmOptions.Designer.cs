@@ -37,11 +37,13 @@
             this.chkDebugWindow = new System.Windows.Forms.CheckBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
+            this.chkSavePassword = new System.Windows.Forms.CheckBox();
             this.grpOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpOptions
             // 
+            this.grpOptions.Controls.Add(this.chkSavePassword);
             this.grpOptions.Controls.Add(this.button1);
             this.grpOptions.Controls.Add(this.chkRandomBackgrounds);
             this.grpOptions.Controls.Add(this.chkClickSounds);
@@ -128,6 +130,17 @@
             this.btnConfirm.UseVisualStyleBackColor = false;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
+            // chkSavePassword
+            // 
+            this.chkSavePassword.AutoSize = true;
+            this.chkSavePassword.Location = new System.Drawing.Point(6, 111);
+            this.chkSavePassword.Name = "chkSavePassword";
+            this.chkSavePassword.Size = new System.Drawing.Size(167, 17);
+            this.chkSavePassword.TabIndex = 6;
+            this.chkSavePassword.Text = "Save password (Windows 10)";
+            this.chkSavePassword.UseVisualStyleBackColor = true;
+            this.chkSavePassword.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // frmOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -159,5 +172,6 @@
         private System.Windows.Forms.CheckBox chkClickSounds;
         private System.Windows.Forms.CheckBox chkRandomBackgrounds;
 		private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox chkSavePassword;
     }
 }

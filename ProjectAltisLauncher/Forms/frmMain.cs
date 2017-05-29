@@ -63,6 +63,8 @@ namespace ProjectAltis.Forms
             try
             {
                 txtUser.Text = Settings.Default.username;
+                if(Settings.Default.WantPassword)
+                    txtPass.Text = UwpHelper.GetPassword();
             }
             catch(Exception ex)
             {
@@ -158,6 +160,19 @@ namespace ProjectAltis.Forms
                 {
                     Settings.Default.username = txtUser.Text;
                     Settings.Default.Save();
+                }
+            }
+            if(Settings.Default.WantPassword)
+            {
+                Log.Info("Trying to save password securely...");
+                try
+                {
+                    UwpHelper.SetCredentials(txtUser.Text, txtPass.Text);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                    Log.Error("Don't want to break after trying to save pass so continuing");
                 }
             }
             #endregion

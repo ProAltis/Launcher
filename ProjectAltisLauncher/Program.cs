@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.IO;
 using System.Threading.Tasks;
+using ProjectAltis.Core;
 using ProjectAltis.Enums;
 using ProjectAltis.Forms;
 
