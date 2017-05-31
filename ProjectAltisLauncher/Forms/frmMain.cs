@@ -96,6 +96,8 @@ namespace ProjectAltis.Forms
             webBrowser1.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, webBrowser1.Width, webBrowser1.Height, 20, 20));
 
             RedistCheck.CheckRedistHandler();
+            if(frmReleaseNotes.ShouldShowReleaseNotes())
+                new frmReleaseNotes().Show();
         }
         private void Form1_Activated(object sender, EventArgs e)
         {

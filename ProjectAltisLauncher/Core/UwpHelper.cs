@@ -58,15 +58,17 @@ namespace ProjectAltis.Core
             if(!IsWindows10())
                 return;
             // Get a toast XML template
-            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText04);
 
             // Fill in the text elements
             XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
             stringElements[0].AppendChild(toastXml.CreateTextNode(title));
             stringElements[1].AppendChild(toastXml.CreateTextNode(content));
-            ToastNotification toast = new ToastNotification(toastXml);
-            toast.Tag = tag;
-            toast.Group = group;
+            ToastNotification toast = new ToastNotification(toastXml)
+            {
+                Tag = tag,
+                Group = group
+            };
             ToastNotificationManager.CreateToastNotifier("ProjectAltis").Show(toast);
         }
 

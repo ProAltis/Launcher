@@ -168,6 +168,12 @@
     <Compile Include="Forms\frmContentPacks.Designer.cs">
       <DependentUpon>frmContentPacks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmReleaseNotes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmReleaseNotes.Designer.cs">
+      <DependentUpon>frmReleaseNotes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmCredits.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmContentPacks.resx">
       <DependentUpon>frmContentPacks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmReleaseNotes.resx">
+      <DependentUpon>frmReleaseNotes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCredits.resx">
       <DependentUpon>frmCredits.cs</DependentUpon>
