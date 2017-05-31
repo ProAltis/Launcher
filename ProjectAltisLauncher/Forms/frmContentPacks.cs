@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using ProjectAltis.Core;
 
 namespace ProjectAltis.Forms
 {
@@ -37,10 +38,23 @@ namespace ProjectAltis.Forms
                     lstPacks.Items.Add(Path.GetFileName(item.Replace("- ", "")));
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Error(ex);
                 MessageBox.Show("Unable to load content pack loader file. Try and download the latest game files");
                 _needsToBeClosed = true;
+            }
+
+            try
+            {
+                foreach (RemoteContentPack contentPack in CpBrowser.Instance.CpList)
+                {
+                    lstPacks.Items.Add(contentPack.Name);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
             }
 
         }
