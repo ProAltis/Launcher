@@ -1,5 +1,4 @@
-language: csharp
-solution: Project Altis Launcher.sln
+language: c++
 dist: trusty
 
 script:
