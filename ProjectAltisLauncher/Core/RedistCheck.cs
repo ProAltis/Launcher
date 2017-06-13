@@ -26,5 +26,13 @@ namespace ProjectAltis.Core
                     "https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe");
             }
         }
+
+        public static bool GameDvrEnabled()
+        {
+            const string keyName = "HKEY_CURRENT_USER\\System\\GameConfigStore";
+            const string valueName = "GameDVR_Enabled";
+            bool result = Registry.GetValue(keyName, valueName, RegistryValueKind.DWord).ToString() == "1";
+            return result;
+        }
     }
 }
