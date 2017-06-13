@@ -1,10 +1,5 @@
-language: csharp
-solution: Project Altis Launcher.sln
+language: c++
 dist: trusty
 
-install:
-  - sudo apt-get install -y gtk-sharp2
-  - nuget restore
-
 script:
-  - MONO_IOMAP=case xbuild
+  - echo "Temp fix travis"
