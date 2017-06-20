@@ -1,19 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Windows.Data.Xml.Dom;
-using Windows.Foundation.Collections;
-using Windows.Foundation.Metadata;
-using Windows.Security;
-using Windows.Security.Authentication;
-using Windows.Security.Authentication.Identity;
-using Windows.Security.Authentication.Identity.Core;
-using Windows.Security.Credentials;
-using Windows.Security.Credentials.UI;
-using Windows.System;
-using Windows.UI.Notifications;
 using CredentialManagement;
 using Microsoft.Win32;
 
@@ -53,24 +38,24 @@ namespace ProjectAltis.Core
             return GetCredential("Altis").Password;
         }
 
-        public static void SendNotification(string title, string content, string tag = "Replace", string group = "Altis")
-        {
-            if(!IsWindows10())
-                return;
-            // Get a toast XML template
-            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText04);
+        //public static void SendNotification(string title, string content, string tag = "Replace", string group = "Altis")
+        //{
+        //    if(!IsWindows10())
+        //        return;
+        //    // Get a toast XML template
+        //    XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText04);
 
-            // Fill in the text elements
-            XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
-            stringElements[0].AppendChild(toastXml.CreateTextNode(title));
-            stringElements[1].AppendChild(toastXml.CreateTextNode(content));
-            ToastNotification toast = new ToastNotification(toastXml)
-            {
-                Tag = tag,
-                Group = group
-            };
-            ToastNotificationManager.CreateToastNotifier("ProjectAltis").Show(toast);
-        }
+        //    // Fill in the text elements
+        //    XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
+        //    stringElements[0].AppendChild(toastXml.CreateTextNode(title));
+        //    stringElements[1].AppendChild(toastXml.CreateTextNode(content));
+        //    ToastNotification toast = new ToastNotification(toastXml)
+        //    {
+        //        Tag = tag,
+        //        Group = group
+        //    };
+        //    ToastNotificationManager.CreateToastNotifier("ProjectAltis").Show(toast);
+        //}
 
         /// <summary>
         /// Checks Windows 10 status
