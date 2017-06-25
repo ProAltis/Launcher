@@ -189,6 +189,7 @@
     <Compile Include="Core\Hashing.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Enums\LogType.cs" />
+    <Compile Include="Manifests\SanityCheckAPIResonse.cs" />
     <Compile Include="Manifests\loginAPIResponse.cs" />
     <Compile Include="Manifests\ManifestJson.cs" />
     <Compile Include="Forms\frmOptions.cs">

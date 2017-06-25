@@ -420,5 +420,47 @@ namespace ProjectAltisLauncher.Core
                 return null;
             }
         }
+
+        public static bool IsPreBeta(string tempToken)
+        {
+            var result = VerifyToken(tempToken);
+            var sanitycheck = SanityCheck(result.additional);
+            return bool.Parse(SanityCheck(result.additional).statuscheck) || int.Parse(sanitycheck.powerlevel) >= 300;
+        }
+
+        private static SanityCheckApiResponse SanityCheck(string realToken)
+        {
+            try
+            {
+                using(var client = new WebClient())
+                {
+                    var result = client.DownloadString("https://projectaltis.com/api/sanitycheck/" + realToken);
+                    return JsonConvert.DeserializeObject<SanityCheckApiResponse>(result);
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.Error("Error when checking sanity of real token");
+                Log.Error(ex);
+                return null;
+            }
+        }
+        private static LoginApiResponse VerifyToken(string tempToken)
+        {
+            try
+            {
+                using(var client = new WebClient())
+                {
+                    var result = client.DownloadString("https://projectaltis.com/api/validatetoken?t=" + tempToken);
+                    return JsonConvert.DeserializeObject<LoginApiResponse>(result);
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.Error("Error when verifying token for prebeta");
+                Log.Error(ex);
+                return null;
+            }
+        }
     }
 }
