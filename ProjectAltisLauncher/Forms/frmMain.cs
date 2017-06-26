@@ -27,7 +27,6 @@ namespace ProjectAltis.Forms
         #region Fields
         private readonly SortedList<string, string> downloadList = new SortedList<string, string>(); // Filename, URL
         private readonly string currentDir;
-        private string nowDownloading;
         #endregion
         #region Main Form Events
         public FrmMain()
@@ -36,7 +35,6 @@ namespace ProjectAltis.Forms
             FormBorderStyle = FormBorderStyle.None;
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             currentDir = Directory.GetCurrentDirectory() + @"\";
-            nowDownloading = "";
 
             Settings.Default.password = "Deprecated";
 
@@ -51,7 +49,6 @@ namespace ProjectAltis.Forms
 
             versionLabel.Text = "Launcher v" + typeof(Program).Assembly.GetName().Version.ToString();
         }
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -95,17 +92,24 @@ namespace ProjectAltis.Forms
 
             webBrowser1.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, webBrowser1.Width, webBrowser1.Height, 20, 20));
 
-            RedistCheck.CheckRedistHandler();
-            if(frmReleaseNotes.ShouldShowReleaseNotes())
-                new frmReleaseNotes().Show();
+
         }
+
         private void Form1_Activated(object sender, EventArgs e)
         {
             ActiveControl = null;
         }
+
         private void Form1_Deactivate(object sender, EventArgs e)
         {
             ActiveControl = null;
+        }
+
+        private void FrmMain_Shown(object sender, EventArgs e)
+        {
+            RedistCheck.CheckRedistHandler();
+            if (frmReleaseNotes.ShouldShowReleaseNotes())
+                new frmReleaseNotes().ShowDialog();
         }
         #endregion
         #region Borderless Form Code
@@ -131,13 +135,13 @@ namespace ProjectAltis.Forms
         #endregion
         #region Button Behaviors
         #region Exit Button
-        private void btnExit_Click(object sender, EventArgs e)
+        private void BtnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
         #endregion
         #region Minimize Button
-        private void btnMin_Click(object sender, EventArgs e)
+        private void BtnMin_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
             WindowState = FormWindowState.Minimized;
@@ -145,7 +149,7 @@ namespace ProjectAltis.Forms
         }
         #endregion
         #region Play Button
-        private void btnPlay_Click(object sender, EventArgs e)
+        private void BtnPlay_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
             if (string.IsNullOrEmpty(txtUser.Text))
@@ -196,7 +200,7 @@ namespace ProjectAltis.Forms
         }
         #endregion
         #region Site Button
-        private void btnOfficialSite_Click(object sender, EventArgs e)
+        private void BtnOfficialSite_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
             Process.Start("https://www.projectaltis.com/");
@@ -204,7 +208,7 @@ namespace ProjectAltis.Forms
         }
         #endregion
         #region Discord Button
-        private void btnDiscord_Click(object sender, EventArgs e)
+        private void BtnDiscord_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
             Log.TryOpenUrl("https://discord.me/ttprojectaltis");
@@ -212,7 +216,7 @@ namespace ProjectAltis.Forms
         }
         #endregion
         #region Content Packs
-        private void btnContentPacks_Click(object sender, EventArgs e)
+        private void BtnContentPacks_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
             btnContentPacks.BackgroundImage = Resources.contentpacks_d;
@@ -222,7 +226,7 @@ namespace ProjectAltis.Forms
         }
         #endregion
         #region Change Theme
-        private void btnChangeBg_Click(object sender, EventArgs e)
+        private void BtnChangeBg_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
             frmBackgroundChoices bg = new frmBackgroundChoices();
@@ -237,7 +241,7 @@ namespace ProjectAltis.Forms
         }
         #endregion
         #region Options Button
-        private void btnOptions_Click(object sender, EventArgs e)
+        private void BtnOptions_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
             frmOptions op = new frmOptions();
@@ -256,7 +260,7 @@ namespace ProjectAltis.Forms
         }
         #endregion
         #region Credits
-        private void btnCredits_Click(object sender, EventArgs e)
+        private void BtnCredits_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
             frmCredits cred = new frmCredits();
@@ -315,7 +319,7 @@ namespace ProjectAltis.Forms
         }
         #endregion
         #region Play on Enter
-        private void txtPassAndUser_KeyDown(object sender, KeyEventArgs e)
+        private void TxtPassAndUser_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -331,7 +335,7 @@ namespace ProjectAltis.Forms
         #endregion
         #region Web Browser / News
         // Place any web browser events inside here
-        private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        private void WebBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             if (e.Url.ToString().Contains("https://projectaltis.com/launcher"))
             {
@@ -369,7 +373,7 @@ namespace ProjectAltis.Forms
         }
         #endregion
 
-        private void txtUser_TextChanged(object sender, EventArgs e)
+        private void TxtUser_TextChanged(object sender, EventArgs e)
         {
             Button_MouseLeave(btnPlay, EventArgs.Empty);
         }
@@ -384,5 +388,7 @@ namespace ProjectAltis.Forms
             int nWidthEllipse, // height of ellipse
             int nHeightEllipse // width of ellipse
         );
+
+
     }
 }

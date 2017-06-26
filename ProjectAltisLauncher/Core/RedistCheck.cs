@@ -31,8 +31,7 @@ namespace ProjectAltis.Core
         {
             const string keyName = "HKEY_CURRENT_USER\\System\\GameConfigStore";
             const string valueName = "GameDVR_Enabled";
-            bool result = Registry.GetValue(keyName, valueName, RegistryValueKind.DWord).ToString() == "1";
-            return result;
+            return Registry.GetValue(keyName, valueName, RegistryValueKind.DWord).ToString() == "1"; 
         }
     }
 }

@@ -56,8 +56,8 @@
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(201, 20);
             this.txtUser.TabIndex = 0;
-            this.txtUser.TextChanged += new System.EventHandler(this.txtUser_TextChanged);
-            this.txtUser.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPassAndUser_KeyDown);
+            this.txtUser.TextChanged += new System.EventHandler(this.TxtUser_TextChanged);
+            this.txtUser.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtPassAndUser_KeyDown);
             // 
             // txtPass
             // 
@@ -66,7 +66,7 @@
             this.txtPass.Size = new System.Drawing.Size(201, 20);
             this.txtPass.TabIndex = 1;
             this.txtPass.UseSystemPasswordChar = true;
-            this.txtPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPassAndUser_KeyDown);
+            this.txtPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtPassAndUser_KeyDown);
             // 
             // btnPlay
             // 
@@ -80,7 +80,7 @@
             this.btnPlay.Size = new System.Drawing.Size(90, 41);
             this.btnPlay.TabIndex = 3;
             this.btnPlay.UseVisualStyleBackColor = false;
-            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            this.btnPlay.Click += new System.EventHandler(this.BtnPlay_Click);
             this.btnPlay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_MouseDown);
             this.btnPlay.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnPlay.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
@@ -159,7 +159,7 @@
             this.btnWebsite.TabIndex = 9;
             this.btnWebsite.TabStop = false;
             this.btnWebsite.UseVisualStyleBackColor = false;
-            this.btnWebsite.Click += new System.EventHandler(this.btnOfficialSite_Click);
+            this.btnWebsite.Click += new System.EventHandler(this.BtnOfficialSite_Click);
             this.btnWebsite.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_MouseDown);
             this.btnWebsite.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnWebsite.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
@@ -182,7 +182,7 @@
             this.btnTheme.TabIndex = 12;
             this.btnTheme.TabStop = false;
             this.btnTheme.UseVisualStyleBackColor = false;
-            this.btnTheme.Click += new System.EventHandler(this.btnChangeBg_Click);
+            this.btnTheme.Click += new System.EventHandler(this.BtnChangeBg_Click);
             this.btnTheme.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_MouseDown);
             this.btnTheme.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnTheme.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
@@ -205,7 +205,7 @@
             this.btnCredits.TabIndex = 13;
             this.btnCredits.TabStop = false;
             this.btnCredits.UseVisualStyleBackColor = false;
-            this.btnCredits.Click += new System.EventHandler(this.btnCredits_Click);
+            this.btnCredits.Click += new System.EventHandler(this.BtnCredits_Click);
             this.btnCredits.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_MouseDown);
             this.btnCredits.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnCredits.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
@@ -228,7 +228,7 @@
             this.btnOptions.TabIndex = 15;
             this.btnOptions.TabStop = false;
             this.btnOptions.UseVisualStyleBackColor = false;
-            this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
+            this.btnOptions.Click += new System.EventHandler(this.BtnOptions_Click);
             this.btnOptions.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_MouseDown);
             this.btnOptions.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnOptions.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
@@ -251,7 +251,7 @@
             this.btnDiscord.TabIndex = 16;
             this.btnDiscord.TabStop = false;
             this.btnDiscord.UseVisualStyleBackColor = false;
-            this.btnDiscord.Click += new System.EventHandler(this.btnDiscord_Click);
+            this.btnDiscord.Click += new System.EventHandler(this.BtnDiscord_Click);
             this.btnDiscord.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_MouseDown);
             this.btnDiscord.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnDiscord.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
@@ -273,7 +273,7 @@
             this.btnExit.Size = new System.Drawing.Size(24, 24);
             this.btnExit.TabIndex = 18;
             this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.Click += new System.EventHandler(this.BtnExit_Click);
             this.btnExit.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnExit.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
@@ -293,7 +293,7 @@
             this.btnMin.Size = new System.Drawing.Size(24, 24);
             this.btnMin.TabIndex = 19;
             this.btnMin.UseVisualStyleBackColor = false;
-            this.btnMin.Click += new System.EventHandler(this.btnMin_Click);
+            this.btnMin.Click += new System.EventHandler(this.BtnMin_Click);
             this.btnMin.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnMin.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
             // 
@@ -309,7 +309,7 @@
             this.webBrowser1.TabIndex = 20;
             this.webBrowser1.TabStop = false;
             this.webBrowser1.Url = new System.Uri("https://projectaltis.com/launcher", System.UriKind.Absolute);
-            this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
+            this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.WebBrowser1_Navigating);
             // 
             // pbDownload
             // 
@@ -336,7 +336,7 @@
             this.btnContentPacks.TabIndex = 23;
             this.btnContentPacks.TabStop = false;
             this.btnContentPacks.UseVisualStyleBackColor = false;
-            this.btnContentPacks.Click += new System.EventHandler(this.btnContentPacks_Click);
+            this.btnContentPacks.Click += new System.EventHandler(this.BtnContentPacks_Click);
             this.btnContentPacks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_MouseDown);
             this.btnContentPacks.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
             this.btnContentPacks.MouseLeave += new System.EventHandler(this.Button_MouseLeave);
@@ -390,6 +390,7 @@
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Deactivate += new System.EventHandler(this.Form1_Deactivate);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Shown += new System.EventHandler(this.FrmMain_Shown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
