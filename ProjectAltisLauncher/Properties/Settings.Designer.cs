@@ -118,17 +118,5 @@ namespace ProjectAltis.Properties {
                 this["WantPassword"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("nil")]
-        public string ReleaseNotesVersion {
-            get {
-                return ((string)(this["ReleaseNotesVersion"]));
-            }
-            set {
-                this["ReleaseNotesVersion"] = value;
-            }
-        }
     }
 }

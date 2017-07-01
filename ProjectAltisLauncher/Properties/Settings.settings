@@ -26,8 +26,5 @@
     <Setting Name="WantPassword" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ReleaseNotesVersion" Type="System.String" Scope="User">
-      <Value Profile="(Default)">nil</Value>
-    </Setting>
   </Settings>
 </SettingsFile>

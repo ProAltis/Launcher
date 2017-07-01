@@ -108,8 +108,6 @@ namespace ProjectAltis.Forms
         private void FrmMain_Shown(object sender, EventArgs e)
         {
             RedistCheck.CheckRedistHandler();
-            if (frmReleaseNotes.ShouldShowReleaseNotes())
-                new frmReleaseNotes().ShowDialog();
         }
         #endregion
         #region Borderless Form Code
