@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using ProjectAltis.Core;
 using ProjectAltis.Enums;
 using ProjectAltis.Forms;
+using SharpRaven;
+using SharpRaven.Data;
 
 namespace ProjectAltis
 {
@@ -16,6 +19,9 @@ namespace ProjectAltis
         [STAThread]
         public static void Main()
         {
+            Application.ThreadException += Application_ThreadException;
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Initialize();
            
         }
@@ -48,6 +54,16 @@ namespace ProjectAltis
                 Log.TryOpenUrl(Path.Combine(Directory.GetCurrentDirectory(), "Logs"));
                 Environment.Exit(1);
             }
+        }
+
+        static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            Log.Error(e.Exception);
+        }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Log.Error(e.ExceptionObject as Exception);
         }
     }
 }
