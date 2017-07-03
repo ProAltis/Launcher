@@ -288,6 +288,12 @@ namespace ProjectAltis.Core
 			{
 				if (this.downloadList.Count > 0)
 				{
+					if (!this.instance.IsHandleCreated)
+					{
+						Log.Error("The form handle was not created.");
+						return;
+					}
+
 					this.instance.BeginInvoke((MethodInvoker)delegate
 					{
 						this.instance.pbDownload.Visible = true;
