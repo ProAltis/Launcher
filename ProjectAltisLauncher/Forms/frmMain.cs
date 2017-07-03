@@ -9,11 +9,6 @@ using System.Windows.Forms;
 using ProjectAltis.Core;
 using ProjectAltis.Properties;
 
-/*
-* TODO:
-*    Catch Exceptions
-*    Enable uploading of logs to pastebin - Idea suggested by Judge2020
-*/
 namespace ProjectAltis.Forms
 {
 	public partial class FrmMain : Form
