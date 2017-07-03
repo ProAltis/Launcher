@@ -2,16 +2,12 @@
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
-using ProjectAltis.Core;
 using ProjectAltis.Enums;
 using ProjectAltis.Forms;
-using SharpRaven;
-using SharpRaven.Data;
 
 namespace ProjectAltis
 {
-    public static class Program
+	public static class Program
     {
         /// <summary>
         ///     The main entry point for the application.
@@ -23,7 +19,6 @@ namespace ProjectAltis
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Initialize();
-           
         }
 
         private static async void Initialize()
@@ -56,12 +51,12 @@ namespace ProjectAltis
             }
         }
 
-        static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             Log.Error(e.Exception);
         }
 
-        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Log.Error(e.ExceptionObject as Exception);
         }

@@ -5,65 +5,54 @@ namespace ProjectAltis.Core
 {
     public static class Background
     {
-        private static readonly Random _rand = new Random();
+        private static readonly Random rand = new Random();
+
         public static Image ReturnRandomBackground()
         {
-            int val = _rand.Next(1, 7); // Generates a random number 1-6
-            Image backgroundImage = Properties.Resources.TTC;
+            int val = rand.Next(1, 7); // Generates a random number 1-6
             switch (val)
             {
                 case 1:
-                    backgroundImage = Properties.Resources.TTC;
-                    break;
+                    return ReturnBackground("TTC");
                 case 2:
-                    backgroundImage = Properties.Resources.DD;
-                    break;
+                    return ReturnBackground("DD");
                 case 3:
-                    backgroundImage = Properties.Resources.DG;
-                    break;
+                    return ReturnBackground("DG");
                 case 4:
-                    backgroundImage = Properties.Resources.MML;
-                    break;
+                    return ReturnBackground("MML");
                 case 5:
-                    backgroundImage = Properties.Resources.Brrrgh;
-                    break;
+                    return ReturnBackground("Brrrgh");
                 case 6:
-                    backgroundImage = Properties.Resources.DDL;
-                    break;
+                    return ReturnBackground("DDLs");
             }
-            return backgroundImage;
+            return ReturnBackground("TTC"); // Return a default case of TTC, is this possible?
         }
+
         public static Image ReturnBackground(string bg)
         {
-            Image backgroundImage = Properties.Resources.TTC;
             switch (bg)
             {
                 case "TTC":
-                    backgroundImage = Properties.Resources.TTC;
-                    break;
+                    return Properties.Resources.TTC;
                 case "DD":
-                    backgroundImage = Properties.Resources.DD;
-                    break;
+                    return Properties.Resources.DD;
                 case "DG":
-                    backgroundImage = Properties.Resources.DG;
-                    break;
+                    return Properties.Resources.DG;
                 case "MML":
-                    backgroundImage = Properties.Resources.MML;
-                    break;
+                    return Properties.Resources.MML;
                 case "Brrrgh":
-                    backgroundImage = Properties.Resources.Brrrgh;
-                    break;
+                    return Properties.Resources.Brrrgh;
                 case "DDL":
-                    backgroundImage = Properties.Resources.DDL;
-                    break;
+                    return Properties.Resources.DDL;
+				default:
+					return Properties.Resources.TTC;
             }
-            return backgroundImage;
         }
+
         public static Image ImageChooser(string name, string method)
         {
             method = method.ToLower();
-            Image img = null;
-            switch (name)
+            switch (name.ToLower())
             {
                 case "create":
                     switch (method)
@@ -201,7 +190,7 @@ namespace ProjectAltis.Core
                     }
                     break;
             }
-            return img;
+            return null;
         }
     }
 }

@@ -15,10 +15,7 @@ namespace ProjectAltis.Core
         {
             try
             {
-                System.IO.FileInfo myFile = new System.IO.FileInfo(filePath);
-                long sizeInBytes = myFile.Length;
-                return sizeInBytes == size; // returns true or false
-
+                return new FileInfo(filePath).Length == size; 
             }
             catch (Exception ex)
             {
@@ -28,6 +25,7 @@ namespace ProjectAltis.Core
                 return false;
             }
         }
+
         /// <summary>
         /// Compares the sha256.
         /// </summary>
@@ -63,6 +61,7 @@ namespace ProjectAltis.Core
                 return false;
             }
         }
+
         /// <summary>
         /// Calculates the sha256.
         /// </summary>
@@ -94,6 +93,7 @@ namespace ProjectAltis.Core
 				throw;
 			}
         }
+
         /// <summary>
         /// Calculates the size of the file.
         /// </summary>

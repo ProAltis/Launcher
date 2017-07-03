@@ -26,6 +26,7 @@ namespace ProjectAltis.Core
             }
             return responseFromServer;
         }
+
         /// <summary>
         /// Converts the type of to network data.
         /// </summary>

@@ -1,9 +1,9 @@
 ﻿namespace ProjectAltis.Enums
 {
-    public enum FileTypes
-    {
-        Phase,
-        Config,
-        Default
-    }
+	public enum FileTypes
+	{
+		Phase,
+		Config,
+		Default
+	}
 }
