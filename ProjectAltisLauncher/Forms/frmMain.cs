@@ -150,6 +150,7 @@ namespace ProjectAltis.Forms
 				return;
 			}
 			btnPlay.Enabled = false;
+		    ErrorReporter.Instance.Username = txtUser.Text;
 			#region Save credentials if necessary
 			if (cbSaveLogin.Checked)
 			{

@@ -112,6 +112,9 @@ namespace ProjectAltis
         {
             WriteLine(ex.ToString(), LogType.Error, memberName, sourceFilePath);
             var ravenClient = new RavenClient("https://4efd8a20d8a94bfe9fbd4ec828c43dfe:614ae4d4f90c4205ad1c1b1f2c494088@sentry.io/186402");
+            ravenClient.Release = typeof(Program).Assembly.GetName().Version.ToString();
+            ravenClient.Tags.Add("AltisUsername", ErrorReporter.Instance.Username);
+            ravenClient.Tags.Add("wantRandomBackgrounds", ErrorReporter.Instance.RandomBackgrounds.ToString());
             ravenClient.Capture(new SentryEvent(ex));
         }
 

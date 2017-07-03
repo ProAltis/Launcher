@@ -154,6 +154,7 @@
     <Compile Include="Core\Background.cs" />
     <Compile Include="Core\Data.cs" />
     <Compile Include="Core\DateTimeExtensions.cs" />
+    <Compile Include="Core\ErrorReporter.cs" />
     <Compile Include="Core\FileUpdater.cs" />
     <Compile Include="Core\RedistCheck.cs" />
     <Compile Include="Core\UwpHelper.cs" />
