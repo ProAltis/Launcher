@@ -3,9 +3,15 @@ using System.Drawing;
 
 namespace ProjectAltis.Core
 {
-    public static class Background
+    public class Background
     {
         private static readonly Random rand = new Random();
+        private const string ToontownCentral = "TTC";
+        private const string DonaldsDock = "DD";
+        private const string DaisyGardens = "DG";
+        private const string MinniesMelodyland = "MML";
+        private const string TheBrrrgh = "Brrrgh";
+        private const string DonaldsDreamland = "DDL";
 
         public static Image ReturnRandomBackground()
         {
@@ -13,36 +19,36 @@ namespace ProjectAltis.Core
             switch (val)
             {
                 case 1:
-                    return ReturnBackground("TTC");
+                    return ReturnBackground(ToontownCentral);
                 case 2:
-                    return ReturnBackground("DD");
+                    return ReturnBackground(DonaldsDock);
                 case 3:
-                    return ReturnBackground("DG");
+                    return ReturnBackground(DaisyGardens);
                 case 4:
-                    return ReturnBackground("MML");
+                    return ReturnBackground(MinniesMelodyland);
                 case 5:
-                    return ReturnBackground("Brrrgh");
+                    return ReturnBackground(TheBrrrgh);
                 case 6:
-                    return ReturnBackground("DDLs");
+                    return ReturnBackground(DonaldsDreamland);
             }
-            return ReturnBackground("TTC"); // Return a default case of TTC, is this possible?
+            return ReturnBackground(ToontownCentral); // Return a default case of TTC, is this possible?
         }
 
-        public static Image ReturnBackground(string bg)
+        public static Image ReturnBackground(string background)
         {
-            switch (bg)
+            switch (background)
             {
-                case "TTC":
+                case ToontownCentral:
                     return Properties.Resources.TTC;
-                case "DD":
+                case DonaldsDock:
                     return Properties.Resources.DD;
-                case "DG":
+                case DaisyGardens:
                     return Properties.Resources.DG;
-                case "MML":
+                case MinniesMelodyland:
                     return Properties.Resources.MML;
-                case "Brrrgh":
+                case TheBrrrgh:
                     return Properties.Resources.Brrrgh;
-                case "DDL":
+                case DonaldsDreamland:
                     return Properties.Resources.DDL;
 				default:
 					return Properties.Resources.TTC;
