@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace ProjectAltis.Forms
 {
-    public partial class frmCredits : Form
+    public partial class FrmCredits : Form
     {
-        public frmCredits()
+        public FrmCredits()
         {
             InitializeComponent();
         }

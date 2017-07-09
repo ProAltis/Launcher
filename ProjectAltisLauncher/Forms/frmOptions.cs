@@ -5,9 +5,9 @@ using ProjectAltis.Core;
 
 namespace ProjectAltis.Forms
 {
-	public partial class frmOptions : Form
+	public partial class FrmOptions : Form
     {
-        public frmOptions()
+        public FrmOptions()
         {
             InitializeComponent();
         }

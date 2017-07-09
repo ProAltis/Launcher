@@ -1,6 +1,6 @@
 ﻿namespace ProjectAltis.Forms
 {
-    partial class frmContentPacks
+    partial class FrmContentPacks
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmContentPacks));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmContentPacks));
             this.grpContentPacks = new System.Windows.Forms.GroupBox();
             this.lstPacks = new System.Windows.Forms.ListBox();
             this.btnImport = new System.Windows.Forms.Button();

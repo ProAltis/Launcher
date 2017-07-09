@@ -9,7 +9,7 @@ namespace ProjectAltis.Forms
     /// Class frmContentPacks.
     /// </summary>
     /// <seealso cref="Form" />
-    public partial class frmContentPacks : Form
+    public partial class FrmContentPacks : Form
     {
         /// <summary>
         /// The file paths
@@ -24,9 +24,9 @@ namespace ProjectAltis.Forms
         private bool _needsToBeClosed;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="frmContentPacks"/> class.
+        /// Initializes a new instance of the <see cref="FrmContentPacks"/> class.
         /// </summary>
-        public frmContentPacks()
+        public FrmContentPacks()
         {
             InitializeComponent();
             try

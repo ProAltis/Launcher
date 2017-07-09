@@ -4,9 +4,9 @@ using ProjectAltis.Properties;
 
 namespace ProjectAltis.Forms
 {
-    public partial class frmBackgroundChoices : Form
+    public partial class FrmBackgroundChoices : Form
     {
-        public frmBackgroundChoices()
+        public FrmBackgroundChoices()
         {
             InitializeComponent();
         }

@@ -1,6 +1,6 @@
 ﻿namespace ProjectAltis.Forms
 {
-    partial class frmBackgroundChoices
+    partial class FrmBackgroundChoices
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBackgroundChoices));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmBackgroundChoices));
             this.grpMain = new System.Windows.Forms.GroupBox();
             this.radDD = new System.Windows.Forms.RadioButton();
             this.radTTC = new System.Windows.Forms.RadioButton();

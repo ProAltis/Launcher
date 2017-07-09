@@ -213,7 +213,7 @@ namespace ProjectAltis.Forms
 		{
 			Audio.PlaySoundFile("sndclick");
 			btnContentPacks.BackgroundImage = Resources.contentpacks_d;
-			frmContentPacks contentPack = new frmContentPacks();
+			FrmContentPacks contentPack = new FrmContentPacks();
 			contentPack.ShowDialog(this);
 			ActiveControl = null;
 		}
@@ -222,7 +222,7 @@ namespace ProjectAltis.Forms
 		private void BtnChangeBg_Click(object sender, EventArgs e)
 		{
 			Audio.PlaySoundFile("sndclick");
-			frmBackgroundChoices bg = new frmBackgroundChoices();
+			FrmBackgroundChoices bg = new FrmBackgroundChoices();
 			bg.ShowDialog();
 			if (!Settings.Default.wantsRandomBg)
 			{
@@ -237,7 +237,7 @@ namespace ProjectAltis.Forms
 		private void BtnOptions_Click(object sender, EventArgs e)
 		{
 			Audio.PlaySoundFile("sndclick");
-			frmOptions op = new frmOptions();
+			FrmOptions op = new FrmOptions();
 			op.ShowDialog();
 			// Apply user settings
 			if (Settings.Default.wantsCursor) // Cursor
@@ -256,7 +256,7 @@ namespace ProjectAltis.Forms
 		private void BtnCredits_Click(object sender, EventArgs e)
 		{
 			Audio.PlaySoundFile("sndclick");
-			frmCredits cred = new frmCredits();
+			FrmCredits cred = new FrmCredits();
 			cred.ShowDialog();
 			ActiveControl = null;
 		}

@@ -1,6 +1,6 @@
 ﻿namespace ProjectAltis.Forms
 {
-    partial class frmOptions
+    partial class FrmOptions
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOptions));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOptions));
             this.grpOptions = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.chkRandomBackgrounds = new System.Windows.Forms.CheckBox();
