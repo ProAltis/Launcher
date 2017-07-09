@@ -75,6 +75,20 @@ namespace ProjectAltis.Core
             }
         }
 
+        public static string RawProductName()
+        {
+            try
+            {
+                var reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+                return (string)reg.GetValue("ProductName");
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex);
+                return "INVALID";
+            }
+        }
+
         private static Credential GetCredential(string target)
         {
             var cm = new Credential { Target = target };

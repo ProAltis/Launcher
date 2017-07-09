@@ -1,4 +1,6 @@
-﻿using ProjectAltis.Properties;
+﻿using System.Linq;
+using System.Reflection;
+using ProjectAltis.Properties;
 
 namespace ProjectAltis.Core
 {
@@ -9,5 +11,9 @@ namespace ProjectAltis.Core
 
         public string Username = Settings.Default.username;
         public bool RandomBackgrounds = Settings.Default.wantsRandomBg;
+
+        public string NetVersion => Assembly.GetExecutingAssembly().GetReferencedAssemblies().First(x => x.Name == "System.Core").Version.ToString();
+
+        public string WindowsVersion => UwpHelper.RawProductName();
     }
 }
