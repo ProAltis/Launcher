@@ -52,6 +52,27 @@ namespace ProjectAltis.Core
 				MessageBox.Show("An unknown error occured when starting the game!\n It has been logged in the launcher's log.");
 			}
 
-		}
-	}
+                frmInstance.BeginInvoke((MethodInvoker)delegate
+                {
+                    Log.Info("Game process ended.");
+                    altis.WaitForExit();
+                    frmInstance.lblNowDownloading.Text = "Thanks for playing!";
+                    frmInstance.Show();
+                });
+            }
+            catch (Win32Exception ex)
+            {
+                Log.Error("Win32Exception thrown. Possibly older os?");
+                Log.Error(ex);
+                MessageBox.Show("An error has occured starting the game!\nIt is possible that you are running a legacy system.\nIt has been logged in the launcher's log.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error when starting game!");
+                Log.Error(ex);
+                MessageBox.Show("An unknown error occured when starting the game!\n It has been logged in the launcher's log.");
+            }
+
+        }
+    }
 }
