@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using ProjectAltis.Manifests;
 using Newtonsoft.Json;
 
@@ -54,17 +55,20 @@ namespace ProjectAltis.Core
             return bytes + " bytes";
         }
 
+
         public static LoginApiResponse GetLoginAPIResponse(string user, string pass)
         {
-            HttpWebRequest httpWebRequest =
-    (HttpWebRequest)WebRequest.Create("https://www.projectaltis.com/api/login");
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("https://www.projectaltis.com/api/login");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             using (StreamWriter streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
-                string json = "{\"u\":\"" + user + "\"," +
-                              "\"p\":\"" + pass + "\"}";
-                streamWriter.Write(json);
+                Credentials cred = new Credentials()
+                {
+                    u = user,
+                    p = pass
+                };
+                streamWriter.Write(JsonConvert.SerializeObject(cred));
                 streamWriter.Flush();
                 streamWriter.Close();
             }
