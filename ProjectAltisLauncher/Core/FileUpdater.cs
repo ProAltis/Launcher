@@ -125,7 +125,7 @@ namespace ProjectAltis.Core
 			try
 			{
 				Log.Info("Querying API for response.");
-				this.instance.BeginInvoke((MethodInvoker)delegate
+				this.instance?.BeginInvoke((MethodInvoker)delegate
 				{
 					this.instance.lblNowDownloading.Visible = true;
 					this.instance.lblInfo.ForeColor = Color.Black;
