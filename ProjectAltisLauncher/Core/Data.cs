@@ -1,5 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
+using ProjectAltis.Manifests;
+using Newtonsoft.Json;
 
 namespace ProjectAltis.Core
 {
@@ -49,6 +52,30 @@ namespace ProjectAltis.Core
                 return (bytes / 1000) + " KB";
             }
             return bytes + " bytes";
+        }
+
+        public static LoginApiResponse GetLoginAPIResponse(string user, string pass)
+        {
+            HttpWebRequest httpWebRequest =
+    (HttpWebRequest)WebRequest.Create("https://www.projectaltis.com/api/login");
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+            using (StreamWriter streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                string json = "{\"u\":\"" + user + "\"," +
+                              "\"p\":\"" + pass + "\"}";
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+
+            HttpWebResponse httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
+            using (StreamReader streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                string result = streamReader.ReadToEnd();
+                return JsonConvert.DeserializeObject<LoginApiResponse>(result);
+            }
         }
     }
 }

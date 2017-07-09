@@ -24,6 +24,10 @@ namespace ProjectAltis.Core
 
 		private int verifyCount;
 
+        public FileUpdater()
+        {
+
+        }
 
 		public FileUpdater(FrmMain instance)
 		{
@@ -116,7 +120,7 @@ namespace ProjectAltis.Core
 		/// <param name="pass">Password.</param>
 		/// <param name="response">Web response.</param>
 		/// <returns>True if credentials are valid; otherwise false.</returns>
-		private LoginApiResponse GetLoginAPIResponse(string user, string pass)
+		public LoginApiResponse GetLoginAPIResponse(string user, string pass)
 		{
 			try
 			{
@@ -127,28 +131,7 @@ namespace ProjectAltis.Core
 					this.instance.lblInfo.ForeColor = Color.Black;
 					this.instance.lblInfo.Text = "Contacting login server...";
 				});
-				HttpWebRequest httpWebRequest =
-					(HttpWebRequest)WebRequest.Create("https://www.projectaltis.com/api/login");
-				httpWebRequest.ContentType = "application/json";
-				httpWebRequest.Method = "POST";
-				using (StreamWriter streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-				{
-					string json = "{\"u\":\"" + user + "\"," +
-								  "\"p\":\"" + pass + "\"}";
-					streamWriter.Write(json);
-					streamWriter.Flush();
-					streamWriter.Close();
-				}
-
-				HttpWebResponse httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-
-				using (StreamReader streamReader = new StreamReader(httpResponse.GetResponseStream()))
-				{
-					string result = streamReader.ReadToEnd();
-					this.instance.BeginInvoke((MethodInvoker)delegate { this.instance.lblNowDownloading.Text = ""; });
-
-					return JsonConvert.DeserializeObject<LoginApiResponse>(result);
-				}
+                return Data.GetLoginAPIResponse(user, pass);
 			}
 			catch (Exception ex)
 			{

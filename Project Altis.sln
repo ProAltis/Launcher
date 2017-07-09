@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project Altis", "ProjectAltisLauncher\Project Altis.csproj", "{081848B9-ACF8-4B76-AE31-2536C79B0219}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectAltisTests", "ProjectAltisTests\ProjectAltisTests.csproj", "{EE57E924-FFD2-4890-B098-FD0A08225EBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +24,14 @@ Global
 		{081848B9-ACF8-4B76-AE31-2536C79B0219}.Release|Any CPU.Build.0 = Release|Any CPU
 		{081848B9-ACF8-4B76-AE31-2536C79B0219}.Release|x86.ActiveCfg = Release|x86
 		{081848B9-ACF8-4B76-AE31-2536C79B0219}.Release|x86.Build.0 = Release|x86
+		{EE57E924-FFD2-4890-B098-FD0A08225EBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE57E924-FFD2-4890-B098-FD0A08225EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE57E924-FFD2-4890-B098-FD0A08225EBA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EE57E924-FFD2-4890-B098-FD0A08225EBA}.Debug|x86.Build.0 = Debug|Any CPU
+		{EE57E924-FFD2-4890-B098-FD0A08225EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE57E924-FFD2-4890-B098-FD0A08225EBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE57E924-FFD2-4890-B098-FD0A08225EBA}.Release|x86.ActiveCfg = Release|Any CPU
+		{EE57E924-FFD2-4890-B098-FD0A08225EBA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
