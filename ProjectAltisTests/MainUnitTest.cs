@@ -12,7 +12,7 @@ namespace ProjectAltisTests
         public void TestLoginApiWorks()
         {
             LoginApiResponse response = Data.GetLoginAPIResponse("drewdev", "drewdev");
-            Assert.IsTrue(response.status == "true");
+            Assert.IsNotNull(response);
         }
     }
 }
