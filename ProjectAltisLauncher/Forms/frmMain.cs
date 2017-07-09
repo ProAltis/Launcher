@@ -339,7 +339,6 @@ namespace ProjectAltis.Forms
 		}
 		#endregion
 
-
 		#region Directory Things
 
 		/// <summary>
