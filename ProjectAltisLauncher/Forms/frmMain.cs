@@ -381,7 +381,7 @@ namespace ProjectAltis.Forms
 			int nHeightEllipse // width of ellipse
 		);
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        public void pictureBox1_Click(object sender, EventArgs e)
         {
             var msgResult = MessageBox.Show(this,
                 "Project Altis is currently in Pre-Beta mode! Only those with a Beta Certificate get in game to experience what Project Altis Beta will be like. For more information visit the website and view #announcements in the discord.");

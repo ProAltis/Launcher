@@ -56,14 +56,21 @@ namespace ProjectAltis.Core
 			{
 				case "true":
 					{
-
-						this.instance.BeginInvoke((MethodInvoker)delegate
-						{
-							this.instance.lblInfo.ForeColor = Color.Green;
-							this.instance.lblInfo.Text = resp.reason;
-						});
-						UpdateFilesAndPlay();
-						break;
+					    if(IsPreBeta(resp.additional))
+					    {
+					        this.instance.BeginInvoke((MethodInvoker) delegate
+					        {
+					            this.instance.lblInfo.ForeColor = Color.Green;
+					            this.instance.lblInfo.Text = resp.reason;
+					        });
+					        UpdateFilesAndPlay();
+					        break;
+					    }
+					    else
+					    {
+					        this.instance.pictureBox1_Click(null, null);
+                            break;
+					    }
 					}
 				case "false":
 					{
@@ -411,7 +418,7 @@ namespace ProjectAltis.Core
 		{
 			var result = VerifyToken(tempToken);
 			var sanitycheck = SanityCheck(result.additional);
-			return bool.Parse(SanityCheck(result.additional).statuscheck) || int.Parse(sanitycheck.powerlevel) >= 300;
+			return bool.Parse(SanityCheck(result.additional).statuscheck) || int.Parse(sanitycheck.powerlevel) >= 151;
 		}
 
 		private static SanityCheckApiResponse SanityCheck(string realToken)
