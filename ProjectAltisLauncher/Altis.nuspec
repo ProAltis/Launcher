@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Altis</id>
+        <version>1.1.2</version>
+        <title>Altis</title>
+        <authors>Project Altis</authors>
+        <owners>Project Altis</owners>
+        <projectUrl>https://projectaltis.com</projectUrl>
+        <iconUrl>https://projectaltis.com/favicon.ico</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Altis Launcher</description>
+        <language>en-US</language>
+    </metadata>
+    <files>
+        <file src="ProjectAltisLauncher\bin\Release\**" target="lib\net45" />
+        <file src="ProjectAltisLauncher\bin\Release\DeltaCompressionDotNet.dll" target="lib\net45\DeltaCompressionDotNet.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\DeltaCompressionDotNet.MsDelta.dll" target="lib\net45\DeltaCompressionDotNet.MsDelta.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\DeltaCompressionDotNet.PatchApi.dll" target="lib\net45\DeltaCompressionDotNet.PatchApi.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\ICSharpCode.SharpZipLib.dll" target="lib\net45\ICSharpCode.SharpZipLib.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\ICSharpCode.SharpZipLib.xml" target="lib\net45\ICSharpCode.SharpZipLib.xml" />
+        <file src="ProjectAltisLauncher\bin\Release\Mono.Cecil.dll" target="lib\net45\Mono.Cecil.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Mono.Cecil.Mdb.dll" target="lib\net45\Mono.Cecil.Mdb.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Mono.Cecil.Pdb.dll" target="lib\net45\Mono.Cecil.Pdb.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Mono.Cecil.Rocks.dll" target="lib\net45\Mono.Cecil.Rocks.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Newtonsoft.Json.dll" target="lib\net45\Newtonsoft.Json.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Newtonsoft.Json.xml" target="lib\net45\Newtonsoft.Json.xml" />
+        <file src="ProjectAltisLauncher\bin\Release\NuGet.Squirrel.dll" target="lib\net45\NuGet.Squirrel.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\NuGet.Squirrel.pdb" target="lib\net45\NuGet.Squirrel.pdb" />
+        <file src="ProjectAltisLauncher\bin\Release\Project Altis.exe" target="lib\net45\Project Altis.exe" />
+        <file src="ProjectAltisLauncher\bin\Release\Project Altis.exe.config" target="lib\net45\Project Altis.exe.config" />
+        <file src="ProjectAltisLauncher\bin\Release\Project Altis.pdb" target="lib\net45\Project Altis.pdb" />
+        <file src="ProjectAltisLauncher\bin\Release\SharpRaven.dll" target="lib\net45\SharpRaven.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\SharpRaven.pdb" target="lib\net45\SharpRaven.pdb" />
+        <file src="ProjectAltisLauncher\bin\Release\SharpRaven.xml" target="lib\net45\SharpRaven.xml" />
+        <file src="ProjectAltisLauncher\bin\Release\Splat.dll" target="lib\net45\Splat.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Splat.pdb" target="lib\net45\Splat.pdb" />
+        <file src="ProjectAltisLauncher\bin\Release\Squirrel.dll" target="lib\net45\Squirrel.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Squirrel.pdb" target="lib\net45\Squirrel.pdb" />
+        <file src="ProjectAltisLauncher\bin\Release\System.Runtime.WindowsRuntime.dll" target="lib\net45\System.Runtime.WindowsRuntime.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\System.Runtime.WindowsRuntime.UI.Xaml.dll" target="lib\net45\System.Runtime.WindowsRuntime.UI.Xaml.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\System.Runtime.WindowsRuntime.UI.Xaml.xml" target="lib\net45\System.Runtime.WindowsRuntime.UI.Xaml.xml" />
+        <file src="ProjectAltisLauncher\bin\Release\System.Runtime.WindowsRuntime.xml" target="lib\net45\System.Runtime.WindowsRuntime.xml" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.Activation.ActivatedEventsContract.winmd" target="lib\net45\Windows.ApplicationModel.Activation.ActivatedEventsContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.Activation.ActivationCameraSettingsContract.winmd" target="lib\net45\Windows.ApplicationModel.Activation.ActivationCameraSettingsContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.Activation.ContactActivatedEventsContract.winmd" target="lib\net45\Windows.ApplicationModel.Activation.ContactActivatedEventsContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.Activation.WebUISearchActivatedEventsContract.winmd" target="lib\net45\Windows.ApplicationModel.Activation.WebUISearchActivatedEventsContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.Background.BackgroundAlarmApplicationContract.winmd" target="lib\net45\Windows.ApplicationModel.Background.BackgroundAlarmApplicationContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.Calls.Background.CallsBackgroundContract.winmd" target="lib\net45\Windows.ApplicationModel.Calls.Background.CallsBackgroundContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.Calls.CallsVoipContract.winmd" target="lib\net45\Windows.ApplicationModel.Calls.CallsVoipContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.Calls.LockScreenCallContract.winmd" target="lib\net45\Windows.ApplicationModel.Calls.LockScreenCallContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.FullTrustAppContract.winmd" target="lib\net45\Windows.ApplicationModel.FullTrustAppContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.Preview.Notes.PreviewNotesContract.winmd" target="lib\net45\Windows.ApplicationModel.Preview.Notes.PreviewNotesContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.Resources.Management.ResourceIndexerContract.winmd" target="lib\net45\Windows.ApplicationModel.Resources.Management.ResourceIndexerContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.Search.Core.SearchCoreContract.winmd" target="lib\net45\Windows.ApplicationModel.Search.Core.SearchCoreContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.Search.SearchContract.winmd" target="lib\net45\Windows.ApplicationModel.Search.SearchContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.SocialInfo.SocialInfoContract.winmd" target="lib\net45\Windows.ApplicationModel.SocialInfo.SocialInfoContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.StartupTaskContract.winmd" target="lib\net45\Windows.ApplicationModel.StartupTaskContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.ApplicationModel.Wallet.WalletContract.winmd" target="lib\net45\Windows.ApplicationModel.Wallet.WalletContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Devices.Custom.CustomDeviceContract.winmd" target="lib\net45\Windows.Devices.Custom.CustomDeviceContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Devices.DevicesLowLevelContract.winmd" target="lib\net45\Windows.Devices.DevicesLowLevelContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Devices.Portable.PortableDeviceContract.winmd" target="lib\net45\Windows.Devices.Portable.PortableDeviceContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Devices.Printers.Extensions.ExtensionsContract.winmd" target="lib\net45\Windows.Devices.Printers.Extensions.ExtensionsContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Devices.Printers.PrintersContract.winmd" target="lib\net45\Windows.Devices.Printers.PrintersContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Devices.Scanners.ScannerDeviceContract.winmd" target="lib\net45\Windows.Devices.Scanners.ScannerDeviceContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Devices.Sms.LegacySmsApiContract.winmd" target="lib\net45\Windows.Devices.Sms.LegacySmsApiContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Foundation.FoundationContract.winmd" target="lib\net45\Windows.Foundation.FoundationContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Foundation.UniversalApiContract.winmd" target="lib\net45\Windows.Foundation.UniversalApiContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Gaming.Preview.GamesEnumerationContract.winmd" target="lib\net45\Windows.Gaming.Preview.GamesEnumerationContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Globalization.GlobalizationJapanesePhoneticAnalyzerContract.winmd" target="lib\net45\Windows.Globalization.GlobalizationJapanesePhoneticAnalyzerContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Graphics.Printing3D.Printing3DContract.winmd" target="lib\net45\Windows.Graphics.Printing3D.Printing3DContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Management.Deployment.Preview.DeploymentPreviewContract.winmd" target="lib\net45\Windows.Management.Deployment.Preview.DeploymentPreviewContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Management.Orchestration.OrchestrationContract.winmd" target="lib\net45\Windows.Management.Orchestration.OrchestrationContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Management.Workplace.WorkplaceSettingsContract.winmd" target="lib\net45\Windows.Management.Workplace.WorkplaceSettingsContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Media.Capture.AppCaptureContract.winmd" target="lib\net45\Windows.Media.Capture.AppCaptureContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Media.Capture.CameraCaptureUIContract.winmd" target="lib\net45\Windows.Media.Capture.CameraCaptureUIContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Media.Devices.CallControlContract.winmd" target="lib\net45\Windows.Media.Devices.CallControlContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Media.MediaControlContract.winmd" target="lib\net45\Windows.Media.MediaControlContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Media.Playlists.PlaylistsContract.winmd" target="lib\net45\Windows.Media.Playlists.PlaylistsContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Media.Protection.ProtectionRenewalContract.winmd" target="lib\net45\Windows.Media.Protection.ProtectionRenewalContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Networking.Connectivity.WwanContract.winmd" target="lib\net45\Windows.Networking.Connectivity.WwanContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Networking.NetworkOperators.LegacyNetworkOperatorsContract.winmd" target="lib\net45\Windows.Networking.NetworkOperators.LegacyNetworkOperatorsContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Networking.Sockets.ControlChannelTriggerContract.winmd" target="lib\net45\Windows.Networking.Sockets.ControlChannelTriggerContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Perception.Automation.Core.PerceptionAutomationCoreContract.winmd" target="lib\net45\Windows.Perception.Automation.Core.PerceptionAutomationCoreContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Security.EnterpriseData.EnterpriseDataContract.winmd" target="lib\net45\Windows.Security.EnterpriseData.EnterpriseDataContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Security.ExchangeActiveSyncProvisioning.EasContract.winmd" target="lib\net45\Windows.Security.ExchangeActiveSyncProvisioning.EasContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Services.Maps.GuidanceContract.winmd" target="lib\net45\Windows.Services.Maps.GuidanceContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Services.Maps.LocalSearchContract.winmd" target="lib\net45\Windows.Services.Maps.LocalSearchContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Services.Store.StoreContract.winmd" target="lib\net45\Windows.Services.Store.StoreContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.System.Profile.ProfileHardwareTokenContract.winmd" target="lib\net45\Windows.System.Profile.ProfileHardwareTokenContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.System.Profile.ProfileRetailInfoContract.winmd" target="lib\net45\Windows.System.Profile.ProfileRetailInfoContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.System.Profile.ProfileSharedModeContract.winmd" target="lib\net45\Windows.System.Profile.ProfileSharedModeContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.System.Profile.SystemManufacturers.SystemManufacturersContract.winmd" target="lib\net45\Windows.System.Profile.SystemManufacturers.SystemManufacturersContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.System.UserProfile.UserProfileContract.winmd" target="lib\net45\Windows.System.UserProfile.UserProfileContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.System.UserProfile.UserProfileLockScreenContract.winmd" target="lib\net45\Windows.System.UserProfile.UserProfileLockScreenContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.UI.ApplicationSettings.ApplicationsSettingsContract.winmd" target="lib\net45\Windows.UI.ApplicationSettings.ApplicationsSettingsContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.UI.Core.AnimationMetrics.AnimationMetricsContract.winmd" target="lib\net45\Windows.UI.Core.AnimationMetrics.AnimationMetricsContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.UI.Core.CoreWindowDialogsContract.winmd" target="lib\net45\Windows.UI.Core.CoreWindowDialogsContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.UI.ViewManagement.ViewManagementViewScalingContract.winmd" target="lib\net45\Windows.UI.ViewManagement.ViewManagementViewScalingContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.UI.Xaml.Hosting.HostingContract.winmd" target="lib\net45\Windows.UI.Xaml.Hosting.HostingContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.Web.Http.Diagnostics.HttpDiagnosticsContract.winmd" target="lib\net45\Windows.Web.Http.Diagnostics.HttpDiagnosticsContract.winmd" />
+        <file src="ProjectAltisLauncher\bin\Release\Windows.WinMD" target="lib\net45\Windows.WinMD" />
+    </files>
+</package>
