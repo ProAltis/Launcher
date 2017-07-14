@@ -73,6 +73,7 @@
             // btnPlay
             // 
             this.btnPlay.BackColor = System.Drawing.Color.Transparent;
+            this.btnPlay.BackgroundImage = global::ProjectAltis.Properties.Resources.create;
             this.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnPlay.FlatAppearance.BorderSize = 0;
             this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -146,6 +147,7 @@
             // btnWebsite
             // 
             this.btnWebsite.BackColor = System.Drawing.Color.Transparent;
+            this.btnWebsite.BackgroundImage = global::ProjectAltis.Properties.Resources.website;
             this.btnWebsite.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnWebsite.FlatAppearance.BorderSize = 0;
             this.btnWebsite.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -168,6 +170,7 @@
             // btnTheme
             // 
             this.btnTheme.BackColor = System.Drawing.Color.Transparent;
+            this.btnTheme.BackgroundImage = global::ProjectAltis.Properties.Resources.theme;
             this.btnTheme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnTheme.FlatAppearance.BorderSize = 0;
             this.btnTheme.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -190,6 +193,7 @@
             // btnCredits
             // 
             this.btnCredits.BackColor = System.Drawing.Color.Transparent;
+            this.btnCredits.BackgroundImage = global::ProjectAltis.Properties.Resources.credits;
             this.btnCredits.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnCredits.FlatAppearance.BorderSize = 0;
             this.btnCredits.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -212,6 +216,7 @@
             // btnOptions
             // 
             this.btnOptions.BackColor = System.Drawing.Color.Transparent;
+            this.btnOptions.BackgroundImage = global::ProjectAltis.Properties.Resources.options;
             this.btnOptions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnOptions.FlatAppearance.BorderSize = 0;
             this.btnOptions.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -234,6 +239,7 @@
             // btnDiscord
             // 
             this.btnDiscord.BackColor = System.Drawing.Color.Transparent;
+            this.btnDiscord.BackgroundImage = global::ProjectAltis.Properties.Resources.discord;
             this.btnDiscord.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnDiscord.FlatAppearance.BorderSize = 0;
             this.btnDiscord.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -318,6 +324,7 @@
             // btnContentPacks
             // 
             this.btnContentPacks.BackColor = System.Drawing.Color.Transparent;
+            this.btnContentPacks.BackgroundImage = global::ProjectAltis.Properties.Resources.contentpacks;
             this.btnContentPacks.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnContentPacks.FlatAppearance.BorderSize = 0;
             this.btnContentPacks.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
@@ -368,19 +375,19 @@
             this.BackgroundImage = global::ProjectAltis.Properties.Resources.TTC;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1000, 666);
+            this.Controls.Add(this.btnWebsite);
+            this.Controls.Add(this.btnDiscord);
+            this.Controls.Add(this.btnContentPacks);
+            this.Controls.Add(this.btnTheme);
+            this.Controls.Add(this.btnOptions);
+            this.Controls.Add(this.btnCredits);
             this.Controls.Add(this.btnMin);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.versionLabel);
-            this.Controls.Add(this.btnContentPacks);
             this.Controls.Add(this.pbDownload);
             this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.webBrowser1);
-            this.Controls.Add(this.btnDiscord);
-            this.Controls.Add(this.btnOptions);
-            this.Controls.Add(this.btnCredits);
-            this.Controls.Add(this.btnTheme);
-            this.Controls.Add(this.btnWebsite);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.lblNowDownloading);
