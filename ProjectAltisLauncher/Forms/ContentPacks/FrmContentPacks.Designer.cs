@@ -1,4 +1,4 @@
-﻿namespace ProjectAltis.Forms
+﻿namespace ProjectAltis.Forms.ContentPacks
 {
     partial class FrmContentPacks
     {
@@ -129,7 +129,7 @@
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
-            // frmContentPacks
+            // FrmContentPacks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -144,7 +144,7 @@
             this.Controls.Add(this.grpContentPacks);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmContentPacks";
+            this.Name = "FrmContentPacks";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Content Pack Chooser";
             this.Load += new System.EventHandler(this.frmContentPacks_Load);
@@ -156,12 +156,12 @@
         #endregion
 
         private System.Windows.Forms.GroupBox grpContentPacks;
-        private System.Windows.Forms.ListBox lstPacks;
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.Button btnMoveItemUp;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnMoveItemDown;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnApply;
+        public System.Windows.Forms.ListBox lstPacks;
     }
 }

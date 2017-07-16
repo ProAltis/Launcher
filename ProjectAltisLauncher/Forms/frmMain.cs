@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using ProjectAltis.Core;
+using ProjectAltis.Forms.ContentPacks;
 using ProjectAltis.Properties;
 
 namespace ProjectAltis.Forms

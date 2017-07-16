@@ -1,9 +1,9 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
-namespace ProjectAltis.Forms
+namespace ProjectAltis.Forms.ContentPacks
 {
     /// <summary>
     /// Class frmContentPacks.
@@ -53,30 +53,8 @@ namespace ProjectAltis.Forms
         private void btnImport_Click(object sender, EventArgs e)
         {
             Console.WriteLine("Opening import dialog");
-            OpenFileDialog importDialog = new OpenFileDialog()
-            {
-                Title = "Choose a Content Pack",
-                Filter = "Multi files|*.mf",
-            };
-            DialogResult result = importDialog.ShowDialog();
-            try
-            {
-
-                string originalFilePath = importDialog.FileName;
-                string fileName = Path.GetFileName(originalFilePath);
-                if (result == DialogResult.OK)
-                {
-                    if (!File.Exists(_currentDirectory + @"resources\contentpacks\" + fileName))
-                    {
-                        File.Copy(originalFilePath, _currentDirectory + @"resources\contentpacks\" + fileName, true);
-                        lstPacks.Items.Add(fileName);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Unable to load that content pack.");
-            }
+            FrmContentChooser frmContentChooser = new FrmContentChooser(this);
+            frmContentChooser.ShowDialog(this);
             this.ActiveControl = null;
         }
 
