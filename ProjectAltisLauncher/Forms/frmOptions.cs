@@ -20,7 +20,6 @@ namespace ProjectAltis.Forms
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.wantsCursor = chkCursor.Checked;
-            Properties.Settings.Default.wantsGameDebug = chkDebugWindow.Checked;
             Properties.Settings.Default.wantsClickSounds = chkClickSounds.Checked;
             Properties.Settings.Default.wantsRandomBg = chkRandomBackgrounds.Checked;
             Properties.Settings.Default.WantPassword = chkSavePassword.Checked;
@@ -31,7 +30,6 @@ namespace ProjectAltis.Forms
         private void Options_Load(object sender, EventArgs e)
         {
             chkCursor.Checked = Properties.Settings.Default.wantsCursor;
-            chkDebugWindow.Checked = Properties.Settings.Default.wantsGameDebug;
             chkClickSounds.Checked = Properties.Settings.Default.wantsClickSounds;
             chkRandomBackgrounds.Checked = Properties.Settings.Default.wantsRandomBg;
             chkSavePassword.Checked = Properties.Settings.Default.WantPassword;

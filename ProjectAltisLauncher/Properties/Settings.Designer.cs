@@ -61,18 +61,6 @@ namespace ProjectAltis.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool wantsGameDebug {
-            get {
-                return ((bool)(this["wantsGameDebug"]));
-            }
-            set {
-                this["wantsGameDebug"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool wantsClickSounds {
             get {

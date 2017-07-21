@@ -52,10 +52,7 @@ namespace ProjectAltis.Core
             Environment.SetEnvironmentVariable("TT_GAMESERVER", "gs1.projectaltis.com");
             Log.Info("Successfully set Environment variables.");
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            if (!Properties.Settings.Default.wantsGameDebug)
-            {
-                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            }
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden; // Hide the console window
             startInfo.FileName = "ProjectAltis";
             return Process.Start(startInfo);
         }
