@@ -25,8 +25,6 @@ namespace ProjectAltis.Forms
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             _currentDir = Directory.GetCurrentDirectory() + @"\";
 
-            Settings.Default.password = "Deprecated";
-
             if (!IsWriteable())
             {
                 MessageBox.Show(@"It appears you do not have permission to write the the current directory: " + _currentDir + @"
@@ -152,15 +150,8 @@ namespace ProjectAltis.Forms
             btnPlay.Enabled = false;
             ErrorReporter.Instance.Username = txtUser.Text;
             #region Save credentials if necessary
-            if (cbSaveLogin.Checked)
-            {
-                Console.WriteLine(@"Save checked");
-                if (txtUser.Text != null || txtPass.Text != null)
-                {
-                    Settings.Default.username = txtUser.Text;
-                    Settings.Default.Save();
-                }
-            }
+            Settings.Default.username = txtUser.Text;
+            Settings.Default.Save();
             if (Settings.Default.WantPassword)
             {
                 Log.Info("Trying to save password securely...");
@@ -384,11 +375,5 @@ namespace ProjectAltis.Forms
             int nWidthEllipse, // height of ellipse
             int nHeightEllipse // width of ellipse
         );
-
-        public void pictureBox1_Click(object sender, EventArgs e)
-        {
-            var msgResult = MessageBox.Show(this,
-                "Project Altis is currently in Pre-Beta mode! Only those with a Beta Certificate get in game to experience what Project Altis Beta will be like. For more information visit the website and view #announcements in the discord.");
-        }
     }
 }
