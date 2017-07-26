@@ -116,9 +116,9 @@ namespace ProjectAltis.Forms
             }
             if (sender is Form)
             {
-                Form f = (Form)sender;
-                f.Location = new Point(f.Location.X + (e.X - mouseDownPoint.X),
-                                f.Location.Y + (e.Y - mouseDownPoint.Y));
+                Form form = sender as Form;
+                form.Location = new Point(form.Location.X + (e.X - mouseDownPoint.X),
+                                form.Location.Y + (e.Y - mouseDownPoint.Y));
             }
         }
 
@@ -166,11 +166,12 @@ namespace ProjectAltis.Forms
                 }
             }
             #endregion
-            FileUpdater updater = new FileUpdater(this);
-            Thread update = new Thread(() => { updater.DoWork(); });
+            FileUpdater fileUpdater = new FileUpdater(this);
+            fileUpdater.FilesUpdated += OnFilesUpdated;
+            Thread updaterThread = new Thread(fileUpdater.DoWork);
             try
             {
-                update.Start();
+                updaterThread.Start();
             }
             catch (OutOfMemoryException)
             {
@@ -181,6 +182,33 @@ namespace ProjectAltis.Forms
                 MessageBox.Show("The updater thread could not be started. Try and restarting the launcher.");
             }
             ActiveControl = null;
+        }
+
+        private void OnFilesUpdated()
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    OnFilesUpdated();
+                });
+            }
+            else
+            {
+                Log.Info("||||||||||");
+                Log.Info("Files have been verified. Starting game!");
+                Log.Info("||||||||||");
+
+                lblNowDownloading.Text = "Have fun!";
+                pbDownload.Visible = false;
+                Thread playThread = new Thread(() =>
+                {
+                    Play.LaunchGame(txtUser.Text, txtPass.Text, this);
+                });
+
+                playThread.Start();
+                btnPlay.Enabled = true;
+            }
         }
         #endregion
         #region Site Button
@@ -375,5 +403,6 @@ namespace ProjectAltis.Forms
             int nWidthEllipse, // height of ellipse
             int nHeightEllipse // width of ellipse
         );
+
     }
 }

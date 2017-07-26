@@ -9,40 +9,49 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using ProjectAltis.Forms;
 using ProjectAltis.Manifests;
+using System.Linq;
 
 namespace ProjectAltis.Core
 {
     public class FileUpdater
     {
-        private readonly string currentDir = Directory.GetCurrentDirectory();
-        private readonly SortedList<string, string> downloadList = new SortedList<string, string>(); // Filename, URL
-        private readonly FrmMain instance;
-        private readonly string pass;
+        private readonly string _currentDirectory = Directory.GetCurrentDirectory();
+        private readonly SortedList<string, string> _downloadList = new SortedList<string, string>(); // Filename, URL
+        private readonly FrmMain _instance;
 
-        private readonly string user;
-        private string nowDownloading = "";
+        private readonly string _username;
+        private readonly string _password;
 
-        private int verifyCount;
+        private volatile string _nowDownloading = string.Empty;
 
-        public FileUpdater()
+        private volatile int _filesChecked;
+
+        public event FilesUpdatedEventHandler FilesUpdated;
+
+        public delegate void FilesUpdatedEventHandler();
+
+        protected virtual void OnFilesUpdated()
         {
-
+            FilesUpdated?.Invoke();
         }
 
         public FileUpdater(FrmMain instance)
         {
-            this.instance = instance;
-            this.user = instance.txtUser.Text;
-            this.pass = instance.txtPass.Text;
+            _instance = instance;
+            _username = instance.txtUser.Text;
+            _password = instance.txtPass.Text;
         }
 
         public void DoWork()
         {
-            this.instance.BeginInvoke((MethodInvoker)delegate { this.instance.btnPlay.Enabled = false; });
+            _instance?.Invoke((MethodInvoker)delegate
+            {
+                _instance.btnPlay.Enabled = false;
+            });
 
-            LoginApiResponse resp = GetLoginAPIResponse(this.instance.txtUser.Text, this.instance.txtPass.Text);
+            LoginApiResponse resp = GetLoginAPIResponse(this._instance.txtUser.Text, this._instance.txtPass.Text);
 
-            if(resp == null)
+            if (resp == null)
             {
                 Log.Info("API response was null.");
                 return;
@@ -52,63 +61,64 @@ namespace ProjectAltis.Core
             Log.Info("Reason: " + resp.reason);
             Log.Info("Additi: " + resp.additional);
 
-            switch(resp.status)
+            switch (resp.status)
             {
                 case "true":
                     {
-                        this.instance.BeginInvoke((MethodInvoker)delegate
+                        _instance?.Invoke((MethodInvoker)delegate
                         {
-                            this.instance.lblInfo.ForeColor = Color.Green;
-                            this.instance.lblInfo.Text = resp.reason;
+                            _instance.lblInfo.ForeColor = Color.Green;
+                            _instance.lblInfo.Text = resp.reason;
                         });
                         UpdateFilesAndPlay();
                         break;
                     }
                 case "false":
                     {
-                        this.instance.BeginInvoke((MethodInvoker)delegate
+                        _instance?.Invoke((MethodInvoker)delegate
                         {
-                            this.instance.lblInfo.ForeColor = Color.Red;
-                            this.instance.lblInfo.Text = resp.reason;
-                            this.instance.btnPlay.Enabled = true;
+                            _instance.lblInfo.ForeColor = Color.Red;
+                            _instance.lblInfo.Text = resp.reason;
+                            _instance.btnPlay.Enabled = true;
                         });
                         break;
                     }
                 case "critical":
                     {
-                        this.instance.BeginInvoke((MethodInvoker)delegate
+                        _instance?.Invoke((MethodInvoker)delegate
                         {
-                            this.instance.lblInfo.ForeColor = Color.Red;
-                            this.instance.lblInfo.Text = resp.additional;
-                            this.instance.btnPlay.Enabled = true;
+                            _instance.lblInfo.ForeColor = Color.Red;
+                            _instance.lblInfo.Text = resp.additional;
+                            _instance.btnPlay.Enabled = true;
                         });
                         break;
                     }
                 case "info":
                     {
-                        this.instance.BeginInvoke((MethodInvoker)delegate
+                        _instance?.Invoke((MethodInvoker)delegate
                         {
-                            this.instance.lblInfo.ForeColor = Color.Orange;
-                            this.instance.lblInfo.Text = resp.reason;
-                            this.instance.btnPlay.Enabled = true;
+                            _instance.lblInfo.ForeColor = Color.Orange;
+                            _instance.lblInfo.Text = resp.reason;
+                            _instance.btnPlay.Enabled = true;
                         });
                         break;
                     }
                 default:
                     {
-                        this.instance.BeginInvoke((MethodInvoker)delegate
+                        _instance.BeginInvoke((MethodInvoker)delegate
                         {
-                            MessageBox.Show(this.instance, "There was an error logging you in!", "Oops!");
-                            this.instance.lblInfo.ForeColor = Color.Red;
-                            this.instance.lblInfo.Text = "Error";
+                            MessageBox.Show(_instance, "There was an error logging you in!", "Oops!");
+                            _instance.lblInfo.ForeColor = Color.Red;
+                            _instance.lblInfo.Text = "Error";
                         });
                         break;
                     }
             }
-            this.instance.BeginInvoke((MethodInvoker)delegate
+
+            _instance?.Invoke((MethodInvoker)delegate
             {
-                this.instance.lblInfo.Visible = true;
-                this.instance.ActiveControl = null;
+                _instance.lblInfo.Visible = true;
+                _instance.ActiveControl = null;
             });
         }
 
@@ -124,25 +134,22 @@ namespace ProjectAltis.Core
             try
             {
                 Log.Info("Querying API for response.");
-                this.instance?.BeginInvoke((MethodInvoker)delegate
+                _instance?.Invoke((MethodInvoker)delegate
                 {
-                    this.instance.lblNowDownloading.Visible = true;
-                    this.instance.lblInfo.ForeColor = Color.Black;
-                    this.instance.lblInfo.Text = "Contacting login server...";
+                    _instance.lblNowDownloading.Visible = true;
+                    _instance.lblInfo.ForeColor = Color.Black;
+                    _instance.lblInfo.Text = "Contacting login server...";
                 });
                 return Data.GetLoginAPIResponse(user, pass);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Error(ex);
-                this.instance.BeginInvoke(
-                    (MethodInvoker)
-                    delegate
-                    {
-                        MessageBox.Show(this.instance, "Failed to contact the login server.");
-                        this.instance.btnPlay.Enabled = true;
-                    });
-
+                _instance?.Invoke((MethodInvoker)delegate
+                {
+                    MessageBox.Show(_instance, "Failed to contact the login server.");
+                    _instance.btnPlay.Enabled = true;
+                });
                 return null;
             }
         }
@@ -157,160 +164,144 @@ namespace ProjectAltis.Core
             Log.Info("Started to update files and play!");
             Log.Info("||||||||||");
             Log.Info("||||||||||");
-            this.instance.BeginInvoke((MethodInvoker)delegate { this.instance.lblNowDownloading.Visible = true; });
+            _instance?.Invoke((MethodInvoker)delegate
+            {
+                _instance.lblNowDownloading.Visible = true; // Enable the downloading label to show what file is downloading
+            });
 
-            Thread main = new Thread(() =>
+            Thread mainThread = new Thread(() =>
             {
                 Log.Info("Checking if directories exist.");
-                if(!CreateGameDirectorys())
+                if (!CreateGameDirectorys())
                 {
-                    this.instance.BeginInvoke(
-                        (MethodInvoker)
-                        delegate
-                        {
-                            Log.Error("Unable to check/create directories.");
-                            MessageBox.Show(this.instance, "Unable to create game directories. Exiting update process.");
-                        });
-
+                    _instance?.Invoke((MethodInvoker)delegate
+                    {
+                        Log.Error("Unable to check/create directories.");
+                        MessageBox.Show(_instance, "Unable to create game directories. Exiting update process.");
+                    });
                     return; // Not able to create directorys, exit out of thread.
                 }
+
                 Log.Info("Checking/creating directories succeeded.");
                 Log.Info("Retrieving manifest.");
                 string rawManifest = RetrieveManifest();
-                if(rawManifest == null)
+                if (rawManifest == null)
                 {
                     Log.Info("Manifest was null, likely web server maintenance.");
                     Log.Info("Starting game anyways.");
-                    this.instance.BeginInvoke((MethodInvoker)delegate
-                    {
-                        this.instance.lblNowDownloading.Text = "Have fun!";
-                        this.instance.pbDownload.Visible = false;
-                        this.instance.btnPlay.Enabled = true;
-                    });
-                    Thread t = new Thread(() => Play.LaunchGame(this.user, this.pass, this.instance));
-                    t.Start();
+                    OnFilesUpdated(); // This will start the game.
                     return;
                 }
                 Log.Info("Manifest wasn't null, verifying files.");
                 Log.Info("---------");
-                string[] rawManifestArray = rawManifest.Split('#');
-                this.instance.BeginInvoke(
-                    (MethodInvoker)delegate { this.instance.lblNowDownloading.Text = "Verifying game files..."; });
-
-                foreach(string item in rawManifestArray)
-                {
-                    // Make sure the item is not an empty value.
-                    // An empty value is added when the raw manifest is split
-                    if(item == "") continue;
-                    Thread fileThread = new Thread(() =>
-                    {
-                        string workingDir;
-                        string path;
-                        ManifestJson manifest = JsonConvert.DeserializeObject<ManifestJson>(item.Replace("#", ""));
-                        Log.Info("Verifying file " + manifest.filename);
-                        this.instance.BeginInvoke(
-                            (MethodInvoker)
-                            delegate
-                            {
-                                this.instance.lblNowDownloading.Text = "Verified files: " + this.verifyCount + "/" +
-                                                                       (rawManifestArray.Length - 1);
-                            });
-
-                        #region Determine the File Type and Set Working Directory
-
-                        if(manifest.filename.Contains("phase"))
-                            workingDir = this.currentDir + @"\resources\default\";
-                        else if(manifest.filename.Equals("toon.dc"))
-                            workingDir = this.currentDir + @"\config\";
-                        else
-                            workingDir = this.currentDir;
-
-                        #endregion
-
-                        path = Path.Combine(workingDir, manifest.filename);
-                        if(!File.Exists(path))
-                        {
-                            Log.Info(manifest.filename + " : Missing.");
-                            this.downloadList.Add(manifest.filename, manifest.url);
-                        }
-                        else if(Hashing.CalculateSHA256(path) != manifest.sha256)
-                        {
-                            Log.Info(manifest.filename + " : Outdated.");
-                            this.downloadList.Add(manifest.filename, manifest.url);
-                        }
-                        else
-                        {
-                            Log.Info(manifest.filename + " : Up to date");
-                        }
-                        this.verifyCount++;
-                    });
-                    fileThread.Start();
-                } // Add items to list
-
-                while(this.verifyCount != rawManifestArray.Length - 1)
-                    Thread.Sleep(30);
-                DownloadItemsFromList(this.downloadList);
+                VerifyFiles(rawManifest); // One thread for each file
+                Log.Info("Downloading files that were not up to date.");
+                new Thread(DownloadFiles).Start(); // Download any files that have not been verified
             });
-            main.Start();
+            mainThread.Start();
         }
 
-        /// <summary>
-        ///     Downloads items from the download list.
-        /// </summary>
-        /// <param name="list">Download List.</param>
-        private void DownloadItemsFromList(SortedList<string, string> list)
+        private void VerifyFiles(string rawManifest)
         {
-            WebClient client = new WebClient();
-            client.DownloadProgressChanged += client_DownloadProgressChanged;
-            client.DownloadFileCompleted += client_DownloadFileCompleted;
+            string[] rawManifestArray = rawManifest.Split('#');
 
-            string Filename = string.Empty;
-            string URL = string.Empty;
-            new Thread(() =>
+            // Remove the empty values in the array ( The last value )
+            string[] manifestArray = rawManifestArray.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+
+            _instance?.Invoke((MethodInvoker)delegate
             {
-                if(this.downloadList.Count > 0)
-                {
-                    if(!this.instance.IsHandleCreated)
-                    {
-                        Log.Error("The form handle was not created.");
-                        return;
-                    }
+                _instance.lblNowDownloading.Text = "Verifying game files...";
+            });
+            List<Thread> fileVerificationThreads = new List<Thread>();
 
-                    this.instance.BeginInvoke((MethodInvoker)delegate
+            foreach (string item in manifestArray)
+            {
+                Thread fileCheckThread = new Thread(() =>
+                {
+                    ManifestJson manifest = JsonConvert.DeserializeObject<ManifestJson>(item.Replace("#", ""));
+                    VerifyFile(manifest, manifestArray.Length);
+                });
+                fileVerificationThreads.Add(fileCheckThread);
+                fileCheckThread.Start();
+            }
+
+            while (true) // Keep checking until all the threads are done.
+            {
+                // Find all the threads that have finished updating. They will no longer be running if they have finished.
+                int finishedThreadCount = fileVerificationThreads.Where(x => x.ThreadState != ThreadState.Running).Count();
+                if (finishedThreadCount == fileVerificationThreads.Count())
+                {
+                    // All done!
+                    break;
+                }
+                Thread.Sleep(50);
+            }
+        }
+
+        private void VerifyFile(ManifestJson manifest, int totalFiles)
+        {
+
+            Log.Info("Verifying file " + manifest.filename);
+
+            _instance?.Invoke((MethodInvoker)delegate
+            {
+                _instance.lblNowDownloading.Text = "Verified files: " + _filesChecked + "/" + (totalFiles);
+            });
+
+            if (IsFileUpToDate(manifest))
+            {
+                Log.Info(manifest.filename + " : Up to date.");
+            }
+            else
+            {
+                Log.Info(manifest.filename + " : Outdated");
+                _downloadList.Add(manifest.filename, manifest.url);
+            }
+            _filesChecked++;
+        }
+
+        private bool IsFileUpToDate(ManifestJson manifest)
+        {
+            string workingDir = GetCorrectDownloadDirectory(manifest.filename);
+            string filePath = workingDir + manifest.filename;
+            return File.Exists(filePath) && Hashing.CalculateSHA256(filePath) == manifest.sha256;
+        }
+
+        private void DownloadFiles()
+        {
+            using (WebClient client = new WebClient())
+            {
+                if (_downloadList.Count > 0)
+                {
+                    client.DownloadProgressChanged += Client_DownloadProgressChanged;
+                    client.DownloadFileCompleted += Client_DownloadFileCompleted;
+
+                    _instance?.Invoke((MethodInvoker)delegate
                     {
-                        this.instance.pbDownload.Visible = true;
-                        this.instance.lblNowDownloading.Visible = true;
+                        _instance.pbDownload.Visible = true;
+                        _instance.lblNowDownloading.Visible = true;
                     });
-                    foreach(KeyValuePair<string, string> kvp in this.downloadList)
+
+                    string filename = string.Empty;
+                    string url = string.Empty;
+
+                    foreach (KeyValuePair<string, string> kvp in _downloadList)
                     // Let it iterate here, we'll just take the last in the list
                     {
-                        Filename = kvp.Key;
-                        URL = kvp.Value;
+                        filename = kvp.Key;
+                        url = kvp.Value;
                     }
-                    this.nowDownloading = Filename;
-                    Log.Info("Downloading " + nowDownloading);
-                    if(Filename.Contains("phase"))
-                        client.DownloadFileAsync(new Uri(URL), this.currentDir + @"\resources\default\" + Filename);
-                    else if(Filename.Contains("toon"))
-                        client.DownloadFileAsync(new Uri(URL), this.currentDir + @"\config\" + Filename);
-                    else
-                        client.DownloadFileAsync(new Uri(URL), this.currentDir + @"\" + Filename);
+
+                    _nowDownloading = filename;
+
+                    Log.Info("Downloading " + _nowDownloading);
+                    client.DownloadFileAsync(new Uri(url), GetCorrectDownloadDirectory(filename) + filename);
                 }
                 else
                 {
-                    Log.Info("||||||||||");
-                    Log.Info("Files have been verified. Starting game!");
-                    Log.Info("||||||||||");
-                    this.instance.BeginInvoke((MethodInvoker)delegate
-                    {
-                        this.instance.lblNowDownloading.Text = "Have fun!";
-                        this.instance.pbDownload.Visible = false;
-                        this.instance.btnPlay.Enabled = true;
-                    });
-                    Thread t = new Thread(() => Play.LaunchGame(this.user, this.pass, this.instance));
-                    t.Start();
+                    OnFilesUpdated(); // No files to be downloaded. All have verified as up to date
                 }
-            }).Start();
+            }
         }
 
         /// <summary>
@@ -318,17 +309,17 @@ namespace ProjectAltis.Core
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        private void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            this.instance.BeginInvoke((MethodInvoker)delegate
+            _instance?.Invoke((MethodInvoker)delegate
             {
                 double bytesIn = double.Parse(e.BytesReceived.ToString());
                 double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
                 double percentage = bytesIn / totalBytes * 100;
-                this.instance.lblNowDownloading.Text = this.nowDownloading + ": " + "Downloaded " +
+                _instance.lblNowDownloading.Text = _nowDownloading + ": " + "Downloaded " +
                                                        Data.ConvertToNetworkDataType(e.BytesReceived) + " of " +
                                                        Data.ConvertToNetworkDataType(e.TotalBytesToReceive);
-                this.instance.pbDownload.Value = Convert.ToInt32(percentage);
+                _instance.pbDownload.Value = Convert.ToInt32(percentage);
             });
         }
 
@@ -337,15 +328,15 @@ namespace ProjectAltis.Core
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        private void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            Log.Info("Finished downloading " + this.nowDownloading);
-            this.instance.BeginInvoke((MethodInvoker)delegate
+            Log.Info("Finished downloading " + _nowDownloading);
+            _instance.Invoke((MethodInvoker)delegate
             {
-                this.downloadList.Remove(this.nowDownloading);
-                this.instance.lblNowDownloading.Text = "Completed";
-                DownloadItemsFromList(this.downloadList);
+                _instance.lblNowDownloading.Text = "Completed";
             });
+            _downloadList.Remove(_nowDownloading);
+            new Thread(DownloadFiles).Start(); // Download the next item...
         }
 
         /// <summary>
@@ -361,7 +352,7 @@ namespace ProjectAltis.Core
                 Directory.CreateDirectory(@"config");
                 return true;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -376,20 +367,20 @@ namespace ProjectAltis.Core
             try
             {
                 Log.Info("Retrieving manifest");
-                using(WebClient client = new WebClient())
+                using (WebClient client = new WebClient())
                 {
                     try
                     {
 
                         string manifest = client.DownloadString("http://projectaltis.com/api/manifest");
-                        if(!manifest.StartsWith("{"))
+                        if (!manifest.StartsWith("{"))
                         {
                             Log.Error("Manifest doesn't look like it's there or is good.");
                             return null;
                         }
                         return manifest;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Log.Error("I think the manifest host is down.");
                         Log.Error(ex);
@@ -398,12 +389,34 @@ namespace ProjectAltis.Core
                     }
                 }
             }
-            catch(Exception eex)
+            catch (Exception eex)
             {
                 Log.Error("random Exception");
                 Log.Error(eex);
                 return null;
             }
-        } 
+        }
+
+        /// <summary>
+        /// Gets the correct download directory.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        private string GetCorrectDownloadDirectory(string fileName)
+        {
+
+            if (fileName.Contains("phase"))
+            {
+                return _currentDirectory + @"\resources\default\";
+            }
+            else if (fileName.Equals("toon.dc"))
+            {
+                return _currentDirectory + @"\config\";
+            }
+            else
+            {
+                return _currentDirectory + @"\";
+            }
+        }
     }
 }
