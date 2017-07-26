@@ -21,7 +21,7 @@ namespace ProjectAltis.Core
                 Process altis = StartAltis(username, password);
                 HideAllForms();
 
-                frmInstance.BeginInvoke((MethodInvoker)delegate
+                frmInstance?.Invoke((MethodInvoker)delegate
                 {
                     altis?.WaitForExit();
                     Log.Info("Game process ended.");

@@ -4,10 +4,11 @@ using System.IO;
 using System.Threading;
 using ProjectAltis.Enums;
 using ProjectAltis.Forms;
+using System.Threading.Tasks;
 
 namespace ProjectAltis
 {
-	public static class Program
+    public static class Program
     {
         /// <summary>
         ///     The main entry point for the application.
@@ -21,9 +22,8 @@ namespace ProjectAltis
             Initialize();
         }
 
-        private static async void Initialize()
+        private static async Task Initialize()
         {
-
             try
             {
 #if (!DEBUG)
