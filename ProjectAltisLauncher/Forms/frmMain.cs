@@ -6,6 +6,9 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 using ProjectAltis.Core;
 using ProjectAltis.Forms.ContentPacks;
 using ProjectAltis.Properties;
@@ -35,6 +38,7 @@ namespace ProjectAltis.Forms
             }
 
             versionLabel.Text = "Launcher v" + typeof(Program).Assembly.GetName().Version.ToString();
+            ValidatePrefJson();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -385,6 +389,31 @@ namespace ProjectAltis.Forms
                 Log.Error(ex);
                 return false;
             }
+        }
+
+        private void ValidatePrefJson()
+        {
+            if(!File.Exists("preferences.json"))
+            {
+                // Will be automatically created by the game
+                return;
+            }
+            string prefFile = File.ReadAllText("preferences.json");
+            try
+            {
+                JObject contents = JObject.Parse(prefFile);
+            }
+            catch (JsonReaderException jre)
+            {
+                File.Delete("preferences.json");
+                Log.Info("DELETED Preferences.json due to it being corrupted");
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex);
+                throw;
+            }
+
         }
         #endregion
 
