@@ -22,7 +22,7 @@ namespace ProjectAltis
             Initialize();
         }
 
-        private static async Task Initialize()
+        private static async void Initialize()
         {
             try
             {

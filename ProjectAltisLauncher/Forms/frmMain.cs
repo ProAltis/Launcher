@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -8,7 +7,6 @@ using System.Threading;
 using System.Windows.Forms;
 using ProjectAltis.Core;
 using ProjectAltis.Forms.ContentPacks;
-using ProjectAltis.Properties;
 
 namespace ProjectAltis.Forms
 {
@@ -25,7 +23,7 @@ namespace ProjectAltis.Forms
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             _currentDir = Directory.GetCurrentDirectory() + @"\";
 
-            Settings.Default.password = "Deprecated";
+            Properties.Settings.Default.Password = "Deprecated";
 
             if (!IsWriteable())
             {
@@ -45,43 +43,10 @@ namespace ProjectAltis.Forms
             MessageBox.Show(@"This is a debug build, do not put this into production",
                 @"Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #endif
-            #region Loading Settings
-            try
-            {
-                txtUser.Text = Settings.Default.username;
-                if (Settings.Default.WantPassword)
-                    txtPass.Text = UwpHelper.GetPassword();
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-            }
-            // Read user settings
-            if (Settings.Default.wantsCursor) // Cursor
-            {
-                MemoryStream cursorMemoryStream = new MemoryStream(Resources.toonmono);
-                Cursor = new Cursor(cursorMemoryStream);
-            }
-            // Load last saved user background choice
-            BackgroundImage.Dispose();
-            if (Settings.Default.wantsRandomBg)
-            {
-                BackgroundImage = Background.ReturnRandomBackground();
-            }
-            else
-            {
-                BackgroundImage = Background.ReturnBackground(Settings.Default.background);
-            }
-            #endregion
-            // This prevents other controls from being focused
-            Select();
-            ActiveControl = null;
+            LoadUserSettings();
             ActiveControl = string.IsNullOrEmpty(txtUser.Text) ? txtUser : txtPass;
             Button_MouseLeave(btnPlay, EventArgs.Empty);
-
             webBrowser1.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, webBrowser1.Width, webBrowser1.Height, 20, 20));
-
-
         }
 
         private void Form1_Activated(object sender, EventArgs e)
@@ -150,75 +115,15 @@ namespace ProjectAltis.Forms
                 return;
             }
             btnPlay.Enabled = false;
+
             ErrorReporter.Instance.Username = txtUser.Text;
-            #region Save credentials if necessary
-            if (cbSaveLogin.Checked)
-            {
-                Console.WriteLine(@"Save checked");
-                if (txtUser.Text != null || txtPass.Text != null)
-                {
-                    Settings.Default.username = txtUser.Text;
-                    Settings.Default.Save();
-                }
-            }
-            if (Settings.Default.WantPassword)
-            {
-                Log.Info("Trying to save password securely...");
-                try
-                {
-                    UwpHelper.SetCredentials(txtUser.Text, txtPass.Text);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex);
-                    Log.Error("Don't want to break after trying to save pass so continuing");
-                }
-            }
-            #endregion
-            FileUpdater fileUpdater = new FileUpdater(this);
-            fileUpdater.FilesUpdated += OnFilesUpdated;
-            Thread updaterThread = new Thread(fileUpdater.DoWork);
-            try
-            {
-                updaterThread.Start();
-            }
-            catch (OutOfMemoryException)
-            {
-                MessageBox.Show("Unable to start the updating process. It appears your computer is out of memory.");
-            }
-            catch (ThreadStateException)
-            {
-                MessageBox.Show("The updater thread could not be started. Try and restarting the launcher.");
-            }
+
+            SaveCredentials();
+            RunUpdater();
             ActiveControl = null;
         }
 
-        private void OnFilesUpdated()
-        {
-            if (InvokeRequired)
-            {
-                Invoke((MethodInvoker)delegate
-                {
-                    OnFilesUpdated();
-                });
-            }
-            else
-            {
-                Log.Info("||||||||||");
-                Log.Info("Files have been verified. Starting game!");
-                Log.Info("||||||||||");
 
-                lblNowDownloading.Text = "Have fun!";
-                pbDownload.Visible = false;
-                Thread playThread = new Thread(() =>
-                {
-                    Play.LaunchGame(txtUser.Text, txtPass.Text, this);
-                });
-
-                playThread.Start();
-                btnPlay.Enabled = true;
-            }
-        }
         #endregion
         #region Site Button
         private void BtnOfficialSite_Click(object sender, EventArgs e)
@@ -240,7 +145,7 @@ namespace ProjectAltis.Forms
         private void BtnContentPacks_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
-            btnContentPacks.BackgroundImage = Resources.contentpacks_d;
+            btnContentPacks.BackgroundImage = Properties.Resources.contentpacks_d;
             FrmContentPacks contentPack = new FrmContentPacks();
             contentPack.ShowDialog(this);
             ActiveControl = null;
@@ -252,10 +157,10 @@ namespace ProjectAltis.Forms
             Audio.PlaySoundFile("sndclick");
             FrmBackgroundChoices bg = new FrmBackgroundChoices();
             bg.ShowDialog();
-            if (!Settings.Default.wantsRandomBg)
+            if (!Properties.Settings.Default.WantsRandomBg)
             {
                 BackgroundImage.Dispose();
-                BackgroundImage = Background.ReturnBackground(Settings.Default.background);
+                BackgroundImage = Background.ReturnBackground(Properties.Settings.Default.Background);
             }
 
             ActiveControl = null;
@@ -268,9 +173,9 @@ namespace ProjectAltis.Forms
             FrmOptions op = new FrmOptions();
             op.ShowDialog();
             // Apply user settings
-            if (Settings.Default.wantsCursor) // Cursor
+            if (Properties.Settings.Default.WantsCursor) // Cursor
             {
-                MemoryStream cursorMemoryStream = new MemoryStream(Resources.toonmono);
+                MemoryStream cursorMemoryStream = new MemoryStream(Properties.Resources.toonmono);
                 Cursor = new Cursor(cursorMemoryStream);
             }
             else
@@ -397,6 +302,113 @@ namespace ProjectAltis.Forms
         }
         #endregion
 
+        private void OnFilesUpdated()
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    OnFilesUpdated();
+                });
+            }
+            else
+            {
+                Log.Info("||||||||||");
+                Log.Info("Files have been verified. Starting game!");
+                Log.Info("||||||||||");
+
+                lblNowDownloading.Text = "Have fun!";
+                // The progress bar visibility should be invisible because
+                // game files are no longer being updated
+                pbDownload.Visible = false; 
+                Thread playThread = new Thread(() =>
+                {
+                    Play.LaunchGame(txtUser.Text, txtPass.Text, this);
+                });
+
+                playThread.Start();
+                btnPlay.Enabled = true;
+            }
+        }
+
+        private void SaveCredentials()
+        {
+            if (cbSaveLogin.Checked)
+            {
+                Log.Info("Save checked");
+                // Make sure the username or pass has text
+                if (!string.IsNullOrEmpty(txtUser.Text)|| !string.IsNullOrEmpty(txtPass.Text))
+                {
+                    Properties.Settings.Default.Username = txtUser.Text;
+                    Properties.Settings.Default.Save();
+                }
+            }
+            if (Properties.Settings.Default.WantsPassword)
+            {
+                Log.Info("Trying to save password securely...");
+                try
+                {
+                    UwpHelper.SetCredentials(txtUser.Text, txtPass.Text);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                    Log.Error("Don't want to break after trying to save pass so continuing");
+                }
+            }
+        }
+
+        private void RunUpdater()
+        {
+            FileUpdater fileUpdater = new FileUpdater(this);
+            fileUpdater.FilesUpdated += OnFilesUpdated;
+            Thread updaterThread = new Thread(fileUpdater.DoWork);
+            try
+            {
+                updaterThread.Start();
+            }
+            catch (OutOfMemoryException)
+            {
+                MessageBox.Show("Unable to start the updating process. It appears your computer is out of memory.");
+            }
+            catch (ThreadStateException)
+            {
+                MessageBox.Show("The updater thread could not be started. Try and restarting the launcher.");
+            }
+        }
+
+        private void LoadUserSettings()
+        {
+            try
+            {
+                txtUser.Text = Properties.Settings.Default.Username;
+                if (Properties.Settings.Default.WantsPassword)
+                {
+                    txtPass.Text = UwpHelper.GetPassword();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+            // Read user settings
+            if (Properties.Settings.Default.WantsCursor) // Old Toontown Cursors
+            {
+                MemoryStream cursorMemoryStream = new MemoryStream(Properties.Resources.toonmono);
+                Cursor = new Cursor(cursorMemoryStream);
+            }
+            // Load last saved user background choice
+            BackgroundImage.Dispose();
+            if (Properties.Settings.Default.WantsRandomBg)
+            {
+                BackgroundImage = Background.ReturnRandomBackground();
+            }
+            else
+            {
+                BackgroundImage = Background.ReturnBackground(Properties.Settings.Default.Background);
+            }
+        }
+
         private void TxtUser_TextChanged(object sender, EventArgs e)
         {
             Button_MouseLeave(btnPlay, EventArgs.Empty);
@@ -405,12 +417,12 @@ namespace ProjectAltis.Forms
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
-            int nLeftRect, // x-coordinate of upper-left corner
-            int nTopRect, // y-coordinate of upper-left corner
-            int nRightRect, // x-coordinate of lower-right corner
-            int nBottomRect, // y-coordinate of lower-right corner
-            int nWidthEllipse, // height of ellipse
-            int nHeightEllipse // width of ellipse
+            int nLeftRect, // X-coordinate of upper-left corner
+            int nTopRect, // Y-coordinate of upper-left corner
+            int nRightRect, // X-coordinate of lower-right corner
+            int nBottomRect, // Y-coordinate of lower-right corner
+            int nWidthEllipse, // Height of ellipse
+            int nHeightEllipse // Width of ellipse
         );
 
         public void PictureBox1_Click(object sender, EventArgs e)

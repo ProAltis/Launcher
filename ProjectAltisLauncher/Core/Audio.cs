@@ -9,7 +9,7 @@ namespace ProjectAltis.Core
 		{
 			try
 			{
-				if (!Properties.Settings.Default.wantsClickSounds) return;
+				if (!Properties.Settings.Default.WantsClickSounds) return;
 				switch (filename.ToLower())
 				{
 					case "sndclick":

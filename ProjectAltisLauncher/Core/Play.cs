@@ -3,11 +3,14 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using ProjectAltis.Forms;
 using System.ComponentModel;
+using System.IO;
 
 namespace ProjectAltis.Core
 {
     public static class Play
     {
+        public static string AltisProcessName = "ProjectAltis";
+
         /// <summary>
         /// Launches the game.
         /// </summary>
@@ -23,17 +26,27 @@ namespace ProjectAltis.Core
 
                 frmInstance?.Invoke((MethodInvoker)delegate
                 {
-                    altis?.WaitForExit();
-                    Log.Info("Game process ended.");
-                    frmInstance.lblNowDownloading.Text = "Thanks for playing!";
-                    frmInstance.Show();
+                    if(altis == null) // Returned null process because AV removed it.
+                    {
+                        frmInstance.Show();
+                        MessageBox.Show(frmInstance, $"The executable {AltisProcessName} has been removed. " +
+                            $"It is possible that it has been removed by your Anti-Virus. " +
+                            $"If so, please add an exclusion to: {Directory.GetCurrentDirectory()}\\{AltisProcessName}");
+                    }
+                    else
+                    {
+                        altis.WaitForExit();
+                        Log.Info("Game process ended.");
+                        frmInstance.lblNowDownloading.Text = "Thanks for playing!";
+                        frmInstance.Show();
+                    }
                 });
             }
             catch (Win32Exception ex)
             {
-                Log.Error("Win32Exception thrown. Possibly older os?");
+                Log.Error("Win32Exception thrown. Possibly older os or file removed by AV?");
                 Log.Error(ex);
-                MessageBox.Show("An error has occured starting the game!\nIt is possible that you are running a legacy system.\nIt has been logged in the launcher's log.");
+                MessageBox.Show("An error has occured starting the game!\nIt is possible that you are running a legacy system or the game has been removed by your Anti-Virus.\nIt has been logged in the launcher's log.");
             }
             catch (Exception ex)
             {
@@ -51,10 +64,23 @@ namespace ProjectAltis.Core
             Environment.SetEnvironmentVariable("TT_PASSWORD", password);
             Environment.SetEnvironmentVariable("TT_GAMESERVER", "gs1.projectaltis.com");
             Log.Info("Successfully set Environment variables.");
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden; // Hide the console window
-            startInfo.FileName = "ProjectAltis";
-            return Process.Start(startInfo);
+            ProcessStartInfo startInfo = new ProcessStartInfo()
+            {
+                WindowStyle = ProcessWindowStyle.Hidden, // Hide the console window
+                FileName = AltisProcessName
+            };
+            string path = Directory.GetCurrentDirectory() + "\\" + AltisProcessName + ".exe";
+
+            if (!File.Exists(path)) // File removed by Anti-Virus
+            {
+                Log.Error($"{AltisProcessName} has been removed! It is most likely an Anti-Virus has detected" +
+                    $"it as a false positive. Exiting");
+                return null;
+            }
+            else
+            {
+                return Process.Start(startInfo);
+            }
         }
 
         public static void HideAllForms()

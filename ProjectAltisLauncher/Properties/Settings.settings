@@ -2,25 +2,25 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ProjectAltis.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="username" Type="System.String" Scope="User">
+    <Setting Name="Username" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="background" Type="System.String" Scope="User">
+    <Setting Name="Background" Type="System.String" Scope="User">
       <Value Profile="(Default)">TTC</Value>
     </Setting>
-    <Setting Name="wantsCursor" Type="System.Boolean" Scope="User">
+    <Setting Name="WantsCursor" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="wantsClickSounds" Type="System.Boolean" Scope="User">
+    <Setting Name="WantsClickSounds" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="wantsRandomBg" Type="System.Boolean" Scope="User">
+    <Setting Name="WantsRandomBg" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="password" Type="System.String" Scope="User">
+    <Setting Name="Password" Type="System.String" Scope="User">
       <Value Profile="(Default)">Deprecated</Value>
     </Setting>
-    <Setting Name="WantPassword" Type="System.Boolean" Scope="User">
+    <Setting Name="WantsPassword" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

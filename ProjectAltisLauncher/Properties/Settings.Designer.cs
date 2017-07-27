@@ -26,84 +26,84 @@ namespace ProjectAltis.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string username {
+        public string Username {
             get {
-                return ((string)(this["username"]));
+                return ((string)(this["Username"]));
             }
             set {
-                this["username"] = value;
+                this["Username"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("TTC")]
-        public string background {
+        public string Background {
             get {
-                return ((string)(this["background"]));
+                return ((string)(this["Background"]));
             }
             set {
-                this["background"] = value;
+                this["Background"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool wantsCursor {
+        public bool WantsCursor {
             get {
-                return ((bool)(this["wantsCursor"]));
+                return ((bool)(this["WantsCursor"]));
             }
             set {
-                this["wantsCursor"] = value;
+                this["WantsCursor"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool wantsClickSounds {
+        public bool WantsClickSounds {
             get {
-                return ((bool)(this["wantsClickSounds"]));
+                return ((bool)(this["WantsClickSounds"]));
             }
             set {
-                this["wantsClickSounds"] = value;
+                this["WantsClickSounds"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool wantsRandomBg {
+        public bool WantsRandomBg {
             get {
-                return ((bool)(this["wantsRandomBg"]));
+                return ((bool)(this["WantsRandomBg"]));
             }
             set {
-                this["wantsRandomBg"] = value;
+                this["WantsRandomBg"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Deprecated")]
-        public string password {
+        public string Password {
             get {
-                return ((string)(this["password"]));
+                return ((string)(this["Password"]));
             }
             set {
-                this["password"] = value;
+                this["Password"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool WantPassword {
+        public bool WantsPassword {
             get {
-                return ((bool)(this["WantPassword"]));
+                return ((bool)(this["WantsPassword"]));
             }
             set {
-                this["WantPassword"] = value;
+                this["WantsPassword"] = value;
             }
         }
     }

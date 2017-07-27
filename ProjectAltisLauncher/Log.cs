@@ -76,23 +76,29 @@ namespace ProjectAltis
             }
             catch(Exception ex)
             {
-
+                // EAT ALL THE ERRORS!!!
             }
             Initialized = true;
-            foreach(var line in LogQueue)
+            foreach(string line in LogQueue)
+            {
                 Trace.WriteLine(line);
+            }
         }
 
         public static void WriteLine(string msg, LogType type, [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "")
         {
 
-            var file = sourceFilePath?.Split('/', '\\').LastOrDefault()?.Split('.').FirstOrDefault();
-            var line = $"{DateTime.Now.ToLongTimeString()}|{type}|{file}.{memberName} >> {msg}";
+            string file = sourceFilePath?.Split('/', '\\').LastOrDefault()?.Split('.').FirstOrDefault();
+            string line = $"{DateTime.Now.ToLongTimeString()}|{type}|{file}.{memberName} >> {msg}";
             if(Initialized)
+            {
                 Trace.WriteLine(line);
+            }
             else
+            {
                 LogQueue.Enqueue(line);
+            }
         }
 
         public static void Debug(string msg, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")

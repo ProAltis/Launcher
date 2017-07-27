@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace ProjectAltis.Core
 {
@@ -36,18 +37,18 @@ namespace ProjectAltis.Core
         {
             try
             {
-                System.Security.Cryptography.SHA256 mySHA256 = System.Security.Cryptography.SHA256.Create();
+                SHA256 sha256 = SHA256.Create();
 
-                using (System.IO.FileStream fileStream = System.IO.File.OpenRead(filePath))
+                using (FileStream fileStream = File.OpenRead(filePath))
                 {
-                    byte[] hashValue = mySHA256.ComputeHash(fileStream);
+                    byte[] hashValue = sha256.ComputeHash(fileStream);
                     string strHashValue = "";
                     foreach (byte x in hashValue)
                     {
                         strHashValue += x.ToString("x2");
                     }
                     // Comparing the hash now
-                    Console.WriteLine("The SHA256 of {0} is: {1}", filePath, strHashValue);
+                    Log.Info("The SHA256 of {0} is: {1}", filePath, strHashValue);
 
                     return strHashValue == hash;
                 }
@@ -71,19 +72,16 @@ namespace ProjectAltis.Core
         {
             try
             {
-                System.Security.Cryptography.SHA256 mySHA256 = System.Security.Cryptography.SHA256.Create();
+                SHA256 sha256 = SHA256.Create();
                 using (FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
-                    byte[] hashValue = mySHA256.ComputeHash(fileStream);
-                    string strHashValue = "";
-                    foreach (byte x in hashValue)
+                    byte[] hashValueBytes = sha256.ComputeHash(fileStream);
+                    string hashValue = "";
+                    foreach (byte x in hashValueBytes)
                     {
-                        strHashValue += x.ToString("x2");
+                        hashValue += x.ToString("x2");
                     }
-                    // Comparing the hash now
-                    Console.WriteLine("The SHA256 of {0} is: {1}", filePath, strHashValue);
-
-                    return strHashValue;
+                    return hashValue;
                 }
             }
             catch (Exception ex)
@@ -101,9 +99,8 @@ namespace ProjectAltis.Core
         /// <returns>System.Int32.</returns>
         public static int CalculateFileSize(string filePath)
         {
-            System.IO.FileInfo myFile = new System.IO.FileInfo(filePath);
-            long sizeInBytes = myFile.Length;
-            return Convert.ToInt32(sizeInBytes);
+            FileInfo myFile = new FileInfo(filePath);
+            return Convert.ToInt32(myFile.Length);
         }
     }
 }
