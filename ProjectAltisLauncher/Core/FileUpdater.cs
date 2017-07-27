@@ -35,8 +35,6 @@ namespace ProjectAltis.Core
             FilesUpdated?.Invoke();
         }
 
-        public event EventHandler<EventArgs> FileUpdated; 
-
         public FileUpdater(FrmMain instance)
         {
             _instance = instance;

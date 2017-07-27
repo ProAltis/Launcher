@@ -5,6 +5,8 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ProjectAltis.Core;
 using ProjectAltis.Forms.ContentPacks;
 
@@ -22,9 +24,6 @@ namespace ProjectAltis.Forms
             FormBorderStyle = FormBorderStyle.None;
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             _currentDir = Directory.GetCurrentDirectory() + @"\";
-
-            Properties.Settings.Default.Password = "Deprecated";
-
             if (!IsWriteable())
             {
                 MessageBox.Show(@"It appears you do not have permission to write the the current directory: " + _currentDir + @"
@@ -35,6 +34,7 @@ namespace ProjectAltis.Forms
             }
 
             versionLabel.Text = "Launcher v" + typeof(Program).Assembly.GetName().Version.ToString();
+            ValidatePrefJson();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -117,8 +117,7 @@ namespace ProjectAltis.Forms
             btnPlay.Enabled = false;
 
             ErrorReporter.Instance.Username = txtUser.Text;
-
-            SaveCredentials();
+            SaveCredentials();// Save credentials if necessary
             RunUpdater();
             ActiveControl = null;
         }
@@ -300,6 +299,31 @@ namespace ProjectAltis.Forms
                 return false;
             }
         }
+
+        private void ValidatePrefJson()
+        {
+            if(!File.Exists("preferences.json"))
+            {
+                // Will be automatically created by the game
+                return;
+            }
+            string prefFile = File.ReadAllText("preferences.json");
+            try
+            {
+                JObject contents = JObject.Parse(prefFile);
+            }
+            catch (JsonReaderException ex)
+            {
+                File.Delete("preferences.json");
+                Log.Info("DELETED Preferences.json due to it being corrupted");
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex);
+                throw;
+            }
+
+        }
         #endregion
 
         private void OnFilesUpdated()
@@ -328,33 +352,6 @@ namespace ProjectAltis.Forms
 
                 playThread.Start();
                 btnPlay.Enabled = true;
-            }
-        }
-
-        private void SaveCredentials()
-        {
-            if (cbSaveLogin.Checked)
-            {
-                Log.Info("Save checked");
-                // Make sure the username or pass has text
-                if (!string.IsNullOrEmpty(txtUser.Text)|| !string.IsNullOrEmpty(txtPass.Text))
-                {
-                    Properties.Settings.Default.Username = txtUser.Text;
-                    Properties.Settings.Default.Save();
-                }
-            }
-            if (Properties.Settings.Default.WantsPassword)
-            {
-                Log.Info("Trying to save password securely...");
-                try
-                {
-                    UwpHelper.SetCredentials(txtUser.Text, txtPass.Text);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex);
-                    Log.Error("Don't want to break after trying to save pass so continuing");
-                }
             }
         }
 
@@ -409,6 +406,25 @@ namespace ProjectAltis.Forms
             }
         }
 
+        public void SaveCredentials()
+        {
+            Properties.Settings.Default.Username = txtUser.Text;
+            Properties.Settings.Default.Save();
+            if (Properties.Settings.Default.WantsPassword)
+            {
+                Log.Info("Trying to save password securely...");
+                try
+                {
+                    UwpHelper.SetCredentials(txtUser.Text, txtPass.Text);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                    Log.Error("Don't want to break after trying to save pass so continuing");
+                }
+            }
+        }
+
         private void TxtUser_TextChanged(object sender, EventArgs e)
         {
             Button_MouseLeave(btnPlay, EventArgs.Empty);
@@ -425,10 +441,5 @@ namespace ProjectAltis.Forms
             int nHeightEllipse // Width of ellipse
         );
 
-        public void PictureBox1_Click(object sender, EventArgs e)
-        {
-            DialogResult msgResult = MessageBox.Show(this,
-                "Project Altis is currently in Pre-Beta mode! Only those with a Beta Certificate get in game to experience what Project Altis Beta will be like. For more information visit the website and view #announcements in the discord.");
-        }
     }
 }

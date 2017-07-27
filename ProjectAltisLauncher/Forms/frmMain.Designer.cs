@@ -33,7 +33,6 @@
             this.txtPass = new System.Windows.Forms.TextBox();
             this.btnPlay = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
-            this.cbSaveLogin = new System.Windows.Forms.CheckBox();
             this.lblNowDownloading = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
@@ -77,7 +76,7 @@
             this.btnPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnPlay.FlatAppearance.BorderSize = 0;
             this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPlay.Location = new System.Drawing.Point(826, 302);
+            this.btnPlay.Location = new System.Drawing.Point(829, 310);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(90, 41);
             this.btnPlay.TabIndex = 3;
@@ -100,16 +99,6 @@
             this.lblInfo.Text = "Info is displayed here";
             this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblInfo.Visible = false;
-            // 
-            // cbSaveLogin
-            // 
-            this.cbSaveLogin.BackColor = System.Drawing.Color.Transparent;
-            this.cbSaveLogin.Location = new System.Drawing.Point(829, 343);
-            this.cbSaveLogin.Name = "cbSaveLogin";
-            this.cbSaveLogin.Size = new System.Drawing.Size(90, 17);
-            this.cbSaveLogin.TabIndex = 5;
-            this.cbSaveLogin.Text = "Save Login";
-            this.cbSaveLogin.UseVisualStyleBackColor = false;
             // 
             // lblNowDownloading
             // 
@@ -364,7 +353,6 @@
             this.pictureBox1.TabIndex = 25;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.WaitOnLoad = true;
-            this.pictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
             // 
             // FrmMain
             // 
@@ -391,7 +379,6 @@
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.lblNowDownloading);
-            this.Controls.Add(this.cbSaveLogin);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.txtPass);
             this.Controls.Add(this.txtUser);
@@ -422,7 +409,6 @@
         public System.Windows.Forms.TextBox txtPass;
         public System.Windows.Forms.Button btnPlay;
         public System.Windows.Forms.Label lblInfo;
-        private System.Windows.Forms.CheckBox cbSaveLogin;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Button btnWebsite;
