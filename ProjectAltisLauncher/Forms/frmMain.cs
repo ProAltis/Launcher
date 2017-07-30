@@ -35,6 +35,7 @@ namespace ProjectAltis.Forms
 
             versionLabel.Text = "Launcher v" + typeof(Program).Assembly.GetName().Version.ToString();
             ValidatePrefJson();
+            webBrowser1.Navigate("https://projectaltis.com/launcher", null, null, "User-Agent: Altis Launcher\r\n");
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -269,6 +270,7 @@ namespace ProjectAltis.Forms
             e.Cancel = true;
             Log.TryOpenUrl(e.Url.ToString());
         }
+
         #endregion
 
         #region Directory Things
