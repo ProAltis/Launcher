@@ -333,12 +333,6 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\explorer\explorer.csproj">
-      <Project>{5bd0e9c7-ad95-43fa-be47-4adc92fb1615}</Project>
-      <Name>explorer</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
