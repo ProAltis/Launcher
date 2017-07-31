@@ -37,7 +37,6 @@ namespace ProjectAltis
                     Directory.CreateDirectory(filesDir);
 
                 //first run
-                UwpHelper.HandlePinToTaskbar();
                 Settings.Default.firstRun = false;
                 Settings.Default.Save();
 
