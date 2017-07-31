@@ -1,10 +1,21 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 using Microsoft.Win32;
+using ProjectAltis.Forms;
 
 namespace ProjectAltis.Core
 {
-    public static class RedistCheck
+    public class RedistCheck
     {
+        private FrmMain _instance;
+        public RedistCheck(FrmMain instance)
+        {
+            _instance = instance;
+        }
         public static bool RedistInstalled()
         {
             Log.Info("Checking C++ 2010 x86 redistributable registry key");
@@ -15,16 +26,35 @@ namespace ProjectAltis.Core
             return result;
         }
 
-        public static void CheckRedistHandler()
+        public void CheckRedistHandler()
         {
             if(RedistInstalled()) return;
             DialogResult result = MessageBox.Show(
-                "The Microsoft Visual C++ redistributable\n 2010 x86 was not found. It may be required to play Project Altis.\nGo to the download page?", @"Project Altis", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if(result == DialogResult.Yes)
+                "The Microsoft Visual C++ redistributable\n 2010 x86 was not found. It may be required to play Project Altis.\nDownload and install it now?", @"Project Altis", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if(result != DialogResult.Yes) return;
+            _instance.lblNowDownloading.Text = "Downloading Redist...";
+            var finalDestination = Path.Combine(Path.GetTempPath(), "vcredist_x86.exe");
+            using(WebClient wc = new WebClient())
             {
-                Log.TryOpenUrl(
-                    "https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe");
+                wc.DownloadProgressChanged += (sender, args) =>
+                {
+                    _instance.pbDownload.Visible = true;
+                    _instance.pbDownload.Value = args.ProgressPercentage;
+                };
+                wc.DownloadFileCompleted += (sender, args) =>
+                {
+                    _instance.pbDownload.Visible = false;
+                    Process.Start(finalDestination, "/passive /norestart");
+                };
+                _instance.pbDownload.Value = 0;
+                wc.DownloadFileAsync(new Uri("https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe"), finalDestination);
+                _instance.lblInfo.Text = "Downloading the C++ Redistributable...";
+
             }
+
+
+            //Log.TryOpenUrl(
+            //    "https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe");
         }
 
         public static bool GameDvrEnabled()

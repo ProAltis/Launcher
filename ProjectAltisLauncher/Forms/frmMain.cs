@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProjectAltis.Core;
 using ProjectAltis.Forms.ContentPacks;
+using Timer = System.Timers.Timer;
 
 namespace ProjectAltis.Forms
 {
@@ -62,10 +63,21 @@ namespace ProjectAltis.Forms
 
         private void FrmMain_Shown(object sender, EventArgs e)
         {
-            RedistCheck.CheckRedistHandler();
+            new RedistCheck(this).CheckRedistHandler();
         }
         #endregion
         #region Borderless Form Code
+
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect, // X-coordinate of upper-left corner
+            int nTopRect, // Y-coordinate of upper-left corner
+            int nRightRect, // X-coordinate of lower-right corner
+            int nBottomRect, // Y-coordinate of lower-right corner
+            int nWidthEllipse, // Height of ellipse
+            int nHeightEllipse // Width of ellipse
+        );
 
         private Point mouseDownPoint = Point.Empty;
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -431,17 +443,5 @@ namespace ProjectAltis.Forms
         {
             Button_MouseLeave(btnPlay, EventArgs.Empty);
         }
-
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn
-        (
-            int nLeftRect, // X-coordinate of upper-left corner
-            int nTopRect, // Y-coordinate of upper-left corner
-            int nRightRect, // X-coordinate of lower-right corner
-            int nBottomRect, // Y-coordinate of lower-right corner
-            int nWidthEllipse, // Height of ellipse
-            int nHeightEllipse // Width of ellipse
-        );
-
     }
 }

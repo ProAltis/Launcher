@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using CredentialManagement;
 using Microsoft.Win32;
 
@@ -116,6 +118,25 @@ namespace ProjectAltis.Core
         private static bool RemoveCredentials(string target)
         {
             return new Credential { Target = target }.Delete();
+        }
+
+        public static void HandlePinToTaskbar()
+        {
+            if(Properties.Settings.Default.firstRun)
+                PinToTaskbar();
+        }
+
+        private static void PinToTaskbar()
+        {
+            string file = Path.Combine(Directory.GetCurrentDirectory(), "explorer.exe");
+            if(!File.Exists(file))
+                return;
+            ProcessStartInfo startInfo = new ProcessStartInfo()
+            {
+                FileName = file,
+                WindowStyle = ProcessWindowStyle.Hidden
+            };
+            Process.Start(startInfo);
         }
     }
 }

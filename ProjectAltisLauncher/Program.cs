@@ -5,6 +5,8 @@ using System.Threading;
 using ProjectAltis.Enums;
 using ProjectAltis.Forms;
 using System.Threading.Tasks;
+using ProjectAltis.Core;
+using ProjectAltis.Properties;
 
 namespace ProjectAltis
 {
@@ -33,6 +35,12 @@ namespace ProjectAltis
                 string filesDir = Path.Combine(appDataPath, "Project Altis");
                 if (!Directory.Exists(filesDir))
                     Directory.CreateDirectory(filesDir);
+
+                //first run
+                UwpHelper.HandlePinToTaskbar();
+                Settings.Default.firstRun = false;
+                Settings.Default.Save();
+
                 Directory.SetCurrentDirectory(filesDir);
                 Log.Initialize(LogType.Info);
                 Log.Info("Loaded altis launcher v" + typeof(Program).Assembly.GetName().Version);
