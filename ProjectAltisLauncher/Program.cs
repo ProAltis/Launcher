@@ -28,6 +28,7 @@ namespace ProjectAltis
         {
             try
             {
+                Log.Initialize(LogType.Info);
 #if (!DEBUG)
                 Updater.CheckForUpdates();
 #endif
@@ -41,7 +42,6 @@ namespace ProjectAltis
                 Settings.Default.Save();
 
                 Directory.SetCurrentDirectory(filesDir);
-                Log.Initialize(LogType.Info);
                 Log.Info("Loaded altis launcher v" + typeof(Program).Assembly.GetName().Version);
                 Log.Info("Current time: " + DateTime.Now.ToLongDateString() + "|" + DateTime.Now.TimeOfDay);
                 Log.Info("Working directory: " + Directory.GetCurrentDirectory());
