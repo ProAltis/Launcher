@@ -122,6 +122,7 @@ namespace ProjectAltis.Core
 
         public static void HandlePinToTaskbar()
         {
+            return;
             if(Properties.Settings.Default.firstRun)
                 PinToTaskbar();
         }
