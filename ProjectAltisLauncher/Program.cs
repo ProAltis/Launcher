@@ -27,7 +27,7 @@ namespace ProjectAltis
             try
             {
 #if (!DEBUG)
-                Updater.CheckForUpdates();
+                await Updater.StartupUpdateCheck();
 #endif
                 string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 string filesDir = Path.Combine(appDataPath, "Project Altis");
