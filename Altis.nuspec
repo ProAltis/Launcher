@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Altis</id>
-        <version>1.2.3</version>
+        <version>1.2.4</version>
         <title>Altis</title>
         <authors>Project Altis</authors>
         <owners>Project Altis</owners>
@@ -18,6 +18,8 @@
         <file src="ProjectAltisLauncher\bin\Release\DeltaCompressionDotNet.dll" target="lib\net45\DeltaCompressionDotNet.dll" />
         <file src="ProjectAltisLauncher\bin\Release\DeltaCompressionDotNet.MsDelta.dll" target="lib\net45\DeltaCompressionDotNet.MsDelta.dll" />
         <file src="ProjectAltisLauncher\bin\Release\DeltaCompressionDotNet.PatchApi.dll" target="lib\net45\DeltaCompressionDotNet.PatchApi.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\explorer.exe" target="lib\net45\explorer.exe" />
+        <file src="ProjectAltisLauncher\bin\Release\explorer.exe.config" target="lib\net45\explorer.exe.config" />
         <file src="ProjectAltisLauncher\bin\Release\ICSharpCode.SharpZipLib.dll" target="lib\net45\ICSharpCode.SharpZipLib.dll" />
         <file src="ProjectAltisLauncher\bin\Release\ICSharpCode.SharpZipLib.xml" target="lib\net45\ICSharpCode.SharpZipLib.xml" />
         <file src="ProjectAltisLauncher\bin\Release\Mono.Cecil.dll" target="lib\net45\Mono.Cecil.dll" />
@@ -27,16 +29,11 @@
         <file src="ProjectAltisLauncher\bin\Release\Newtonsoft.Json.dll" target="lib\net45\Newtonsoft.Json.dll" />
         <file src="ProjectAltisLauncher\bin\Release\Newtonsoft.Json.xml" target="lib\net45\Newtonsoft.Json.xml" />
         <file src="ProjectAltisLauncher\bin\Release\NuGet.Squirrel.dll" target="lib\net45\NuGet.Squirrel.dll" />
-        <file src="ProjectAltisLauncher\bin\Release\NuGet.Squirrel.pdb" target="lib\net45\NuGet.Squirrel.pdb" />
         <file src="ProjectAltisLauncher\bin\Release\Project Altis.exe" target="lib\net45\Project Altis.exe" />
         <file src="ProjectAltisLauncher\bin\Release\Project Altis.exe.config" target="lib\net45\Project Altis.exe.config" />
-        <file src="ProjectAltisLauncher\bin\Release\Project Altis.pdb" target="lib\net45\Project Altis.pdb" />
         <file src="ProjectAltisLauncher\bin\Release\SharpRaven.dll" target="lib\net45\SharpRaven.dll" />
-        <file src="ProjectAltisLauncher\bin\Release\SharpRaven.pdb" target="lib\net45\SharpRaven.pdb" />
         <file src="ProjectAltisLauncher\bin\Release\SharpRaven.xml" target="lib\net45\SharpRaven.xml" />
         <file src="ProjectAltisLauncher\bin\Release\Splat.dll" target="lib\net45\Splat.dll" />
-        <file src="ProjectAltisLauncher\bin\Release\Splat.pdb" target="lib\net45\Splat.pdb" />
         <file src="ProjectAltisLauncher\bin\Release\Squirrel.dll" target="lib\net45\Squirrel.dll" />
-        <file src="ProjectAltisLauncher\bin\Release\Squirrel.pdb" target="lib\net45\Squirrel.pdb" />
     </files>
 </package>
