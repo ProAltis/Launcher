@@ -373,7 +373,7 @@ namespace ProjectAltis.Forms
         {
             FileUpdater fileUpdater = new FileUpdater(this);
             fileUpdater.FilesUpdated += OnFilesUpdated;
-            Thread updaterThread = new Thread(fileUpdater.DoWork);
+            Thread updaterThread = new Thread(fileUpdater.RunUpdater);
             try
             {
                 updaterThread.Start();
