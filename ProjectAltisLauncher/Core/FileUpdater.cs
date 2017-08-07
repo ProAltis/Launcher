@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using ProjectAltis.Forms;
 using ProjectAltis.Manifests;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjectAltis.Core
 {
@@ -19,12 +20,9 @@ namespace ProjectAltis.Core
         private readonly SortedList<string, string> _downloadList = new SortedList<string, string>(); // Filename, URL
         private readonly FrmMain _instance;
 
-        private readonly string _username;
-        private readonly string _password;
-
         private volatile string _nowDownloading = string.Empty;
 
-        private volatile int _filesChecked;
+        private volatile int _filesChecked = 0;
 
         public event FilesUpdatedEventHandler FilesUpdated;
 
@@ -38,24 +36,23 @@ namespace ProjectAltis.Core
         public FileUpdater(FrmMain instance)
         {
             _instance = instance;
-            _username = instance.txtUser.Text;
-            _password = instance.txtPass.Text;
         }
 
-        public void DoWork()
+        public void RunUpdater()
         {
             _instance?.Invoke((MethodInvoker)delegate
             {
                 _instance.btnPlay.Enabled = false;
             });
 
-            LoginApiResponse resp = GetLoginAPIResponse(this._instance.txtUser.Text, this._instance.txtPass.Text);
+            LoginApiResponse resp = GetLoginAPIResponse(_instance?.txtUser.Text, _instance?.txtPass.Text);
 
             if (resp == null)
             {
                 Log.Info("API response was null.");
                 return;
             }
+
             Log.Info("Response Status info:");
             Log.Info("Status: " + resp.status);
             Log.Info("Reason: " + resp.reason);
@@ -194,8 +191,9 @@ namespace ProjectAltis.Core
                 }
                 Log.Info("Manifest wasn't null, verifying files.");
                 Log.Info("---------");
-                VerifyFiles(rawManifest); // One thread for each file
+                VerifyFiles(rawManifest);
                 Log.Info("Downloading files that were not up to date.");
+
                 new Thread(DownloadFiles).Start(); // Download any files that have not been verified
             });
             mainThread.Start();
@@ -205,37 +203,24 @@ namespace ProjectAltis.Core
         {
             string[] rawManifestArray = rawManifest.Split('#');
 
-            // Remove the empty values in the array ( The last value )
+            // Remove the empty values in the array ( The last value will be removed, but just to future proof in case manifest changes )
             string[] manifestArray = rawManifestArray.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 
             _instance?.Invoke((MethodInvoker)delegate
             {
                 _instance.lblNowDownloading.Text = "Verifying game files...";
             });
-            List<Thread> fileVerificationThreads = new List<Thread>();
 
-            foreach (string item in manifestArray)
+            ParallelOptions options = new ParallelOptions
             {
-                Thread fileCheckThread = new Thread(() =>
-                {
-                    ManifestJson manifest = JsonConvert.DeserializeObject<ManifestJson>(item.Replace("#", ""));
-                    VerifyFile(manifest, manifestArray.Length);
-                });
-                fileVerificationThreads.Add(fileCheckThread);
-                fileCheckThread.Start();
-            }
+                MaxDegreeOfParallelism = Environment.ProcessorCount / 2 // Only use half cores
+            };
 
-            while (true) // Keep checking until all the threads are done.
+            Parallel.ForEach(manifestArray, options, x =>
             {
-                // Find all the threads that have finished updating. They will no longer be running if they have finished.
-                int finishedThreadCount = fileVerificationThreads.Where(x => x.ThreadState != ThreadState.Running).Count();
-                if (finishedThreadCount == fileVerificationThreads.Count())
-                {
-                    // All done!
-                    break;
-                }
-                Thread.Sleep(50);
-            }
+                ManifestJson manifest = JsonConvert.DeserializeObject<ManifestJson>(x.Replace("#", ""));
+                VerifyFile(manifest, manifestArray.Length);
+            });
         }
 
         private void VerifyFile(ManifestJson manifest, int totalFiles)
@@ -260,6 +245,13 @@ namespace ProjectAltis.Core
             _filesChecked++;
         }
 
+        /// <summary>
+        /// Determines whether a file up to date.
+        /// </summary>
+        /// <param name="manifest">The manifest.</param>
+        /// <returns>
+        ///   <c>true</c> if the file is up to date; otherwise, <c>false</c>.
+        /// </returns>
         private bool IsFileUpToDate(ManifestJson manifest)
         {
             string workingDir = GetCorrectDownloadDirectory(manifest.filename);
@@ -373,12 +365,12 @@ namespace ProjectAltis.Core
                     {
 
                         string manifest = client.DownloadString("http://projectaltis.com/api/manifest");
-                        if (!manifest.StartsWith("{"))
+                        if (manifest.StartsWith("{"))
                         {
-                            Log.Error("Manifest doesn't look like it's there or is good.");
-                            return null;
+                            return manifest;
                         }
-                        return manifest;
+                        Log.Error("Manifest doesn't look like it's there or is good.");
+                        return null;
                     }
                     catch (Exception ex)
                     {
