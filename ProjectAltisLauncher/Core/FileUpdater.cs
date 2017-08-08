@@ -213,7 +213,7 @@ namespace ProjectAltis.Core
 
             ParallelOptions options = new ParallelOptions
             {
-                MaxDegreeOfParallelism = Environment.ProcessorCount / 2 // Only use half cores
+                MaxDegreeOfParallelism = (int)Math.Ceiling(Environment.ProcessorCount / 2d) // Cores / 2 50% cpu usage. Round up if we get dec vals
             };
 
             Parallel.ForEach(manifestArray, options, x =>
