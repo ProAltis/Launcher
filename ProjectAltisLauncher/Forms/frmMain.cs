@@ -107,7 +107,7 @@ namespace ProjectAltis.Forms
         #region Exit Button
         private void BtnExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Environment.Exit(0);
         }
         #endregion
         #region Minimize Button
