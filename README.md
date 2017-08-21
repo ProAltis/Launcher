@@ -1,6 +1,6 @@
 Project Altis Launcher Source Code
 ==================================
-[![Build Status](https://travis-ci.com/altisofficial/Project-Altis-Launcher.svg?token=gEmYwqjDCsLTVbma9rmy&branch=master)](https://travis-ci.com/altisofficial/Project-Altis-Launcher)
+![Build Status](https://teamcity.projectalt.is/app/rest/builds/buildType:Launcher_Build/statusIcon)
 
 This repository contains all launcher source code to launch into Project Altis
 
