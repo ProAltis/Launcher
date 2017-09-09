@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Background.cs" />
+    <Compile Include="Core\ContentPacks.cs" />
     <Compile Include="Core\Credentials.cs" />
     <Compile Include="Core\Data.cs" />
     <Compile Include="Core\DateTimeExtensions.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Core\Hashing.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Enums\LogType.cs" />
+    <Compile Include="Manifests\ContentPack.cs" />
     <Compile Include="Manifests\SanityCheckAPIResonse.cs" />
     <Compile Include="Manifests\loginAPIResponse.cs" />
     <Compile Include="Manifests\ManifestJson.cs" />

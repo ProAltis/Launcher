@@ -28,6 +28,7 @@ namespace ProjectAltis
         {
             try
             {
+                Console.WriteLine(ContentPacks.Instance.cachedPacks);
                 Log.Initialize(LogType.Info);
 #if (!DEBUG)
                 Updater.CheckForUpdates();
