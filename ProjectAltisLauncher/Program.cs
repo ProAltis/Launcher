@@ -28,8 +28,8 @@ namespace ProjectAltis
         {
             try
             {
-                Console.WriteLine(ContentPacks.Instance.cachedPacks);
                 Log.Initialize(LogType.Info);
+                Console.WriteLine(ContentPacks.Instance.cachedPacks.GetType().ToString()); // Initializing content pack list
 #if (!DEBUG)
                 Updater.CheckForUpdates();
 #endif

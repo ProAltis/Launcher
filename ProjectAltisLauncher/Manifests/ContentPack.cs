@@ -6,6 +6,8 @@ namespace ProjectAltis.Manifests
 {
     public class ContentPackResponse
     {
+        public bool valid { get; set; }
+
         public List<ContentPackDetail> data { get; set; }
     }
     
@@ -17,6 +19,10 @@ namespace ProjectAltis.Manifests
         public string author { get; set; }
         
         public string description { get; set; }
+
+        public string filename { get; set; }
+
+        public List<string> screenshots { get; set; }
 
         public List<ContentPackVersion> versions { get; set; }
     }

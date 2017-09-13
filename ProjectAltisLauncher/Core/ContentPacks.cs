@@ -19,7 +19,6 @@ namespace ProjectAltis.Core
         public ContentPacks()
         {
             cachedPacks = GetPacks();
-            MessageBox.Show(cachedPacks.data.First().versions.First().displayversion);
         }
 
         private static ContentPackResponse GetPacks()
@@ -39,6 +38,7 @@ namespace ProjectAltis.Core
                 Log.Error(ex);
                 return new ContentPackResponse
                 {
+                    valid = false,
                     data = new List<ContentPackDetail>
                     {
                         new ContentPackDetail
