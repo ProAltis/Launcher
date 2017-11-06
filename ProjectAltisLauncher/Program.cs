@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO;
+using System.Net;
 using System.Threading;
 using ProjectAltis.Enums;
 using ProjectAltis.Forms;
@@ -18,6 +19,8 @@ namespace ProjectAltis
         [STAThread]
         public static void Main()
         {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             Application.ThreadException += Application_ThreadException;
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
