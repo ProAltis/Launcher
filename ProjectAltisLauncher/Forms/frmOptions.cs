@@ -19,20 +19,19 @@ namespace ProjectAltis.Forms
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.WantsCursor = chkCursor.Checked;
-            Properties.Settings.Default.WantsClickSounds = chkClickSounds.Checked;
-            Properties.Settings.Default.WantsRandomBg = chkRandomBackgrounds.Checked;
-            Properties.Settings.Default.WantsPassword = chkSavePassword.Checked;
-            Properties.Settings.Default.Save();
+            Settings.Instance.WantCursor = chkCursor.Checked;
+            Settings.Instance.WantClickSound = chkClickSounds.Checked;
+            Settings.Instance.WantRandomBackgrounds = chkRandomBackgrounds.Checked;
+            Settings.Instance.WantSavePassword = chkSavePassword.Checked;
             this.Close();
         }
 
         private void Options_Load(object sender, EventArgs e)
         {
-            chkCursor.Checked = Properties.Settings.Default.WantsCursor;
-            chkClickSounds.Checked = Properties.Settings.Default.WantsClickSounds;
-            chkRandomBackgrounds.Checked = Properties.Settings.Default.WantsRandomBg;
-            chkSavePassword.Checked = Properties.Settings.Default.WantsPassword;
+            chkCursor.Checked = Settings.Instance.WantCursor;
+            chkClickSounds.Checked = Settings.Instance.WantClickSound;
+            chkRandomBackgrounds.Checked = Settings.Instance.WantRandomBackgrounds;
+            chkSavePassword.Checked = Settings.Instance.WantSavePassword;
             if(!UwpHelper.IsWindows10())
             {
                 chkSavePassword.Enabled = false;

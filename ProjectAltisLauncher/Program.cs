@@ -40,9 +40,9 @@ namespace ProjectAltis
                 if (!Directory.Exists(filesDir))
                     Directory.CreateDirectory(filesDir);
 
-                //first run
-                Settings.Default.firstRun = false;
-                Settings.Default.Save();
+                // First run
+                // This may be used in the future for first-run messages or configuration
+                Settings.Instance.FirstRun = false;
 
                 Directory.SetCurrentDirectory(filesDir);
                 Log.Info("Loaded altis launcher v" + typeof(Program).Assembly.GetName().Version);

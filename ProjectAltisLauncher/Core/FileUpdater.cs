@@ -256,7 +256,7 @@ namespace ProjectAltis.Core
         {
             string workingDir = GetCorrectDownloadDirectory(manifest.filename);
             string filePath = workingDir + manifest.filename;
-            return File.Exists(filePath) && Hashing.CalculateSHA256(filePath) == manifest.sha256;
+            return File.Exists(filePath) && Hashing.CalculateSha256(filePath) == manifest.sha256;
         }
 
         private void DownloadFiles()

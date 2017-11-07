@@ -47,8 +47,8 @@ namespace ProjectAltis.Core
                     Process.Start(finalDestination, "/passive /norestart");
                 };
                 _instance.pbDownload.Value = 0;
+                _instance.lblInfo.Text = "Downloading the C++ Redistributable from Microsoft...";
                 wc.DownloadFileAsync(new Uri("https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe"), finalDestination);
-                _instance.lblInfo.Text = "Downloading the C++ Redistributable...";
 
             }
 

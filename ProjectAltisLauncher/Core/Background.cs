@@ -5,7 +5,7 @@ namespace ProjectAltis.Core
 {
     public class Background
     {
-        private static readonly Random rand = new Random();
+        private static readonly Random Rand = new Random();
         private const string ToontownCentral = "TTC";
         private const string DonaldsDock = "DD";
         private const string DaisyGardens = "DG";
@@ -15,7 +15,7 @@ namespace ProjectAltis.Core
 
         public static Image ReturnRandomBackground()
         {
-            int val = rand.Next(1, 7); // Generates a random number 1-6
+            int val = Rand.Next(1, 7); // Generates a random number 1-6
             switch (val)
             {
                 case 1:

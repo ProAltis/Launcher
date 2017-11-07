@@ -33,7 +33,7 @@ namespace ProjectAltis.Core
         /// <param name="filePath">The file path.</param>
         /// <param name="hash">The hash.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool CompareSHA256(string filePath, string hash)
+        public static bool CompareSha256(string filePath, string hash)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace ProjectAltis.Core
         /// </summary>
         /// <param name="filePath">The file path.</param>
         /// <returns>System.String.</returns>
-        public static string CalculateSHA256(string filePath)
+        public static string CalculateSha256(string filePath)
         {
             try
             {

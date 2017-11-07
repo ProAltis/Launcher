@@ -20,35 +20,34 @@ namespace ProjectAltis.Forms
         {
             if (radTTC.Checked)
             {
-                Settings.Default.Background = "TTC";
+                Settings.Instance.Background = "TTC";
             }
             else if (radDD.Checked)
             {
-                Settings.Default.Background = "DD";
+                Settings.Instance.Background = "DD";
             }
             else if (radDG.Checked)
             {
-                Settings.Default.Background = "DG";
+                Settings.Instance.Background = "DG";
             }
             else if (radMML.Checked)
             {
-                Settings.Default.Background = "MML";
+                Settings.Instance.Background = "MML";
             }
             else if (radBrrrgh.Checked)
             {
-                Settings.Default.Background = "Brrrgh";
+                Settings.Instance.Background = "Brrrgh";
             }
             else if(radDDL.Checked)
             {
-                Settings.Default.Background = "DDL";
+                Settings.Instance.Background = "DDL";
             }
-            Settings.Default.Save();
             Close();
         }
 
         private void BackgroundChoices_Load(object sender, EventArgs e)
         {
-            if (Settings.Default.WantsRandomBg)
+            if (Settings.Instance.WantRandomBackgrounds)
             {
                 radBrrrgh.Visible = false;
                 radDD.Visible = false;
@@ -60,7 +59,7 @@ namespace ProjectAltis.Forms
             }
             else
             {
-                switch (Settings.Default.Background)
+                switch (Settings.Instance.Background)
                 {
                     case "TTC":
                         radTTC.Checked = true;

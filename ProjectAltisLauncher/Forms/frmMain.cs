@@ -169,10 +169,10 @@ namespace ProjectAltis.Forms
             Audio.PlaySoundFile("sndclick");
             FrmBackgroundChoices bg = new FrmBackgroundChoices();
             bg.ShowDialog();
-            if (!Properties.Settings.Default.WantsRandomBg)
+            if (!Settings.Instance.WantRandomBackgrounds)
             {
                 BackgroundImage.Dispose();
-                BackgroundImage = Background.ReturnBackground(Properties.Settings.Default.Background);
+                BackgroundImage = Background.ReturnBackground(Settings.Instance.Background);
             }
 
             ActiveControl = null;
@@ -185,7 +185,7 @@ namespace ProjectAltis.Forms
             FrmOptions op = new FrmOptions();
             op.ShowDialog();
             // Apply user settings
-            if (Properties.Settings.Default.WantsCursor) // Cursor
+            if (Settings.Instance.WantCursor) // Cursor
             {
                 MemoryStream cursorMemoryStream = new MemoryStream(Properties.Resources.toonmono);
                 Cursor = new Cursor(cursorMemoryStream);
@@ -392,8 +392,8 @@ namespace ProjectAltis.Forms
         {
             try
             {
-                txtUser.Text = Properties.Settings.Default.Username;
-                if (Properties.Settings.Default.WantsPassword)
+                txtUser.Text = Settings.Instance.Username;
+                if (Settings.Instance.WantSavePassword)
                 {
                     txtPass.Text = UwpHelper.GetPassword();
                 }
@@ -403,30 +403,29 @@ namespace ProjectAltis.Forms
                 Log.Error(ex);
             }
             // Read user settings
-            if (Properties.Settings.Default.WantsCursor) // Old Toontown Cursors
+            if (Settings.Instance.WantCursor) // Old Toontown Cursors
             {
                 MemoryStream cursorMemoryStream = new MemoryStream(Properties.Resources.toonmono);
                 Cursor = new Cursor(cursorMemoryStream);
             }
             // Load last saved user background choice
             BackgroundImage.Dispose();
-            if (Properties.Settings.Default.WantsRandomBg)
+            if (Settings.Instance.WantRandomBackgrounds)
             {
                 BackgroundImage = Background.ReturnRandomBackground();
             }
             else
             {
-                BackgroundImage = Background.ReturnBackground(Properties.Settings.Default.Background);
+                BackgroundImage = Background.ReturnBackground(Settings.Instance.Background);
             }
         }
 
         public void SaveCredentials()
         {
-            Properties.Settings.Default.Username = txtUser.Text;
-            Properties.Settings.Default.Save();
-            if (Properties.Settings.Default.WantsPassword)
+            Settings.Instance.Username = txtUser.Text;
+            if (Settings.Instance.WantSavePassword)
             {
-                Log.Info("Trying to save password securely...");
+                Log.Info("Trying to save password via Windows Credential Manager...");
                 try
                 {
                     UwpHelper.SetCredentials(txtUser.Text, txtPass.Text);
@@ -434,7 +433,7 @@ namespace ProjectAltis.Forms
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    Log.Error("Don't want to break after trying to save pass so continuing");
+                    Log.Error("Error when saving password via Credential Manager. Continuing...");
                 }
             }
         }
