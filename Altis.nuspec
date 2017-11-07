@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Altis</id>
-        <version>1.2.8</version>
+        <version>1.3.0</version>
         <title>Altis</title>
         <authors>Project Altis</authors>
         <owners>Project Altis</owners>
@@ -14,6 +14,8 @@
         <language>en-US</language>
     </metadata>
     <files>
+        <file src="ProjectAltisLauncher\bin\Release\Castle.Core.dll" target="lib\net45\Castle.Core.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\Config.Net.dll" target="lib\net45\Config.Net.dll" />
         <file src="ProjectAltisLauncher\bin\Release\CredentialManagement.dll" target="lib\net45\CredentialManagement.dll" />
         <file src="ProjectAltisLauncher\bin\Release\DeltaCompressionDotNet.dll" target="lib\net45\DeltaCompressionDotNet.dll" />
         <file src="ProjectAltisLauncher\bin\Release\DeltaCompressionDotNet.MsDelta.dll" target="lib\net45\DeltaCompressionDotNet.MsDelta.dll" />
@@ -25,7 +27,6 @@
         <file src="ProjectAltisLauncher\bin\Release\Mono.Cecil.Pdb.dll" target="lib\net45\Mono.Cecil.Pdb.dll" />
         <file src="ProjectAltisLauncher\bin\Release\Mono.Cecil.Rocks.dll" target="lib\net45\Mono.Cecil.Rocks.dll" />
         <file src="ProjectAltisLauncher\bin\Release\Newtonsoft.Json.dll" target="lib\net45\Newtonsoft.Json.dll" />
-        <file src="ProjectAltisLauncher\bin\Release\Newtonsoft.Json.xml" target="lib\net45\Newtonsoft.Json.xml" />
         <file src="ProjectAltisLauncher\bin\Release\NuGet.Squirrel.dll" target="lib\net45\NuGet.Squirrel.dll" />
         <file src="ProjectAltisLauncher\bin\Release\Project Altis.exe" target="lib\net45\Project Altis.exe" />
         <file src="ProjectAltisLauncher\bin\Release\Project Altis.exe.config" target="lib\net45\Project Altis.exe.config" />
@@ -33,5 +34,6 @@
         <file src="ProjectAltisLauncher\bin\Release\SharpRaven.xml" target="lib\net45\SharpRaven.xml" />
         <file src="ProjectAltisLauncher\bin\Release\Splat.dll" target="lib\net45\Splat.dll" />
         <file src="ProjectAltisLauncher\bin\Release\Squirrel.dll" target="lib\net45\Squirrel.dll" />
+        <file src="ProjectAltisLauncher\bin\Release\YamlDotNet.dll" target="lib\net45\YamlDotNet.dll" />
     </files>
 </package>
