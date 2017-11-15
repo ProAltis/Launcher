@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using ProjectAltis.Forms;
 using System.ComponentModel;
 using System.IO;
+using System.Net;
 
 namespace ProjectAltis.Core
 {
@@ -57,12 +58,17 @@ namespace ProjectAltis.Core
 
         }
 
+        public static string GetGameserver()
+        {
+            return new WebClient().DownloadString("https://projectaltis.com/api/gameserver");
+        }
+
         public static Process StartAltis(string username, string password)
         {
             Log.Info("Starting Toontown: " + username);
             Environment.SetEnvironmentVariable("TT_USERNAME", username);
             Environment.SetEnvironmentVariable("TT_PASSWORD", password);
-            Environment.SetEnvironmentVariable("TT_GAMESERVER", "gs1.projectaltis.com");
+            Environment.SetEnvironmentVariable("TT_GAMESERVER", GetGameserver());
             Log.Info("Successfully set Environment variables.");
             ProcessStartInfo startInfo = new ProcessStartInfo()
             {
