@@ -10,6 +10,8 @@ using Newtonsoft.Json.Linq;
 using ProjectAltis.Core;
 using ProjectAltis.Forms.ContentPacks;
 using Timer = System.Timers.Timer;
+using CefSharp;
+using CefSharp.WinForms;
 
 namespace ProjectAltis.Forms
 {
@@ -17,6 +19,7 @@ namespace ProjectAltis.Forms
     {
         #region Fields
         private readonly string _currentDir;
+        public ChromiumWebBrowser Browser;
         #endregion
         #region Main Form Events
         public FrmMain()
@@ -27,29 +30,57 @@ namespace ProjectAltis.Forms
             _currentDir = Directory.GetCurrentDirectory() + @"\";
             if (!IsWriteable())
             {
-                MessageBox.Show(@"It appears you do not have permission to write the the current directory: " + _currentDir + @"
-" +
-                                @"The launcher may not work correctly without permissions. 
-" +
-                                @"Try running the launcher with administrator rights or installing in a different location.");
+                MessageBox.Show(@"It appears you do not have permission to write the the current directory: " + _currentDir + @"" +
+                                @"The launcher may not work correctly without permissions." +
+                                @"Try running the launcher with administrator rights. If you have problems, message ModMail bot on the Altis discord.");
             }
 
             versionLabel.Text = "Launcher v" + typeof(Program).Assembly.GetName().Version.ToString();
             ValidatePrefJson();
-            webBrowser1.Navigate("https://projectaltis.com/launcher", null, null, "User-Agent: Altis Launcher\r\n");
+            //webBrowser1.Navigate("https://projectaltis.com/launcher", null, null, "User-Agent: Altis Launcher\r\n");
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-#if DEBUG
-            MessageBox.Show(@"This is a debug build, do not put this into production",
-                @"Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-#endif
             LoadUserSettings();
             ActiveControl = string.IsNullOrEmpty(txtUser.Text) ? txtUser : txtPass;
+            // Hack to change the button text to "create account"
             Button_MouseLeave(btnPlay, EventArgs.Empty);
-            webBrowser1.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, webBrowser1.Width, webBrowser1.Height, 20, 20));
+            InitBrowser();
         }
+
+        #region Chromium Browser
+        public void InitBrowser()
+        {
+            var cefsettings = new CefSettings();
+            cefsettings.UserAgent = "Altis Launcher " + typeof(Program).Assembly.GetName().Version;
+            Cef.Initialize(cefsettings);
+            Browser = new ChromiumWebBrowser("https://projectaltis.com/launcher");
+            this.Controls.Add(Browser);
+            // Here, we use webbrowser1 (old internet explorer) to define the bounds of CEF browser
+            Browser.Height = webBrowser1.Height;
+            Browser.Width = webBrowser1.Width;
+            Browser.Dock = webBrowser1.Dock;
+            Browser.Bounds = webBrowser1.Bounds;
+            Browser.Location = webBrowser1.Location;
+            Browser.Anchor = webBrowser1.Anchor;
+            Browser.Region = webBrowser1.Region;
+            Browser.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Browser.Width, Browser.Height, 20, 20));
+            Browser.ConsoleMessage += BrowserOnConsoleMessage;
+            Browser.LifeSpanHandler  = new BrowserLifeSpanHandler();
+        }
+
+        private void BrowserOnConsoleMessage(object sender, ConsoleMessageEventArgs consoleMessageEventArgs)
+        {
+            Log.Info($"Line: {consoleMessageEventArgs.Line}, Source: {consoleMessageEventArgs.Source}, Message: {consoleMessageEventArgs.Message}");
+        }
+
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Cef.Shutdown();
+        }
+        #endregion
+
 
         private void Form1_Activated(object sender, EventArgs e)
         {
@@ -107,6 +138,7 @@ namespace ProjectAltis.Forms
         #region Exit Button
         private void BtnExit_Click(object sender, EventArgs e)
         {
+            Cef.Shutdown();
             Environment.Exit(0);
         }
         #endregion
