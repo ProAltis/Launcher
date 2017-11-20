@@ -1,6 +1,7 @@
 Project Altis Launcher Source Code
 ==================================
-![Build Status](https://teamcity.projectalt.is/app/rest/builds/buildType:Launcher_Build/statusIcon)
+![Build Status](https://teamcity.projectalt.is/app/rest/builds/buildType:Launcher_Build/statusIcon) [![Build status](https://ci.appveyor.com/api/projects/status/x0ocu1eai8w0sqto/branch/master?svg=true)](https://ci.appveyor.com/project/judge2020/launcher/branch/master)
+ 
 
 This repository contains all launcher source code to launch into Project Altis
 
