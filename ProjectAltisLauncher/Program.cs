@@ -5,9 +5,6 @@ using System.Net;
 using System.Threading;
 using ProjectAltis.Enums;
 using ProjectAltis.Forms;
-using System.Threading.Tasks;
-using ProjectAltis.Core;
-using ProjectAltis.Properties;
 
 namespace ProjectAltis
 {
