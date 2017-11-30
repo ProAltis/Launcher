@@ -45,3 +45,5 @@ Advantages:
 10. **commit** your changes, including the releases folder. If someone leaves the team, the Releases folder's contents will still be needed to provide updates.
 
 Done! Clients will start updating to that and since Setup.exe has been renamed new people will download latest release.
+
+
