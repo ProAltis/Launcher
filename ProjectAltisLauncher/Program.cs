@@ -17,6 +17,7 @@ namespace ProjectAltis
         public static void Main()
         {
             ServicePointManager.Expect100Continue = true;
+            
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             Application.ThreadException += Application_ThreadException;
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
