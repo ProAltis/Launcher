@@ -17,7 +17,7 @@ namespace ProjectAltis
     [DebuggerStepThrough]
     public class Log
     {
-        private const int MaxLogFileAge = 2;
+        private const int MaxLogFileAge = 3;
         private const int KeepOldLogs = 10;
         private static readonly Queue<string> LogQueue = new Queue<string>();
         public static bool Initialized { get; private set; }
