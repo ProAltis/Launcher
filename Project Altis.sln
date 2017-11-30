@@ -4,8 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project Altis", "ProjectAltisLauncher\Project Altis.csproj", "{081848B9-ACF8-4B76-AE31-2536C79B0219}"
+	ProjectSection(ProjectDependencies) = postProject
+		{46664524-D177-43BA-87DF-9813A8DF9FBF} = {46664524-D177-43BA-87DF-9813A8DF9FBF}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LauncherLib", "..\LauncherLib\LauncherLib\LauncherLib.csproj", "{46664524-D177-43BA-87DF-9813A8DF9FBF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LauncherLib", "LauncherLib\LauncherLib.csproj", "{46664524-D177-43BA-87DF-9813A8DF9FBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

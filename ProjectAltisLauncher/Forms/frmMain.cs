@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProjectAltis.Core;
 using ProjectAltis.Forms.ContentPacks;
-using Timer = System.Timers.Timer;
 using CefSharp;
 using CefSharp.WinForms;
 
@@ -58,13 +57,10 @@ namespace ProjectAltis.Forms
             Browser = new ChromiumWebBrowser("https://projectaltis.com/launcher");
             this.Controls.Add(Browser);
             // Here, we use webbrowser1 (old internet explorer) to define the bounds of CEF browser
-            Browser.Height = webBrowser1.Height;
-            Browser.Width = webBrowser1.Width;
-            Browser.Dock = webBrowser1.Dock;
-            Browser.Bounds = webBrowser1.Bounds;
-            Browser.Location = webBrowser1.Location;
-            Browser.Anchor = webBrowser1.Anchor;
-            Browser.Region = webBrowser1.Region;
+            Browser.Size = new Size(435, 525);
+            Browser.Dock = DockStyle.None;
+            Browser.Location = new Point(38, 76);
+            Browser.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             Browser.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Browser.Width, Browser.Height, 20, 20));
             Browser.ConsoleMessage += BrowserOnConsoleMessage;
             Browser.LifeSpanHandler  = new BrowserLifeSpanHandler();
