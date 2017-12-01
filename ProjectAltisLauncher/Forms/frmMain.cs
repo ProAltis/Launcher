@@ -2,8 +2,10 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -11,6 +13,9 @@ using ProjectAltis.Core;
 using ProjectAltis.Forms.ContentPacks;
 using CefSharp;
 using CefSharp.WinForms;
+using LauncherLib.Login;
+using LauncherLib.Play;
+using LauncherLib.Update;
 
 namespace ProjectAltis.Forms
 {
@@ -18,6 +23,7 @@ namespace ProjectAltis.Forms
     {
         #region Fields
         private readonly string _currentDir;
+        private readonly Uri _fileApi = new Uri("https://projectaltis.com/api/manifest");
         public ChromiumWebBrowser Browser;
         #endregion
         #region Main Form Events
@@ -63,7 +69,7 @@ namespace ProjectAltis.Forms
             Browser.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             Browser.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Browser.Width, Browser.Height, 20, 20));
             Browser.ConsoleMessage += BrowserOnConsoleMessage;
-            Browser.LifeSpanHandler  = new BrowserLifeSpanHandler();
+            Browser.LifeSpanHandler = new BrowserLifeSpanHandler();
         }
 
         private void BrowserOnConsoleMessage(object sender, ConsoleMessageEventArgs consoleMessageEventArgs)
@@ -147,7 +153,7 @@ namespace ProjectAltis.Forms
         }
         #endregion
         #region Play Button
-        private void BtnPlay_Click(object sender, EventArgs e)
+        private async void BtnPlay_Click(object sender, EventArgs e)
         {
             Audio.PlaySoundFile("sndclick");
             if (string.IsNullOrEmpty(txtUser.Text))
@@ -158,11 +164,178 @@ namespace ProjectAltis.Forms
             btnPlay.Enabled = false;
 
             ErrorReporter.Instance.Username = txtUser.Text;
-            SaveCredentials();// Save credentials if necessary
-            RunUpdater();
+            SaveCredentials(); // Save credentials if necessary
+
+
+            IAccount account = new Account(txtUser.Text, txtPass.Text, LoginConfig.ProjectAltis);
+
+            bool isGoodLogin = await Login(account);
+
+            if (isGoodLogin)
+            {
+                // Don't want to block UI Thread
+                // Run updater
+                bool finished = false;
+
+                // Enable progress bar for updating
+                pbDownload.Visible = true;
+                new Task(async () =>
+                {
+                    await PatchFiles();
+                    finished = true;
+                }).Start();
+
+                while (!finished)
+                {
+                    await Task.Delay(200);
+                }
+
+                pbDownload.Visible = false;
+                lblNowDownloading.Text = "";
+
+                // Files are updated
+                // Time to launch the game
+
+                bool gameFinished = false;
+                new Task(async () =>
+                {
+                    await LaunchGame(account);
+                    gameFinished = true;
+                }).Start();
+
+                while (!gameFinished)
+                {
+                    await Task.Delay(200);
+                }
+
+                btnPlay.Enabled = true;
+
+            }
+            else
+            {
+                btnPlay.Enabled = true;
+            }
+
+
             ActiveControl = null;
         }
 
+        public async Task LaunchGame(IAccount account)
+        {
+            string processName = Path.Combine(Directory.GetCurrentDirectory(), "ProjectAltis");
+
+            IGame game = new Game(account, "Project Altis", processName,
+                "https://projectaltis.com/api/gameserver");
+
+            bool success = await game.Run();
+        }
+
+        public async Task<bool> Login(IAccount account)
+        {
+            var response = await account.Login();
+
+            // Make sure a bad response has not been given
+            if (response == LoginAPIResponse.Empty)
+            {
+                lblInfo.ForeColor = Color.Red;
+                lblInfo.Text = "Failed to contact the login servers.";
+                return LoginAPIResponse.Bad;
+            }
+
+            switch (response.Status)
+            {
+                case LoginAPIResponse.Good:
+                    {
+                        lblInfo.ForeColor = Color.Green;
+                        lblInfo.Text = response.Reason;
+
+                        return LoginAPIResponse.Good;
+                    }
+                case LoginAPIResponse.Bad:
+                    {
+                        lblInfo.ForeColor = Color.Red;
+                        lblInfo.Text = response.Reason;
+
+                        return LoginAPIResponse.Bad;
+                    }
+                default:
+                    {
+                        return LoginAPIResponse.Bad;
+                    }
+            }
+        }
+
+        public async Task PatchFiles()
+        {
+            using (var updater = new LauncherLib.Update.Updater(_fileApi, Directory.GetCurrentDirectory()))
+            {
+
+                // Subscribe
+                updater.FileStartDownload += OnFileStartDownload;
+                updater.FileDownloadProgressChanged += OnFileDownloadProgressChanged;
+                updater.FileDownloaded += OnFileDownloaded;
+
+                // Patch
+                await updater.PatchFiles();
+
+                // Unsubscribe
+                updater.FileStartDownload -= OnFileStartDownload;
+                updater.FileDownloadProgressChanged -= OnFileDownloadProgressChanged;
+                updater.FileDownloaded -= OnFileDownloaded;
+            }
+        }
+
+        private void OnFileDownloaded(object sender, FileManifestEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() =>
+                {
+                    lblNowDownloading.Text = "Finished downloading " + e.File.Filename;
+                }));
+            }
+            else
+            {
+                lblNowDownloading.Text = "Finished downloading " + e.File.Filename;
+            }
+        }
+
+        private void OnFileDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            if (e.ProgressPercentage % 2 != 0)
+            {
+                // Only update progress every positive intervals
+                // 2%, 4%, 6%...
+                return;
+            }
+
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() =>
+                {
+                    pbDownload.Value = e.ProgressPercentage;
+                }));
+            }
+            else
+            {
+                pbDownload.Value = e.ProgressPercentage;
+            }
+        }
+
+        private void OnFileStartDownload(object sender, FileManifestEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() =>
+                {
+                    lblNowDownloading.Text = "Downloading " + e.File.Filename;
+                }));
+            }
+            else
+            {
+                lblNowDownloading.Text = "Downloading " + e.File.Filename;
+            }
+        }
 
         #endregion
         #region Site Button
@@ -344,7 +517,7 @@ namespace ProjectAltis.Forms
 
         private void ValidatePrefJson()
         {
-            if(!File.Exists("preferences.json"))
+            if (!File.Exists("preferences.json"))
             {
                 // Will be automatically created by the game
                 return;
@@ -359,7 +532,7 @@ namespace ProjectAltis.Forms
                 File.Delete("preferences.json");
                 Log.Info("DELETED Preferences.json due to it being corrupted");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Error(ex);
                 throw;
@@ -367,54 +540,6 @@ namespace ProjectAltis.Forms
 
         }
         #endregion
-
-        private void OnFilesUpdated()
-        {
-            if (InvokeRequired)
-            {
-                Invoke((MethodInvoker)delegate
-                {
-                    OnFilesUpdated();
-                });
-            }
-            else
-            {
-                Log.Info("||||||||||");
-                Log.Info("Files have been verified. Starting game!");
-                Log.Info("||||||||||");
-
-                lblNowDownloading.Text = "Have fun!";
-                // The progress bar visibility should be invisible because
-                // game files are no longer being updated
-                pbDownload.Visible = false; 
-                Thread playThread = new Thread(() =>
-                {
-                    Play.LaunchGame(txtUser.Text, txtPass.Text, this);
-                });
-
-                playThread.Start();
-                btnPlay.Enabled = true;
-            }
-        }
-
-        private void RunUpdater()
-        {
-            FileUpdater fileUpdater = new FileUpdater(this);
-            fileUpdater.FilesUpdated += OnFilesUpdated;
-            Thread updaterThread = new Thread(fileUpdater.RunUpdater);
-            try
-            {
-                updaterThread.Start();
-            }
-            catch (OutOfMemoryException)
-            {
-                MessageBox.Show("Unable to start the updating process. It appears your computer is out of memory.");
-            }
-            catch (ThreadStateException)
-            {
-                MessageBox.Show("The updater thread could not be started. Try and restarting the launcher.");
-            }
-        }
 
         private void LoadUserSettings()
         {

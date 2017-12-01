@@ -13,7 +13,7 @@ namespace LauncherLib.Net
         /// <summary>
         ///     The HttpClient used for networking
         /// </summary>
-        private static readonly HttpClient _client = new HttpClient();
+        private static readonly HttpClient Client = new HttpClient();
 
         /// <summary>
         ///     Contacts the login api server and gets a login response
@@ -35,7 +35,7 @@ namespace LauncherLib.Net
                 var content = new FormUrlEncodedContent(values);
 
                 // Post to server
-                var response = await _client.PostAsync(config.LoginAPI, content);
+                var response = await Client.PostAsync(config.LoginAPI, content);
 
                 // Get response
                 var responseString = await response.Content.ReadAsStringAsync();
@@ -58,7 +58,7 @@ namespace LauncherLib.Net
             try
             {
                 // Get the raw manifest from the file api
-                var rawManifest = await _client.GetStringAsync(fileApi);
+                var rawManifest = await Client.GetStringAsync(fileApi);
 
                 // Return the raw manifest as a collection
                 return new FileManifestCollection(rawManifest);
@@ -71,7 +71,7 @@ namespace LauncherLib.Net
 
         internal static async Task<string> GetGameServer(Uri uri)
         {
-            return await _client.GetStringAsync(uri);
+            return await Client.GetStringAsync(uri);
         }
     }
 }

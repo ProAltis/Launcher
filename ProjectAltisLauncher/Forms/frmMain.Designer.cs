@@ -96,9 +96,7 @@
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(341, 34);
             this.lblInfo.TabIndex = 4;
-            this.lblInfo.Text = "Info is displayed here";
             this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblInfo.Visible = false;
             // 
             // lblNowDownloading
             // 
@@ -110,7 +108,6 @@
             this.lblNowDownloading.Size = new System.Drawing.Size(340, 24);
             this.lblNowDownloading.TabIndex = 6;
             this.lblNowDownloading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblNowDownloading.Visible = false;
             // 
             // lblUsername
             // 
