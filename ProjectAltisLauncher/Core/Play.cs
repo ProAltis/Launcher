@@ -12,6 +12,24 @@ namespace ProjectAltis.Core
     {
         public static string AltisProcessName = "ProjectAltis";
 
+
+        public static bool VerifyAltisSignatureShouldOpenExe()
+        {
+            var isTrusted = AuthenticodeTools.IsTrusted(AltisProcessName + ".exe");
+            var isSignedByAltis = AuthenticodeTools.IsSignedByAltis(AltisProcessName + ".exe");
+            if (!isTrusted)
+            {
+                MessageBox.Show($"The Project Altis file is not signed with a valid Code signing certificate!\n\nThis usually means your download was corrupt or someone is trying to trick you into running a malicious file!\n\n In most cases, pressing the download button again should work.", "Invalid file signature!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (!isSignedByAltis)
+            {
+                MessageBox.Show($"The file {AltisProcessName + ".exe"} is authenticode-verified, however wasn't signed with the alis certificate.\n\nIf you are the new launcher/game distributor, the signature fingerprint can be changed in Core\\AuthenticodeTools.", "Invalid file signature!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
         /// <summary>
         /// Launches the game.
         /// </summary>
@@ -22,12 +40,14 @@ namespace ProjectAltis.Core
         {
             try
             {
+                if (!VerifyAltisSignatureShouldOpenExe())
+                    return;
                 Process altis = StartAltis(username, password);
                 HideAllForms();
 
                 frmInstance?.Invoke((MethodInvoker)delegate
                 {
-                    if(altis == null) // Returned null process because AV removed it.
+                    if (altis == null) // Returned null process because AV removed it.
                     {
                         frmInstance.Show();
                         MessageBox.Show(frmInstance, $"The executable {AltisProcessName} has been removed. " +

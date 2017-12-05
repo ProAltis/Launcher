@@ -165,6 +165,7 @@
   <ItemGroup>
     <Compile Include="AltisSettings.cs" />
     <Compile Include="BrowserLifeSpanHandler.cs" />
+    <Compile Include="Core\AuthenticodeTools.cs" />
     <Compile Include="Core\Background.cs" />
     <Compile Include="Core\Credentials.cs" />
     <Compile Include="Core\Data.cs" />
@@ -326,32 +327,32 @@
   <ItemGroup>
     <PublishFile Include="Resources\create.png">
       <Visible>False</Visible>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\create_d.png">
       <Visible>False</Visible>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\create_h.png">
       <Visible>False</Visible>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
