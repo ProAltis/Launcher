@@ -199,7 +199,8 @@ namespace ProjectAltis.Forms
                 bool gameFinished = false;
                 new Task(async () =>
                 {
-                    await LaunchGame(account);
+                    // NOTE: we need to still use Play.LaunchGame for security and code signing certificate purposes.
+                    Play.LaunchGame(txtUser.Text, txtPass.Text, this);
                     gameFinished = true;
                 }).Start();
 
