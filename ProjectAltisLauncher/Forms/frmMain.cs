@@ -60,7 +60,7 @@ namespace ProjectAltis.Forms
             var cefsettings = new CefSettings();
             cefsettings.UserAgent = "Altis Launcher " + typeof(Program).Assembly.GetName().Version;
             Cef.Initialize(cefsettings);
-            Browser = new ChromiumWebBrowser("https://projectaltis.com/launcher");
+            Browser = new ChromiumWebBrowser("https://proaltis.github.io");
             this.Controls.Add(Browser);
             // Here, we use webbrowser1 (old internet explorer) to define the bounds of CEF browser
             Browser.Size = new Size(435, 525);
